@@ -6,6 +6,8 @@ import Notifications from "layouts/notifications";
 import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
+import Categories from "layouts/categories/Categories";
+import CreateTest from "layouts/tests/components/CreateTest";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
@@ -18,6 +20,22 @@ const routes = [
     icon: <Icon fontSize="small">dashboard</Icon>,
     route: "/dashboard",
     component: <Dashboard />,
+  },
+  {
+    type: "collapse",
+    name: "Create a test",
+    key: "createTest",
+    icon: <Icon fontSize="small">Create a Test</Icon>,
+    route: "/createTest",
+    component: <CreateTest />,
+  },
+  {
+    type: "collapse",
+    name: "Categories",
+    key: "categories",
+    icon: <Icon fontSize="small">category</Icon>,
+    route: "/categories",
+    component: <Categories />,
   },
   {
     type: "collapse",
