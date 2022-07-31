@@ -33,7 +33,7 @@ function Cover() {
             Join us today
           </MDTypography>
           <MDTypography display="block" variant="button" color="white" my={1}>
-            Enter your email and password to register
+            Enter your phone and password to register
           </MDTypography>
         </MDBox>
         <MDBox pt={4} pb={3} px={3}>
@@ -42,7 +42,7 @@ function Cover() {
               <MDInput type="text" label="Name" variant="standard" fullWidth />
             </MDBox>
             <MDBox mb={2}>
-              <MDInput type="email" label="Email" variant="standard" fullWidth />
+              <MDInput type="phone" label="Phone" variant="standard" fullWidth />
             </MDBox>
             <MDBox mb={2}>
               <MDInput type="password" label="Password" variant="standard" fullWidth />
