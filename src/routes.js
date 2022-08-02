@@ -25,7 +25,7 @@ const routes = [
     type: "collapse",
     name: "Create a test",
     key: "createTest",
-    icon: <Icon fontSize="small">Create a Test</Icon>,
+    icon: <Icon fontSize="small">quiz</Icon>,
     route: "/createTest",
     component: <CreateTest />,
   },
