@@ -1,13 +1,9 @@
 import React, { useState } from "react";
 
-// react-router-dom components
-import { Link } from "react-router-dom";
-
 import Backdrop from "@mui/material/Backdrop";
 import Modal from "@mui/material/Modal";
 
 // @mui material components
-import Switch from "@mui/material/Switch";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 
@@ -27,13 +23,6 @@ import DataTable from "examples/Tables/DataTable";
 // Data
 import CategoriesTableData from "layouts/tables/data/CategoriesTableData";
 
-// Authentication layout components
-import BasicLayout from "layouts/authentication/components/BasicLayout";
-
-// @mui material components
-// import Grid from "@mui/material/Grid";
-// import MuiLink from "@mui/material/Link";
-
 // Material Dashboard 2 React components
 import MDInput from "components/MDInput";
 
@@ -43,9 +32,6 @@ function Categories() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [rememberMe, setRememberMe] = useState(false);
-
-  const handleSetRememberMe = () => setRememberMe(!rememberMe);
 
   const { columns, rows } = CategoriesTableData();
 
@@ -99,66 +85,27 @@ function Categories() {
             timeout: 500,
           }}
         >
-          <BasicLayout>
-            <Card>
-              <MDBox
-                variant="gradient"
-                bgColor="info"
-                borderRadius="lg"
-                coloredShadow="info"
-                mx={2}
-                mt={-3}
-                p={2}
-                mb={1}
-                textAlign="center"
-              >
-                <MDTypography variant="h4" fontWeight="medium" color="white" mt={1}>
-                  Sign in
-                </MDTypography>
-              </MDBox>
-              <MDBox pt={4} pb={3} px={3}>
-                <MDBox component="form" role="form">
-                  <MDBox mb={2}>
-                    <MDInput type="phone" label="Phone" fullWidth />
-                  </MDBox>
-                  <MDBox mb={2}>
-                    <MDInput type="password" label="Password" fullWidth />
-                  </MDBox>
-                  <MDBox display="flex" alignItems="center" ml={-1}>
-                    <Switch checked={rememberMe} onChange={handleSetRememberMe} />
-                    <MDTypography
-                      variant="button"
-                      fontWeight="regular"
-                      color="text"
-                      sx={{ cursor: "pointer", userSelect: "none", ml: -1 }}
-                    >
-                      &nbsp;&nbsp;Remember me
-                    </MDTypography>
-                  </MDBox>
-                  <MDBox mt={4} mb={1}>
-                    <MDButton variant="gradient" color="info" fullWidth>
-                      sign in
-                    </MDButton>
-                  </MDBox>
-                  <MDBox mt={3} mb={1} textAlign="center">
-                    <MDTypography variant="button" color="text">
-                      Don&apos;t have an account?{" "}
-                      <MDTypography
-                        component={Link}
-                        to="/authentication/sign-up"
-                        variant="button"
-                        color="info"
-                        fontWeight="medium"
-                        textGradient
-                      >
-                        Sign up
-                      </MDTypography>
-                    </MDTypography>
+          <Grid container spacing={1} justifyContent="center" alignItems="center" height="100%">
+            <Grid item xs={11} sm={9} md={5} lg={4} xl={3}>
+              <Card>
+                <MDBox pt={4} pb={3} px={3}>
+                  <MDBox component="form" role="form">
+                    <MDBox mb={2}>
+                      <MDInput type="text" label="Category" fullWidth />
+                    </MDBox>
+                    <MDBox mb={2}>
+                      <MDInput type="select" label="Parent Category" fullWidth />
+                    </MDBox>
+                    <MDBox mt={4} mb={1}>
+                      <MDButton variant="gradient" color="info" fullWidth>
+                        sign in
+                      </MDButton>
+                    </MDBox>
                   </MDBox>
                 </MDBox>
-              </MDBox>
-            </Card>
-          </BasicLayout>
+              </Card>
+            </Grid>
+          </Grid>
         </Modal>
       </div>
     </DashboardLayout>
