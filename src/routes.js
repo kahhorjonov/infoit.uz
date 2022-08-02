@@ -7,7 +7,7 @@ import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
 import Categories from "layouts/categories/Categories";
-import CreateTest from "layouts/tests/components/CreateTest";
+import CreateTest from "layouts/tests/CreateTest";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
