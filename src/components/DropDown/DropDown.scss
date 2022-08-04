@@ -1,0 +1,19 @@
+.drop_down {
+  width: 20%;
+  height: 50px;
+  position: relative;
+  .MuiAccordion-root {
+    // position: absolute;
+    margin: 0;
+    padding: 0;
+    p {
+      font-size: 14px;
+    }
+    .MuiAccordionSummary-root {
+      min-height: 20px;
+      .MuiAccordionSummary-content {
+        margin: 0 !important;
+      }
+    }
+  }
+}

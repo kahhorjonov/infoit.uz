@@ -80,7 +80,7 @@ function CreateTest() {
                 mt={-5}
               >
                 <Icon fontSize="large" color="inherit">
-                  category
+                  create
                 </Icon>
               </MDBox>
               <MDBox textAlign="right" lineHeight={1.25} mt={-5} mb={2}>
