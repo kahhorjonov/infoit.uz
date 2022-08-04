@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/function-component-definition */
 
+import { useState, useEffect } from "react";
+
 // @mui material components
 import Icon from "@mui/material/Icon";
 
@@ -10,14 +12,32 @@ import MDTypography from "components/MDTypography";
 import MDBadge from "components/MDBadge";
 import MDButton from "components/MDButton";
 
+// Services
+import { fetchAllCategories } from "services/categoryService";
+
 export default function data() {
-  const Category = ({ name, email }) => (
+  const [categories, setCategories] = useState([]);
+
+  const getCategories = async () => {
+    const {
+      data: { objectKoinot },
+    } = await fetchAllCategories();
+    setCategories(objectKoinot);
+  };
+
+  useEffect(() => {
+    getCategories();
+  }, []);
+
+  console.log(categories);
+
+  const Category = ({ name, child }) => (
     <MDBox display="flex" alignItems="center" lineHeight={1}>
       <MDBox ml={2} lineHeight={1}>
         <MDTypography display="block" variant="button" fontWeight="medium">
           {name}
         </MDTypography>
-        <MDTypography variant="caption">{email}</MDTypography>
+        <MDTypography variant="caption">{child}</MDTypography>
       </MDBox>
     </MDBox>
   );
@@ -38,9 +58,10 @@ export default function data() {
       { Header: "action", accessor: "action", align: "center" },
     ],
 
-    rows: [
-      {
-        category: <Category name="Programming" email="IT" />,
+    rows:
+      categories &&
+      categories.map((category) => ({
+        category: <Category name={category.nameUz} child={category.children[0].nameUz} />,
         tests: <Tests amount="1561" />,
         status: (
           <MDBox ml={-1}>
@@ -48,15 +69,10 @@ export default function data() {
           </MDBox>
         ),
         action: (
-          <MDButton variant="text" color="dark">
+          <MDButton variant="text" color="dark" onClick={() => alert(category.id)}>
             <Icon>edit</Icon>&nbsp;edit
           </MDButton>
         ),
-      },
-    ],
+      })),
   };
 }
-
-// <MDTypography component="a" variant="caption" color="text" fontWeight="medium">
-//   Edit
-// </MDTypography>
