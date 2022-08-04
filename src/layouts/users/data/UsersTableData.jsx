@@ -70,7 +70,11 @@ export default function data() {
           </MDBox>
         ),
         action: (
-          <MDButton variant="text" color="dark" onClick={() => alert(user.id)}>
+          <MDButton
+            variant="text"
+            color="dark"
+            //  onClick={() => alert(user.id)}
+          >
             <Icon>edit</Icon>&nbsp;edit
           </MDButton>
         ),

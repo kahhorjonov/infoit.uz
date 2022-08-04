@@ -29,8 +29,6 @@ export default function data() {
     getCategories();
   }, []);
 
-  console.log(categories);
-
   const Category = ({ name, child }) => (
     <MDBox display="flex" alignItems="center" lineHeight={1}>
       <MDBox ml={2} lineHeight={1}>
@@ -69,7 +67,11 @@ export default function data() {
           </MDBox>
         ),
         action: (
-          <MDButton variant="text" color="dark" onClick={() => alert(category.id)}>
+          <MDButton
+            variant="text"
+            color="dark"
+            // onClick={() => alert(category.id)}
+          >
             <Icon>edit</Icon>&nbsp;edit
           </MDButton>
         ),

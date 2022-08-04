@@ -25,9 +25,7 @@ export const login = (phoneNumber, password) => {
 };
 
 export function setToken(jwt) {
-  console.log(jwt);
   const path = jwtDecode(jwt);
-  console.log(path);
   // const path = jwtDecode(jwt).roles[0].roleName.slice(5).toLowerCase();
   // const parsedJwt = parseJwt(jwt);
   // if (jwt) {
