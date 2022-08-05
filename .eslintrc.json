@@ -13,24 +13,79 @@
   },
   "plugins": ["react", "prettier"],
   "rules": {
-    "prettier/prettier": [
+    //
+
+    "prettier/prettier": 0,
+    "no-console": 1,
+    "no-plusplus": 0,
+    "comma-dangle": 0,
+    "arrow-parens": "off",
+    "react/display-name": 1,
+    "react/jsx-uses-vars": 1,
+    "no-unused-vars": "warn",
+    "no-return-assign": "off",
+    "no-param-reassign": "off",
+    "import/extensions": "off",
+    "no-nested-ternary": "off",
+    "operator-linebreak": "off",
+    "import/no-unresolved": "off",
+    "object-curly-newline": "off",
+    "no-underscore-dangle": "off",
+    "react/jsx-curly-newline": "off",
+    "react/forbid-prop-types": "off",
+    "implicit-arrow-linebreak": "off",
+    "no-unexpected-multiline": "warn",
+    "react/require-default-props": "off",
+    "import/prefer-default-export": "off",
+    "jsx-quotes": ["error", "prefer-single"],
+    "react/jsx-one-expression-per-line": "off",
+    "react/function-component-definition": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
+    "jsx-a11y/label-has-associated-control": "off",
+    "jsx-a11y/label-has-for": "off",
+    "array-callback-return": "off",
+    "react/jsx-props-no-spreading": "off",
+    "linebreak-style": ["off"],
+    "no-multiple-empty-lines": [
       "error",
       {
-        "endOfLine": "auto"
+        "max": 2,
+        "maxEOF": 2
       }
     ],
+    "react/react-in-jsx-scope": ["off"],
+    "react/state-in-constructor": [1, "never"],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    ],
+    "react/static-property-placement": ["error", "static public field"],
+
+    //
+
+    // "prettier/prettier": [
+    //   "error",
+    //   {
+    //     "endOfLine": "auto"
+    //   }
+    // ],
+
     "default-param-last": "off",
     "react/react-in-jsx-scope": "off",
     "no-unneeded-ternary": "off",
     "no-unused-expressions": "off",
     "camelcase": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "react/jsx-props-no-spreading": [
-      1,
-      {
-        "custom": "ignore"
-      }
-    ],
+    // "react/jsx-props-no-spreading": [
+    //   1,
+    //   {
+    //     "custom": "ignore"
+    //   }
+    // ],
     "react/jsx-curly-spacing": [2, "never"]
   },
   "settings": { "import/resolver": { "node": { "paths": ["src"] } } }

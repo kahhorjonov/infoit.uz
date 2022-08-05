@@ -105,18 +105,18 @@ function Configurator() {
   });
 
   return (
-    <ConfiguratorRoot variant="permanent" ownerState={{ openConfigurator }}>
+    <ConfiguratorRoot variant='permanent' ownerState={{ openConfigurator }}>
       <MDBox
-        display="flex"
-        justifyContent="space-between"
-        alignItems="baseline"
+        display='flex'
+        justifyContent='space-between'
+        alignItems='baseline'
         pt={4}
         pb={0.5}
         px={3}
       >
         <MDBox>
-          <MDTypography variant="h5">Configurator</MDTypography>
-          <MDTypography variant="body2" color="text">
+          <MDTypography variant='h5'>Configurator</MDTypography>
+          <MDTypography variant='body2' color='text'>
             See our dashboard options.
           </MDTypography>
         </MDBox>
@@ -140,7 +140,7 @@ function Configurator() {
 
       <MDBox pt={0.5} pb={3} px={3}>
         <MDBox>
-          <MDTypography variant="h6">Sidenav Colors</MDTypography>
+          <MDTypography variant='h6'>Sidenav Colors</MDTypography>
 
           <MDBox mb={0.5}>
             {sidenavColors.map((color) => (
@@ -186,8 +186,8 @@ function Configurator() {
         </MDBox>
 
         <MDBox mt={3} lineHeight={1}>
-          <MDTypography variant="h6">Sidenav Type</MDTypography>
-          <MDTypography variant="button" color="text">
+          <MDTypography variant='h6'>Sidenav Type</MDTypography>
+          <MDTypography variant='button' color='text'>
             Choose between different sidenav types.
           </MDTypography>
 
@@ -199,8 +199,8 @@ function Configurator() {
             }}
           >
             <MDButton
-              color="dark"
-              variant="gradient"
+              color='dark'
+              variant='gradient'
               onClick={handleDarkSidenav}
               disabled={disabled}
               fullWidth
@@ -214,8 +214,8 @@ function Configurator() {
             </MDButton>
             <MDBox sx={{ mx: 1, width: "8rem", minWidth: "8rem" }}>
               <MDButton
-                color="dark"
-                variant="gradient"
+                color='dark'
+                variant='gradient'
                 onClick={handleTransparentSidenav}
                 disabled={disabled}
                 fullWidth
@@ -229,8 +229,8 @@ function Configurator() {
               </MDButton>
             </MDBox>
             <MDButton
-              color="dark"
-              variant="gradient"
+              color='dark'
+              variant='gradient'
               onClick={handleWhiteSidenav}
               disabled={disabled}
               fullWidth
@@ -245,19 +245,19 @@ function Configurator() {
           </MDBox>
         </MDBox>
         <MDBox
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
+          display='flex'
+          justifyContent='space-between'
+          alignItems='center'
           mt={3}
           lineHeight={1}
         >
-          <MDTypography variant="h6">Navbar Fixed</MDTypography>
+          <MDTypography variant='h6'>Navbar Fixed</MDTypography>
 
           <Switch checked={fixedNavbar} onChange={handleFixedNavbar} />
         </MDBox>
         <Divider />
-        <MDBox display="flex" justifyContent="space-between" alignItems="center" lineHeight={1}>
-          <MDTypography variant="h6">Light / Dark</MDTypography>
+        <MDBox display='flex' justifyContent='space-between' alignItems='center' lineHeight={1}>
+          <MDTypography variant='h6'>Light / Dark</MDTypography>
 
           <Switch checked={darkMode} onChange={handleDarkMode} />
         </MDBox>

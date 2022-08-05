@@ -1,22 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getCategories } from 'store/thunk';
 // @mui material components
-import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
+import Grid from '@mui/material/Grid';
+import Card from '@mui/material/Card';
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
+import MDBox from 'components/MDBox';
+import MDTypography from 'components/MDTypography';
 
 // Material Dashboard 2 React example components
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
+import DashboardLayout from 'examples/LayoutContainers/DashboardLayout';
+import DashboardNavbar from 'examples/Navbars/DashboardNavbar';
 // import Select from "components/Select/Select";
 
-import MDButton from "components/MDButton";
-import { Icon } from "@mui/material";
-import TableComp from "components/Table/Table";
-import ModalComp from "components/Modal/ModalComp";
-import CreateForm from "./components/CreateForm";
+import MDButton from 'components/MDButton';
+import { Icon } from '@mui/material';
+import TableComp from 'components/Table/Table';
+import ModalComp from 'components/Modal/ModalComp';
+import CreateForm from './components/CreateForm';
 // import DataTable from "examples/Tables/DataTable";
 
 // Data
@@ -40,10 +42,18 @@ import CreateForm from "./components/CreateForm";
 // };
 
 function CreateQuestion() {
+  const dispatch = useDispatch();
+  const { category } = useSelector(state => state);
   const [createQStatus, setCreateQStatus] = useState(false);
 
   const handleOpen = () => setCreateQStatus(true);
   const handleClose = () => setCreateQStatus(false);
+
+  console.log(category);
+
+  useEffect(() => {
+    dispatch(getCategories());
+  }, [dispatch]);
 
   return (
     <DashboardLayout>
@@ -59,26 +69,26 @@ function CreateQuestion() {
                 mx={2}
                 mt={-3}
                 p={2}
-                variant="gradient"
-                bgColor="info"
-                borderRadius="lg"
-                coloredShadow="info"
-                display="flex"
-                alignItems="center"
-                justifyContent="space-between"
+                variant='gradient'
+                bgColor='info'
+                borderRadius='lg'
+                coloredShadow='info'
+                display='flex'
+                alignItems='center'
+                justifyContent='space-between'
               >
-                <MDTypography variant="h6" color="white">
+                <MDTypography variant='h6' color='white'>
                   Questions Table
                 </MDTypography>
-                <MDBox display="flex" alignItems="center" gap={5}>
+                <MDBox display='flex' alignItems='center' gap={5}>
                   <select
                     style={{
-                      width: "500%",
-                      padding: "0.7rem 1rem",
-                      borderRadius: "0.5rem",
-                      fontSize: "1rem",
-                      outline: "none",
-                      border: "none",
+                      width: '500%',
+                      padding: '0.7rem 1rem',
+                      borderRadius: '0.5rem',
+                      fontSize: '1rem',
+                      outline: 'none',
+                      border: 'none',
                     }}
                   >
                     <option>Category</option>
@@ -91,7 +101,7 @@ function CreateQuestion() {
                   </MDButton>
                 </MDBox>
               </MDBox>
-              <MDBox width="100%" p={3}>
+              <MDBox width='100%' p={3}>
                 <TableComp />
                 {/* <CreateForm questionNumber={1} /> */}
               </MDBox>
