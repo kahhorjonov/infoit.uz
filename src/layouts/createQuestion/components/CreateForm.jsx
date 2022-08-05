@@ -48,8 +48,6 @@ function CreateForm({ questionNumber, onClose }) {
     answers: [{ id: v4(), status: false, text: "", img: "" }],
   });
 
-  console.log(questionsForm);
-
   const handleAddAnswer = () => {
     const newAnswer = { id: v4(), status: false, text: "", img: "" };
     const data = [...questionsForm.answers];
@@ -92,7 +90,7 @@ function CreateForm({ questionNumber, onClose }) {
       answer.id === id ? { ...answer, [name]: value } : answer
     );
 
-    console.log(name, value);
+    // console.log(name, value);
 
     setQuestionsForm({ ...questionsForm, answers: data });
   };
