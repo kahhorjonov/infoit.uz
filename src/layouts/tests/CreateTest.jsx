@@ -44,13 +44,12 @@ function CreateTest() {
   };
 
   const handleSave = (testData) => {
-    testData?.category && testData?.date && testData?.count ? console.log(testData) : "";
+    testData?.category && testData?.date && testData?.count ? null : "";
   };
 
   const handleCancel = () => {
     const data = { ...createTestData, category: "Category Name", date: "", count: "" };
     setCreateTestData(data);
-    console.log(data);
   };
 
   const handleAddTestId = (id) => {

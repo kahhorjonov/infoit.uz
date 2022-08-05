@@ -9,6 +9,10 @@ import Card from "@mui/material/Card";
 
 // @mui material components
 import Icon from "@mui/material/Icon";
+import InputAdornment from "@mui/material/InputAdornment";
+import IconButton from "@mui/material/IconButton";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
@@ -21,17 +25,22 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import DataTable from "examples/Tables/DataTable";
 
 // Data
-import CategoriesTableData from "layouts/categories/data/CategoriesTableData";
+import UsersTableData from "layouts/users/data/UsersTableData";
 
 // Material Dashboard 2 React components
 import MDInput from "components/MDInput";
 
-function Categories() {
+function Users() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [showPassword, setShowPassword] = useState(false);
 
-  const { columns, rows } = CategoriesTableData();
+  const { columns, rows } = UsersTableData();
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
 
   return (
     <DashboardLayout>
@@ -52,7 +61,7 @@ function Categories() {
                 coloredShadow="info"
               >
                 <MDTypography variant="h6" color="white">
-                  Categories Table
+                  Users Table
                 </MDTypography>
                 <MDButton variant="text" color="white" onClick={handleOpen}>
                   <Icon>add</Icon>&nbsp;add
@@ -89,20 +98,64 @@ function Categories() {
                 <MDBox pt={4} pb={3} px={3}>
                   <MDBox component="form" role="form">
                     <MDBox mb={2} sx={{ display: "flex" }}>
-                      <MDInput sx={{ marginRight: "5px" }} type="text" label="Category" fullWidth />
-                      <MDInput type="text" label="Category" fullWidth />
+                      <MDInput
+                        sx={{ marginRight: "5px" }}
+                        type="text"
+                        label="First Name"
+                        fullWidth
+                      />
+                      <MDInput type="text" label="Last Name" fullWidth />
                     </MDBox>
                     <MDBox mb={2} sx={{ display: "flex" }}>
                       <MDInput
                         sx={{ marginRight: "5px" }}
-                        type="select"
-                        label="Parent Category"
+                        type="date"
+                        InputLabelProps={{ shrink: true, required: true }}
+                        label="Date of Birth"
                         fullWidth
                       />
-                      <MDInput type="select" label="Parent Category" fullWidth />
+                      <MDInput type="text" label="Address" fullWidth />
                     </MDBox>
-                    <MDBox mt={4} mb={1}>
-                      <MDButton variant="gradient" color="info" fullWidth>
+                    <MDBox mb={2} sx={{ display: "flex" }}>
+                      <MDInput sx={{ marginRight: "5px" }} type="text" label="Region" fullWidth />
+                      <MDInput type="text" label="Role" fullWidth />
+                    </MDBox>
+                    <MDBox mb={2} sx={{ display: "flex" }}>
+                      <MDInput
+                        sx={{ marginRight: "5px" }}
+                        type="text"
+                        label="Phone Number"
+                        fullWidth
+                      />
+                      <MDInput
+                        id="outlined-adornment-password"
+                        type={showPassword ? "text" : "password"}
+                        label="Password"
+                        fullWidth
+                        endAdornment={
+                          <InputAdornment position="end">
+                            <IconButton
+                              aria-label="toggle password visibility"
+                              onClick={handleClickShowPassword}
+                              edge="end"
+                            >
+                              {showPassword ? <VisibilityOff /> : <Visibility />}
+                            </IconButton>
+                          </InputAdornment>
+                        }
+                      />
+                    </MDBox>
+                    <MDBox
+                      mt={4}
+                      mb={1}
+                      spacing={1}
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <MDButton sx={{ paddingX: "35px" }} variant="gradient" color="info">
                         Save
                       </MDButton>
                     </MDBox>
@@ -117,4 +170,4 @@ function Categories() {
   );
 }
 
-export default Categories;
+export default Users;

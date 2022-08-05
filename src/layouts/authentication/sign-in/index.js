@@ -31,7 +31,6 @@ function Basic() {
   const handleLogin = async () => {
     const result = await login(phone, password);
     setToken(result.data.objectKoinot.accessToken);
-    console.log(result);
   };
 
   return (

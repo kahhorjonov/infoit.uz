@@ -7,13 +7,13 @@ const { baseURL } = api;
 
 // const token = localStorage.getItem("token");
 
-// const parseJwt = (token) => {
-//   try {
-//     return JSON.parse(atob(token.split(".")[1]));
-//   } catch (e) {
-//     return null;
-//   }
-// };
+const parseJwt = (token) => {
+  try {
+    return JSON.parse(atob(token.split(".")[1]));
+  } catch (e) {
+    return null;
+  }
+};
 
 export const login = (phoneNumber, password) => {
   const result = axios.post(`${baseURL}/auth/v1/login`, {
@@ -25,18 +25,15 @@ export const login = (phoneNumber, password) => {
 };
 
 export function setToken(jwt) {
-  console.log(jwt);
-  const path = jwtDecode(jwt);
-  console.log(path);
-  // const path = jwtDecode(jwt).roles[0].roleName.slice(5).toLowerCase();
-  // const parsedJwt = parseJwt(jwt);
-  // if (jwt) {
-  //   if (parsedJwt.exp * 1000 > Date.now()) {
-  //     localStorage.setItem("token", jwt);
-  //     return window.location.replace(`/${path}`);
-  //   }
-  // }
-  // return parsedJwt;
+  const path = jwtDecode(jwt).roles[0].roleName.slice(5).toLowerCase();
+  const parsedJwt = parseJwt(jwt);
+  if (jwt) {
+    if (parsedJwt.exp * 1000 > Date.now()) {
+      localStorage.setItem("token", jwt);
+      return window.location.replace(`/${path}`);
+    }
+  }
+  return parsedJwt;
 }
 
 // const me = () => {
@@ -103,5 +100,5 @@ export function setToken(jwt) {
 
 export default {
   login,
-  setToken,
+  // setToken,
 };
