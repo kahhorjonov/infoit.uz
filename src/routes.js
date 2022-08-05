@@ -8,6 +8,7 @@ import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
 import Categories from "layouts/categories/Categories";
 import CreateTest from "layouts/tests/CreateTest";
+import CreateQuestion from "layouts/createQuestion/CreateQuestion";
 import Users from "layouts/users/components/Users";
 
 // @mui icons
@@ -21,6 +22,14 @@ const routes = [
     icon: <Icon fontSize="small">dashboard</Icon>,
     route: "/dashboard",
     component: <Dashboard />,
+  },
+  {
+    type: "collapse",
+    name: "Create a questions",
+    key: "createQuestions",
+    icon: <Icon fontSize="small">add</Icon>,
+    route: "/createQuestions",
+    component: <CreateQuestion />,
   },
   {
     type: "collapse",

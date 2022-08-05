@@ -1,0 +1,10 @@
+.addImage {
+  display: flex;
+  align-items: center;
+  span {
+    font-size: 3rem !important;
+  }
+  input {
+    display: none;
+  }
+}
