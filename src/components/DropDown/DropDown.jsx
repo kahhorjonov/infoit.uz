@@ -1,28 +1,28 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
-import Accordion from "@mui/material/Accordion";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import Typography from "@mui/material/Typography";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Accordion from '@mui/material/Accordion';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import Typography from '@mui/material/Typography';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-import "./DropDown.scss";
+import './DropDown.scss';
 
 const categorySelect = [
   {
     id: 1,
-    text: "Select 1",
+    text: 'Select 1',
     child: [
-      { id: 1, text: "Select 1 1" },
-      { id: 1, text: "Select 1 2" },
+      { id: 1, text: 'Select 1 1' },
+      { id: 1, text: 'Select 1 2' },
     ],
   },
   {
     id: 2,
-    text: "Select 2",
+    text: 'Select 2',
     child: [
-      { id: 1, text: "Select 2 1" },
-      { id: 1, text: "Select 2 2" },
+      { id: 1, text: 'Select 2 1' },
+      { id: 1, text: 'Select 2 2' },
     ],
   },
 ];
@@ -45,9 +45,9 @@ MiniAccordion.propTypes = {
 
 function Dropdown({ categorySelect }) {
   return (
-    <div className="drop_down">
-      <MiniAccordion category="Choose a category">
-        {categorySelect.map((category) => (
+    <div className='drop_down'>
+      <MiniAccordion category='Choose a category'>
+        {categorySelect.map(category => (
           <MiniAccordion key={category.id} category={category.text}></MiniAccordion>
         ))}
       </MiniAccordion>

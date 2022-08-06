@@ -9,10 +9,6 @@ import Card from '@mui/material/Card';
 
 // @mui material components
 import Icon from '@mui/material/Icon';
-import InputAdornment from '@mui/material/InputAdornment';
-import IconButton from '@mui/material/IconButton';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 // Material Dashboard 2 React components
 import MDBox from 'components/MDBox';
@@ -26,15 +22,11 @@ import DashboardNavbar from 'examples/Navbars/DashboardNavbar';
 // Material Dashboard 2 React components
 import MDInput from 'components/MDInput';
 
-// Services
-import { fetchAllUsers } from 'services/userService';
-
 // Components
 import UsersTableComponent from '../table/UsersTableComponent';
 
 function Users() {
   const [open, setOpen] = useState(false);
-  const [users, setUsers] = useState([]);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -43,17 +35,6 @@ function Users() {
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
-
-  const fetchUsers = async () => {
-    const result = await fetchAllUsers();
-    setUsers(result.data.objectKoinot.content);
-  };
-
-  useEffect(() => {
-    fetchUsers();
-  }, []);
-
-  console.log(users);
 
   return (
     <DashboardLayout>
@@ -126,31 +107,6 @@ function Users() {
                     <MDBox mb={2} sx={{ display: 'flex' }}>
                       <MDInput sx={{ marginRight: '5px' }} type='text' label='Region' fullWidth />
                       <MDInput type='text' label='Role' fullWidth />
-                    </MDBox>
-                    <MDBox mb={2} sx={{ display: 'flex' }}>
-                      <MDInput
-                        sx={{ marginRight: '5px' }}
-                        type='text'
-                        label='Phone Number'
-                        fullWidth
-                      />
-                      <MDInput
-                        id='outlined-adornment-password'
-                        type={showPassword ? 'text' : 'password'}
-                        label='Password'
-                        fullWidth
-                        endAdornment={
-                          <InputAdornment position='end'>
-                            <IconButton
-                              aria-label='toggle password visibility'
-                              onClick={handleClickShowPassword}
-                              edge='end'
-                            >
-                              {showPassword ? <VisibilityOff /> : <Visibility />}
-                            </IconButton>
-                          </InputAdornment>
-                        }
-                      />
                     </MDBox>
                     <MDBox
                       mt={4}

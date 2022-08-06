@@ -1,15 +1,15 @@
-import axios from "axios";
-import jwtDecode from "jwt-decode";
+import axios from 'axios';
+import jwtDecode from 'jwt-decode';
 
-import api from "utils/config.json";
+import api from 'utils/config.json';
 
 const { baseURL } = api;
 
 // const token = localStorage.getItem("token");
 
-const parseJwt = (token) => {
+const parseJwt = token => {
   try {
-    return JSON.parse(atob(token.split(".")[1]));
+    return JSON.parse(atob(token.split('.')[1]));
   } catch (e) {
     return null;
   }
@@ -29,7 +29,7 @@ export function setToken(jwt) {
   const parsedJwt = parseJwt(jwt);
   if (jwt) {
     if (parsedJwt.exp * 1000 > Date.now()) {
-      localStorage.setItem("token", jwt);
+      localStorage.setItem('token', jwt);
       return window.location.replace(`/${path}`);
     }
   }
