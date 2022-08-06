@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Backdrop from "@mui/material/Backdrop";
 import Modal from "@mui/material/Modal";
@@ -22,25 +22,38 @@ import MDButton from "components/MDButton";
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import DataTable from "examples/Tables/DataTable";
-
-// Data
-import UsersTableData from "layouts/users/data/UsersTableData";
 
 // Material Dashboard 2 React components
 import MDInput from "components/MDInput";
 
+// Services
+import { fetchAllUsers } from "services/userService";
+
+// Components
+import UsersTableComponent from "../table/UsersTableComponent";
+
 function Users() {
   const [open, setOpen] = useState(false);
+  const [users, setUsers] = useState([]);
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  const { columns, rows } = UsersTableData();
-
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
+
+  const fetchUsers = async () => {
+    const result = await fetchAllUsers();
+    setUsers(result.data.objectKoinot.content);
+  };
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  console.log(users);
 
   return (
     <DashboardLayout>
@@ -68,13 +81,7 @@ function Users() {
                 </MDButton>{" "}
               </MDBox>
               <MDBox pt={3}>
-                <DataTable
-                  table={{ columns, rows }}
-                  isSorted={false}
-                  entriesPerPage={false}
-                  showTotalEntries={false}
-                  noEndBorder
-                />
+                <UsersTableComponent />
               </MDBox>
             </Card>
           </Grid>

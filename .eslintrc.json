@@ -33,5 +33,8 @@
     ],
     "react/jsx-curly-spacing": [2, "never"]
   },
-  "settings": { "import/resolver": { "node": { "paths": ["src"] } } }
+  "settings": {
+    "import/ignore": [".css$"],
+    "import/resolver": { "node": { "paths": ["src"] } }
+  }
 }
