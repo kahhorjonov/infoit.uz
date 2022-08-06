@@ -45,11 +45,12 @@ function CreateQuestion() {
   const dispatch = useDispatch();
   const { category } = useSelector(state => state);
   const [createQStatus, setCreateQStatus] = useState(false);
+  const [categorys, setCategorys] = useState({});
+
+  console.log(categorys);
 
   const handleOpen = () => setCreateQStatus(true);
   const handleClose = () => setCreateQStatus(false);
-
-  console.log(category);
 
   useEffect(() => {
     dispatch(getCategories());
@@ -90,12 +91,71 @@ function CreateQuestion() {
                       outline: 'none',
                       border: 'none',
                     }}
+                    onChange={e => setCategorys({ child1: e.target.value })}
                   >
-                    <option>Category</option>
-                    <option>Fizika</option>
-                    <option>Matematika</option>
-                    <option>Ingliz tili</option>
+                    {category.categories.map(c => (
+                      <option key={c.id} value={JSON.stringify(c.children)}>
+                        {c.nameUz}
+                      </option>
+                    ))}
                   </select>
+                  {categorys?.child1 && (
+                    <select
+                      style={{
+                        width: '500%',
+                        padding: '0.7rem 1rem',
+                        borderRadius: '0.5rem',
+                        fontSize: '1rem',
+                        outline: 'none',
+                        border: 'none',
+                      }}
+                      onChange={e => setCategorys({ ...categorys, child2: e.target.value })}
+                    >
+                      {JSON.parse(categorys.child1).map(c => (
+                        <option key={c.id} value={JSON.stringify(c.children)}>
+                          {c.nameUz}
+                        </option>
+                      ))}
+                    </select>
+                  )}
+                  {categorys?.child2 && (
+                    <select
+                      style={{
+                        width: '500%',
+                        padding: '0.7rem 1rem',
+                        borderRadius: '0.5rem',
+                        fontSize: '1rem',
+                        outline: 'none',
+                        border: 'none',
+                      }}
+                      onChange={e => setCategorys({ ...categorys, child3: e.target.value })}
+                    >
+                      {JSON.parse(categorys.child2).map(c => (
+                        <option key={c.id} value={JSON.stringify(c.children)}>
+                          {c.nameUz}
+                        </option>
+                      ))}
+                    </select>
+                  )}
+                  {categorys?.child3 && (
+                    <select
+                      style={{
+                        width: '500%',
+                        padding: '0.7rem 1rem',
+                        borderRadius: '0.5rem',
+                        fontSize: '1rem',
+                        outline: 'none',
+                        border: 'none',
+                      }}
+                      onChange={e => setCategorys({ ...categorys, child4: e.target.value })}
+                    >
+                      {JSON.parse(categorys.child3).map(c => (
+                        <option key={c.id} value={JSON.stringify(c.children)}>
+                          {c.nameUz}
+                        </option>
+                      ))}
+                    </select>
+                  )}
                   <MDButton onClick={() => handleOpen()}>
                     <Icon>add</Icon>
                   </MDButton>
