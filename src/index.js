@@ -8,11 +8,16 @@ import "assets/style/style.css";
 
 // Material Dashboard 2 React Context Provider
 import { MaterialUIControllerProvider } from "context";
+import { Provider } from "react-redux";
+
+import { store } from "store/store";
 
 ReactDOM.render(
   <BrowserRouter>
     <MaterialUIControllerProvider>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </MaterialUIControllerProvider>
   </BrowserRouter>,
   document.getElementById("root")

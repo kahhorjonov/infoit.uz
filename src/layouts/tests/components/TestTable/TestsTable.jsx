@@ -16,8 +16,8 @@ const TESTS = [
 
 function TestTable({ onAddTestId }) {
   return (
-    <MDBox bgColor="white" coloredShadow="dark" borderRadius="xl" p={3}>
-      <table className="test_table">
+    <MDBox bgColor='white' coloredShadow='dark' borderRadius='xl' p={3}>
+      <table className='test_table'>
         <thead>
           <tr>
             <th> </th>
@@ -29,7 +29,7 @@ function TestTable({ onAddTestId }) {
           {TESTS.map((test) => (
             <tr key={test.id}>
               <td>
-                <input type="checkbox" onChange={() => onAddTestId(test.id)} />
+                <input type='checkbox' onChange={() => onAddTestId(test.id)} />
               </td>
               <td>{test.id}</td>
               <td>{test.text}</td>
@@ -38,8 +38,8 @@ function TestTable({ onAddTestId }) {
         </tbody>
       </table>
       <MDPagination
-        display="flex"
-        justifyContent="space-between"
+        display='flex'
+        justifyContent='space-between'
         style={{ width: "100% !important" }}
       >
         <select
@@ -55,7 +55,7 @@ function TestTable({ onAddTestId }) {
           <option>20</option>
           <option>30</option>
         </select>
-        <Pagination count={10} defaultPage={1} color="primary" />
+        <Pagination count={10} defaultPage={1} color='primary' />
       </MDPagination>
     </MDBox>
   );

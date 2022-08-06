@@ -76,8 +76,8 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
         <Link
           href={href}
           key={key}
-          target="_blank"
-          rel="noreferrer"
+          target='_blank'
+          rel='noreferrer'
           sx={{ textDecoration: "none" }}
         >
           <SidenavCollapse
@@ -97,10 +97,10 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
         <MDTypography
           key={key}
           color={textColor}
-          display="block"
-          variant="caption"
-          fontWeight="bold"
-          textTransform="uppercase"
+          display='block'
+          variant='caption'
+          fontWeight='bold'
+          textTransform='uppercase'
           pl={3}
           mt={2}
           mb={1}
@@ -127,30 +127,30 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
   return (
     <SidenavRoot
       {...rest}
-      variant="permanent"
+      variant='permanent'
       ownerState={{ transparentSidenav, whiteSidenav, miniSidenav, darkMode }}
     >
-      <MDBox pt={3} pb={1} px={4} textAlign="center">
+      <MDBox pt={3} pb={1} px={4} textAlign='center'>
         <MDBox
           display={{ xs: "block", xl: "none" }}
-          position="absolute"
+          position='absolute'
           top={0}
           right={0}
           p={1.625}
           onClick={closeSidenav}
           sx={{ cursor: "pointer" }}
         >
-          <MDTypography variant="h6" color="secondary">
+          <MDTypography variant='h6' color='secondary'>
             <Icon sx={{ fontWeight: "bold" }}>close</Icon>
           </MDTypography>
         </MDBox>
-        <MDBox component={NavLink} to="/" display="flex" alignItems="center">
-          {brand && <MDBox component="img" src={brand} alt="Brand" width="2rem" />}
+        <MDBox component={NavLink} to='/' display='flex' alignItems='center'>
+          {brand && <MDBox component='img' src={brand} alt='Brand' width='2rem' />}
           <MDBox
             width={!brandName && "100%"}
             sx={(theme) => sidenavLogoLabel(theme, { miniSidenav })}
           >
-            <MDTypography component="h6" variant="button" fontWeight="medium" color={textColor}>
+            <MDTypography component='h6' variant='button' fontWeight='medium' color={textColor}>
               {brandName}
             </MDTypography>
           </MDBox>

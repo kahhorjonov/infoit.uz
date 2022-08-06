@@ -64,36 +64,36 @@ function CreateTest() {
       <MDBox py={3}>
         <Grid container spacing={3}>
           <Grid item xs={12} lg={100}>
-            <MDBox p={2} variant="gradient" coloredShadow="light" borderRadius="xl">
+            <MDBox p={2} variant='gradient' coloredShadow='light' borderRadius='xl'>
               <MDBox
-                variant="gradient"
-                bgColor="dark"
-                color="white"
-                coloredShadow="dark"
-                borderRadius="xl"
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                width="5rem"
-                height="5rem"
+                variant='gradient'
+                bgColor='dark'
+                color='white'
+                coloredShadow='dark'
+                borderRadius='xl'
+                display='flex'
+                justifyContent='center'
+                alignItems='center'
+                width='5rem'
+                height='5rem'
                 mt={-5}
               >
-                <Icon fontSize="large" color="inherit">
+                <Icon fontSize='large' color='inherit'>
                   create
                 </Icon>
               </MDBox>
-              <MDBox textAlign="right" lineHeight={1.25} mt={-5} mb={2}>
-                <MDTypography variant="button" fontWeight="light" color="text">
+              <MDBox textAlign='right' lineHeight={1.25} mt={-5} mb={2}>
+                <MDTypography variant='button' fontWeight='light' color='text'>
                   Create Test
                 </MDTypography>
-                <MDTypography variant="h4" height="2rem">
+                <MDTypography variant='h4' height='2rem'>
                   {createTestData.category}
                 </MDTypography>
               </MDBox>
-              <Grid container spacing={1} width="100%" mt={2} justifyContent="space-between">
+              <Grid container spacing={1} width='100%' mt={2} justifyContent='space-between'>
                 <Grid item xs={12} sm={6} lg={3}>
                   <MDInput
-                    label="Category"
+                    label='Category'
                     fullWidth
                     required
                     // error={!createTestData.category ? true : false}
@@ -102,8 +102,8 @@ function CreateTest() {
                 </Grid>
                 <Grid item xs={12} sm={6} lg={3}>
                   <MDInput
-                    placeholder="Date"
-                    type="datetime-local"
+                    placeholder='Date'
+                    type='datetime-local'
                     fullWidth
                     required
                     // error={!createTestData.date ? true : false}
@@ -112,8 +112,8 @@ function CreateTest() {
                 </Grid>
                 <Grid item xs={12} sm={6} lg={3}>
                   <MDInput
-                    label="Count"
-                    type="number"
+                    label='Count'
+                    type='number'
                     fullWidth
                     required
                     // error={!createTestData.count ? true : false}
@@ -122,8 +122,8 @@ function CreateTest() {
                 </Grid>
                 <Grid item xs={12} sm={6} lg={1.5}>
                   <MDButton
-                    variant="gradient"
-                    color="info"
+                    variant='gradient'
+                    color='info'
                     fullWidth
                     onClick={() => handleSave(createTestData)}
                   >
@@ -132,8 +132,8 @@ function CreateTest() {
                 </Grid>
                 <Grid item xs={12} sm={6} lg={1.5}>
                   <MDButton
-                    variant="gradient"
-                    color="warning"
+                    variant='gradient'
+                    color='warning'
                     fullWidth
                     onClick={() => handleCancel()}
                   >

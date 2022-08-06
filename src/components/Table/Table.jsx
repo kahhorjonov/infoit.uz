@@ -1,11 +1,11 @@
 // import PropTypes from "prop-types";
-import MDBox from "components/MDBox";
-import Styles from "./Table.module.scss";
+import MDBox from 'components/MDBox';
+import Styles from './Table.module.scss';
 // import { v4 } from "uuid";
 
 function Table() {
   return (
-    <MDBox width="100%">
+    <MDBox sx='100%'>
       <table className={Styles.table}>
         <thead>
           <tr>
@@ -18,7 +18,7 @@ function Table() {
           <tr>
             <td>1</td>
             <td>
-              <img src="" alt="" />
+              <img src='' alt='' />
               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam et dolorem sit eum
               harum temporibus omnis consequuntur sequi, quaerat laudantium.
             </td>

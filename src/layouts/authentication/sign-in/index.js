@@ -37,44 +37,44 @@ function Basic() {
     <BasicLayout>
       <Card>
         <MDBox
-          variant="gradient"
-          bgColor="info"
-          borderRadius="lg"
-          coloredShadow="info"
+          variant='gradient'
+          bgColor='info'
+          borderRadius='lg'
+          coloredShadow='info'
           mx={2}
           mt={-3}
           p={2}
           mb={1}
-          textAlign="center"
+          textAlign='center'
         >
-          <MDTypography variant="h4" fontWeight="medium" color="white" mt={1}>
+          <MDTypography variant='h4' fontWeight='medium' color='white' mt={1}>
             Sign in
           </MDTypography>
         </MDBox>
         <MDBox pt={4} pb={3} px={3}>
-          <MDBox component="form" role="form">
+          <MDBox component='form' role='form'>
             <MDBox mb={2}>
               <MDInput
-                type="phone"
-                label="Phone"
+                type='phone'
+                label='Phone'
                 fullWidth
                 onChange={(e) => setPhone(e.target.value)}
               />
             </MDBox>
             <MDBox mb={2}>
               <MDInput
-                type="password"
-                label="Password"
+                type='password'
+                label='Password'
                 fullWidth
                 onChange={(e) => setPassword(e.target.value)}
               />
             </MDBox>
-            <MDBox display="flex" alignItems="center" ml={-1}>
+            <MDBox display='flex' alignItems='center' ml={-1}>
               <Switch checked={rememberMe} onChange={handleSetRememberMe} />
               <MDTypography
-                variant="button"
-                fontWeight="regular"
-                color="text"
+                variant='button'
+                fontWeight='regular'
+                color='text'
                 onClick={handleSetRememberMe}
                 sx={{ cursor: "pointer", userSelect: "none", ml: -1 }}
               >
@@ -82,19 +82,19 @@ function Basic() {
               </MDTypography>
             </MDBox>
             <MDBox mt={4} mb={1}>
-              <MDButton variant="gradient" color="info" fullWidth onClick={handleLogin}>
+              <MDButton variant='gradient' color='info' fullWidth onClick={handleLogin}>
                 sign in
               </MDButton>
             </MDBox>
-            <MDBox mt={3} mb={1} textAlign="center">
-              <MDTypography variant="button" color="text">
+            <MDBox mt={3} mb={1} textAlign='center'>
+              <MDTypography variant='button' color='text'>
                 Don&apos;t have an account?{" "}
                 <MDTypography
                   component={Link}
-                  to="/authentication/sign-up"
-                  variant="button"
-                  color="info"
-                  fontWeight="medium"
+                  to='/authentication/sign-up'
+                  variant='button'
+                  color='info'
+                  fontWeight='medium'
                   textGradient
                 >
                   Sign up

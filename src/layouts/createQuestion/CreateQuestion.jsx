@@ -1,22 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getCategories } from 'store/thunk';
 // @mui material components
-import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
+import Grid from '@mui/material/Grid';
+import Card from '@mui/material/Card';
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
+import MDBox from 'components/MDBox';
+import MDTypography from 'components/MDTypography';
 
 // Material Dashboard 2 React example components
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
+import DashboardLayout from 'examples/LayoutContainers/DashboardLayout';
+import DashboardNavbar from 'examples/Navbars/DashboardNavbar';
 // import Select from "components/Select/Select";
 
-import MDButton from "components/MDButton";
-import { Icon } from "@mui/material";
-import TableComp from "components/Table/Table";
-import ModalComp from "components/Modal/ModalComp";
-import CreateForm from "./components/CreateForm";
+import MDButton from 'components/MDButton';
+import { Icon } from '@mui/material';
+import TableComp from 'components/Table/Table';
+import ModalComp from 'components/Modal/ModalComp';
+import CreateForm from './components/CreateForm';
 // import DataTable from "examples/Tables/DataTable";
 
 // Data
@@ -40,10 +42,19 @@ import CreateForm from "./components/CreateForm";
 // };
 
 function CreateQuestion() {
+  const dispatch = useDispatch();
+  const { category } = useSelector(state => state);
   const [createQStatus, setCreateQStatus] = useState(false);
+  const [categorys, setCategorys] = useState({});
+
+  console.log(categorys);
 
   const handleOpen = () => setCreateQStatus(true);
   const handleClose = () => setCreateQStatus(false);
+
+  useEffect(() => {
+    dispatch(getCategories());
+  }, [dispatch]);
 
   return (
     <DashboardLayout>
@@ -59,39 +70,98 @@ function CreateQuestion() {
                 mx={2}
                 mt={-3}
                 p={2}
-                variant="gradient"
-                bgColor="info"
-                borderRadius="lg"
-                coloredShadow="info"
-                display="flex"
-                alignItems="center"
-                justifyContent="space-between"
+                variant='gradient'
+                bgColor='info'
+                borderRadius='lg'
+                coloredShadow='info'
+                display='flex'
+                alignItems='center'
+                justifyContent='space-between'
               >
-                <MDTypography variant="h6" color="white">
+                <MDTypography variant='h6' color='white'>
                   Questions Table
                 </MDTypography>
-                <MDBox display="flex" alignItems="center" gap={5}>
+                <MDBox display='flex' alignItems='center' gap={5}>
                   <select
                     style={{
-                      width: "500%",
-                      padding: "0.7rem 1rem",
-                      borderRadius: "0.5rem",
-                      fontSize: "1rem",
-                      outline: "none",
-                      border: "none",
+                      width: '500%',
+                      padding: '0.7rem 1rem',
+                      borderRadius: '0.5rem',
+                      fontSize: '1rem',
+                      outline: 'none',
+                      border: 'none',
                     }}
+                    onChange={e => setCategorys({ child1: e.target.value })}
                   >
-                    <option>Category</option>
-                    <option>Fizika</option>
-                    <option>Matematika</option>
-                    <option>Ingliz tili</option>
+                    {category.categories.map(c => (
+                      <option key={c.id} value={JSON.stringify(c.children)}>
+                        {c.nameUz}
+                      </option>
+                    ))}
                   </select>
+                  {categorys?.child1 && (
+                    <select
+                      style={{
+                        width: '500%',
+                        padding: '0.7rem 1rem',
+                        borderRadius: '0.5rem',
+                        fontSize: '1rem',
+                        outline: 'none',
+                        border: 'none',
+                      }}
+                      onChange={e => setCategorys({ ...categorys, child2: e.target.value })}
+                    >
+                      {JSON.parse(categorys.child1).map(c => (
+                        <option key={c.id} value={JSON.stringify(c.children)}>
+                          {c.nameUz}
+                        </option>
+                      ))}
+                    </select>
+                  )}
+                  {categorys?.child2 && (
+                    <select
+                      style={{
+                        width: '500%',
+                        padding: '0.7rem 1rem',
+                        borderRadius: '0.5rem',
+                        fontSize: '1rem',
+                        outline: 'none',
+                        border: 'none',
+                      }}
+                      onChange={e => setCategorys({ ...categorys, child3: e.target.value })}
+                    >
+                      {JSON.parse(categorys.child2).map(c => (
+                        <option key={c.id} value={JSON.stringify(c.children)}>
+                          {c.nameUz}
+                        </option>
+                      ))}
+                    </select>
+                  )}
+                  {categorys?.child3 && (
+                    <select
+                      style={{
+                        width: '500%',
+                        padding: '0.7rem 1rem',
+                        borderRadius: '0.5rem',
+                        fontSize: '1rem',
+                        outline: 'none',
+                        border: 'none',
+                      }}
+                      onChange={e => setCategorys({ ...categorys, child4: e.target.value })}
+                    >
+                      {JSON.parse(categorys.child3).map(c => (
+                        <option key={c.id} value={JSON.stringify(c.children)}>
+                          {c.nameUz}
+                        </option>
+                      ))}
+                    </select>
+                  )}
                   <MDButton onClick={() => handleOpen()}>
                     <Icon>add</Icon>
                   </MDButton>
                 </MDBox>
               </MDBox>
-              <MDBox width="100%" p={3}>
+              <MDBox width='100%' p={3}>
                 <TableComp />
                 {/* <CreateForm questionNumber={1} /> */}
               </MDBox>
