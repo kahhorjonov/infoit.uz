@@ -4,8 +4,8 @@ import Tables from 'layouts/tables';
 import Billing from 'layouts/billing';
 import Notifications from 'layouts/notifications';
 import Profile from 'layouts/profile';
-import SignIn from 'layouts/authentication/sign-in';
-import SignUp from 'layouts/authentication/sign-up';
+// import SignIn from 'layouts/authentication/sign-in';
+// import SignUp from 'layouts/authentication/sign-up';
 import Categories from 'layouts/categories/Categories';
 import CreateTest from 'layouts/tests/CreateTest';
 import CreateQuestion from 'layouts/createQuestion/CreateQuestion';
@@ -96,24 +96,24 @@ const routes = [
     user: 'admin',
     component: <Profile />,
   },
-  {
-    type: 'collapse',
-    name: 'Sign In',
-    key: 'sign-in',
-    icon: <Icon fontSize='small'>login</Icon>,
-    route: '/admin/login',
-    user: 'admin',
-    component: <SignIn />,
-  },
-  {
-    type: 'collapse',
-    name: 'Sign Up',
-    key: 'sign-up',
-    icon: <Icon fontSize='small'>assignment</Icon>,
-    route: '/admin/register',
-    user: 'admin',
-    component: <SignUp />,
-  },
+  // {
+  //   type: 'collapse',
+  //   name: 'Sign In',
+  //   key: 'sign-in',
+  //   icon: <Icon fontSize='small'>login</Icon>,
+  //   route: '/admin/login',
+  //   user: 'admin',
+  //   component: <SignIn />,
+  // },
+  // {
+  //   type: 'collapse',
+  //   name: 'Sign Up',
+  //   key: 'sign-up',
+  //   icon: <Icon fontSize='small'>assignment</Icon>,
+  //   route: '/admin/register',
+  //   user: 'admin',
+  //   component: <SignUp />,
+  // },
 ];
 
 export default routes;
