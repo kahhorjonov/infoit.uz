@@ -47,8 +47,6 @@ function CreateQuestion() {
   const [createQStatus, setCreateQStatus] = useState(false);
   const [categorys, setCategorys] = useState({});
 
-  console.log(categorys);
-
   const handleOpen = () => setCreateQStatus(true);
   const handleClose = () => setCreateQStatus(false);
 

@@ -1,14 +1,14 @@
-import { useState } from "react";
-import { PropTypes } from "prop-types";
-import MDInput from "components/MDInput";
-import MDTypography from "components/MDTypography";
+import { useState } from 'react';
+import { PropTypes } from 'prop-types';
+import MDInput from 'components/MDInput';
+import MDTypography from 'components/MDTypography';
 // import Grid from "@mui/material/Grid";
-import MDBox from "components/MDBox";
-import AddImage from "components/AddImage/AddImage";
-import { v4 } from "uuid";
-import ScreenImage from "components/ScreenImage/ScreenImage";
-import Icon from "@mui/material/Icon";
-import MDButton from "components/MDButton";
+import MDBox from 'components/MDBox';
+import AddImage from 'components/AddImage/AddImage';
+import { v4 } from 'uuid';
+import ScreenImage from 'components/ScreenImage/ScreenImage';
+import Icon from '@mui/material/Icon';
+import MDButton from 'components/MDButton';
 
 function AnswerInput({ id, status, text, img, onAddAnswer, onDeleteAnswer, onChangeAnswer }) {
   return (
@@ -18,13 +18,13 @@ function AnswerInput({ id, status, text, img, onAddAnswer, onDeleteAnswer, onCha
           label='Answer'
           fullWidth
           value={text}
-          onChange={e => onChangeAnswer(id, "text", e.target.value)}
+          onChange={e => onChangeAnswer(id, 'text', e.target.value)}
         />
-        {!img && <AddImage onChange={image => onChangeAnswer(id, "img", image)} />}
+        {!img && <AddImage onChange={image => onChangeAnswer(id, 'img', image)} />}
         <Icon
           fontSize='large'
-          color={status ? "success" : "secondary"}
-          onClick={() => onChangeAnswer(id, "status", !status)}
+          color={status ? 'success' : 'secondary'}
+          onClick={() => onChangeAnswer(id, 'status', !status)}
         >
           check
         </Icon>
@@ -36,7 +36,7 @@ function AnswerInput({ id, status, text, img, onAddAnswer, onDeleteAnswer, onCha
         </Icon>
       </MDBox>
       <MDBox display='flex' alignItems='center' mt={2} mb={2} gap={1}>
-        {img && <ScreenImage key={v4()} img={img} onDelete={() => onChangeAnswer(id, "img", "")} />}
+        {img && <ScreenImage key={v4()} img={img} onDelete={() => onChangeAnswer(id, 'img', '')} />}
       </MDBox>
     </MDBox>
   );
@@ -54,13 +54,13 @@ AnswerInput.propTypes = {
 
 function CreateForm({ questionNumber, onClose }) {
   const [questionsForm, setQuestionsForm] = useState({
-    question: "",
-    image: "",
-    answers: [{ id: v4(), status: false, text: "", img: "" }],
+    question: '',
+    image: '',
+    answers: [{ id: v4(), status: false, text: '', img: '' }],
   });
 
   const handleAddAnswer = () => {
-    const newAnswer = { id: v4(), status: false, text: "", img: "" };
+    const newAnswer = { id: v4(), status: false, text: '', img: '' };
     const data = [...questionsForm.answers];
     data.push(newAnswer);
     setQuestionsForm({
@@ -99,7 +99,7 @@ function CreateForm({ questionNumber, onClose }) {
     );
 
     // console.log(name, value);
-    console.log(id, name, value);
+    // console.log(id, name, value);
 
     setQuestionsForm({ ...questionsForm, answers: newAnswer });
   };
