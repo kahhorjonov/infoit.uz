@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 
 // @mui material components
 import { ThemeProvider } from '@mui/material/styles';
@@ -47,7 +47,6 @@ function User() {
   const {
     miniSidenav,
     direction,
-    layout,
     openConfigurator,
     sidenavColor,
     transparentSidenav,

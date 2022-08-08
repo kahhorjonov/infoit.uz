@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import Backdrop from '@mui/material/Backdrop';
 import Modal from '@mui/material/Modal';
@@ -30,11 +30,6 @@ function Users() {
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [showPassword, setShowPassword] = useState(false);
-
-  const handleClickShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
 
   return (
     <DashboardLayout>

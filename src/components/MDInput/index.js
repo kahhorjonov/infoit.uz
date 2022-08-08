@@ -10,6 +10,8 @@ const MDInput = forwardRef(({ error, success, disabled, ...rest }, ref) => (
   <MDInputRoot {...rest} ref={ref} ownerState={{ error, success, disabled }} />
 ));
 
+MDInput.displayName = 'MDInput';
+
 // Setting default values for the props of MDInput
 MDInput.defaultProps = {
   error: false,

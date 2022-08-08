@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 
 import Icon from '@mui/material/Icon';
 import MDButton from 'components/MDButton';
@@ -18,10 +17,7 @@ import Modal from '@mui/material/Modal';
 // Services
 import { fetchAllUsers, getUserById } from 'services/userService';
 
-// Components
-import ModalComp from 'components/Modal/ModalComp';
-
-export default function UsersTableComponent({ color }) {
+export default function UsersTableComponent() {
   const [open, setOpen] = useState(false);
   const [users, setUsers] = useState([]);
   const [userData, setUserData] = useState('');
@@ -172,8 +168,4 @@ export default function UsersTableComponent({ color }) {
 
 UsersTableComponent.defaultProps = {
   color: 'light',
-};
-
-UsersTableComponent.propTypes = {
-  color: PropTypes.oneOf(['light', 'dark']),
 };
