@@ -11,8 +11,8 @@ import CssBaseline from '@mui/material/CssBaseline';
 import theme from 'assets/theme';
 
 // Layouts
-import AdminLayout from 'layouts/admin/AdminLayout';
-import UserLayout from 'layouts/user/UserLayout';
+import Admin from 'layouts/admin/Admin';
+import User from 'layouts/user/User';
 import SignIn from 'layouts/authentication/sign-in';
 
 export default function App() {
@@ -57,11 +57,11 @@ export default function App() {
           path='/admin/*'
           element={
             <RequireAuth>
-              <AdminLayout />
+              <Admin />
             </RequireAuth>
           }
         />
-        <Route path='/admin/*' element={<UserLayout />} />
+        <Route path='/admin/*' element={<User />} />
       </Routes>
     </ThemeProvider>
   );

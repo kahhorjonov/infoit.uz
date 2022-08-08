@@ -29,7 +29,7 @@ export function setToken(jwt) {
   const parsedJwt = parseJwt(jwt);
   if (jwt && parsedJwt.exp * 1000 > Date.now()) {
     localStorage.setItem('token', jwt);
-    // return window.location.replace(`/${path}`);
+    return window.location.replace(`/${path}`);
   }
   return null;
 }

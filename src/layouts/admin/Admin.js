@@ -42,7 +42,7 @@ import Profile from 'layouts/profile';
 import Login from 'layouts/authentication/sign-in';
 import Register from 'layouts/authentication/sign-up';
 
-function UserLayout() {
+function Admin() {
   const [controller, dispatch] = useMaterialUIController();
   const {
     miniSidenav,
@@ -126,6 +126,7 @@ function UserLayout() {
       {configsButton}
 
       <Routes>
+        <Route path='/' exact element={<Dashboard />} />
         <Route path='/dashboard' exact element={<Dashboard />} />
         <Route path='/createQuestion' exact element={<CreateQuestion />} />
         <Route path='/createTest' exact element={<CreateTest />} />
@@ -142,4 +143,4 @@ function UserLayout() {
   );
 }
 
-export default UserLayout;
+export default Admin;

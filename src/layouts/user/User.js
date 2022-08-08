@@ -42,7 +42,7 @@ import Profile from 'layouts/profile';
 import Login from 'layouts/authentication/sign-in';
 import Register from 'layouts/authentication/sign-up';
 
-function AdminLayout() {
+function User() {
   const [controller, dispatch] = useMaterialUIController();
   const {
     miniSidenav,
@@ -142,4 +142,4 @@ function AdminLayout() {
   );
 }
 
-export default AdminLayout;
+export default User;
