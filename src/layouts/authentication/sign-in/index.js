@@ -1,29 +1,29 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 // react-router-dom components
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 // @mui material components
-import Card from "@mui/material/Card";
-import Switch from "@mui/material/Switch";
+import Card from '@mui/material/Card';
+import Switch from '@mui/material/Switch';
 // import Grid from "@mui/material/Grid";
 // import MuiLink from "@mui/material/Link";
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDInput from "components/MDInput";
-import MDButton from "components/MDButton";
+import MDBox from 'components/MDBox';
+import MDTypography from 'components/MDTypography';
+import MDInput from 'components/MDInput';
+import MDButton from 'components/MDButton';
 
 // Authentication layout components
-import BasicLayout from "layouts/authentication/components/BasicLayout";
+import BasicLayout from 'layouts/authentication/components/BasicLayout';
 
 // Services
-import { login, setToken } from "services/authService";
+import { login, setToken } from 'services/authService';
 
 function Basic() {
-  const [phone, setPhone] = useState("");
-  const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState('');
+  const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
 
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
@@ -58,7 +58,7 @@ function Basic() {
                 type='phone'
                 label='Phone'
                 fullWidth
-                onChange={(e) => setPhone(e.target.value)}
+                onChange={e => setPhone(e.target.value)}
               />
             </MDBox>
             <MDBox mb={2}>
@@ -66,7 +66,7 @@ function Basic() {
                 type='password'
                 label='Password'
                 fullWidth
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={e => setPassword(e.target.value)}
               />
             </MDBox>
             <MDBox display='flex' alignItems='center' ml={-1}>
@@ -76,7 +76,7 @@ function Basic() {
                 fontWeight='regular'
                 color='text'
                 onClick={handleSetRememberMe}
-                sx={{ cursor: "pointer", userSelect: "none", ml: -1 }}
+                sx={{ cursor: 'pointer', userSelect: 'none', ml: -1 }}
               >
                 &nbsp;&nbsp;Remember me
               </MDTypography>
@@ -88,7 +88,7 @@ function Basic() {
             </MDBox>
             <MDBox mt={3} mb={1} textAlign='center'>
               <MDTypography variant='button' color='text'>
-                Don&apos;t have an account?{" "}
+                Don&apos;t have an account?{' '}
                 <MDTypography
                   component={Link}
                   to='/authentication/sign-up'
