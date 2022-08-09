@@ -35,7 +35,7 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
   const [controller, dispatch] = useMaterialUIController();
   const { miniSidenav, transparentSidenav, whiteSidenav, darkMode } = controller;
   const location = useLocation();
-  const collapseName = location.pathname.replace(`/${routes[0].user}/`, '');
+  const collapseName = location.pathname.replace('/', '');
 
   let textColor = 'white';
 

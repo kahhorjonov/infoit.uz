@@ -18,10 +18,11 @@ import MDButton from 'components/MDButton';
 import { Icon } from '@mui/material';
 import TableComp from 'components/Table/Table';
 import ModalComp from 'components/Modal/ModalComp';
-import CreateForm from './components/CreateForm';
+
 import CategorySelect from '../../components/CategorySelect/CategorySelect';
 import PaginationTable from '../../components/Pagination/Pagination';
 import { setQuestionsPagination } from '../../store/actions/actionCreaters';
+import CreateForm from './components/CreateForm';
 
 // import DataTable from "examples/Tables/DataTable";
 
@@ -33,7 +34,6 @@ function CreateQuestion() {
     id: category.categories[0]?.id,
     child1: category.categories[0]?.children,
   });
-
   const handleOpen = () => setCreateQStatus(true);
   const handleClose = () => setCreateQStatus(false);
 

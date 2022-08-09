@@ -1,19 +1,19 @@
-import axios from "axios";
-import jwtDecode from "jwt-decode";
+import axios from 'axios';
+import jwtDecode from 'jwt-decode';
 
-import api from "utils/config.json";
+import api from 'utils/config.json';
 
 const { baseURL } = api;
 
 // const token = localStorage.getItem("token");
 
-// const parseJwt = (token) => {
-//   try {
-//     return JSON.parse(atob(token.split(".")[1]));
-//   } catch (e) {
-//     return null;
-//   }
-// };
+const parseJwt = token => {
+  try {
+    return JSON.parse(atob(token.split('.')[1]));
+  } catch (e) {
+    return null;
+  }
+};
 
 export const login = (phoneNumber, password) => {
   const result = axios.post(`${baseURL}/auth/v1/login`, {
@@ -25,18 +25,13 @@ export const login = (phoneNumber, password) => {
 };
 
 export function setToken(jwt) {
-  console.log(jwt);
-  const path = jwtDecode(jwt);
-  console.log(path);
-  // const path = jwtDecode(jwt).roles[0].roleName.slice(5).toLowerCase();
-  // const parsedJwt = parseJwt(jwt);
-  // if (jwt) {
-  //   if (parsedJwt.exp * 1000 > Date.now()) {
-  //     localStorage.setItem("token", jwt);
-  //     return window.location.replace(`/${path}`);
-  //   }
-  // }
-  // return parsedJwt;
+  const path = jwtDecode(jwt).roles.name.slice(5).toLowerCase();
+  const parsedJwt = parseJwt(jwt);
+  if (jwt && parsedJwt.exp * 1000 > Date.now()) {
+    localStorage.setItem('token', jwt);
+    return window.location.replace(`/${path}`);
+  }
+  return null;
 }
 
 // const me = () => {
@@ -69,18 +64,16 @@ export function setToken(jwt) {
 //   localStorage.removeItem("token");
 // };
 
-// export const decodedToken = () => {
-//   const jwt = localStorage.getItem("token");
-//   const parsedJwt = parseJwt(jwt);
+export const decodedToken = () => {
+  const jwt = localStorage.getItem('token');
+  const parsedJwt = parseJwt(jwt);
+  let decodedJwt;
 
-//   if (jwt) {
-//     if (parsedJwt.exp * 1000 < Date.now()) {
-//       return;
-//     } else {
-//       return jwtDecode(jwt);
-//     }
-//   }
-// };
+  if (jwt && parsedJwt.exp * 1000 > Date.now()) {
+    decodedJwt = jwtDecode(jwt);
+  }
+  return decodedJwt;
+};
 
 // export function loginWithJwt(jwt) {
 //   const parsedJwt = parseJwt(localStorage.getItem("token"));
@@ -103,5 +96,5 @@ export function setToken(jwt) {
 
 export default {
   login,
-  setToken,
+  decodedToken,
 };

@@ -18,20 +18,18 @@ import MDButton from 'components/MDButton';
 // Material Dashboard 2 React example components
 import DashboardLayout from 'examples/LayoutContainers/DashboardLayout';
 import DashboardNavbar from 'examples/Navbars/DashboardNavbar';
-import DataTable from 'examples/Tables/DataTable';
-
-// Data
-import CategoriesTableData from 'layouts/categories/data/CategoriesTableData';
 
 // Material Dashboard 2 React components
 import MDInput from 'components/MDInput';
 
-function Categories() {
+// Components
+import UsersTableComponent from '../table/UsersTableComponent';
+
+function Users() {
   const [open, setOpen] = useState(false);
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-  const { columns, rows } = CategoriesTableData();
 
   return (
     <DashboardLayout>
@@ -52,20 +50,14 @@ function Categories() {
                 coloredShadow='info'
               >
                 <MDTypography variant='h6' color='white'>
-                  Categories Table
+                  Users Table
                 </MDTypography>
                 <MDButton variant='text' color='white' onClick={handleOpen}>
                   <Icon>add</Icon>&nbsp;add
                 </MDButton>{' '}
               </MDBox>
               <MDBox pt={3}>
-                <DataTable
-                  table={{ columns, rows }}
-                  isSorted={false}
-                  entriesPerPage={false}
-                  showTotalEntries={false}
-                  noEndBorder
-                />
+                <UsersTableComponent />
               </MDBox>
             </Card>
           </Grid>
@@ -89,20 +81,39 @@ function Categories() {
                 <MDBox pt={4} pb={3} px={3}>
                   <MDBox component='form' role='form'>
                     <MDBox mb={2} sx={{ display: 'flex' }}>
-                      <MDInput sx={{ marginRight: '5px' }} type='text' label='Category' fullWidth />
-                      <MDInput type='text' label='Category' fullWidth />
+                      <MDInput
+                        sx={{ marginRight: '5px' }}
+                        type='text'
+                        label='First Name'
+                        fullWidth
+                      />
+                      <MDInput type='text' label='Last Name' fullWidth />
                     </MDBox>
                     <MDBox mb={2} sx={{ display: 'flex' }}>
                       <MDInput
                         sx={{ marginRight: '5px' }}
-                        type='select'
-                        label='Parent Category'
+                        type='date'
+                        InputLabelProps={{ shrink: true, required: true }}
+                        label='Date of Birth'
                         fullWidth
                       />
-                      <MDInput type='select' label='Parent Category' fullWidth />
+                      <MDInput type='text' label='Address' fullWidth />
                     </MDBox>
-                    <MDBox mt={4} mb={1}>
-                      <MDButton variant='gradient' color='info' fullWidth>
+                    <MDBox mb={2} sx={{ display: 'flex' }}>
+                      <MDInput sx={{ marginRight: '5px' }} type='text' label='Region' fullWidth />
+                      <MDInput type='text' label='Role' fullWidth />
+                    </MDBox>
+                    <MDBox
+                      mt={4}
+                      mb={1}
+                      spacing={1}
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <MDButton sx={{ paddingX: '35px' }} variant='gradient' color='info'>
                         Save
                       </MDButton>
                     </MDBox>
@@ -117,4 +128,4 @@ function Categories() {
   );
 }
 
-export default Categories;
+export default Users;
