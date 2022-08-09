@@ -6,11 +6,13 @@ import MDTypography from 'components/MDTypography';
 import MDBox from 'components/MDBox';
 import AddImage from 'components/AddImage/AddImage';
 import { v4 } from 'uuid';
-import ScreenImage from 'components/ScreenImage/ScreenImage';
+// import ScreenImage from 'components/ScreenImage/ScreenImage';
 import Icon from '@mui/material/Icon';
 import MDButton from 'components/MDButton';
+import { addQuestion } from '../../../store/thunk';
+// import { uploadPhoto } from '../../../store/thunk';
 
-function AnswerInput({ id, status, text, img, onAddAnswer, onDeleteAnswer, onChangeAnswer }) {
+function AnswerInput({ id, correct, text, onAddAnswer, onDeleteAnswer, onChangeAnswer }) {
   return (
     <MDBox width='100%'>
       <MDBox display='flex' alignItems='center'>
@@ -20,11 +22,17 @@ function AnswerInput({ id, status, text, img, onAddAnswer, onDeleteAnswer, onCha
           value={text}
           onChange={e => onChangeAnswer(id, 'text', e.target.value)}
         />
-        {!img && <AddImage onChange={image => onChangeAnswer(id, 'img', image)} />}
+
+        <AddImage
+          label={`AnswerImage${id}`}
+          // value={img}
+          onChange={image => onChangeAnswer(id, 'img', image)}
+        />
+
         <Icon
           fontSize='large'
-          color={status ? 'success' : 'secondary'}
-          onClick={() => onChangeAnswer(id, 'status', !status)}
+          color={correct ? 'success' : 'secondary'}
+          onClick={() => onChangeAnswer(id, 'correct', !correct)}
         >
           check
         </Icon>
@@ -35,73 +43,62 @@ function AnswerInput({ id, status, text, img, onAddAnswer, onDeleteAnswer, onCha
           remove
         </Icon>
       </MDBox>
-      <MDBox display='flex' alignItems='center' mt={2} mb={2} gap={1}>
+      {/* <MDBox display='flex' alignItems='center' mt={2} mb={2} gap={1}>
         {img && <ScreenImage key={v4()} img={img} onDelete={() => onChangeAnswer(id, 'img', '')} />}
-      </MDBox>
+      </MDBox> */}
     </MDBox>
   );
 }
 
 AnswerInput.propTypes = {
   id: PropTypes.string.isRequired,
-  status: PropTypes.bool.isRequired,
+  correct: PropTypes.bool.isRequired,
   text: PropTypes.string.isRequired,
-  img: PropTypes.string.isRequired,
+  // img: PropTypes.string.isRequired,
   onAddAnswer: PropTypes.func.isRequired,
   onDeleteAnswer: PropTypes.func.isRequired,
   onChangeAnswer: PropTypes.func.isRequired,
 };
 
-function CreateForm({ questionNumber, onClose }) {
+function CreateForm({ questionNumber, categoryId, onClose }) {
   const [questionsForm, setQuestionsForm] = useState({
-    question: '',
-    image: '',
-    answers: [{ id: v4(), status: false, text: '', img: '' }],
+    id: 0,
+    attachmentId: 0,
+    categoryId,
+    text: '',
+    choices: [{ id: v4(), attachmentId: 0, correct: false, text: '' }],
   });
-  //   console.log(questionsForm);
 
   const handleAddAnswer = () => {
-    const newAnswer = { id: v4(), status: false, text: '', img: '' };
-    const data = [...questionsForm.answers];
-    data.push(newAnswer);
+    const newChoice = { id: v4(), attachmentId: 0, correct: false, text: '' };
+    const data = [...questionsForm.choices];
+    data.push(newChoice);
     setQuestionsForm({
       ...questionsForm,
-      answers: data,
+      choices: data,
     });
   };
 
-  const handleDeleteAnswer = answerId => {
-    const data = questionsForm.answers.filter(answer => answer.id !== answerId);
-    setQuestionsForm({ ...questionsForm, answers: data });
+  const handleDeleteAnswer = choiceId => {
+    const data = questionsForm.choices.filter(answer => answer.id !== choiceId);
+    setQuestionsForm({ ...questionsForm, choices: data });
   };
 
-  const handleChangeQuestion = question => {
-    setQuestionsForm({ ...questionsForm, question });
-  };
-
-  const handleAddImage = image => {
-    // const data = [...questionsForm.image];
-    // data.push(URL.createObjectURL(image.target.files[0]));
-    setQuestionsForm({ ...questionsForm, image });
-  };
-
-  const handleDeleteImage = image => {
-    const data = [...questionsForm.image];
-    data.splice(data.indexOf(image), 1);
-    setQuestionsForm({
-      ...questionsForm,
-      image: data,
-    });
+  const handleChangeQuestion = text => {
+    setQuestionsForm({ ...questionsForm, text });
   };
 
   const handleChangeAnswer = (id, name, value) => {
-    const newAnswer = questionsForm.answers.map(answer =>
-      answer.id === id ? { ...answer, [name]: value } : answer,
+    const choices = questionsForm.choices.map(choice =>
+      choice.id === id ? { ...choice, [name]: value } : choice,
     );
 
-    console.log(id, name, value);
+    setQuestionsForm({ ...questionsForm, choices });
+  };
 
-    setQuestionsForm({ ...questionsForm, answers: newAnswer });
+  const handleSave = question => {
+    addQuestion(question);
+    console.log(question);
   };
 
   return (
@@ -118,16 +115,28 @@ function CreateForm({ questionNumber, onClose }) {
             fullWidth
             onChange={e => handleChangeQuestion(e.target.value)}
           />
-          <AddImage onChange={img => handleAddImage(img)} />
+          <AddImage
+            label='questionImage'
+            // onChange={img => uploadPhoto(img)}
+            onChange={image => setQuestionsForm({ ...questionsForm, image })}
+          />
         </MDBox>
-        <MDBox display='flex' alignItems='center' mt={2} gap={1}>
-          {questionsForm?.image && (
-            <ScreenImage img={questionsForm.image} onDelete={e => handleDeleteImage(e)} />
+        {/* <MDBox display='flex' alignItems='center' mt={2} gap={1}>
+          {questionsForm?.image?.imageUrl && (
+            <ScreenImage
+              img={questionsForm?.image?.imageUrl}
+              onDelete={() =>
+                setQuestionsForm({
+                  ...questionsForm,
+                  image: {},
+                })
+              }
+            />
           )}
-        </MDBox>
+        </MDBox> */}
       </MDBox>
       <MDBox item xs={5}>
-        {questionsForm?.answers?.map(answer => (
+        {questionsForm?.choices?.map(answer => (
           <MDBox key={answer.id} display='flex' alignItems='center' gap={1}>
             <AnswerInput
               {...answer}
@@ -139,7 +148,7 @@ function CreateForm({ questionNumber, onClose }) {
         ))}
       </MDBox>
       <MDBox width='100%' display='flex' alignItems='center' gap={1}>
-        <MDButton fullWidth color='success'>
+        <MDButton fullWidth color='success' onClick={() => handleSave(questionsForm)}>
           Save
         </MDButton>
         <MDButton fullWidth color='secondary' onClick={onClose}>
@@ -151,6 +160,7 @@ function CreateForm({ questionNumber, onClose }) {
 }
 
 CreateForm.propTypes = {
+  categoryId: PropTypes.number.isRequired,
   questionNumber: PropTypes.number.isRequired,
   onClose: PropTypes.func.isRequired,
 };

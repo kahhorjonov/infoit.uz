@@ -1,0 +1,44 @@
+.pagination {
+  font-style: normal;
+  color: gray;
+  margin: 10px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+  font-size: 13px;
+  font-weight: 600;
+  .leftCont {
+    span {
+      font-size: 13px;
+      line-height: 24px;
+    }
+    select {
+      margin-left: 24px;
+      border: 1px solid gray;
+      color: gray;
+      padding: 2px 0px;
+      outline: none;
+      background: none;
+      font-weight: 600;
+      line-height: 24px;
+    }
+  }
+  .rightCont {
+    display: flex;
+    align-items: center;
+    span {
+      margin-right: 20px;
+    }
+    .MuiPaginationItem-root {
+      border-radius: 0px;
+      border-color: gray;
+      color: inherit;
+    }
+    .Mui-selected {
+      border-color: orange;
+      color: orange;
+      background-color: #fff;
+    }
+  }
+}

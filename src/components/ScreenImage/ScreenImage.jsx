@@ -5,7 +5,7 @@ function ScreenImage({ img, onDelete }) {
   return (
     <div className={Styles.screenImage}>
       <img src={img} alt='' />
-      <button type='button' onClick={() => onDelete(img)}>
+      <button type='button' onClick={() => onDelete()}>
         ×
       </button>
     </div>
