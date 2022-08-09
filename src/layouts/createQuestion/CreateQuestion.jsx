@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getCategories } from 'store/thunk';
+import { getCategories, getQuestions } from 'store/thunk';
 // @mui material components
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
@@ -19,45 +19,47 @@ import { Icon } from '@mui/material';
 import TableComp from 'components/Table/Table';
 import ModalComp from 'components/Modal/ModalComp';
 import CreateForm from './components/CreateForm';
+import CategorySelect from '../../components/CategorySelect/CategorySelect';
+import PaginationTable from '../../components/Pagination/Pagination';
+import { setQuestionsPagination } from '../../store/actions/actionCreaters';
+
 // import DataTable from "examples/Tables/DataTable";
-
-// Data
-// import CategoriesTableData from "layouts/tables/data/CategoriesTableData";
-
-// const categorySelect = [
-//   { id: "1", label: "Category 1", val: "c1" },
-//   { id: "2", label: "Category 2", val: "c2" },
-//   { id: "3", label: "Category 3", val: "c3" },
-//   { id: "4", label: "Category 4", val: "c4" },
-// ];
-
-// const KEYS = [
-//   { id: "1", key: "text" },
-//   { id: "1", key: "status" },
-// ];
-
-// const head = {
-//   text: "Questions",
-//   status: "Answers",
-// };
 
 function CreateQuestion() {
   const dispatch = useDispatch();
-  const { category } = useSelector(state => state);
+  const { category, questionsData } = useSelector(state => state);
   const [createQStatus, setCreateQStatus] = useState(false);
-  const [categorys, setCategorys] = useState({});
+  const [categorys, setCategorys] = useState({
+    id: category.categories[0]?.id,
+    child1: category.categories[0]?.children,
+  });
 
   const handleOpen = () => setCreateQStatus(true);
   const handleClose = () => setCreateQStatus(false);
+
+  const handleChangePage = page => {
+    dispatch(setQuestionsPagination({ ...questionsData.pagination, page }));
+  };
+  const handleChangePageSize = pageSize => {
+    dispatch(setQuestionsPagination({ ...questionsData.pagination, page: 1, pageSize }));
+  };
 
   useEffect(() => {
     dispatch(getCategories());
   }, [dispatch]);
 
+  useEffect(() => {
+    setCategorys({ id: category?.categories[0]?.id, child1: category?.categories[0]?.children });
+  }, [category]);
+
+  useEffect(() => {
+    dispatch(getQuestions(categorys?.id));
+  }, [dispatch, categorys.id]);
+
   return (
     <DashboardLayout>
       <ModalComp status={createQStatus} onClose={handleClose}>
-        <CreateForm questionNumber={1} onClose={handleClose} />
+        <CreateForm categoryId={categorys?.id || 0} questionNumber={1} onClose={handleClose} />
       </ModalComp>
       <DashboardNavbar />
       <MDBox pt={6} pb={3}>
@@ -79,80 +81,52 @@ function CreateQuestion() {
                 <MDTypography variant='h6' color='white'>
                   Questions Table
                 </MDTypography>
-                <MDBox display='flex' alignItems='center' gap={5}>
-                  <select
-                    style={{
-                      width: '500%',
-                      padding: '0.7rem 1rem',
-                      borderRadius: '0.5rem',
-                      fontSize: '1rem',
-                      outline: 'none',
-                      border: 'none',
-                    }}
-                    onChange={e => setCategorys({ child1: e.target.value })}
-                  >
-                    {category.categories.map(c => (
-                      <option key={c.id} value={JSON.stringify(c.children)}>
-                        {c.nameUz}
-                      </option>
-                    ))}
-                  </select>
-                  {categorys?.child1 && (
-                    <select
-                      style={{
-                        width: '500%',
-                        padding: '0.7rem 1rem',
-                        borderRadius: '0.5rem',
-                        fontSize: '1rem',
-                        outline: 'none',
-                        border: 'none',
-                      }}
-                      onChange={e => setCategorys({ ...categorys, child2: e.target.value })}
-                    >
-                      {JSON.parse(categorys.child1).map(c => (
-                        <option key={c.id} value={JSON.stringify(c.children)}>
-                          {c.nameUz}
-                        </option>
-                      ))}
-                    </select>
+                <MDBox display='flex' alignItems='center' gap={3}>
+                  <CategorySelect
+                    options={category.categories}
+                    onChange={e =>
+                      setCategorys({
+                        id: JSON.parse(e).id,
+                        child1: JSON.parse(e).child,
+                      })
+                    }
+                  />
+
+                  {categorys?.child1?.length > 0 && (
+                    <CategorySelect
+                      options={categorys.child1}
+                      onChange={e =>
+                        setCategorys({
+                          ...categorys,
+                          id: JSON.parse(e).id,
+                          child2: JSON.parse(e).child,
+                        })
+                      }
+                    />
                   )}
-                  {categorys?.child2 && (
-                    <select
-                      style={{
-                        width: '500%',
-                        padding: '0.7rem 1rem',
-                        borderRadius: '0.5rem',
-                        fontSize: '1rem',
-                        outline: 'none',
-                        border: 'none',
-                      }}
-                      onChange={e => setCategorys({ ...categorys, child3: e.target.value })}
-                    >
-                      {JSON.parse(categorys.child2).map(c => (
-                        <option key={c.id} value={JSON.stringify(c.children)}>
-                          {c.nameUz}
-                        </option>
-                      ))}
-                    </select>
+                  {categorys?.child2?.length > 0 && (
+                    <CategorySelect
+                      options={categorys.child2}
+                      onChange={e =>
+                        setCategorys({
+                          ...categorys,
+                          id: JSON.parse(e).id,
+                          child3: JSON.parse(e).child,
+                        })
+                      }
+                    />
                   )}
-                  {categorys?.child3 && (
-                    <select
-                      style={{
-                        width: '500%',
-                        padding: '0.7rem 1rem',
-                        borderRadius: '0.5rem',
-                        fontSize: '1rem',
-                        outline: 'none',
-                        border: 'none',
-                      }}
-                      onChange={e => setCategorys({ ...categorys, child4: e.target.value })}
-                    >
-                      {JSON.parse(categorys.child3).map(c => (
-                        <option key={c.id} value={JSON.stringify(c.children)}>
-                          {c.nameUz}
-                        </option>
-                      ))}
-                    </select>
+                  {categorys?.child3?.length > 0 && (
+                    <CategorySelect
+                      options={categorys.child3}
+                      onChange={e =>
+                        setCategorys({
+                          // child4: JSON.parse(e).child,
+                          ...categorys,
+                          id: JSON.parse(e).id,
+                        })
+                      }
+                    />
                   )}
                   <MDButton onClick={() => handleOpen()}>
                     <Icon>add</Icon>
@@ -160,8 +134,15 @@ function CreateQuestion() {
                 </MDBox>
               </MDBox>
               <MDBox width='100%' p={3}>
-                <TableComp />
-                {/* <CreateForm questionNumber={1} /> */}
+                {!questionsData.isLoading && <TableComp questions={questionsData?.questions} />}
+
+                <PaginationTable
+                  dataCount={questionsData.count}
+                  pageNumber={questionsData.pagination.page}
+                  pageSize={questionsData.pagination.pageSize}
+                  onChangeCurrPage={page => handleChangePage(page)}
+                  onChangePageSize={pageSize => handleChangePageSize(pageSize)}
+                />
               </MDBox>
             </Card>
           </Grid>

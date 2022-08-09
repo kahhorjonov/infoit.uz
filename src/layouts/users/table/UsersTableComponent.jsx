@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Icon from '@mui/material/Icon';
 import MDButton from 'components/MDButton';
@@ -15,20 +16,25 @@ import Backdrop from '@mui/material/Backdrop';
 import Modal from '@mui/material/Modal';
 
 // Services
-import { fetchAllUsers, getUserById } from 'services/userService';
+import { getUserById } from 'services/userService';
+import { fetchAllUsers } from 'store/thunk';
 
 export default function UsersTableComponent() {
+  const dispatch = useDispatch();
+
+  const { users } = useSelector(state => state);
+  console.log(users);
   const [open, setOpen] = useState(false);
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
   const [userData, setUserData] = useState('');
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const fetchUsers = async () => {
-    const result = await fetchAllUsers();
-    setUsers(result.data.objectKoinot.content);
-  };
+  // const fetchUsers = async () => {
+  //   const result = await fetchAllUsers();
+  //   setUsers(result.data.objectKoinot.content);
+  // };
 
   const getUser = async id => {
     const result = await getUserById(id);
@@ -36,8 +42,9 @@ export default function UsersTableComponent() {
   };
 
   useEffect(() => {
-    fetchUsers();
-  }, []);
+    // fetchUsers();
+    dispatch(fetchAllUsers());
+  }, [dispatch]);
 
   return (
     <div className='relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-white'>
@@ -61,43 +68,37 @@ export default function UsersTableComponent() {
           </thead>
 
           <tbody>
-            {users &&
-              users.map(user => (
-                <tr key={user.id}>
-                  <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
-                    {`${user.firstName} ${user.lastName}`}
-                  </td>
-                  <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
-                    {user.balance}
-                  </td>
+            {users.users?.map(user => (
+              <tr key={user.id}>
+                <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
+                  {`${user?.firstName} ${user?.lastName}`}
+                </td>
+                <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
+                  {user?.balance}
+                </td>
 
-                  <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
-                    <div className='flex items-center'>
-                      <MDBox ml={-1}>
-                        <MDBadge
-                          badgeContent='active'
-                          color='success'
-                          variant='gradient'
-                          size='sm'
-                        />
-                      </MDBox>
-                    </div>
-                  </td>
-                  <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
-                    <MDButton
-                      sx={{ paddingX: '0' }}
-                      variant='text'
-                      color='dark'
-                      onClick={() => {
-                        getUser(user.id);
-                        handleOpen();
-                      }}
-                    >
-                      <Icon>edit</Icon>&nbsp;edit
-                    </MDButton>
-                  </td>
-                </tr>
-              ))}
+                <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
+                  <div className='flex items-center'>
+                    <MDBox ml={-1}>
+                      <MDBadge badgeContent='active' color='success' variant='gradient' size='sm' />
+                    </MDBox>
+                  </div>
+                </td>
+                <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
+                  <MDButton
+                    sx={{ paddingX: '0' }}
+                    variant='text'
+                    color='dark'
+                    onClick={() => {
+                      getUser(user.id);
+                      handleOpen();
+                    }}
+                  >
+                    <Icon>edit</Icon>&nbsp;edit
+                  </MDButton>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

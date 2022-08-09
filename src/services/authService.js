@@ -15,6 +15,17 @@ const parseJwt = token => {
   }
 };
 
+export const getTokenFromStorage = () => {
+  let token;
+  const tokenLs = localStorage.getItem('token');
+
+  const parsedJwt = parseJwt(tokenLs);
+  if (tokenLs && parsedJwt.exp * 1000 > Date.now()) {
+    token = tokenLs;
+  }
+  return token;
+};
+
 export const login = (phoneNumber, password) => {
   const result = axios.post(`${baseURL}/auth/v1/login`, {
     phoneNumber,
@@ -97,4 +108,5 @@ export const decodedToken = () => {
 export default {
   login,
   decodedToken,
+  getTokenFromStorage,
 };

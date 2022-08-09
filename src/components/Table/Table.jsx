@@ -1,9 +1,9 @@
-// import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 import MDBox from 'components/MDBox';
 import Styles from './Table.module.scss';
 // import { v4 } from "uuid";
 
-function Table() {
+function Table({ questions }) {
   return (
     <MDBox sx='100%'>
       <table className={Styles.table}>
@@ -15,16 +15,17 @@ function Table() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>
-              <img src='' alt='' />
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam et dolorem sit eum
-              harum temporibus omnis consequuntur sequi, quaerat laudantium.
-            </td>
-            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa, nulla?</td>
-          </tr>
-          <tr>
+          {questions?.map(question => (
+            <tr key={question.id}>
+              <td>{question?.id}</td>
+              <td>
+                <img src='' alt='' />
+                {question?.name}
+              </td>
+              <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa, nulla?</td>
+            </tr>
+          ))}
+          {/* <tr>
             <td>2</td>
             <td>
               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae labore quaerat ratione
@@ -32,8 +33,8 @@ function Table() {
               ipsam.
             </td>
             <td>Lorem ipsum dolor sit amet.</td>
-          </tr>
-          <tr>
+          </tr> */}
+          {/* <tr>
             <td>3</td>
             <td>
               Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tempore, recusandae!
@@ -43,16 +44,15 @@ function Table() {
               saepe harum. Iusto atque beatae voluptates exercitationem a.
             </td>
             <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, provident?</td>
-          </tr>
+          </tr> */}
         </tbody>
       </table>
     </MDBox>
   );
 }
 
-// Table.propTypes = {
-//   head: PropTypes.arrayOf(PropTypes.string).isRequired,
-//   body: PropTypes.arrayOf(PropTypes.string).isRequired,
-// };
+Table.propTypes = {
+  questions: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
 export default Table;
