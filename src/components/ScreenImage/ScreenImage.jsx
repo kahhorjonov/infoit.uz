@@ -4,7 +4,7 @@ import Styles from './ScreenImage.module.scss';
 function ScreenImage({ img, onDelete }) {
   return (
     <div className={Styles.screenImage}>
-      <img src={img} alt='' />
+      <img src={img} alt='img' />
       <button type='button' onClick={() => onDelete()}>
         ×
       </button>

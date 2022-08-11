@@ -14,10 +14,10 @@ export const getCategories = () => async dispatch => {
 }
 
 
-export const getQuestions = (categoryId) => async dispatch => {
+export const getQuestions = (categoryId = "", pageNumber, pageSize) => async dispatch => {
     try {
         dispatch(getQuestionsProccess())
-        const response = await axiosPublic.get(`api/question/v1?category=`);
+        const response = await axiosPublic.get(`api/question/v1?category=${categoryId}&page=${pageNumber - 1}&pageSize=${pageSize}`);
         dispatch(getQuestionsSuccess(response.data.objectKoinot));
 
     } catch (e) {
@@ -25,11 +25,11 @@ export const getQuestions = (categoryId) => async dispatch => {
     }
 };
 
-export const addQuestion = async (question) => {
+export const addQuestion = (question, categoryId, pagination) => async dispatch => {
     try {
         const response = await axiosPublic.post('api/question/v1/save', [question]);
-
         console.log(response.data);
+        dispatch(getQuestions(categoryId, pagination.pageNumber, pagination.pageSize));
     } catch (e) {
         console.error(e);
     }
@@ -37,16 +37,24 @@ export const addQuestion = async (question) => {
 
 
 export const uploadPhoto = async (photo) => {
-    console.log(photo);
+    let image;
+    const formBody = new FormData();
+    formBody.append("photo", photo);
+
     try {
-        const response = await axiosPublic.post(`koinot/attachment/v1/upload-photo`, photo,
+        const response = await axiosPublic.post(`koinot/attachment/v1/upload-photo`, formBody,
             { headers: { "Content-Type": "multipart/form-data" } }
         );
-        console.log(response);
+
+        // console.log(response.data.objectKoinot[0].fileId);
+        image = { attechmentId: response.data.objectKoinot[0].fileId, imageUrl: response.data.objectKoinot[0].link };
 
     } catch (e) {
         console.error(e);
     }
+
+    return image;
+
 }
 
 

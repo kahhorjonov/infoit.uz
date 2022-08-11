@@ -1,0 +1,26 @@
+.spinerContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  .spiner {
+    width: 100px;
+    height: 100px;
+    border: 10px solid black;
+    border-bottom-color: white;
+    border-radius: 50%;
+    animation: spinerAnim 0.3s linear 0s infinite;
+  }
+}
+
+@keyframes spinerAnim {
+  0% {
+    transform: rotate(0deg);
+    border-color: blue;
+    border-bottom-color: white;
+  }
+  100% {
+    transform: rotate(360deg);
+    border-color: black;
+    border-bottom-color: white;
+  }
+}
