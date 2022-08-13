@@ -1,8 +1,9 @@
-import { GET_CATEGORIES_SUCCESS, GET_CATEGORIES_PROCCESS } from "store/actions/actionTypes";
+import { GET_CATEGORIES_SUCCESS, GET_CATEGORIES_PROCCESS, SET_CURRENT_CATEGORIES } from "store/actions/actionTypes";
 
 const initialState = {
     isLoading: false,
-    categories: []
+    categories: [],
+    currentCategory: null
 }
 
 export const categoriesReducer = (state = initialState, action) => {
@@ -11,7 +12,17 @@ export const categoriesReducer = (state = initialState, action) => {
             return { ...state, isLoading: true };
 
         case GET_CATEGORIES_SUCCESS:
-            return { ...state, isLoading: false, categories: action.payload };
+            return {
+                ...state, isLoading: false,
+                categories: action.payload,
+                currentCategory: {
+                    id: action.payload[0].id,
+                    name: action.payload[0].nameUz
+                }
+            };
+
+        case SET_CURRENT_CATEGORIES:
+            return { ...state, currentCategory: action.payload };
 
         default:
             return state

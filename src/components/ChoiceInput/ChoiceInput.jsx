@@ -33,7 +33,7 @@ function ChoiceInput({
         </div>
       ) : (
         <label htmlFor={`label_${idx}`} className={Styles.addImage}>
-          <Icon fontSize='large'>image</Icon>
+          {formType !== 'view' && <Icon fontSize='large'>image</Icon>}
           <input
             id={`label_${idx}`}
             type='file'

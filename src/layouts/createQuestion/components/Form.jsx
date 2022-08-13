@@ -33,7 +33,7 @@ function Form({ formType, questionData, categoryId, pagination, onClose }) {
             correct: choice.correct,
             text: choice.text,
           }))
-        : [ { idx: v4(), attachmentId: 0, choicePhoto: '', correct: false, text: '' }],
+        : [{ idx: v4(), attachmentId: 0, choicePhoto: '', correct: false, text: '' }],
   });
 
   const handleAddAnswer = () => {
@@ -70,6 +70,7 @@ function Form({ formType, questionData, categoryId, pagination, onClose }) {
 
   const handleSave = question => {
     dispatch(addQuestion(question, categoryId, pagination));
+    onClose();
   };
 
   const handleDelete = () => {
