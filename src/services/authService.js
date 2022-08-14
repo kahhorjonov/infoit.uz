@@ -21,6 +21,8 @@ export const login = (phoneNumber, password) => {
     password,
   });
 
+  console.log(result);
+
   return result;
 };
 

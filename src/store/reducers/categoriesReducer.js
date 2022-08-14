@@ -3,7 +3,7 @@ import { GET_CATEGORIES_SUCCESS, GET_CATEGORIES_PROCCESS, SET_CURRENT_CATEGORIES
 const initialState = {
     isLoading: false,
     categories: [],
-    currentCategory: null
+    currentCategory: {}
 }
 
 export const categoriesReducer = (state = initialState, action) => {
@@ -16,8 +16,9 @@ export const categoriesReducer = (state = initialState, action) => {
                 ...state, isLoading: false,
                 categories: action.payload,
                 currentCategory: {
-                    id: action.payload[0].id,
-                    name: action.payload[0].nameUz
+                    id: '',
+                    name: '',
+                    child: action.payload
                 }
             };
 

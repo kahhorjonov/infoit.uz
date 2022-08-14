@@ -12,18 +12,19 @@ import { setCurrentCategories } from 'store/actions/actionCreaters';
 const style = {
   width: '300px',
   padding: '10px',
+  zIndex: 1,
 };
 
 const TreeViewItem = ({ id, name, child }) => {
   const childs = child && child.length > 0;
 
   return (
-    <TreeItem nodeId={id.toString()} label={name}>
+    <TreeItem nodeId={JSON.stringify({ id, child })} label={name}>
       {childs &&
         child.map(ch => (
           <TreeViewItem
             key={ch.id}
-            nodeId={ch.id.toString()}
+            nodeId={JSON.stringify({ id: ch.id, child: ch.children })}
             id={ch.id}
             name={ch.nameUz}
             child={ch.children}
@@ -53,7 +54,10 @@ function DropDown() {
   };
 
   const handleChange = (event, nodeIds) => {
-    dispatch(setCurrentCategories({ name: event.target.textContent, id: nodeIds }));
+    const data = JSON.parse(nodeIds);
+    dispatch(
+      setCurrentCategories({ name: event.target.textContent, id: data?.id, child: data?.child }),
+    );
   };
 
   return (
@@ -84,7 +88,8 @@ function DropDown() {
                 {category.categories?.map(c => (
                   <TreeViewItem
                     key={c.id}
-                    nodeId={c.id.toString()}
+                    nodeId={JSON.stringify({ id: c.id, child: c.children })}
+                    // nodeId={c.id.toString()}
                     id={c.id}
                     name={c.nameUz}
                     child={c.children}
