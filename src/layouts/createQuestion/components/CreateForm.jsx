@@ -100,7 +100,6 @@ function CreateForm({ questionNumber, categoryId, onClose }) {
 
   const handleSave = question => {
     addQuestion(question);
-    console.log(question);
   };
 
   return (

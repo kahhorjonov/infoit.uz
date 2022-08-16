@@ -36,22 +36,18 @@ export const getQuestions = categoryId => async dispatch => {
 export const addQuestion = async question => {
   try {
     const response = await axiosPublic.post('api/question/v1/save', [question]);
-
-    console.log(response.data);
   } catch (e) {
-    console.error(e);
+    // console.error(e);
   }
 };
 
 export const uploadPhoto = async photo => {
-  console.log(photo);
   try {
     const response = await axiosPublic.post(`koinot/attachment/v1/upload-photo`, photo, {
       headers: { 'Content-Type': 'multipart/form-data' },
     });
-    console.log(response);
   } catch (e) {
-    console.error(e);
+    // console.log(e);
   }
 };
 
@@ -68,6 +64,6 @@ export const fetchAllUsers = () => async dispatch => {
     console.log(result.data.objectKoinot);
     dispatch(getUsersSuccess(result.data.objectKoinot.content));
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };

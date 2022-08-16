@@ -23,7 +23,6 @@ export default function UsersTableComponent() {
   const dispatch = useDispatch();
 
   const { users } = useSelector(state => state);
-  console.log(users);
   const [open, setOpen] = useState(false);
   // const [users, setUsers] = useState([]);
   const [userData, setUserData] = useState('');

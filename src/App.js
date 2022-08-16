@@ -11,6 +11,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import theme from 'assets/theme';
 
 // Layouts
+import Home from 'layouts/home/index';
 import Admin from 'layouts/admin/Admin';
 import User from 'layouts/user/User';
 import SignIn from 'layouts/authentication/sign-in';
@@ -52,7 +53,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Routes>
-        <Route path='/' element={<SignIn />} />
+        <Route path='/*' element={<Home />} />
         <Route
           path='/admin/*'
           element={
@@ -61,7 +62,8 @@ export default function App() {
             </RequireAuth>
           }
         />
-        <Route path='/admin/*' element={<User />} />
+        <Route path='/user/*' element={<User />} />
+        <Route path='/login' element={<SignIn />} />
       </Routes>
     </ThemeProvider>
   );
