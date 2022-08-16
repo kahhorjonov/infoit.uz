@@ -1,16 +1,6 @@
+<<<<<<<<< Temporary merge branch 1
 import { axiosPublic } from 'services/axiosPublic';
-
-// Services
-import { getTokenFromStorage } from 'services/authService';
-
-import {
-  getCategoriesProccess,
-  getCategoriesSuccess,
-  getQuestionsSuccess,
-  getQuestionsProccess,
-  getUsersProcess,
-  getUsersSuccess,
-} from './actions/actionCreaters';
+import { getCategoriesProccess, getCategoriesSuccess } from './actions/actionCreaters';
 
 export const getCategories = () => async dispatch => {
   try {
@@ -22,34 +12,43 @@ export const getCategories = () => async dispatch => {
     // console.error(e);
   }
 };
+=========
+import { axiosPublic } from "services/axiosPublic";
+import { getCategoriesProccess, getCategoriesSuccess, getQuestionsProccess, getQuestionsSuccess } from "./actions/actionCreaters";
 
-export const getQuestions = categoryId => async dispatch => {
-  try {
-    dispatch(getQuestionsProccess());
-    const response = await axiosPublic.get(`api/question/v1?category=`);
-    dispatch(getQuestionsSuccess(response.data.objectKoinot));
-  } catch (e) {
-    console.error(e);
-  }
+export const getCategories = () => async dispatch => {
+    try {
+        dispatch(getCategoriesProccess());
+        const response = await axiosPublic.get('api/category/v1');
+
+        dispatch(getCategoriesSuccess(response.data.objectKoinot));
+
+    } catch (e) {
+        console.error(e);
+    }
+}
+
+
+export const getQuestions = (categoryId = "", pageNumber, pageSize) => async dispatch => {
+    try {
+        dispatch(getQuestionsProccess())
+        const response = await axiosPublic.get(`api/question/v1?category=${categoryId}&page=${pageNumber - 1}&pageSize=${pageSize}`);
+        dispatch(getQuestionsSuccess(response.data.objectKoinot));
+
+    } catch (e) {
+        toast.error(e);
+    }
 };
 
-export const addQuestion = async question => {
-  try {
-    const response = await axiosPublic.post('api/question/v1/save', [question]);
-  } catch (e) {
-    // console.error(e);
-  }
-};
+export const addQuestion = async (question) => {
+    try {
+        const response = await axiosPublic.post('api/question/v1/save', [question]);
 
-export const uploadPhoto = async photo => {
-  try {
-    const response = await axiosPublic.post(`koinot/attachment/v1/upload-photo`, photo, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    });
-  } catch (e) {
-    // console.log(e);
-  }
-};
+        console.log(response.data);
+    } catch (e) {
+        console.error(e);
+    }
+}
 
 export const fetchAllUsers = () => async dispatch => {
   const config = {
@@ -58,12 +57,16 @@ export const fetchAllUsers = () => async dispatch => {
     },
   };
 
-  try {
-    dispatch(getUsersProcess());
-    const result = await axiosPublic.get(`api/user/v1`, config);
-    console.log(result.data.objectKoinot);
-    dispatch(getUsersSuccess(result.data.objectKoinot.content));
-  } catch (error) {
-    // console.log(error);
-  }
-};
+export const uploadPhoto = async (photo) => {
+    console.log(photo);
+    try {
+        const response = await axiosPublic.post(`koinot/attachment/v1/upload-photo`, photo,
+            { headers: { "Content-Type": "multipart/form-data" } }
+        );
+        console.log(response);
+
+    } catch (e) {
+        console.error(e);
+    }
+}
+>>>>>>>>> Temporary merge branch 2
