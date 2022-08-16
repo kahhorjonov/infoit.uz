@@ -6,6 +6,7 @@ import {
   SET_QUESTION_PAGINATION,
   GET_USERS_PROCESS,
   GET_USERS_SUCCESS,
+  SET_CURRENT_CATEGORIES,
 } from './actionTypes';
 
 export const getCategoriesProccess = () => ({
@@ -16,6 +17,11 @@ export const getCategoriesSuccess = categories => ({
   type: GET_CATEGORIES_SUCCESS,
   payload: categories,
 });
+
+export const setCurrentCategories = currCategory => ({
+  type: SET_CURRENT_CATEGORIES,
+  payload: currCategory
+})
 
 export const getQuestionsProccess = () => ({
   type: GET_QUESTIONS_PROCCESS,

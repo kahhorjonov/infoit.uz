@@ -4,10 +4,6 @@ const initialState = {
     isLoading: false,
     questions: [],
     count: null,
-    pagination: {
-        page: 1,
-        pageSize: 10,
-    },
     pageable: {}
 }
 
@@ -18,7 +14,7 @@ export const questionsReducer = (state = initialState, action) => {
             return { ...state, isLoading: true }
 
         case GET_QUESTIONS_SUCCESS:
-            return { ...state, isLoading: false, questions: action.payload.content, count: action.payload.size, pageable: action.payload.pageable }
+            return { ...state, isLoading: false, questions: action.payload.content, count: action.payload.totalPages, pageable: action.payload.pageable }
 
         default: return state;
     }
