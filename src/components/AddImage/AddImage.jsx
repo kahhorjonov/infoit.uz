@@ -5,10 +5,10 @@ import { uploadPhoto } from '../../store/thunk';
 import Styles from './AddImage.module.scss';
 
 function AddImage({ label, onChange }) {
-  const handleChangeImage = img => {
-    uploadPhoto(img);
+  const handleChangeImage = async img => {
+    const { attechmentId } = await uploadPhoto(img);
 
-    onChange({ attechmentId: img, imageUrl: URL.createObjectURL(img) });
+    onChange({ attechmentId, imageUrl: URL.createObjectURL(img) });
   };
 
   return (

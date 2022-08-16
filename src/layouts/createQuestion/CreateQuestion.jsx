@@ -12,23 +12,25 @@ import MDTypography from 'components/MDTypography';
 // Material Dashboard 2 React example components
 import DashboardLayout from 'examples/LayoutContainers/DashboardLayout';
 import DashboardNavbar from 'examples/Navbars/DashboardNavbar';
-// import Select from "components/Select/Select";
 
 import MDButton from 'components/MDButton';
 import { Icon } from '@mui/material';
-import TableComp from 'components/Table/Table';
 import ModalComp from 'components/Modal/ModalComp';
-import CreateForm from './components/CreateForm';
-import CategorySelect from '../../components/CategorySelect/CategorySelect';
-import PaginationTable from '../../components/Pagination/Pagination';
-import { setQuestionsPagination } from '../../store/actions/actionCreaters';
+// import { SelectPicker } from 'rsuite';
 
-// import DataTable from "examples/Tables/DataTable";
+import DropDown from 'components/DropDown/DropDown';
+import PaginationTable from '../../components/Pagination/Pagination';
+import Spiner from '../../components/Loader/Spiner';
+import Form from './components/Form';
+import Table from './components/Table/Table';
 
 function CreateQuestion() {
   const dispatch = useDispatch();
   const { category, questionsData } = useSelector(state => state);
   const [createQStatus, setCreateQStatus] = useState(false);
+<<<<<<<<< Temporary merge branch 1
+  const [categorys, setCategorys] = useState({});
+=========
   const [categorys, setCategorys] = useState({
     id: category.categories[0]?.id,
     child1: category.categories[0]?.children,
@@ -37,11 +39,11 @@ function CreateQuestion() {
   const handleOpen = () => setCreateQStatus(true);
   const handleClose = () => setCreateQStatus(false);
 
-  const handleChangePage = page => {
-    dispatch(setQuestionsPagination({ ...questionsData.pagination, page }));
+  const handleChangePage = pageNumber => {
+    setPagination({ ...pagination, pageNumber });
   };
   const handleChangePageSize = pageSize => {
-    dispatch(setQuestionsPagination({ ...questionsData.pagination, page: 1, pageSize }));
+    setPagination({ ...pagination, pageNumber: 1, pageSize });
   };
 
   useEffect(() => {
@@ -49,17 +51,20 @@ function CreateQuestion() {
   }, [dispatch]);
 
   useEffect(() => {
-    setCategorys({ id: category?.categories[0]?.id, child1: category?.categories[0]?.children });
-  }, [category]);
-
-  useEffect(() => {
-    dispatch(getQuestions(categorys?.id));
-  }, [dispatch, categorys.id]);
+    dispatch(
+      getQuestions(category?.currentCategory?.id, pagination.pageNumber, pagination.pageSize),
+    );
+  }, [dispatch, category.currentCategory, pagination]);
 
   return (
     <DashboardLayout>
       <ModalComp status={createQStatus} onClose={handleClose}>
-        <CreateForm categoryId={categorys?.id || 0} questionNumber={1} onClose={handleClose} />
+        <Form
+          formType='add'
+          categoryId={category?.currentCategory?.id || 0}
+          pagination={pagination}
+          onClose={handleClose}
+        />
       </ModalComp>
       <DashboardNavbar />
       <MDBox pt={6} pb={3}>
@@ -82,64 +87,27 @@ function CreateQuestion() {
                   Questions Table
                 </MDTypography>
                 <MDBox display='flex' alignItems='center' gap={3}>
-                  <CategorySelect
-                    options={category.categories}
-                    onChange={e =>
-                      setCategorys({
-                        id: JSON.parse(e).id,
-                        child1: JSON.parse(e).child,
-                      })
-                    }
-                  />
-
-                  {categorys?.child1?.length > 0 && (
-                    <CategorySelect
-                      options={categorys.child1}
-                      onChange={e =>
-                        setCategorys({
-                          ...categorys,
-                          id: JSON.parse(e).id,
-                          child2: JSON.parse(e).child,
-                        })
-                      }
-                    />
-                  )}
-                  {categorys?.child2?.length > 0 && (
-                    <CategorySelect
-                      options={categorys.child2}
-                      onChange={e =>
-                        setCategorys({
-                          ...categorys,
-                          id: JSON.parse(e).id,
-                          child3: JSON.parse(e).child,
-                        })
-                      }
-                    />
-                  )}
-                  {categorys?.child3?.length > 0 && (
-                    <CategorySelect
-                      options={categorys.child3}
-                      onChange={e =>
-                        setCategorys({
-                          // child4: JSON.parse(e).child,
-                          ...categorys,
-                          id: JSON.parse(e).id,
-                        })
-                      }
-                    />
-                  )}
+                  <DropDown />
                   <MDButton onClick={() => handleOpen()}>
                     <Icon>add</Icon>
                   </MDButton>
                 </MDBox>
               </MDBox>
               <MDBox width='100%' p={3}>
-                {!questionsData.isLoading && <TableComp questions={questionsData?.questions} />}
+                {questionsData.isLoading ? (
+                  <Spiner />
+                ) : (
+                  <Table
+                    questions={questionsData?.questions}
+                    pagination={pagination}
+                    categoryId={category?.currentCategory?.id || 0}
+                  />
+                )}
 
                 <PaginationTable
                   dataCount={questionsData.count}
-                  pageNumber={questionsData.pagination.page}
-                  pageSize={questionsData.pagination.pageSize}
+                  pageNumber={pagination.pageNumber}
+                  pageSize={pagination.pageSize}
                   onChangeCurrPage={page => handleChangePage(page)}
                   onChangePageSize={pageSize => handleChangePageSize(pageSize)}
                 />
