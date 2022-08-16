@@ -47,6 +47,7 @@
     "jsx-a11y/label-has-for": "off",
     "array-callback-return": "off",
     "react/jsx-props-no-spreading": "off",
+    "import/no-named-as-default": "off",
     "linebreak-style": ["off"],
     "no-multiple-empty-lines": [
       "error",

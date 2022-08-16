@@ -27,13 +27,20 @@
   .rightCont {
     display: flex;
     align-items: center;
+
+    button {
+      outline: none;
+    }
+
     span {
       margin-right: 20px;
+      text-transform: uppercase;
     }
     .MuiPaginationItem-root {
       border-radius: 0px;
       border-color: gray;
       color: inherit;
+      outline: none;
     }
     .Mui-selected {
       border-color: orange;

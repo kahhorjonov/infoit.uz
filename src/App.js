@@ -16,6 +16,9 @@ import Admin from 'layouts/admin/Admin';
 import User from 'layouts/user/User';
 import SignIn from 'layouts/authentication/sign-in';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 export default function App() {
   const { pathname } = useLocation();
 
@@ -51,6 +54,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
+      <ToastContainer />
       <CssBaseline />
       <Routes>
         <Route path='/*' element={<Home />} />

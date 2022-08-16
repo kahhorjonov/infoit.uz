@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-
-import Backdrop from '@mui/material/Backdrop';
-import Modal from '@mui/material/Modal';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCategories } from 'store/thunk';
 
 // @mui material components
 import Grid from '@mui/material/Grid';
@@ -18,101 +17,64 @@ import MDButton from 'components/MDButton';
 // Material Dashboard 2 React example components
 import DashboardLayout from 'examples/LayoutContainers/DashboardLayout';
 import DashboardNavbar from 'examples/Navbars/DashboardNavbar';
-import DataTable from 'examples/Tables/DataTable';
-
-// Data
-import CategoriesTableData from 'layouts/categories/data/CategoriesTableData';
 
 // Material Dashboard 2 React components
-import MDInput from 'components/MDInput';
+import DropDown from 'components/DropDown/DropDown';
+import ModalComp from 'components/Modal/ModalComp';
+import Spiner from 'components/Loader/Spiner';
+import CategoryForm from './components/CategoryForm';
+import CategoriesTable from './components/CategoriesTable/CategoriesTable';
 
 function Categories() {
+  const dispatch = useDispatch();
+  const { category } = useSelector(store => store);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const { columns, rows } = CategoriesTableData();
+  useEffect(() => {
+    dispatch(getCategories());
+  }, [dispatch]);
 
   return (
     <DashboardLayout>
+      <ModalComp status={open} onClose={handleClose}>
+        <CategoryForm formType='add' onClose={handleClose} />
+      </ModalComp>
       <DashboardNavbar />
       <MDBox pt={6} pb={3}>
         <Grid container spacing={6}>
           <Grid item xs={12}>
             <Card>
               <MDBox
-                sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}
                 mx={2}
                 mt={-3}
-                py={3}
-                px={2}
+                p={2}
                 variant='gradient'
                 bgColor='info'
                 borderRadius='lg'
                 coloredShadow='info'
+                display='flex'
+                alignItems='center'
+                justifyContent='space-between'
               >
                 <MDTypography variant='h6' color='white'>
-                  Categories Table
+                  Categories
                 </MDTypography>
-                <MDButton variant='text' color='white' onClick={handleOpen}>
-                  <Icon>add</Icon>&nbsp;add
-                </MDButton>{' '}
+                <MDBox display='flex' alignItems='center' gap={3}>
+                  <DropDown />
+                  <MDButton onClick={() => handleOpen()}>
+                    <Icon>add</Icon>
+                  </MDButton>
+                </MDBox>
               </MDBox>
-              <MDBox pt={3}>
-                <DataTable
-                  table={{ columns, rows }}
-                  isSorted={false}
-                  entriesPerPage={false}
-                  showTotalEntries={false}
-                  noEndBorder
-                />
+              <MDBox width='100%' p={3}>
+                {category.isLoading ? <Spiner /> : <CategoriesTable />}
               </MDBox>
             </Card>
           </Grid>
         </Grid>
       </MDBox>
-      <div>
-        <Modal
-          aria-labelledby='transition-modal-title'
-          aria-describedby='transition-modal-description'
-          open={open}
-          onClose={handleClose}
-          closeAfterTransition
-          BackdropComponent={Backdrop}
-          BackdropProps={{
-            timeout: 500,
-          }}
-        >
-          <Grid container spacing={1} justifyContent='center' alignItems='center' height='100%'>
-            <Grid item xs={10} sm={10} md={8} lg={6} xl={6}>
-              <Card>
-                <MDBox pt={4} pb={3} px={3}>
-                  <MDBox component='form' role='form'>
-                    <MDBox mb={2} sx={{ display: 'flex' }}>
-                      <MDInput sx={{ marginRight: '5px' }} type='text' label='Category' fullWidth />
-                      <MDInput type='text' label='Category' fullWidth />
-                    </MDBox>
-                    <MDBox mb={2} sx={{ display: 'flex' }}>
-                      <MDInput
-                        sx={{ marginRight: '5px' }}
-                        type='select'
-                        label='Parent Category'
-                        fullWidth
-                      />
-                      <MDInput type='select' label='Parent Category' fullWidth />
-                    </MDBox>
-                    <MDBox mt={4} mb={1}>
-                      <MDButton variant='gradient' color='info' fullWidth>
-                        Save
-                      </MDButton>
-                    </MDBox>
-                  </MDBox>
-                </MDBox>
-              </Card>
-            </Grid>
-          </Grid>
-        </Modal>
-      </div>
     </DashboardLayout>
   );
 }
