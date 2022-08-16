@@ -49,7 +49,11 @@ export const deleteCategory = categoryId => async dispatch => {
 export const getQuestions = (categoryId = "", pageNumber, pageSize) => async dispatch => {
     try {
         dispatch(getQuestionsProccess())
-        const response = await axiosPublic.get(`api/question/v1?category=${categoryId}&page=${pageNumber - 1}&pageSize=${pageSize}`);
+        const response = await axiosPublic.get(`api/question/v1?category=${categoryId}&page=${pageNumber - 1}&pageSize=${pageSize}`, {
+            headers: {
+                Authorization: `Bearer ${access_token}`
+            }
+        });
         dispatch(getQuestionsSuccess(response.data.objectKoinot));
 
     } catch (e) {
