@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 // Icons
+import MenuIcon from '@mui/icons-material/Menu';
 import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
 
 export default function HomeNavbar() {
@@ -25,11 +26,15 @@ export default function HomeNavbar() {
             type='button'
             onClick={() => setNavbarOpen(!navbarOpen)}
           >
-            <i className='fas fa-bars' />
+            <i className='fas fa-bars'>
+              <MenuIcon />
+            </i>
           </button>
         </div>
         <div
-          className={`lg:flex flex-grow items-center bg-white lg:bg-opacity-0 lg:shadow-none ${navbarOpen} ? 'block' : 'hidden' `}
+          className={`lg:flex flex-grow items-center bg-white lg:bg-opacity-0 lg:shadow-none ${
+            navbarOpen ? 'block' : 'hidden'
+          }  `}
           id='example-navbar-warning'
         >
           <ul className='flex flex-col lg:flex-row list-none lg:ml-auto'>
@@ -103,17 +108,6 @@ export default function HomeNavbar() {
                 </button>
               </Link>
             </li>
-
-            {/* <li className='flex items-center'>
-              <Link to='/register'>
-                <button
-                  className='bg-white text-blueGray-700 active:bg-blueGray-50 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150'
-                  type='button'
-                >
-                  Register
-                </button>
-              </Link>
-            </li> */}
           </ul>
         </div>
       </div>
