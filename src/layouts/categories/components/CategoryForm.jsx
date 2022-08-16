@@ -23,12 +23,17 @@ function CategoryForm({ formType, currCategory, onClose }) {
   };
 
   const handleSave = categoryData => {
-    if (formType === 'add') {
+    if (actionType === 'add') {
       dispatch(createNewCategory(categoryData));
       onClose();
     }
-    formType === 'edit' && setActionType('view');
+
+    if (actionType === 'edit') {
+      dispatch(createNewCategory({ ...categoryData, id: currCategory.id }));
+      setActionType('view');
+    }
   };
+
   const handleDelete = () => {
     dispatch(deleteCategory(currCategory.id));
   };

@@ -56,6 +56,11 @@ export const getQuestions =
       dispatch(getQuestionsProccess());
       const response = await axiosPublic.get(
         `api/question/v1?category=${categoryId}&page=${pageNumber - 1}&pageSize=${pageSize}`,
+        {
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+          },
+        },
       );
       dispatch(getQuestionsSuccess(response.data.objectKoinot));
     } catch (e) {
