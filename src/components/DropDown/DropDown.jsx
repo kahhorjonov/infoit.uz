@@ -1,3 +1,6 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/function-component-definition */
+
 import PropTypes from 'prop-types';
 
 import Accordion from '@mui/material/Accordion';
@@ -8,24 +11,24 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import './DropDown.module.scss';
 
-const categorySelect = [
-  {
-    id: 1,
-    text: 'Select 1',
-    child: [
-      { id: 1, text: 'Select 1 1' },
-      { id: 1, text: 'Select 1 2' },
-    ],
-  },
-  {
-    id: 2,
-    text: 'Select 2',
-    child: [
-      { id: 1, text: 'Select 2 1' },
-      { id: 1, text: 'Select 2 2' },
-    ],
-  },
-];
+// const categorySelect = [
+//   {
+//     id: 1,
+//     text: 'Select 1',
+//     child: [
+//       { id: 1, text: 'Select 1 1' },
+//       { id: 1, text: 'Select 1 2' },
+//     ],
+//   },
+//   {
+//     id: 2,
+//     text: 'Select 2',
+//     child: [
+//       { id: 1, text: 'Select 2 1' },
+//       { id: 1, text: 'Select 2 2' },
+//     ],
+//   },
+// ];
 
 function MiniAccordion({ category, children }) {
   return (
@@ -48,7 +51,7 @@ function Dropdown({ categorySelect }) {
     <div className='drop_down'>
       <MiniAccordion category='Choose a category'>
         {categorySelect.map(category => (
-          <MiniAccordion key={category.id} category={category.text}></MiniAccordion>
+          <MiniAccordion key={category.id} category={category.text} />
         ))}
       </MiniAccordion>
 
