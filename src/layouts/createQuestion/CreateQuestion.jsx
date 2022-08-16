@@ -39,6 +39,7 @@ function CreateQuestion() {
   const handleChangePage = pageNumber => {
     setPagination({ ...pagination, pageNumber });
   };
+
   const handleChangePageSize = pageSize => {
     setPagination({ ...pagination, pageNumber: 1, pageSize });
   };
