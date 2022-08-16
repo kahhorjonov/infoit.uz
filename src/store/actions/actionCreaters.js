@@ -18,14 +18,11 @@ export const getCategoriesSuccess = categories => ({
   payload: categories,
 });
 
-<<<<<<< HEAD
 export const setCurrentCategories = currCategory => ({
   type: SET_CURRENT_CATEGORIES,
-  payload: currCategory
-})
+  payload: currCategory,
+});
 
-=======
->>>>>>> da6b5359091baef6d820898b3855b5c5f908d3dc
 export const getQuestionsProccess = () => ({
   type: GET_QUESTIONS_PROCCESS,
 });

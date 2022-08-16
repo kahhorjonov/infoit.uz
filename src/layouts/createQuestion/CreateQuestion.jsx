@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getCategories, getQuestions } from 'store/thunk';
-
 // @mui material components
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
@@ -29,15 +28,9 @@ function CreateQuestion() {
   const dispatch = useDispatch();
   const { category, questionsData } = useSelector(state => state);
   const [createQStatus, setCreateQStatus] = useState(false);
-<<<<<<< HEAD
   const [pagination, setPagination] = useState({
     pageNumber: 1,
     pageSize: 5,
-=======
-  const [categorys, setCategorys] = useState({
-    id: category.categories[0]?.id,
-    child1: category.categories[0]?.children,
->>>>>>> da6b5359091baef6d820898b3855b5c5f908d3dc
   });
 
   const handleOpen = () => setCreateQStatus(true);
@@ -46,7 +39,6 @@ function CreateQuestion() {
   const handleChangePage = pageNumber => {
     setPagination({ ...pagination, pageNumber });
   };
-
   const handleChangePageSize = pageSize => {
     setPagination({ ...pagination, pageNumber: 1, pageSize });
   };
