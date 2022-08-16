@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getCategories, getQuestions } from 'store/thunk';
+
 // @mui material components
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
@@ -12,7 +13,6 @@ import MDTypography from 'components/MDTypography';
 // Material Dashboard 2 React example components
 import DashboardLayout from 'examples/LayoutContainers/DashboardLayout';
 import DashboardNavbar from 'examples/Navbars/DashboardNavbar';
-// import Select from "components/Select/Select";
 
 import MDButton from 'components/MDButton';
 import { Icon } from '@mui/material';
