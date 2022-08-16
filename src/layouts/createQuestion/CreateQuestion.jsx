@@ -28,9 +28,6 @@ function CreateQuestion() {
   const dispatch = useDispatch();
   const { category, questionsData } = useSelector(state => state);
   const [createQStatus, setCreateQStatus] = useState(false);
-<<<<<<<<< Temporary merge branch 1
-  const [categorys, setCategorys] = useState({});
-=========
   const [categorys, setCategorys] = useState({
     id: category.categories[0]?.id,
     child1: category.categories[0]?.children,
