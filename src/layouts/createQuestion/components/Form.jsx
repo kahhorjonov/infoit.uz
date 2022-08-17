@@ -7,7 +7,7 @@ import MDBox from 'components/MDBox';
 import ChoiceInput from 'components/ChoiceInput/ChoiceInput';
 import { v4 } from 'uuid';
 import MDButton from 'components/MDButton';
-import { addQuestion } from '../../../store/thunk';
+import { addQuestion, editQuestion } from '../../../store/thunk';
 
 function Form({ formType, questionData, categoryId, pagination, onClose }) {
   const dispatch = useDispatch();
@@ -69,8 +69,14 @@ function Form({ formType, questionData, categoryId, pagination, onClose }) {
   };
 
   const handleSave = question => {
-    dispatch(addQuestion(question, categoryId, pagination));
-    onClose();
+    if (actionType === 'add') {
+      dispatch(addQuestion(question, categoryId, pagination));
+      onClose();
+    }
+    if (actionType === 'edit') {
+      dispatch(editQuestion({ ...question, id: questionData.id }, categoryId, pagination));
+      setActionType('view');
+    }
   };
 
   const handleDelete = () => {
@@ -79,12 +85,12 @@ function Form({ formType, questionData, categoryId, pagination, onClose }) {
 
   return (
     <MDBox display='flex' flexDirection='column' gap={2}>
-      <MDBox item xs={12}>
+      <MDBox xs={12}>
         <MDTypography variant='text' color='text' fontSize='5' fontWeight='bold'>
-          Question: {formType === 'view' && questionsForm.idx}
+          Question: {formType === 'view' && questionsForm?.idx}
         </MDTypography>
       </MDBox>
-      <MDBox item xs={5}>
+      <MDBox xs={5}>
         <MDBox display='flex' alignItems='center' gap={1}>
           <TextArea
             formType={actionType}
@@ -98,13 +104,13 @@ function Form({ formType, questionData, categoryId, pagination, onClose }) {
               setQuestionsForm({
                 ...questionsForm,
                 questionPhoto: '',
-                attechmentId: null,
+                attachmentId: null,
               })
             }
           />
         </MDBox>
       </MDBox>
-      <MDBox item xs={5}>
+      <MDBox xs={5}>
         {questionsForm?.choices?.map(answer => (
           <MDBox key={answer.idx} display='flex' alignItems='center' gap={1}>
             <ChoiceInput

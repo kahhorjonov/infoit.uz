@@ -40,13 +40,13 @@ function CategoryForm({ formType, currCategory, onClose }) {
 
   return (
     <MDBox display='flex' flexDirection='column' gap={2}>
-      <MDBox display='flex' justifyContent='space-between' item xs={12}>
+      <MDBox display='flex' justifyContent='space-between' xs={12}>
         <MDTypography variant='text' color='text' fontSize='5' fontWeight='bold'>
           Create Category
         </MDTypography>
         <MDTypography>Parent Category: {category?.currentCategory?.name}</MDTypography>
       </MDBox>
-      <MDBox item xs={5}>
+      <MDBox xs={5}>
         <MDBox display='flex' alignItems='center' gap={1}>
           <MDInput
             disabled={actionType === 'view' ? true : false}
@@ -71,7 +71,6 @@ function CategoryForm({ formType, currCategory, onClose }) {
           />
         </MDBox>
       </MDBox>
-      {/* <MDBox item xs={5}></MDBox> */}
       {actionType === 'edit' || actionType === 'add' ? (
         <MDBox width='100%' display='flex' alignItems='center' gap={1}>
           <MDButton fullWidth color='success' onClick={() => handleSave(newCategory)}>

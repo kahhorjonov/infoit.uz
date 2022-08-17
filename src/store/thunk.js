@@ -51,22 +51,22 @@ export const deleteCategory = categoryId => async dispatch => {
 
 export const getQuestions =
   (categoryId = '', pageNumber, pageSize) =>
-  async dispatch => {
-    try {
-      dispatch(getQuestionsProccess());
-      const response = await axiosPublic.get(
-        `api/question/v1?category=${categoryId}&page=${pageNumber - 1}&pageSize=${pageSize}`,
-        {
-          headers: {
-            Authorization: `Bearer ${access_token}`,
+    async dispatch => {
+      try {
+        dispatch(getQuestionsProccess());
+        const response = await axiosPublic.get(
+          `api/question/v1?category=${categoryId}&page=${pageNumber - 1}&pageSize=${pageSize}`,
+          {
+            headers: {
+              Authorization: `Bearer ${access_token}`,
+            },
           },
-        },
-      );
-      dispatch(getQuestionsSuccess(response.data.objectKoinot));
-    } catch (e) {
-      toast.error(e);
-    }
-  };
+        );
+        dispatch(getQuestionsSuccess(response.data.objectKoinot));
+      } catch (e) {
+        toast.error(e);
+      }
+    };
 
 export const addQuestion = (question, categoryId, pagination) => async dispatch => {
   try {
@@ -77,6 +77,17 @@ export const addQuestion = (question, categoryId, pagination) => async dispatch 
     toast.error(e);
   }
 };
+
+export const editQuestion = (question, categoryId, pagination) => async dispatch => {
+  try {
+    const response = await axiosPublic.post('api/question/v1/edit', question);
+    console.log(response.data);
+    dispatch(getQuestions(categoryId, pagination.pageNumber, pagination.pageSize));
+  } catch (e) {
+    toast.error(e);
+  }
+};
+
 
 export const uploadPhoto = async photo => {
   let image;

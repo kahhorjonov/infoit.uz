@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import MDBox from 'components/MDBox';
 import ModalComp from 'components/Modal/ModalComp';
 import Styles from './Table.module.scss';
@@ -8,11 +8,10 @@ import Form from '../Form';
 // import { v4 } from "uuid";
 
 function Table({ questions, pagination, categoryId }) {
-  const [openId, setOpenId] = useState(null);
+  const [openId, setOpenId] = useState({});
 
   const handleOpen = data => setOpenId(data);
   const handleClose = () => setOpenId(null);
-
   return (
     <MDBox sx='100%'>
       <ModalComp status={openId?.id ? true : false} onClose={handleClose}>
@@ -42,11 +41,7 @@ function Table({ questions, pagination, categoryId }) {
                 <img src='' alt='' />
                 {question?.name}
               </td>
-              <td>
-                {question?.choices?.forEach(choice => {
-                  choice.correct ? choice.text : '';
-                })}
-              </td>
+              <td>{question?.choices?.filter(choice => choice.correct)[0]?.text}</td>
             </tr>
           ))}
         </tbody>
