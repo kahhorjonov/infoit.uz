@@ -1,39 +1,10 @@
-import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Box, Pagination } from '@mui/material';
 import './Pagination.scss';
 
 function PaginationTable(props) {
   const { dataCount, pageNumber, pageSize, onChangePageSize, onChangeCurrPage } = props;
-  const [pageNum, setPageNum] = useState(null);
-  const [inpErr, setInpErr] = useState(false);
-
-  const pagesCount = dataCount > pageSize ? Math.ceil(dataCount / pageSize) : 1;
-
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = event => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-    setInpErr(false);
-  };
-
-  const handleChangePageNum = num => {
-    if (num >= 0 && num <= pagesCount) {
-      const n = parseInt(num, 10);
-      setPageNum(n);
-      setInpErr(false);
-    } else setInpErr(true);
-  };
-
-  const handleSave = num => {
-    if (num > 0) {
-      onChangeCurrPage(num);
-      handleClose();
-    } else setInpErr(true);
-  };
+  // const pagesCount = dataCount > pageSize ? Math.ceil(dataCount / pageSize) : 1;
 
   return (
     <Box className='pagination'>

@@ -81,7 +81,7 @@ function CreateQuestion() {
                 justifyContent='space-between'
               >
                 <MDTypography variant='h6' color='white'>
-                  Questions Table
+                  Questions
                 </MDTypography>
                 <MDBox display='flex' alignItems='center' gap={3}>
                   <DropDown />
