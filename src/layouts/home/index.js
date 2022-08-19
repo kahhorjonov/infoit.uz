@@ -5,9 +5,6 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
-// Material Dashboard 2 React components
-import MDBox from 'components/MDBox';
-
 // Material Dashboard 2 React themes
 import theme from 'assets/theme';
 
@@ -22,6 +19,7 @@ import HomeNavbar from './components/HomeNavbar';
 
 // Pages
 import Main from './components/main';
+import TestInfo from './components/TestInfo';
 
 function Admin() {
   const [controller, dispatch] = useMaterialUIController();
@@ -54,6 +52,7 @@ function Admin() {
 
       <Routes>
         <Route path='/' exact element={<Main />} />
+        <Route path='/test/:id' exact element={<TestInfo />} />
       </Routes>
     </ThemeProvider>
   );
