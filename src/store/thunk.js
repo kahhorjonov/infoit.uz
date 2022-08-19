@@ -55,7 +55,7 @@ export const getQuestions = ({ categoryId, pagination }) => async dispatch => {
   try {
     dispatch(getQuestionsProccess());
     const response = await axiosPublic.get(
-      `api/question/v1?category=${categoryId || ""}&page=${pagination.pageNumber - 1}&pageSize=${pagination.pageSize}`,
+      `api/question/v1?category=${categoryId || ""}&page=${pagination.pageNumber - 1}&size=${pagination.pageSize}`,
       {
         headers: {
           Authorization: `Bearer ${access_token}`,
@@ -114,9 +114,7 @@ export const uploadPhoto = async photo => {
 export const getPlanningTest = ({ categoryId, pagination }) => async dispatch => {
   try {
     dispatch(getPlanningTestProccess())
-    const response = await axiosPublic.get(`api/test/v1/find-all?category=${categoryId}&page=${pagination.pageNumber - 1}&size=${pagination.pageSize}&search=&sortBy=&sortType=DESC`);
-
-    console.log(response.data.objectKoinot);
+    const response = await axiosPublic.get(`api/test/v1/find-all?category=${categoryId}&page=${pagination.pageNumber - 1}&size=${pagination.pageSize}&search=`);
 
     dispatch(getPlanningTestSuccess({ data: response.data.objectKoinot, pagination }))
   } catch (e) {

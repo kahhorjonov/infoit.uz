@@ -20,13 +20,13 @@ export default function FooterHome() {
               <EmailIcon /> &nbsp; InfoIT@gmail.com
             </h5>
           </div>
-          <div className='w-full lg:w-6/12 px-4'>
+          <div className='w-full lg:w-6/12 '>
             <div className='flex flex-wrap items-top mb-6'>
-              <div className='w-full lg:w-4/12 px-4 ml-auto'>
-                <ul className='list-unstyled'>
+              <div className='w-full lg:w-4/12 ml-auto'>
+                <ul className='list-unstyled flex flex-col gap-2'>
                   <li>
                     <a
-                      className='text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm'
+                      className='text-blueGray-600 hover:text-blueGray-800 font-semibold block text-sm'
                       href='https://www.creative-tim.com/presentation?ref=nr-footer'
                     >
                       {/* About Us */}
@@ -35,7 +35,7 @@ export default function FooterHome() {
                   </li>
                   <li>
                     <a
-                      className='text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm'
+                      className='text-blueGray-600 hover:text-blueGray-800 font-semibold block  text-sm'
                       href='https://blog.creative-tim.com?ref=nr-footer'
                     >
                       Testlar
@@ -43,7 +43,7 @@ export default function FooterHome() {
                   </li>
                   <li>
                     <a
-                      className='text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm'
+                      className='text-blueGray-600 hover:text-blueGray-800 font-semibold block  text-sm'
                       href='https://www.github.com/creativetimofficial?ref=nr-footer'
                     >
                       Abiturientlar uchun
@@ -51,11 +51,11 @@ export default function FooterHome() {
                   </li>
                 </ul>
               </div>
-              <div className='w-full lg:w-4/12 px-4'>
-                <ul className='list-unstyled'>
+              <div className='w-full lg:w-4/12'>
+                <ul className='list-unstyled flex flex-col gap-2'>
                   <li>
                     <a
-                      className='text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm'
+                      className='text-blueGray-600 hover:text-blueGray-800 font-semibold block text-sm'
                       href='https://github.com/creativetimofficial/notus-react/blob/main/LICENSE.md?ref=nr-footer'
                     >
                       O`qituvchilar uchun
@@ -63,7 +63,7 @@ export default function FooterHome() {
                   </li>
                   <li>
                     <a
-                      className='text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm'
+                      className='text-blueGray-600 hover:text-blueGray-800 font-semibold block text-sm'
                       href='https://creative-tim.com/terms?ref=nr-footer'
                     >
                       Statistika
@@ -71,7 +71,7 @@ export default function FooterHome() {
                   </li>
                   <li>
                     <a
-                      className='text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm'
+                      className='text-blueGray-600 hover:text-blueGray-800 font-semibold block text-sm'
                       href='https://creative-tim.com/privacy?ref=nr-footer'
                     >
                       Mening Profilim

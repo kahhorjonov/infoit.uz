@@ -22,13 +22,13 @@ export default function Home() {
                   INFO <span className='text-blue-900'>IT</span>
                 </h1>
 
-                <p className='text-left mt-4 text-lg text-blueGray-700 mb-4'>
+                <p className='text-left mt-4 mb-12 text-lg text-blueGray-700 mb-4'>
                   Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officia in aut, dolorum
                   perferendis saepe deleniti dolore fugiat aliquid architecto alias?
                 </p>
 
                 <Link
-                  className='text-left my-4 bg-blue-900 text-white rounded py-2 px-2 text-sm'
+                  className='text-left  bg-blue-900 text-white rounded px-6 py-4 text-sm'
                   to='/login'
                 >
                   <button
@@ -46,7 +46,7 @@ export default function Home() {
 
             <div className='lg:w-6/12 px-4 py-6 ml-auto mr-auto text-center'>
               <img
-                style={{ height: '450px' }}
+                style={{ width: '708px' }}
                 alt='...'
                 className='rounded-xl ml-auto mr-auto shadow-lg right'
                 src={hand}

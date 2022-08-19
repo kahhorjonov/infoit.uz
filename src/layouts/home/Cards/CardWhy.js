@@ -13,7 +13,7 @@ export default function CardWhy() {
   return (
     <div className='relative flex flex-row min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0'>
       <div className='w-full rounded-y-l lg:w-6/12 bg-white mb-0 px-4 py-6'>
-        <div className='lg:w-8/12 p-2'>
+        <div className='lg:w-8/12 p-2 flex flex-col'>
           <h1 className='uppercase mb-4 font-bold'>Nega aynan biz?</h1>
           <span className='text-left text-sm'>
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sit temporibus labore
@@ -22,11 +22,11 @@ export default function CardWhy() {
           </span>
 
           <Link
-            className='text-left my-4 bg-blue-900 text-white rounded py-2 px-2 text-sm'
+            className='max-content mt-8 text-left my-4 bg-blue-900 text-white rounded py-2 px-6 text-sm'
             to='/login'
           >
             <button
-              className='mt-8 bg-transparent uppercase outline-none focus:outline-none ease-linear transition-all duration-150'
+              className='bg-transparent uppercase outline-none focus:outline-none ease-linear transition-all duration-150'
               type='button'
             >
               <span>

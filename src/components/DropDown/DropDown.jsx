@@ -40,7 +40,7 @@ TreeViewItem.propTypes = {
   child: PropTypes.array,
 };
 
-function DropDown() {
+function DropDown({ position = 'bottom-end', color = '' }) {
   const dispatch = useDispatch();
   const { category } = useSelector(store => store);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -62,7 +62,7 @@ function DropDown() {
 
   return (
     <div>
-      <MDButton variant='outlined' type='button' onClick={handleClick('bottom-end')}>
+      <MDButton variant='outlined' type='button' color={color} onClick={handleClick(position)}>
         {category?.currentCategory?.name || 'Category'}{' '}
         <Icon
           style={{
@@ -103,5 +103,10 @@ function DropDown() {
     </div>
   );
 }
+
+DropDown.propTypes = {
+  position: PropTypes.string,
+  color: PropTypes.string,
+};
 
 export default DropDown;
