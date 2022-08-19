@@ -1,10 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { useNavigate, useParams } from 'react-router-dom';
+
 // icons
 import AccessTimeFilled from '@mui/icons-material/AccessTimeFilled';
 
-export default function CardTest({ name, category, startVisionTestDate, durationTimeInMinutes }) {
+export default function CardTest({
+  id,
+  name,
+  category,
+  startVisionTestDate,
+  durationTimeInMinutes,
+}) {
+  const navigate = useNavigate();
+  const params = useParams();
+
   return (
     <div className='w-full lg:w-6/12 xl:w-4/12 px-4 py-2'>
       <div className='relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg p-2'>
@@ -45,6 +56,7 @@ export default function CardTest({ name, category, startVisionTestDate, duration
                 color: 'white',
                 borderRadius: '6px',
               }}
+              onClick={() => navigate(`/test/${id}`)}
             >
               Test yechishni boshlash
             </button>
@@ -56,8 +68,9 @@ export default function CardTest({ name, category, startVisionTestDate, duration
 }
 
 CardTest.propTypes = {
+  id: PropTypes.number,
   name: PropTypes.string,
   category: PropTypes.object,
-  startVisionTestDate: PropTypes.string,
-  durationTimeInMinutes: PropTypes.string,
+  startVisionTestDate: PropTypes.number,
+  durationTimeInMinutes: PropTypes.number,
 };

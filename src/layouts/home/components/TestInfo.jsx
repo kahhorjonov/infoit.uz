@@ -1,11 +1,27 @@
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { getPlanningTest } from 'store/thunk';
 import cover from 'assets/homePage/Testcover.png';
 
 // Components
 
-import FooterHome from './FooterHome';
 import CardTestInfo from '../Cards/CardTestInfo';
+import FooterHome from './FooterHome';
 
 export default function TestInfo() {
+  const dispatch = useDispatch();
+  const { planningTests } = useSelector(store => store);
+  const { id } = useParams();
+
+  const currentTestData = planningTests?.planning?.filter(test => test.id === id);
+
+  console.log(currentTestData);
+
+  useEffect(() => {
+    dispatch(getPlanningTest({ categoryId: '', pagination: { pageNumber: 1, pageSize: '' } }));
+  }, []);
+
   return (
     <main>
       <div className='relative pt-16 pb-32 flex content-center items-center justify-center bg-white min-h-screen-75'>
