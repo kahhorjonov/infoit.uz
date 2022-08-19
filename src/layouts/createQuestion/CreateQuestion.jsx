@@ -47,12 +47,6 @@ function CreateQuestion() {
     dispatch(getCategories());
   }, [dispatch]);
 
-  useEffect(() => {
-    dispatch(
-      getQuestions(category?.currentCategory?.id, pagination.pageNumber, pagination.pageSize),
-    );
-  }, [dispatch, category.currentCategory, pagination]);
-
   return (
     <DashboardLayout>
       <ModalComp status={createQStatus} onClose={handleClose}>
@@ -91,22 +85,10 @@ function CreateQuestion() {
                 </MDBox>
               </MDBox>
               <MDBox width='100%' p={3}>
-                {questionsData.isLoading ? (
-                  <Spiner />
-                ) : (
-                  <Table
-                    questions={questionsData?.questions}
-                    pagination={pagination}
-                    categoryId={category?.currentCategory?.id || 0}
-                  />
-                )}
-
-                <PaginationTable
-                  dataCount={questionsData.count}
-                  pageNumber={pagination.pageNumber}
-                  pageSize={pagination.pageSize}
-                  onChangeCurrPage={page => handleChangePage(page)}
-                  onChangePageSize={pageSize => handleChangePageSize(pageSize)}
+                <Table
+                  questions={questionsData?.questions}
+                  pagination={pagination}
+                  categoryId={category?.currentCategory?.id || 0}
                 />
               </MDBox>
             </Card>

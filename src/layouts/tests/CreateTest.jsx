@@ -1,65 +1,45 @@
-import { useState } from 'react';
-// @mui material components
-import Grid from '@mui/material/Grid';
-
-// Material Dashboard 2 React components
-import MDBox from 'components/MDBox';
-
-// Material Dashboard 2 React example components
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCategories } from 'store/thunk';
+import { Icon, Grid } from '@mui/material';
 import DashboardLayout from 'examples/LayoutContainers/DashboardLayout';
 import DashboardNavbar from 'examples/Navbars/DashboardNavbar';
-// import Footer from "examples/Footer";
-// import ReportsBarChart from "examples/Charts/BarCharts/ReportsBarChart";
-// import ReportsLineChart from "examples/Charts/LineCharts/ReportsLineChart";
-// import ComplexStatisticsCard from "examples/Cards/StatisticsCards/ComplexStatisticsCard";
-
-// Data
-// import reportsBarChartData from "layouts/dashboard/data/reportsBarChartData";
-// import reportsLineChartData from "layouts/dashboard/data/reportsLineChartData";
-
-// Dashboard components
-// import Projects from "layouts/dashboard/components/Projects";
-import OrdersOverview from 'layouts/dashboard/components/OrdersOverview';
-import MDInput from 'components/MDInput';
+import MDBox from 'components/MDBox';
 import MDButton from 'components/MDButton';
 import MDTypography from 'components/MDTypography';
 import DropDown from 'components/DropDown/DropDown';
-import { Icon } from '@mui/material';
 import TestTable from './components/TestTable/TestsTable';
 import CreateTestForm from './components/CreateTestForm/CreateTestForm';
 import PlanningTestTable from './components/PlanningTestsTable/PlanningTestTable';
 
 function CreateTest() {
-  // const { sales, tasks } = reportsLineChartData;
-  const [createTestData, setCreateTestData] = useState({
-    category: 'Category Name',
-    date: '',
-    count: '',
-    testsId: [],
+  const dispatch = useDispatch();
+  const { category } = useSelector(store => store);
+  const [actionType, setActionType] = useState('view');
+  const [newTest, setNewTest] = useState({
+    name: '',
+    image: '',
+    categoryId: null,
+    price: 0,
+    durationTimeInMinutes: 0,
+    questionsCount: 0,
+    attachmentId: null,
+    questionsId: [],
+    startTestDate: '',
+    finishTestDate: '',
+    startVisionTestDate: '',
+    finishVisionTestDate: '',
   });
-  // const [error, setError] = useState({ category: false, date: false, count: false });
 
   const handleChangeTestData = (name, value) => {
-    setCreateTestData({
-      ...createTestData,
-      [name]: value,
-    });
+    if (name === 'image') {
+      setNewTest({ ...newTest, attachmentId: value.attachmentId, image: value.imageUrl });
+    } else setNewTest({ ...newTest, [name]: value });
   };
 
-  const handleSave = testData => {
-    testData?.category && testData?.date && testData?.count ? null : '';
-  };
-
-  const handleCancel = () => {
-    const data = { ...createTestData, category: 'Category Name', date: '', count: '' };
-    setCreateTestData(data);
-  };
-
-  const handleAddTestId = id => {
-    const ids = [...createTestData.testsId];
-    ids.push(id);
-    setCreateTestData({ ...createTestData, testsId: ids });
-  };
+  useEffect(() => {
+    dispatch(getCategories());
+  }, []);
 
   return (
     <DashboardLayout>
@@ -81,31 +61,50 @@ function CreateTest() {
           </MDTypography>
           <MDBox display='flex' alignItems='center' gap={3}>
             <DropDown />
-            <MDButton onClick={() => {}}>
-              <Icon>add</Icon>
-            </MDButton>
+            {actionType === 'view' && category?.currentCategory?.id && (
+              <MDButton
+                onClick={() => {
+                  console.log(newTest);
+                  setActionType('add');
+                }}
+              >
+                <Icon>add</Icon>
+              </MDButton>
+            )}
+            {actionType === 'add' && (
+              <MDButton
+                onClick={() => {
+                  setActionType('view');
+                }}
+              >
+                <Icon>check</Icon>
+              </MDButton>
+            )}
           </MDBox>
         </MDBox>
 
         <MDBox mt={4}>
           <Grid container spacing={3}>
-            <Grid item xs={12} md={6} lg={8}>
-              <PlanningTestTable />
-              {/* <TestTable onAddTestId={id => handleAddTestId(id)} /> */}
+            <Grid item xs={12} lg={actionType === 'view' ? 12 : 8}>
+              {actionType === 'view' && <PlanningTestTable />}
+              {actionType === 'add' && <TestTable />}
             </Grid>
-            <Grid item xs={12} md={6} lg={4}>
-              <MDBox
-                width='100%'
-                height='100%'
-                bgColor='white'
-                coloredShadow='dark'
-                borderRadius='xl'
-                p={3}
-              >
-                <CreateTestForm />
-              </MDBox>
-              {/* <OrdersOverview /> */}
-            </Grid>
+            {actionType === 'add' && (
+              <Grid item xs={12} md={6} lg={4}>
+                <MDBox
+                  width='100%'
+                  height='minContent'
+                  bgColor='white'
+                  coloredShadow='dark'
+                  borderRadius='xl'
+                  p={3}
+                >
+                  <CreateTestForm
+                    onChangeTestData={(name, value) => handleChangeTestData(name, value)}
+                  />
+                </MDBox>
+              </Grid>
+            )}
           </Grid>
         </MDBox>
       </MDBox>

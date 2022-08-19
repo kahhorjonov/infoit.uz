@@ -3,7 +3,8 @@ import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import thunk from 'redux-thunk';
 import {
   categoriesReducer,
-  paginationsReducer,
+  // paginationsReducer,
+  planningTestReducer,
   questionsReducer,
   usersReducer,
 } from './reducers/index';
@@ -11,8 +12,9 @@ import {
 const reducers = combineReducers({
   category: categoriesReducer,
   questionsData: questionsReducer,
-  paginations: paginationsReducer,
+  // paginations: paginationsReducer,
   users: usersReducer,
+  planningTests: planningTestReducer
 });
 
 export const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));

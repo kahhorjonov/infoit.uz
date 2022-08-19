@@ -3,6 +3,8 @@ import { toast } from 'react-toastify';
 import {
   getCategoriesProccess,
   getCategoriesSuccess,
+  getPlanningTestProccess,
+  getPlanningTestSuccess,
   getQuestionsProccess,
   getQuestionsSuccess,
 } from './actions/actionCreaters';
@@ -49,24 +51,22 @@ export const deleteCategory = categoryId => async dispatch => {
   }
 };
 
-export const getQuestions =
-  (categoryId = '', pageNumber, pageSize) =>
-    async dispatch => {
-      try {
-        dispatch(getQuestionsProccess());
-        const response = await axiosPublic.get(
-          `api/question/v1?category=${categoryId}&page=${pageNumber - 1}&pageSize=${pageSize}`,
-          {
-            headers: {
-              Authorization: `Bearer ${access_token}`,
-            },
-          },
-        );
-        dispatch(getQuestionsSuccess(response.data.objectKoinot));
-      } catch (e) {
-        toast.error(e);
-      }
-    };
+export const getQuestions = ({ categoryId, pagination }) => async dispatch => {
+  try {
+    dispatch(getQuestionsProccess());
+    const response = await axiosPublic.get(
+      `api/question/v1?category=${categoryId || ""}&page=${pagination.pageNumber - 1}&pageSize=${pagination.pageSize}`,
+      {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      },
+    );
+    dispatch(getQuestionsSuccess({ questions: response.data.objectKoinot, pagination }));
+  } catch (e) {
+    toast.error(e);
+  }
+};
 
 export const addQuestion = (question, categoryId, pagination) => async dispatch => {
   try {
@@ -110,3 +110,16 @@ export const uploadPhoto = async photo => {
 
   return image;
 };
+
+export const getPlanningTest = ({ categoryId, pagination }) => async dispatch => {
+  try {
+    dispatch(getPlanningTestProccess())
+    const response = await axiosPublic.get(`api/test/v1/find-all?category=${categoryId}&page=${pagination.pageNumber - 1}&size=${pagination.pageSize}&search=&sortBy=&sortType=DESC`);
+
+    console.log(response.data.objectKoinot);
+
+    dispatch(getPlanningTestSuccess({ data: response.data.objectKoinot, pagination }))
+  } catch (e) {
+    toast.error(e);
+  }
+}

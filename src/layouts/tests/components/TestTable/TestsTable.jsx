@@ -1,60 +1,83 @@
-import PropTyps from 'prop-types';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getQuestions } from 'store/thunk';
 import MDBox from 'components/MDBox';
-import './TestsTable.scss';
-import MDPagination from 'components/MDPagination';
-import { Pagination } from '@mui/material';
+import Spiner from 'components/Loader/Spiner';
 import PaginationTable from 'components/Pagination/Pagination';
+import Styles from '../TestTable.module.scss';
 
-const TESTS = [
-  { id: 1, text: 'Test 1 Test 1 Test 1Test 1Test 1Test 1Test 1 Test 1Test 1Test 1' },
-  { id: 2, text: 'Test 2' },
-  { id: 3, text: 'Test 3' },
-  { id: 4, text: 'Test 4' },
-  { id: 5, text: 'Test 5' },
-  { id: 6, text: 'Test 6' },
-  { id: 7, text: 'Test 7' },
-];
+function TestTable() {
+  const dispatch = useDispatch();
+  const { category, questionsData } = useSelector(store => store);
 
-function TestTable({ onAddTestId }) {
-  const handleChangeCurrPage = pageNumber => {};
+  const handleChangeCurrPage = pageNumber => {
+    dispatch(
+      getQuestions({
+        categoryId: category.currentCategory.id,
+        pagination: { ...questionsData.pagination, pageNumber },
+      }),
+    );
+  };
 
-  const handleChangePageSize = pageSize => {};
+  const handleChangePageSize = pageSize => {
+    dispatch(
+      getQuestions({
+        categoryId: category.currentCategory.id,
+        pagination: { ...questionsData.pagination, pageNumber: 1, pageSize },
+      }),
+    );
+  };
+
+  useEffect(() => {
+    dispatch(
+      getQuestions({
+        categoryId: category.currentCategory.id,
+        pagination: questionsData.pagination,
+      }),
+    );
+  }, [dispatch, category.currentCategory.id]);
 
   return (
     <MDBox bgColor='white' coloredShadow='dark' borderRadius='xl' p={3}>
-      <table className='test_table'>
-        <thead>
-          <tr>
-            <th> </th>
-            <th>ID</th>
-            <th>Questions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {TESTS.map(test => (
-            <tr key={test.id}>
-              <td>
-                <input type='checkbox' onChange={() => onAddTestId(test.id)} />
-              </td>
-              <td>{test.id}</td>
-              <td>{test.text}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <PaginationTable
-        dataCount={100}
-        pageNumber={5}
-        pageSize={10}
-        onChangeCurrPage={pageNumber => handleChangeCurrPage(pageNumber)}
-        onChangePageSize={pageSize => handleChangePageSize(pageSize)}
-      />
+      {questionsData.isLoading ? (
+        <Spiner />
+      ) : (
+        <>
+          <table className={Styles.testTable}>
+            <thead>
+              <tr>
+                <th> </th>
+                <th>№</th>
+                <th>Questions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {questionsData?.questions?.map((test, idx) => (
+                <tr key={test.id}>
+                  <td>
+                    <input type='checkbox' onChange={e => (e.target.hidden = true)} />
+                  </td>
+                  <td>
+                    {idx +
+                      1 +
+                      questionsData.pagination.pageSize * (questionsData.pagination.pageNumber - 1)}
+                  </td>
+                  <td>{test.name}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <PaginationTable
+            dataCount={questionsData.count}
+            pageNumber={questionsData.pagination.pageNumber}
+            pageSize={questionsData.pagination.pageSize}
+            onChangeCurrPage={pageNumber => handleChangeCurrPage(pageNumber)}
+            onChangePageSize={pageSize => handleChangePageSize(pageSize)}
+          />
+        </>
+      )}
     </MDBox>
   );
 }
-
-TestTable.propTypes = {
-  onAddTestId: PropTyps.func.isRequired,
-};
 
 export default TestTable;
