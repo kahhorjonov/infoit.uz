@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import { getQuestions } from 'store/thunk';
 import MDBox from 'components/MDBox';
 import Spiner from 'components/Loader/Spiner';
 import PaginationTable from 'components/Pagination/Pagination';
 import Styles from '../TestTable.module.scss';
 
-function TestTable() {
+function TestTable({ onAddQuestionId }) {
   const dispatch = useDispatch();
   const { category, questionsData } = useSelector(store => store);
 
@@ -55,7 +56,7 @@ function TestTable() {
               {questionsData?.questions?.map((test, idx) => (
                 <tr key={test.id}>
                   <td>
-                    <input type='checkbox' onChange={e => (e.target.hidden = true)} />
+                    <input type='checkbox' onChange={e => onAddQuestionId(test.id)} />
                   </td>
                   <td>
                     {idx +
@@ -79,5 +80,9 @@ function TestTable() {
     </MDBox>
   );
 }
+
+TestTable.propTypes = {
+  onAddQuestionId: PropTypes.func,
+};
 
 export default TestTable;

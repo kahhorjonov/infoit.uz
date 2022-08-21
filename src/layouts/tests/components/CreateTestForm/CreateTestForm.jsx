@@ -5,11 +5,20 @@ import MDInput from 'components/MDInput';
 import MDTypography from 'components/MDTypography';
 import { uploadPhoto } from 'store/thunk';
 
-function CreateTestForm({ onChangeTestData }) {
-  const handleGetImageId = async image => {
-    const { attechmentId } = await uploadPhoto(image);
+function CreateTestForm({
+  name,
+  durationTimeInMinutes,
+  price,
+  questionsCount,
+  startVisionTestDate,
+  finishVisionTestDate,
+  // image,
+  onChangeTestData,
+}) {
+  const handleGetImageId = async img => {
+    const { attachmentId } = await uploadPhoto(img);
 
-    onChangeTestData('image', { attechmentId, imageUrl: URL.createObjectURL(image) });
+    onChangeTestData('image', { attachmentId, imageUrl: URL.createObjectURL(img) });
   };
 
   return (
@@ -18,6 +27,7 @@ function CreateTestForm({ onChangeTestData }) {
         Create Test
       </MDTypography>
       <MDInput
+        value={name}
         onChange={e => onChangeTestData('name', e.target.value)}
         label='Name'
         placeholder='Test Name'
@@ -26,7 +36,8 @@ function CreateTestForm({ onChangeTestData }) {
         focused
       />
       <MDInput
-        onChange={e => onChangeTestData('durationTimeInMinutes', e.target.value)}
+        value={durationTimeInMinutes}
+        onChange={e => onChangeTestData('durationTimeInMinutes', parseInt(e.target.value, 10))}
         label='Duration'
         placeholder='Duration'
         type='number'
@@ -34,7 +45,8 @@ function CreateTestForm({ onChangeTestData }) {
         focused
       />
       <MDInput
-        onChange={e => onChangeTestData('price', e.target.value)}
+        value={price}
+        onChange={e => onChangeTestData('price', parseInt(e.target.value, 10))}
         label='Price'
         placeholder='Price'
         type='number'
@@ -42,7 +54,8 @@ function CreateTestForm({ onChangeTestData }) {
         focused
       />
       <MDInput
-        onChange={e => onChangeTestData('questionsCount', e.target.value)}
+        value={questionsCount}
+        onChange={e => onChangeTestData('questionsCount', parseInt(e.target.value, 10))}
         label='Count'
         placeholder='Questions count'
         type='number'
@@ -50,16 +63,18 @@ function CreateTestForm({ onChangeTestData }) {
         focused
       />
       <MDInput
+        value={startVisionTestDate}
         onChange={e => onChangeTestData('startVisionTestDate', e.target.value)}
         label='Start Test'
-        type='date'
+        type='datetime-local'
         fullWidth
         focused
       />
       <MDInput
+        value={finishVisionTestDate}
         onChange={e => onChangeTestData('finishVisionTestDate', e.target.value)}
         label='Finish Test'
-        type='date'
+        type='datetime-local'
         fullWidth
         focused
       />
@@ -90,7 +105,14 @@ function CreateTestForm({ onChangeTestData }) {
 }
 
 CreateTestForm.propTypes = {
+  name: PropTypes.string,
+  price: PropTypes.number,
+  // image: PropTypes.string,
+  questionsCount: PropTypes.number,
   onChangeTestData: PropTypes.func,
+  startVisionTestDate: PropTypes.string,
+  finishVisionTestDate: PropTypes.string,
+  durationTimeInMinutes: PropTypes.number,
 };
 
 export default CreateTestForm;

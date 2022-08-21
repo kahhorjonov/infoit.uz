@@ -1,16 +1,44 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPlanningTest } from 'store/thunk';
+import { getPlanningTest, getPlanningTestById } from 'store/thunk';
+import PropTypes from 'prop-types';
 import MDBox from 'components/MDBox';
 import PaginationTable from 'components/Pagination/Pagination';
+import Spiner from 'components/Loader/Spiner';
 
+import ModalComp from 'components/Modal/ModalComp';
+import CardTestInfo from 'layouts/home/Cards/CardTestInfo';
+import cover from 'assets/homePage/Testcover.png';
 import Styles from '../TestTable.module.scss';
 
-function PlanningTestTable() {
+function PlanningTestTable({ onChangeActionType }) {
   const dispatch = useDispatch();
   const { category, planningTests } = useSelector(store => store);
+  const [testInfo, setTestInfo] = useState(false);
 
   // console.log(planningTest);
+
+  const handleOpenCurrentTestData = id => {
+    dispatch(getPlanningTestById(id));
+    setTestInfo(true);
+  };
+
+  const handleChangeCurrPage = pageNumber => {
+    dispatch(
+      getPlanningTest({
+        categoryId: category?.currentCategory?.id || '',
+        pagination: { ...planningTests?.pagination, pageNumber },
+      }),
+    );
+  };
+  const handleChangePageSize = pageSize => {
+    dispatch(
+      getPlanningTest({
+        categoryId: category?.currentCategory?.id || '',
+        pagination: { ...planningTests?.pagination, pageNumber: 1, pageSize },
+      }),
+    );
+  };
 
   useEffect(() => {
     dispatch(
@@ -19,49 +47,70 @@ function PlanningTestTable() {
         pagination: planningTests?.pagination,
       }),
     );
-  }, [dispatch, category?.currentCategory, planningTests?.pagination]);
+  }, [dispatch, category?.currentCategory]);
 
   return (
     <MDBox bgColor='white' coloredShadow='dark' borderRadius='xl' p={3}>
-      <table className={Styles.testTable}>
-        <thead>
-          <tr>
-            <th>№</th>
-            <th>Test Name</th>
-            <th>Questions Count</th>
-            <th>Duration</th>
-            {/* <th>Price</th> */}
-            <th>Start date</th>
-            <th>Finish date</th>
-          </tr>
-        </thead>
-        <tbody>
-          {planningTests?.planning?.map((testData, idx) => (
-            <tr key={testData.id}>
-              <td>
-                {idx +
-                  1 +
-                  planningTests.pagination.pageSize * (planningTests.pagination.pageNumber - 1)}
-              </td>
-              <td>{testData?.name}</td>
-              <td>{testData?.questionsCount}</td>
-              <td>{new Date(testData?.durationTimeInMinutes).getHours()}</td>
-              {/* <td>45 000 som</td> */}
-              <td>{new Date(testData?.startVisionTestDate).toISOString()}</td>
-              <td>{new Date(testData?.finishVisionTestDate).toISOString()}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <PaginationTable
-        dataCount={planningTests?.count}
-        pageNumber={planningTests?.pagination?.pageNumber}
-        pageSize={planningTests?.pagination?.pageSize}
-        onChangeCurrPage={() => {}}
-        onChangePageSize={() => {}}
-      />
+      <ModalComp status={testInfo} onClose={() => setTestInfo(false)}>
+        <div className='items-center flex'>
+          <div className='w-full  px-4'>
+            <img alt='...' className='rounded-xl ml-auto mr-auto shadow-lg right' src={cover} />
+          </div>
+
+          <div className='w-full px-4'>
+            <CardTestInfo workingComp='admin' onChangeAction={type => onChangeActionType(type)} />
+          </div>
+        </div>
+      </ModalComp>
+      {planningTests?.isLoading ? (
+        <Spiner />
+      ) : (
+        <>
+          <table className={Styles.testTable}>
+            <thead>
+              <tr>
+                <th>№</th>
+                <th>Test Name</th>
+                <th>Questions Count</th>
+                <th>Duration</th>
+                {/* <th>Price</th> */}
+                <th>Start date</th>
+                <th>Finish date</th>
+              </tr>
+            </thead>
+            <tbody>
+              {planningTests?.planning?.map((testData, idx) => (
+                <tr key={testData?.id} onClick={() => handleOpenCurrentTestData(testData.id)}>
+                  <td>
+                    {idx +
+                      1 +
+                      planningTests.pagination.pageSize * (planningTests.pagination.pageNumber - 1)}
+                  </td>
+                  <td>{testData?.name}</td>
+                  <td>{testData?.questionsCount}</td>
+                  <td>{new Date(testData?.durationTimeInMinutes).getHours()}</td>
+                  {/* <td>45 000 som</td> */}
+                  <td>{new Date(testData?.startVisionTestDate).toISOString()}</td>
+                  <td>{new Date(testData?.finishVisionTestDate).toISOString()}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <PaginationTable
+            dataCount={planningTests?.count}
+            pageNumber={planningTests?.pagination?.pageNumber}
+            pageSize={planningTests?.pagination?.pageSize}
+            onChangeCurrPage={pageNumber => handleChangeCurrPage(pageNumber)}
+            onChangePageSize={pageSize => handleChangePageSize(pageSize)}
+          />
+        </>
+      )}
     </MDBox>
   );
 }
+
+PlanningTestTable.propTypes = {
+  onChangeActionType: PropTypes.func,
+};
 
 export default PlanningTestTable;

@@ -7,6 +7,7 @@ import {
   getPlanningTestSuccess,
   getQuestionsProccess,
   getQuestionsSuccess,
+  setCurrentPlanningTestData,
 } from './actions/actionCreaters';
 
 const access_token = localStorage.getItem('token');
@@ -51,22 +52,26 @@ export const deleteCategory = categoryId => async dispatch => {
   }
 };
 
-export const getQuestions = ({ categoryId, pagination }) => async dispatch => {
-  try {
-    dispatch(getQuestionsProccess());
-    const response = await axiosPublic.get(
-      `api/question/v1?category=${categoryId || ""}&page=${pagination.pageNumber - 1}&size=${pagination.pageSize}`,
-      {
-        headers: {
-          Authorization: `Bearer ${access_token}`,
+export const getQuestions =
+  ({ categoryId, pagination }) =>
+  async dispatch => {
+    try {
+      dispatch(getQuestionsProccess());
+      const response = await axiosPublic.get(
+        `api/question/v1?category=${categoryId || ''}&page=${pagination.pageNumber - 1}&size=${
+          pagination.pageSize
+        }`,
+        {
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+          },
         },
-      },
-    );
-    dispatch(getQuestionsSuccess({ questions: response.data.objectKoinot, pagination }));
-  } catch (e) {
-    toast.error(e);
-  }
-};
+      );
+      dispatch(getQuestionsSuccess({ questions: response.data.objectKoinot, pagination }));
+    } catch (e) {
+      toast.error(e);
+    }
+  };
 
 export const addQuestion = (question, categoryId, pagination) => async dispatch => {
   try {
@@ -87,7 +92,6 @@ export const editQuestion = (question, categoryId, pagination) => async dispatch
     toast.error(e);
   }
 };
-
 
 export const uploadPhoto = async photo => {
   let image;
@@ -111,13 +115,39 @@ export const uploadPhoto = async photo => {
   return image;
 };
 
-export const getPlanningTest = ({ categoryId, pagination }) => async dispatch => {
+export const addPlanningTest = data => async dispatch => {
   try {
-    dispatch(getPlanningTestProccess())
-    const response = await axiosPublic.get(`api/test/v1/find-all?category=${categoryId}&page=${pagination.pageNumber - 1}&size=${pagination.pageSize}&search=`);
-
-    dispatch(getPlanningTestSuccess({ data: response.data.objectKoinot, pagination }))
+    dispatch(getQuestionsProccess());
+    const response = await axiosPublic.post('api/test/v1/save', data);
+    console.log(response);
+    dispatch(getQuestionsSuccess({ categoryId: '', pagination: { pageNumber: 1, pageSize: 10 } }));
   } catch (e) {
     toast.error(e);
   }
-}
+};
+
+export const getPlanningTest =
+  ({ categoryId, pagination }) =>
+  async dispatch => {
+    try {
+      dispatch(getPlanningTestProccess());
+      const response = await axiosPublic.get(
+        `api/test/v1/find-all?category=${categoryId}&page=${pagination.pageNumber - 1}&size=${
+          pagination.pageSize
+        }&search=`,
+      );
+
+      dispatch(getPlanningTestSuccess({ data: response.data.objectKoinot, pagination }));
+    } catch (e) {
+      toast.error(e);
+    }
+  };
+
+export const getPlanningTestById = id => async dispatch => {
+  try {
+    const response = await axiosPublic.get(`api/test/v1/by-id?testId=${id}`);
+    dispatch(setCurrentPlanningTestData(response.data.objectKoinot));
+  } catch (e) {
+    toast.error(e);
+  }
+};

@@ -40,7 +40,7 @@ TreeViewItem.propTypes = {
   child: PropTypes.array,
 };
 
-function DropDown({ position = 'bottom-end', color = '' }) {
+function DropDown({ position = 'bottom-end', color = 'white' }) {
   const dispatch = useDispatch();
   const { category } = useSelector(store => store);
   const [anchorEl, setAnchorEl] = useState(null);

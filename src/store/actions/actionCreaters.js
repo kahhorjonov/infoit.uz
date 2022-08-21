@@ -9,6 +9,7 @@ import {
   SET_CURRENT_CATEGORIES,
   GET_PLANNING_TESTS_PROCCESS,
   GET_PLANNING_TESTS_SUCCESS,
+  SET_CURRENT_TEST_DATA,
 } from './actionTypes';
 
 export const getCategoriesProccess = () => ({
@@ -50,9 +51,14 @@ export const getUsersSuccess = users => ({
 
 export const getPlanningTestProccess = () => ({
   type: GET_PLANNING_TESTS_PROCCESS,
-})
+});
 
-export const getPlanningTestSuccess = (testData) => ({
+export const getPlanningTestSuccess = testData => ({
   type: GET_PLANNING_TESTS_SUCCESS,
-  payload: testData
-})
+  payload: testData,
+});
+
+export const setCurrentPlanningTestData = testData => ({
+  type: SET_CURRENT_TEST_DATA,
+  payload: testData,
+});

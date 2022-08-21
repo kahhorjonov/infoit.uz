@@ -68,9 +68,13 @@ function Table({ questions, pagination, categoryId }) {
               </tr>
             </thead>
             <tbody>
-              {questions?.map(question => (
+              {questions?.map((question, idx) => (
                 <tr key={question.id} onClick={() => handleOpen(question)}>
-                  <td>{question?.id}</td>
+                  <td>
+                    {idx +
+                      1 +
+                      questionsData.pagination.pageSize * (questionsData.pagination.pageNumber - 1)}
+                  </td>
                   <td>
                     <img src='' alt='' />
                     {question?.name}
