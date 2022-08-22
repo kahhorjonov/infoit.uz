@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getPlanningTestById } from 'store/thunk';
+import { getPlanningTest, getPlanningTestById } from 'store/thunk';
 import cover from 'assets/homePage/Testcover.png';
 
 // Components
@@ -11,12 +11,16 @@ import FooterHome from './FooterHome';
 
 export default function TestInfo() {
   const dispatch = useDispatch();
-  const { planningTests } = useSelector(store => store);
+  const { category, planningTests } = useSelector(store => store);
   const { id } = useParams();
 
   useEffect(() => {
     dispatch(getPlanningTestById(id));
   }, [dispatch, id]);
+
+  useEffect(() => {
+    dispatch(getPlanningTest({ categoryId: category?.currentCategory?.id }));
+  }, [dispatch, category.currentCategory.id]);
 
   return (
     <main>
@@ -28,7 +32,7 @@ export default function TestInfo() {
             </div>
 
             <div className='w-full lg:w-6/12 xl:w-4/12 px-4 ml-auto mr-auto'>
-              <CardTestInfo />
+              <CardTestInfo planningTests={planningTests.currentTestData} />
             </div>
           </div>
         </div>
@@ -64,22 +68,6 @@ export default function TestInfo() {
       <section className='relative py-20 bg-white'>
         <div className='container mx-auto px-4'>
           <div className='flex flex-wrap'>
-            <div className='w-full lg:w-6/12 xl:w-4/12 px-4 py-2'>
-              <CardTestInfo />
-            </div>
-
-            <div className='w-full lg:w-6/12 xl:w-4/12 px-4 py-2'>
-              <CardTestInfo />
-            </div>
-
-            <div className='w-full lg:w-6/12 xl:w-4/12 px-4 py-2'>
-              <CardTestInfo />
-            </div>
-
-            <div className='w-full lg:w-6/12 xl:w-4/12 px-4 py-2'>
-              <CardTestInfo />
-            </div>
-
             <div className='w-full lg:w-6/12 xl:w-4/12 px-4 py-2'>
               <CardTestInfo />
             </div>
