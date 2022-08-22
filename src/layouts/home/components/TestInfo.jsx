@@ -19,7 +19,12 @@ export default function TestInfo() {
   }, [dispatch, id]);
 
   useEffect(() => {
-    dispatch(getPlanningTest({ categoryId: category?.currentCategory?.id }));
+    dispatch(
+      getPlanningTest({
+        categoryId: planningTests?.currentTestData?.category?.id || '',
+        pagination: { pageNumber: 1, pageSize: 6 },
+      }),
+    );
   }, [dispatch, category.currentCategory.id]);
 
   return (
@@ -68,9 +73,11 @@ export default function TestInfo() {
       <section className='relative py-20 bg-white'>
         <div className='container mx-auto px-4'>
           <div className='flex flex-wrap'>
-            <div className='w-full lg:w-6/12 xl:w-4/12 px-4 py-2'>
-              <CardTestInfo />
-            </div>
+            {planningTests?.planning?.map(test => (
+              <div key={test.id} className='w-full lg:w-6/12 xl:w-4/12 px-4 py-2'>
+                <CardTestInfo planningTests={test} />
+              </div>
+            ))}
           </div>
         </div>
       </section>
