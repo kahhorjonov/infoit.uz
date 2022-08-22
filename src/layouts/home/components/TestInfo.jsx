@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getPlanningTest } from 'store/thunk';
+import { getPlanningTestById } from 'store/thunk';
 import cover from 'assets/homePage/Testcover.png';
 
 // Components
@@ -14,13 +14,9 @@ export default function TestInfo() {
   const { planningTests } = useSelector(store => store);
   const { id } = useParams();
 
-  const currentTestData = planningTests?.planning?.filter(test => test.id === id);
-
-  console.log(currentTestData);
-
   useEffect(() => {
-    dispatch(getPlanningTest({ categoryId: '', pagination: { pageNumber: 1, pageSize: '' } }));
-  }, []);
+    dispatch(getPlanningTestById(id));
+  }, [dispatch, id]);
 
   return (
     <main>

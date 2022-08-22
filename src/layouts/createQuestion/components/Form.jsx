@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { PropTypes } from 'prop-types';
 import { useDispatch } from 'react-redux';
 import TextArea from 'components/TextArea/TextArea';
@@ -12,6 +12,7 @@ import { addQuestion, editQuestion } from '../../../store/thunk';
 function Form({ formType, questionData, categoryId, pagination, onClose }) {
   const dispatch = useDispatch();
   const [actionType, setActionType] = useState(formType);
+  const [correctChoiceId, setCorrectChoiceId] = useState('');
   const [questionsForm, setQuestionsForm] = useState({
     idx: actionType !== 'add' && questionData.id ? questionData.id : '',
     text: actionType !== 'add' && questionData?.name ? questionData?.name : '',
@@ -56,7 +57,7 @@ function Form({ formType, questionData, categoryId, pagination, onClose }) {
     const choices = questionsForm.choices.map(choice =>
       choice.idx === idx ? { ...choice, [name]: value } : choice,
     );
-
+    if (name === 'correct' && value === true) setCorrectChoiceId(idx);
     setQuestionsForm({ ...questionsForm, choices });
   };
 
@@ -70,8 +71,9 @@ function Form({ formType, questionData, categoryId, pagination, onClose }) {
 
   const handleSave = question => {
     if (actionType === 'add') {
-      dispatch(addQuestion(question, categoryId, pagination));
-      onClose();
+      console.log(question);
+      // dispatch(addQuestion(question, categoryId, pagination));
+      // onClose();
     }
     if (actionType === 'edit') {
       dispatch(editQuestion({ ...question, id: questionData.id }, categoryId, pagination));
@@ -82,6 +84,19 @@ function Form({ formType, questionData, categoryId, pagination, onClose }) {
   const handleDelete = () => {
     onClose();
   };
+
+  useEffect(() => {
+    console.log(correctChoiceId);
+    // setQuestionsForm({
+    //   ...questionsForm,
+    const choices = questionsForm?.choices?.map(choice => ({
+      ...choice,
+      correct: choice.idx === correctChoiceId ? true : false,
+    }));
+
+    console.log(choices);
+    // });
+  }, [correctChoiceId]);
 
   return (
     <MDBox display='flex' flexDirection='column' gap={2}>
@@ -115,6 +130,7 @@ function Form({ formType, questionData, categoryId, pagination, onClose }) {
           <MDBox key={answer.idx} display='flex' alignItems='center' gap={1}>
             <ChoiceInput
               {...answer}
+              correctChoiceId={correctChoiceId}
               formType={actionType}
               onAddAnswer={() => handleAddAnswer()}
               onDeleteAnswer={idx => handleDeleteAnswer(idx)}

@@ -93,15 +93,21 @@ export const editQuestion = (question, categoryId, pagination) => async dispatch
   }
 };
 
-export const uploadPhoto = async photo => {
+export const uploadPhoto = async (photo, type) => {
   let image;
   const formBody = new FormData();
   formBody.append('photo', photo);
 
   try {
-    const response = await axiosPublic.post(`koinot/attachment/v1/upload-photo`, formBody, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    });
+    const response = await axiosPublic.post(
+      `koinot/attachment/v1/upload-photo?AttachmentEnumTypeWhy=web&type=${type}`,
+      formBody,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      },
+    );
 
     // console.log(response.data.objectKoinot[0].fileId);
     image = {

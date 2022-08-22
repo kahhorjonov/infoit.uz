@@ -6,9 +6,9 @@ import Styles from './AddImage.module.scss';
 
 function AddImage({ label, onChange }) {
   const handleChangeImage = async img => {
-    const { attechmentId } = await uploadPhoto(img);
+    // const { attechmentId } = await uploadPhoto(img);
 
-    onChange({ attechmentId, imageUrl: URL.createObjectURL(img) });
+    onChange({ imageUrl: URL.createObjectURL(img) });
   };
 
   return (

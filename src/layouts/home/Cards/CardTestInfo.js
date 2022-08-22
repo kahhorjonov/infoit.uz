@@ -5,18 +5,7 @@ import PropTypes from 'prop-types';
 import AccessTimeFilled from '@mui/icons-material/AccessTimeFilled';
 import { useSelector } from 'react-redux';
 
-export default function CardTestInfo({
-  workingComp,
-  onChangeAction,
-  // statTitle,
-  // statSubjectTitle,
-  // statDescripiron,
-  // statStartDate,
-  // statEndDate,
-  // statStartTime,
-  // statEndTime,
-  statPrice,
-}) {
+export default function CardTestInfo({ workingComp, onChangeAction, statPrice }) {
   const { planningTests } = useSelector(store => store);
 
   return (

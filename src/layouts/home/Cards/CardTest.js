@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 // icons
 import AccessTimeFilled from '@mui/icons-material/AccessTimeFilled';
@@ -14,7 +13,6 @@ export default function CardTest({
   durationTimeInMinutes,
 }) {
   const navigate = useNavigate();
-  const params = useParams();
 
   return (
     <div className='w-full lg:w-6/12 xl:w-4/12 px-4 py-2'>

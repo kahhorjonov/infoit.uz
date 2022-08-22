@@ -5,6 +5,7 @@ import Styles from './ChoiceInput.module.scss';
 
 function ChoiceInput({
   idx,
+  correctChoiceId,
   formType,
   correct,
   placeholder,
@@ -16,12 +17,21 @@ function ChoiceInput({
   onAddImage,
 }) {
   const handleChangeImage = async img => {
-    const { attechmentId } = await uploadPhoto(img);
+    const { attechmentId } = await uploadPhoto(img, 'QUESTION');
     onAddImage(idx, attechmentId, URL.createObjectURL(img));
   };
 
   return (
-    <div className={Styles.input_container}>
+    <div
+      className={`${Styles.input_container} ${
+        correctChoiceId === idx ? Styles.input_container_active : ''
+      }`}
+    >
+      <input
+        type='radio'
+        name='correctChoice'
+        onClick={() => onChangeText(idx, 'correct', !correct)}
+      />
       {choicePhoto ? (
         <div className={Styles.viewImage}>
           <img src={choicePhoto} alt='' />
@@ -54,13 +64,14 @@ function ChoiceInput({
             placeholder={placeholder}
             onChange={e => onChangeText(idx, 'text', e.target.value)}
           />
-          <Icon
+
+          {/* <Icon
             fontSize='large'
             color={correct ? 'success' : 'secondary'}
             onClick={() => onChangeText(idx, 'correct', !correct)}
           >
             check
-          </Icon>
+          </Icon> */}
           <Icon fontSize='large' color='secondary' onClick={() => onAddAnswer()}>
             add
           </Icon>
@@ -75,6 +86,7 @@ function ChoiceInput({
 
 ChoiceInput.propTypes = {
   idx: PropTypes.node,
+  correctChoiceId: PropTypes.node,
   formType: PropTypes.string,
   text: PropTypes.string,
   choicePhoto: PropTypes.string,
