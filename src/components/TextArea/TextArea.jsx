@@ -12,7 +12,9 @@ function TextArea({ formType, text, image, onChangeText, onAddImage, onDeleteIma
   return (
     <div htmlFor='text_area' className={Styles.text_area_container}>
       {formType === 'view' ? (
-        <span className={Styles.text}>{text}</span>
+        <span style={{ width: image ? '80%' : '100%' }} className={Styles.text}>
+          {text}
+        </span>
       ) : (
         <textarea
           value={text}

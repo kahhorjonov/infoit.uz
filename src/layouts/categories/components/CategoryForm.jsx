@@ -6,10 +6,12 @@ import MDTypography from 'components/MDTypography';
 import MDInput from 'components/MDInput';
 import { useDispatch, useSelector } from 'react-redux';
 import { createNewCategory, deleteCategory } from 'store/thunk';
+import ModalComp from 'components/Modal/ModalComp';
 
 function CategoryForm({ formType, currCategory, onClose }) {
   const dispatch = useDispatch();
   const { category } = useSelector(store => store);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [actionType, setActionType] = useState(formType);
   const [newCategory, setNewCategory] = useState({
     nameEn: currCategory?.nameEn || '',
@@ -17,6 +19,9 @@ function CategoryForm({ formType, currCategory, onClose }) {
     nameUz: currCategory?.nameUz || '',
     parentCategory: category?.currentCategory?.id,
   });
+
+  const handleOpen = () => setOpenDeleteModal(true);
+  const handleClose = () => setOpenDeleteModal(false);
 
   const handleChangeCategory = (name, value) => {
     setNewCategory({ ...newCategory, [name]: value });
@@ -40,6 +45,31 @@ function CategoryForm({ formType, currCategory, onClose }) {
 
   return (
     <MDBox display='flex' flexDirection='column' gap={2}>
+      <ModalComp width='15%' status={openDeleteModal} onClose={handleClose}>
+        <MDTypography textAlign='center' mb={1}>
+          O`chirishni davom ettirasizmi?
+        </MDTypography>
+        <MDBox display='flex' justifyContent='space-between' gap={1}>
+          <MDButton
+            fullWidth
+            type='button'
+            variant='contained'
+            color='success'
+            onClick={() => handleDelete()}
+          >
+            Yes
+          </MDButton>
+          <MDButton
+            fullWidth
+            type='button'
+            variant='contained'
+            color='secondary'
+            onClick={handleClose}
+          >
+            No
+          </MDButton>
+        </MDBox>
+      </ModalComp>
       <MDBox display='flex' justifyContent='space-between' xs={12}>
         <MDTypography variant='text' color='text' fontSize='5' fontWeight='bold'>
           Create Category
@@ -89,7 +119,7 @@ function CategoryForm({ formType, currCategory, onClose }) {
           <MDButton fullWidth color='success' onClick={() => setActionType('edit')}>
             Edit
           </MDButton>
-          <MDButton fullWidth color='secondary' onClick={() => handleDelete()}>
+          <MDButton fullWidth color='secondary' onClick={() => handleOpen()}>
             Delete
           </MDButton>
         </MDBox>

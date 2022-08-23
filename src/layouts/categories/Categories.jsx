@@ -22,8 +22,8 @@ import DashboardNavbar from 'examples/Navbars/DashboardNavbar';
 import DropDown from 'components/DropDown/DropDown';
 import ModalComp from 'components/Modal/ModalComp';
 import Spiner from 'components/Loader/Spiner';
-import CategoryForm from './components/CategoryForm';
 import CategoriesTable from './components/CategoriesTable/CategoriesTable';
+import CategoryForm from './components/CategoryForm';
 
 function Categories() {
   const dispatch = useDispatch();

@@ -2,19 +2,19 @@ import PropTypes from 'prop-types';
 import { Modal } from '@mui/material';
 import MDBox from 'components/MDBox';
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: '50%',
-  bgcolor: 'background.paper',
-  boxShadow: 24,
-  borderRadius: 4,
-  p: 4,
-};
+function ModalComp({ children, status, onClose, width = '50%' }) {
+  const style = {
+    width,
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    borderRadius: 4,
+    p: 4,
+  };
 
-function ModalComp({ children, status, onClose }) {
   return (
     <Modal
       open={status}
@@ -28,6 +28,7 @@ function ModalComp({ children, status, onClose }) {
 }
 
 ModalComp.propTypes = {
+  width: PropTypes.string,
   children: PropTypes.node.isRequired,
   status: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
