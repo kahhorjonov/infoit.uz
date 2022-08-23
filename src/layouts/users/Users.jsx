@@ -15,7 +15,7 @@ import DashboardLayout from 'examples/LayoutContainers/DashboardLayout';
 import DashboardNavbar from 'examples/Navbars/DashboardNavbar';
 
 // Material Dashboard 2 React components
-import UsersTable from './components/UsersTable/UsersTable';
+import UsersTable from "./components/UsersTable/UsersTable"
 
 function Users() {
   return (

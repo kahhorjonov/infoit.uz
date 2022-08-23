@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import InputMask from 'react-input-mask';
 import PropTypes from 'prop-types';
 
-import { sendCardDetails } from 'store/thunk';
+import { sendCardDetails, confirmationPayment } from 'store/thunk';
+import { toast } from 'react-toastify';
 
 import humo from 'assets/homePage/Humo-01 1.png';
 import uzcard from 'assets/homePage/Uzcard-01 1.png';
@@ -13,14 +14,26 @@ export default function CardTest({ planningTests }) {
   const [confirmation, setConfirmation] = useState(false);
 
   // amount: planningTests?.currentTestData?.price,
-  const handleSendCardDetails = () => {
+
+  const handleSendCardDetails = async () => {
     const data = {
-      amount: 5000,
+      amount: '5000',
       card: cardNumber.trim(),
       expireDate: `${expDate.slice(3, 5)}${expDate.slice(0, 2)}`,
     };
-    // expireDate: `${expDate.slice(3, 5)}/${expDate.slice(0, 2)}`,
-    sendCardDetails(data);
+
+    try {
+      const result = await sendCardDetails(data);
+      toast.info(result.data.message);
+      setConfirmation(true);
+    } catch (ex) {
+      toast.error(ex.response.data.message);
+      setConfirmation(true);
+    }
+  };
+
+  const handleConfirmation = () => {
+    confirmationPayment({ confirmationCode: '34567' });
   };
 
   return (
@@ -56,11 +69,9 @@ export default function CardTest({ planningTests }) {
         </div>
 
         {confirmation ? (
-          <div className='relative max-w-full'>
-            <div className='sm:w-12/12'>
-              <label className='block text-xs'>Tasdiqlash kodi</label>
-              <input className='border' />
-            </div>
+          <div className='relative px-2'>
+            <label className='block text-xs'>Tasdiqlash kodi</label>
+            <input className='border px-2' />
           </div>
         ) : null}
 
@@ -68,6 +79,7 @@ export default function CardTest({ planningTests }) {
           <p className='w-full text-sm text-blueGray-400 mt-4 flex justify-center items-center'>
             <button
               type='button'
+              onClick={handleConfirmation}
               className='p-3 bg-lightBlue-600 text-white focus:outline-none rounded'
             >
               To`lovni amalga oshirish
