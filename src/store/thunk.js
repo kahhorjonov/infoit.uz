@@ -67,6 +67,7 @@ export const getQuestions =
           },
         },
       );
+
       dispatch(getQuestionsSuccess({ questions: response.data.objectKoinot, pagination }));
     } catch (e) {
       toast.error(e);
@@ -76,8 +77,8 @@ export const getQuestions =
 export const addQuestion = (question, categoryId, pagination) => async dispatch => {
   try {
     const response = await axiosPublic.post('api/question/v1/save', [question]);
-    console.log(response.data);
-    dispatch(getQuestions(categoryId, pagination.pageNumber, pagination.pageSize));
+    toast.success(response.data.message);
+    dispatch(getQuestions({ categoryId, pagination }));
   } catch (e) {
     toast.error(e);
   }
@@ -86,8 +87,8 @@ export const addQuestion = (question, categoryId, pagination) => async dispatch 
 export const editQuestion = (question, categoryId, pagination) => async dispatch => {
   try {
     const response = await axiosPublic.post('api/question/v1/edit', question);
-    console.log(response.data);
-    dispatch(getQuestions(categoryId, pagination.pageNumber, pagination.pageSize));
+    toast.success(response.data.message);
+    dispatch(getQuestions({ categoryId, pagination }));
   } catch (e) {
     toast.error(e);
   }

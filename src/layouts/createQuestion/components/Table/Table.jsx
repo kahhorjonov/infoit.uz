@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
 import { getQuestions } from 'store/thunk';
+import { setCurrentQuestion } from 'store/actions/actionCreaters';
 import PaginationTable from 'components/Pagination/Pagination';
 import MDBox from 'components/MDBox';
 import ModalComp from 'components/Modal/ModalComp';
@@ -9,13 +9,13 @@ import Spiner from 'components/Loader/Spiner';
 import Form from '../Form';
 import Styles from './Table.module.scss';
 
-function Table({ questions, categoryId }) {
+function Table() {
   const dispatch = useDispatch();
   const { category, questionsData } = useSelector(store => store);
-  const [openId, setOpenId] = useState({});
+  const [open, setOpen] = useState(false);
 
-  const handleOpen = data => setOpenId(data);
-  const handleClose = () => setOpenId(null);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const handleChangePage = pageNumber => {
     dispatch(
@@ -34,6 +34,11 @@ function Table({ questions, categoryId }) {
     );
   };
 
+  const handleChooseQuestion = question => {
+    handleOpen();
+    dispatch(setCurrentQuestion(question));
+  };
+
   useEffect(() => {
     dispatch(
       getQuestions({
@@ -45,14 +50,14 @@ function Table({ questions, categoryId }) {
 
   return (
     <MDBox sx='100%'>
-      <ModalComp status={openId?.id ? true : false} onClose={handleClose}>
+      <ModalComp status={open} onClose={handleClose}>
         <Form
           formType='view'
-          categoryId={categoryId}
+          categoryId={category?.currentCategory?.id || questionsData?.currentQuestion?.category?.id}
           pagination={questionsData?.pagination}
           questionNumber={1}
           onClose={handleClose}
-          questionData={openId}
+          questionData={questionsData?.currentQuestion}
         />
       </ModalComp>
       {questionsData.isLoading ? (
@@ -68,8 +73,8 @@ function Table({ questions, categoryId }) {
               </tr>
             </thead>
             <tbody>
-              {questions?.map((question, idx) => (
-                <tr key={question.id} onClick={() => handleOpen(question)}>
+              {questionsData?.questions?.map((question, idx) => (
+                <tr key={question.id} onClick={() => handleChooseQuestion(question)}>
                   <td>
                     {idx +
                       1 +
@@ -96,10 +101,5 @@ function Table({ questions, categoryId }) {
     </MDBox>
   );
 }
-
-Table.propTypes = {
-  questions: PropTypes.arrayOf(PropTypes.object).isRequired,
-  categoryId: PropTypes.number,
-};
 
 export default Table;

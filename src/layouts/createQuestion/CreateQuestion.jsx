@@ -19,8 +19,6 @@ import ModalComp from 'components/Modal/ModalComp';
 // import { SelectPicker } from 'rsuite';
 
 import DropDown from 'components/DropDown/DropDown';
-import PaginationTable from '../../components/Pagination/Pagination';
-import Spiner from '../../components/Loader/Spiner';
 import Form from './components/Form';
 import Table from './components/Table/Table';
 
@@ -68,16 +66,15 @@ function CreateQuestion() {
                 </MDTypography>
                 <MDBox display='flex' alignItems='center' gap={3}>
                   <DropDown />
-                  <MDButton onClick={() => handleOpen()}>
-                    <Icon>add</Icon>
-                  </MDButton>
+                  {category?.currentCategory?.id && (
+                    <MDButton onClick={() => handleOpen()}>
+                      <Icon>add</Icon>
+                    </MDButton>
+                  )}
                 </MDBox>
               </MDBox>
               <MDBox width='100%' p={3}>
-                <Table
-                  questions={questionsData?.questions}
-                  categoryId={category?.currentCategory?.id || 0}
-                />
+                <Table />
               </MDBox>
             </Card>
           </Grid>

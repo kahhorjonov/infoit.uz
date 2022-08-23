@@ -16,11 +16,14 @@ function Form({ formType, questionData, categoryId, pagination, onClose }) {
   const [questionsForm, setQuestionsForm] = useState({
     idx: actionType !== 'add' && questionData.id ? questionData.id : '',
     text: actionType !== 'add' && questionData?.name ? questionData?.name : '',
-    categoryId: (actionType !== 'add' && questionData?.category?.id) || '',
+    categoryId:
+      actionType !== 'add' && questionData?.category?.id
+        ? questionData?.category?.id
+        : categoryId || '',
     attachmentId:
       actionType !== 'add' && questionData?.questionPhoto?.fileId
         ? questionData.questionPhoto.fileId
-        : 0,
+        : '',
     questionPhoto:
       actionType !== 'add' && questionData?.questionPhoto?.fileName
         ? questionData?.questionPhoto?.link
@@ -36,6 +39,8 @@ function Form({ formType, questionData, categoryId, pagination, onClose }) {
           }))
         : [{ idx: v4(), attachmentId: 0, choicePhoto: '', correct: false, text: '' }],
   });
+
+  // console.log(questionData);
 
   const handleAddAnswer = () => {
     const newChoice = { idx: v4(), attachmentId: 0, choicePhoto: '', correct: false, text: '' };
@@ -55,9 +60,13 @@ function Form({ formType, questionData, categoryId, pagination, onClose }) {
 
   const handleChangeAnswer = (idx, name, value) => {
     const choices = questionsForm.choices.map(choice =>
-      choice.idx === idx ? { ...choice, [name]: value } : choice,
+      choice.idx === idx
+        ? { ...choice, [name]: value }
+        : name === 'correct' && value === true
+        ? { ...choice, correct: false }
+        : choice,
     );
-    if (name === 'correct' && value === true) setCorrectChoiceId(idx);
+    // if (name === 'correct' && value === true) setCorrectChoiceId(idx);
     setQuestionsForm({ ...questionsForm, choices });
   };
 
@@ -71,7 +80,6 @@ function Form({ formType, questionData, categoryId, pagination, onClose }) {
 
   const handleSave = question => {
     if (actionType === 'add') {
-      console.log(question);
       dispatch(addQuestion(question, categoryId, pagination));
       onClose();
     }
@@ -84,16 +92,6 @@ function Form({ formType, questionData, categoryId, pagination, onClose }) {
   const handleDelete = () => {
     onClose();
   };
-
-  // useEffect(() => {
-  //   setQuestionsForm({
-  //     ...questionsForm,
-  //     choices: questionsForm?.choices?.map(choice => ({
-  //       ...choice,
-  //       correct: choice.idx === correctChoiceId ? true : false,
-  //     })),
-  //   });
-  // }, [correctChoiceId]);
 
   return (
     <MDBox display='flex' flexDirection='column' gap={2}>
@@ -127,7 +125,6 @@ function Form({ formType, questionData, categoryId, pagination, onClose }) {
           <MDBox key={answer.idx} display='flex' alignItems='center' gap={1}>
             <ChoiceInput
               {...answer}
-              correctChoiceId={correctChoiceId}
               formType={actionType}
               onAddAnswer={() => handleAddAnswer()}
               onDeleteAnswer={idx => handleDeleteAnswer(idx)}

@@ -10,6 +10,7 @@ import {
   GET_PLANNING_TESTS_PROCCESS,
   GET_PLANNING_TESTS_SUCCESS,
   SET_CURRENT_TEST_DATA,
+  SET_CURRENT_QUESTION,
 } from './actionTypes';
 
 export const getCategoriesProccess = () => ({
@@ -33,6 +34,11 @@ export const getQuestionsProccess = () => ({
 export const getQuestionsSuccess = questions => ({
   type: GET_QUESTIONS_SUCCESS,
   payload: questions,
+});
+
+export const setCurrentQuestion = currentQustion => ({
+  type: SET_CURRENT_QUESTION,
+  payload: currentQustion,
 });
 
 export const setQuestionsPagination = pagination => ({
