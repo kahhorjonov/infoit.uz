@@ -34,7 +34,7 @@ import Dashboard from 'layouts/dashboard';
 import CreateQuestion from 'layouts/createQuestion/CreateQuestion';
 import CreateTest from 'layouts/tests/CreateTest';
 import Categories from 'layouts/categories/Categories';
-import Users from 'layouts/users/components/Users';
+import Users from 'layouts/users/Users';
 import Tables from 'layouts/tables';
 import Billing from 'layouts/billing';
 import Notifications from 'layouts/notifications';

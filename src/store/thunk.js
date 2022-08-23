@@ -7,6 +7,7 @@ import {
   getPlanningTestSuccess,
   getQuestionsProccess,
   getQuestionsSuccess,
+  getUsersProcess,
   setCurrentPlanningTestData,
 } from './actions/actionCreaters';
 
@@ -158,3 +159,20 @@ export const getPlanningTestById = id => async dispatch => {
     toast.error(e);
   }
 };
+
+export const getUsers =
+  ({ pagination }) =>
+  async dispatch => {
+    try {
+      dispatch(getUsersProcess());
+      const response = await axiosPublic.get(
+        `api/user/v1?page=${pagination.pageNumber - 1}size=${pagination.pageSize}`,
+        {
+          headers: { Authorization: `Bearer ${access_token}` },
+        },
+      );
+      console.log(response.data);
+    } catch (e) {
+      toast.error(e);
+    }
+  };

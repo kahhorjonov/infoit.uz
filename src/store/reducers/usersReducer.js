@@ -3,6 +3,10 @@ import { GET_USERS_PROCESS, GET_USERS_SUCCESS } from 'store/actions/actionTypes'
 const initialState = {
   isLoading: false,
   users: [],
+  pagination: {
+    pageNumber: 1,
+    pageSize: 10,
+  },
 };
 
 export const usersReducer = (state = initialState, action) => {

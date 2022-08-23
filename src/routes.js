@@ -9,7 +9,7 @@ import Profile from 'layouts/profile';
 import Categories from 'layouts/categories/Categories';
 import CreateTest from 'layouts/tests/CreateTest';
 import CreateQuestion from 'layouts/createQuestion/CreateQuestion';
-import Users from 'layouts/users/components/Users';
+import Users from 'layouts/users/Users';
 
 // @mui icons
 import Icon from '@mui/material/Icon';
