@@ -1,10 +1,13 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 // icons
 import AccessTimeFilled from '@mui/icons-material/AccessTimeFilled';
 
 export default function CardTestInfo({ planningTests, workingComp, onChangeAction }) {
+  const navigate = useNavigate();
+
   return (
     <div className='relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg p-2'>
       <div className='flex-auto p-4'>
@@ -62,6 +65,7 @@ export default function CardTestInfo({ planningTests, workingComp, onChangeActio
             </button>
           ) : (
             <button
+              onClick={() => navigate(`/buyTest/${planningTests?.id}`)}
               type='button'
               className='w-full bg-lightBlue-600'
               style={{

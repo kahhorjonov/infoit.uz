@@ -1,10 +1,11 @@
 import React from 'react';
+import InputMask from 'react-input-mask';
 import PropTypes from 'prop-types';
 
 import humo from 'assets/homePage/Humo-01 1.png';
 import uzcard from 'assets/homePage/Uzcard-01 1.png';
 
-export default function CardTest({ statTitle }) {
+export default function CardTest({ planningTests }) {
   return (
     <div className='relative lg:w-12/12 flex flex-col px-4 min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg p-2'>
       <div className='flex-auto'>
@@ -16,19 +17,19 @@ export default function CardTest({ statTitle }) {
             </div>
             <div className='relative lg:w-4/12 sm:w-2/12'>
               <label className='text-xs'>Amal qilish muddati</label>
-              <input type='text' className='w-full border' />
+              <InputMask mask='99/99' alwaysShowMask='true' className='w-full border' />
             </div>
           </div>
           <div className='relative max-w-full'>
             <div className='sm:w-12/12'>
               <label className='text-xs'>Kartaga ulangan telefon raqam</label>
-              <input type='text' className='w-full border' />
+              <InputMask mask='(99) 999 99 99' alwaysShowMask='true' className='w-full border' />
             </div>
           </div>
           <div className='flex relative w-full max-w-full py-4'>
             <div className='w-full'>
               <p className='text-sm font-bold'>Summa</p>
-              <p className='text-xs'>45000 so`m</p>
+              <p className='text-xs'>{planningTests?.currentTestData?.price} so`m</p>
             </div>
             <div>
               <img src={humo} alt='1' />
@@ -51,20 +52,6 @@ export default function CardTest({ statTitle }) {
   );
 }
 
-CardTest.defaultProps = {
-  statTitle: 'Prezident maktablari uchun',
-  // statDescripiron: 'Fan nomi',
-  // statSubjectTitle: 'Fizika',
-  // statDate: '20.08.2022',
-  // statTime: '20:35',
-  // statPrice: '45000',
-};
-
 CardTest.propTypes = {
-  statTitle: PropTypes.string,
-  // statDescripiron: PropTypes.string,
-  // statSubjectTitle: PropTypes.string,
-  // statDate: PropTypes.string,
-  // statTime: PropTypes.string,
-  // statPrice: PropTypes.string,
+  planningTests: PropTypes.object,
 };
