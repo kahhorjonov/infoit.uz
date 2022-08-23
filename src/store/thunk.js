@@ -176,3 +176,16 @@ export const getUsers =
       toast.error(e);
     }
   };
+
+export const sendCardDetails = async data => {
+  try {
+    const result = await axiosPublic.post(`api/payment/v1/card-info`, data, {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+    });
+    console.log(result);
+  } catch (ex) {
+    console.log(ex);
+  }
+};
