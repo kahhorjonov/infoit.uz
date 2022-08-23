@@ -7,18 +7,18 @@ import { uploadPhoto } from 'store/thunk';
 
 function CreateTestForm({
   name,
-  durationTimeInMinutes,
   price,
+  image,
   questionsCount,
+  durationTimeInMinutes,
   startVisionTestDate,
   finishVisionTestDate,
-  // image,
   onChangeTestData,
 }) {
   const handleGetImageId = async img => {
-    const { attachmentId } = await uploadPhoto(img);
+    const { attechmentId } = await uploadPhoto(img, 'TEST');
 
-    onChangeTestData('image', { attachmentId, imageUrl: URL.createObjectURL(img) });
+    onChangeTestData('image', { attachmentId: attechmentId, imageUrl: URL.createObjectURL(img) });
   };
 
   return (
@@ -63,7 +63,7 @@ function CreateTestForm({
         focused
       />
       <MDInput
-        value={startVisionTestDate}
+        value={startVisionTestDate && new Date(startVisionTestDate).toISOString().substr(0, 16)}
         onChange={e => onChangeTestData('startVisionTestDate', e.target.value)}
         label='Start Test'
         type='datetime-local'
@@ -71,35 +71,65 @@ function CreateTestForm({
         focused
       />
       <MDInput
-        value={finishVisionTestDate}
+        value={finishVisionTestDate && new Date(finishVisionTestDate).toISOString().substr(0, 16)}
         onChange={e => onChangeTestData('finishVisionTestDate', e.target.value)}
         label='Finish Test'
         type='datetime-local'
         fullWidth
         focused
       />
-      <label
-        htmlFor='test_image'
-        style={{
-          width: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          border: '2px solid #2E87EC',
-          borderRadius: '6px',
-          padding: '0.1rem 0.6rem',
-          fontSize: '0.9rem',
-        }}
-      >
-        Test cover <Icon fontSize='large'>image</Icon>
-        <input
-          onChange={e => handleGetImageId(e.target.files[0])}
-          style={{ display: 'none' }}
-          type='file'
-          accept='image'
-          id='test_image'
-        />
-      </label>
+      {image ? (
+        <div style={{ position: 'relative' }}>
+          <img
+            style={{ borderRadius: '6px', border: '2px solid #2E87EC', padding: '2px' }}
+            src={image}
+            alt=''
+          />
+          <button
+            onClick={() => onChangeTestData('image', { attachmentId: '', imageUrl: '' })}
+            style={{
+              width: '20px',
+              height: '20px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              position: 'absolute',
+              top: '-7px',
+              right: '-7px',
+              fontSize: '1.3rem',
+              background: '#2E87EC',
+              borderRadius: '20px',
+              color: 'white',
+            }}
+            type='button'
+          >
+            ×
+          </button>
+        </div>
+      ) : (
+        <label
+          htmlFor='test_image'
+          style={{
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            border: '2px solid #2E87EC',
+            borderRadius: '6px',
+            padding: '0.1rem 0.6rem',
+            fontSize: '0.9rem',
+          }}
+        >
+          Test cover <Icon fontSize='large'>image</Icon>
+          <input
+            onChange={e => handleGetImageId(e.target.files[0])}
+            style={{ display: 'none' }}
+            type='file'
+            accept='image'
+            id='test_image'
+          />
+        </label>
+      )}
     </MDBox>
   );
 }
@@ -107,11 +137,11 @@ function CreateTestForm({
 CreateTestForm.propTypes = {
   name: PropTypes.string,
   price: PropTypes.number,
-  // image: PropTypes.string,
+  image: PropTypes.string,
   questionsCount: PropTypes.number,
   onChangeTestData: PropTypes.func,
-  startVisionTestDate: PropTypes.string,
-  finishVisionTestDate: PropTypes.string,
+  startVisionTestDate: PropTypes.node,
+  finishVisionTestDate: PropTypes.node,
   durationTimeInMinutes: PropTypes.number,
 };
 

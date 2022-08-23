@@ -23,7 +23,7 @@ function CreateTest() {
     price: 0,
     durationTimeInMinutes: 0,
     questionsCount: 0,
-    attachmentId: 255,
+    attachmentId: '',
     questionsId: [],
     startTestDate: '',
     finishTestDate: '',
@@ -58,17 +58,16 @@ function CreateTest() {
         ...newTest,
         id: planningTests?.currentTestData?.id,
         name: planningTests?.currentTestData?.name,
-        image: planningTests?.currentTestData?.photo,
+        image: planningTests?.currentTestData?.photo?.link,
+        attachmentId: planningTests?.currentTestData?.photo?.id,
         categoryId: planningTests?.currentTestData?.category?.id,
         price: planningTests?.currentTestData?.price,
-        durationTimeInMinutes: planningTests?.currentTestData?.durationTimeInMinutes,
+        durationTimeInMinutes: new Date(
+          planningTests?.currentTestData?.durationTimeInMinutes,
+        ).getMinutes(),
         questionsCount: planningTests?.currentTestData?.questionsCount,
-        startVisionTestDate: new Date(
-          planningTests?.currentTestData?.startVisionTestDate,
-        ).toLocaleString(),
-        finishVisionTestDate: new Date(
-          planningTests?.currentTestData?.finishVisionTestDate,
-        ).toLocaleString(),
+        startVisionTestDate: planningTests?.currentTestData?.startVisionTestDate,
+        finishVisionTestDate: planningTests?.currentTestData?.finishVisionTestDate,
       });
   }, [actionType, planningTests.currentTestData]);
 

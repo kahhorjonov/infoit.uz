@@ -54,7 +54,11 @@ function PlanningTestTable({ onChangeActionType }) {
       <ModalComp status={testInfo} onClose={() => setTestInfo(false)}>
         <div className='items-center flex'>
           <div className='w-full  px-4'>
-            <img alt='...' className='rounded-xl ml-auto mr-auto shadow-lg right' src={cover} />
+            <img
+              alt={planningTests?.currentTestData?.photo?.fileName || '...'}
+              className='rounded-xl ml-auto mr-auto shadow-lg right'
+              src={planningTests?.currentTestData?.photo?.link}
+            />
           </div>
 
           <div className='w-full px-4'>
@@ -92,10 +96,10 @@ function PlanningTestTable({ onChangeActionType }) {
                   </td>
                   <td>{testData?.name}</td>
                   <td>{testData?.questionsCount}</td>
-                  <td>{new Date(testData?.durationTimeInMinutes).getHours()}</td>
+                  <td>{new Date(testData?.durationTimeInMinutes).getMinutes()}</td>
                   <td>{testData?.price}</td>
-                  <td>{new Date(testData?.startVisionTestDate).toISOString()}</td>
-                  <td>{new Date(testData?.finishVisionTestDate).toISOString()}</td>
+                  <td>{new Date(testData?.startVisionTestDate).toLocaleString()}</td>
+                  <td>{new Date(testData?.finishVisionTestDate).toLocaleString()}</td>
                 </tr>
               ))}
             </tbody>
