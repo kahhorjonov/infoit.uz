@@ -5,7 +5,6 @@ import Styles from './ChoiceInput.module.scss';
 
 function ChoiceInput({
   idx,
-  correctChoiceId,
   formType,
   correct,
   placeholder,
@@ -22,16 +21,16 @@ function ChoiceInput({
   };
 
   return (
-    <div
-      className={`${Styles.input_container} ${
-        correctChoiceId === idx ? Styles.input_container_active : ''
-      }`}
-    >
-      <input
-        type='radio'
-        name='correctChoice'
-        onClick={() => onChangeText(idx, 'correct', !correct)}
-      />
+    <div className={`${Styles.input_container}`}>
+      {/* {formType !== 'view' && (
+        <input
+          // value={correct ? 'on' : ''}
+          defaultChecked={correct === true ? 'true' : 'false'}
+          type='radio'
+          name='correctChoice'
+          onClick={() => onChangeText(idx, 'correct', !correct)}
+        />
+      )} */}
       {choicePhoto ? (
         <div className={Styles.viewImage}>
           <img src={choicePhoto} alt='' />
@@ -65,13 +64,13 @@ function ChoiceInput({
             onChange={e => onChangeText(idx, 'text', e.target.value)}
           />
 
-          {/* <Icon
+          <Icon
             fontSize='large'
             color={correct ? 'success' : 'secondary'}
             onClick={() => onChangeText(idx, 'correct', !correct)}
           >
             check
-          </Icon> */}
+          </Icon>
           <Icon fontSize='large' color='secondary' onClick={() => onAddAnswer()}>
             add
           </Icon>
@@ -86,7 +85,6 @@ function ChoiceInput({
 
 ChoiceInput.propTypes = {
   idx: PropTypes.node,
-  correctChoiceId: PropTypes.node,
   formType: PropTypes.string,
   text: PropTypes.string,
   choicePhoto: PropTypes.string,

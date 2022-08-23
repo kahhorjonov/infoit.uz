@@ -9,7 +9,7 @@ import Spiner from 'components/Loader/Spiner';
 import Form from '../Form';
 import Styles from './Table.module.scss';
 
-function Table({ questions, pagination, categoryId }) {
+function Table({ questions, categoryId }) {
   const dispatch = useDispatch();
   const { category, questionsData } = useSelector(store => store);
   const [openId, setOpenId] = useState({});
@@ -49,7 +49,7 @@ function Table({ questions, pagination, categoryId }) {
         <Form
           formType='view'
           categoryId={categoryId}
-          pagination={pagination}
+          pagination={questionsData?.pagination}
           questionNumber={1}
           onClose={handleClose}
           questionData={openId}
@@ -99,7 +99,6 @@ function Table({ questions, pagination, categoryId }) {
 
 Table.propTypes = {
   questions: PropTypes.arrayOf(PropTypes.object).isRequired,
-  pagination: PropTypes.object,
   categoryId: PropTypes.number,
 };
 

@@ -58,7 +58,11 @@ function PlanningTestTable({ onChangeActionType }) {
           </div>
 
           <div className='w-full px-4'>
-            <CardTestInfo workingComp='admin' onChangeAction={type => onChangeActionType(type)} />
+            <CardTestInfo
+              workingComp='admin'
+              planningTests={planningTests?.currentTestData}
+              onChangeAction={type => onChangeActionType(type)}
+            />
           </div>
         </div>
       </ModalComp>
@@ -73,7 +77,7 @@ function PlanningTestTable({ onChangeActionType }) {
                 <th>Test Name</th>
                 <th>Questions Count</th>
                 <th>Duration</th>
-                {/* <th>Price</th> */}
+                <th>Price</th>
                 <th>Start date</th>
                 <th>Finish date</th>
               </tr>
@@ -89,7 +93,7 @@ function PlanningTestTable({ onChangeActionType }) {
                   <td>{testData?.name}</td>
                   <td>{testData?.questionsCount}</td>
                   <td>{new Date(testData?.durationTimeInMinutes).getHours()}</td>
-                  {/* <td>45 000 som</td> */}
+                  <td>{testData?.price}</td>
                   <td>{new Date(testData?.startVisionTestDate).toISOString()}</td>
                   <td>{new Date(testData?.finishVisionTestDate).toISOString()}</td>
                 </tr>

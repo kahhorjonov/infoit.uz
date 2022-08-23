@@ -16,21 +16,21 @@ function Form({ formType, questionData, categoryId, pagination, onClose }) {
   const [questionsForm, setQuestionsForm] = useState({
     idx: actionType !== 'add' && questionData.id ? questionData.id : '',
     text: actionType !== 'add' && questionData?.name ? questionData?.name : '',
-    categoryId,
+    categoryId: (actionType !== 'add' && questionData?.category?.id) || '',
     attachmentId:
       actionType !== 'add' && questionData?.questionPhoto?.fileId
         ? questionData.questionPhoto.fileId
         : 0,
     questionPhoto:
       actionType !== 'add' && questionData?.questionPhoto?.fileName
-        ? questionData?.questionPhoto?.fileName
+        ? questionData?.questionPhoto?.link
         : '',
     choices:
       actionType !== 'add' && questionData?.choices
         ? questionData?.choices?.map(choice => ({
             idx: choice?.id,
             attachmentId: choice?.choicePhoto?.fileId,
-            choicePhoto: choice?.choicePhoto?.fileName,
+            choicePhoto: choice?.choicePhoto?.link,
             correct: choice.correct,
             text: choice.text,
           }))
@@ -72,8 +72,8 @@ function Form({ formType, questionData, categoryId, pagination, onClose }) {
   const handleSave = question => {
     if (actionType === 'add') {
       console.log(question);
-      // dispatch(addQuestion(question, categoryId, pagination));
-      // onClose();
+      dispatch(addQuestion(question, categoryId, pagination));
+      onClose();
     }
     if (actionType === 'edit') {
       dispatch(editQuestion({ ...question, id: questionData.id }, categoryId, pagination));
@@ -85,18 +85,15 @@ function Form({ formType, questionData, categoryId, pagination, onClose }) {
     onClose();
   };
 
-  useEffect(() => {
-    console.log(correctChoiceId);
-    // setQuestionsForm({
-    //   ...questionsForm,
-    const choices = questionsForm?.choices?.map(choice => ({
-      ...choice,
-      correct: choice.idx === correctChoiceId ? true : false,
-    }));
-
-    console.log(choices);
-    // });
-  }, [correctChoiceId]);
+  // useEffect(() => {
+  //   setQuestionsForm({
+  //     ...questionsForm,
+  //     choices: questionsForm?.choices?.map(choice => ({
+  //       ...choice,
+  //       correct: choice.idx === correctChoiceId ? true : false,
+  //     })),
+  //   });
+  // }, [correctChoiceId]);
 
   return (
     <MDBox display='flex' flexDirection='column' gap={2}>

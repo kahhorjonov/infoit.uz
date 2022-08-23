@@ -28,20 +28,9 @@ function CreateQuestion() {
   const dispatch = useDispatch();
   const { category, questionsData } = useSelector(state => state);
   const [createQStatus, setCreateQStatus] = useState(false);
-  const [pagination, setPagination] = useState({
-    pageNumber: 1,
-    pageSize: 5,
-  });
 
   const handleOpen = () => setCreateQStatus(true);
   const handleClose = () => setCreateQStatus(false);
-
-  const handleChangePage = pageNumber => {
-    setPagination({ ...pagination, pageNumber });
-  };
-  const handleChangePageSize = pageSize => {
-    setPagination({ ...pagination, pageNumber: 1, pageSize });
-  };
 
   useEffect(() => {
     dispatch(getCategories());
@@ -53,7 +42,7 @@ function CreateQuestion() {
         <Form
           formType='add'
           categoryId={category?.currentCategory?.id || 0}
-          pagination={pagination}
+          pagination={questionsData?.pagination}
           onClose={handleClose}
         />
       </ModalComp>
@@ -87,7 +76,6 @@ function CreateQuestion() {
               <MDBox width='100%' p={3}>
                 <Table
                   questions={questionsData?.questions}
-                  pagination={pagination}
                   categoryId={category?.currentCategory?.id || 0}
                 />
               </MDBox>

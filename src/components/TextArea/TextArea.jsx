@@ -5,7 +5,7 @@ import Styles from './TextArea.module.scss';
 
 function TextArea({ formType, text, image, onChangeText, onAddImage, onDeleteImage }) {
   const handleChangeImage = async img => {
-    const { attechmentId } = await uploadPhoto(img);
+    const { attechmentId } = await uploadPhoto(img, 'QUESTION');
     onAddImage(attechmentId, URL.createObjectURL(img));
   };
 
