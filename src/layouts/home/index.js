@@ -20,6 +20,7 @@ import HomeNavbar from './components/HomeNavbar';
 // Pages
 import Main from './components/main';
 import TestInfo from './components/TestInfo';
+import Payment from './components/Payment';
 
 function Admin() {
   const [controller, dispatch] = useMaterialUIController();
@@ -53,6 +54,7 @@ function Admin() {
       <Routes>
         <Route path='/' exact element={<Main />} />
         <Route path='/test/:id' exact element={<TestInfo />} />
+        <Route path='/buyTest/:id' exact element={<Payment />} />
       </Routes>
     </ThemeProvider>
   );
