@@ -184,8 +184,8 @@ export const sendCardDetails = async data => {
         Authorization: `Bearer ${access_token}`,
       },
     });
-    console.log(result);
+    toast.info(result.data.message);
   } catch (ex) {
-    console.log(ex);
+    toast.error(ex.response.data.message);
   }
 };
