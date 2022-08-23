@@ -16,9 +16,9 @@ export default function CardTest({ planningTests }) {
     const data = {
       amount: planningTests?.currentTestData?.price,
       card: cardNumber.trim(),
-      expireDate: `${expDate.slice(3, 5)}/${expDate.slice(0, 2)}`,
+      expireDate: `${expDate.slice(0, 2)}${expDate.slice(3, 5)}`,
     };
-
+    // expireDate: `${expDate.slice(3, 5)}/${expDate.slice(0, 2)}`,
     sendCardDetails(data);
   };
 
