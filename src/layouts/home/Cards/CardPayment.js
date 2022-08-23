@@ -12,11 +12,12 @@ export default function CardTest({ planningTests }) {
   const [expDate, setExpDate] = useState('');
   const [confirmation, setConfirmation] = useState(false);
 
+  // amount: planningTests?.currentTestData?.price,
   const handleSendCardDetails = () => {
     const data = {
-      amount: planningTests?.currentTestData?.price,
+      amount: 5000,
       card: cardNumber.trim(),
-      expireDate: `${expDate.slice(0, 2)}${expDate.slice(3, 5)}`,
+      expireDate: `${expDate.slice(3, 5)}${expDate.slice(0, 2)}`,
     };
     // expireDate: `${expDate.slice(3, 5)}/${expDate.slice(0, 2)}`,
     sendCardDetails(data);
