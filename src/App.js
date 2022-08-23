@@ -15,6 +15,7 @@ import Home from 'layouts/home/index';
 import Admin from 'layouts/admin/Admin';
 import User from 'layouts/user/User';
 import SignIn from 'layouts/authentication/sign-in';
+import SignUp from 'layouts/authentication/sign-up';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -68,6 +69,7 @@ export default function App() {
         />
         <Route path='/user/*' element={<User />} />
         <Route path='/login' element={<SignIn />} />
+        <Route path='/register' element={<SignUp />} />
       </Routes>
     </ThemeProvider>
   );
