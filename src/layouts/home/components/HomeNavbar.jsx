@@ -104,7 +104,7 @@ export default function HomeNavbar() {
                   className='bg-transparent font-semibold uppercase outline-none focus:outline-none ease-linear transition-all duration-150'
                   type='button'
                 >
-                  <MeetingRoomIcon fontSize='small' /> Ro`yxatdan o`tish
+                  <MeetingRoomIcon fontSize='small' /> Kirish
                 </button>
               </Link>
             </li>
