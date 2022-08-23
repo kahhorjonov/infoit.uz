@@ -54,8 +54,6 @@ export default function CardTest({ planningTests }) {
           </div>
         </div>
 
-        <h2>hello</h2>
-
         {confirmation ? (
           <div className='relative max-w-full'>
             <div className='sm:w-12/12'>
