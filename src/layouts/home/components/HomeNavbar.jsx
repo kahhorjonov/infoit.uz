@@ -4,6 +4,10 @@ import { Link } from 'react-router-dom';
 // Icons
 import MenuIcon from '@mui/icons-material/Menu';
 import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import PersonIcon from '@mui/icons-material/Person';
+import LogoutIcon from '@mui/icons-material/Logout';
+import QuizIcon from '@mui/icons-material/Quiz';
 
 // Services
 import { decodedToken } from 'services/authService';
@@ -120,12 +124,29 @@ export default function HomeNavbar() {
                 </Link>
               </li>
             ) : (
-              <li className='flex items-center'>
-                <select name='' id=''>
-                  <option className='text-xs'>Profil</option>
-                  <option className='text-xs'>Testlarim</option>
-                  <option className='text-xs'>Chiqish</option>
-                </select>
+              <li style={{ borderRadius: '40px' }} className='text-sm flex items-center shadow-lg'>
+                <div className='dropdown'>
+                  <button type='button' className='max-w-200-px rounded-2xl dropbtn'>
+                    <AccountCircleIcon fontSize='medium' />
+                  </button>
+                  <div className='rounded-lg dropdown-content'>
+                    <Link className='rounded-lg' to='/'>
+                      <PersonIcon /> Profil
+                    </Link>
+                    <hr />
+                    <Link to='/' className='rounded-lg'>
+                      <QuizIcon /> Testlarim
+                    </Link>
+                    <hr />
+                    <Link
+                      to='/'
+                      onClick={() => localStorage.removeItem('token')}
+                      className='rounded-lg'
+                    >
+                      <LogoutIcon /> Chiqish
+                    </Link>
+                  </div>
+                </div>
               </li>
             )}
           </ul>
