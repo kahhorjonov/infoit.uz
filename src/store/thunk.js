@@ -177,15 +177,23 @@ export const getUsers =
     }
   };
 
-export const sendCardDetails = async data => {
+export function sendCardDetails(data) {
+  return axiosPublic.post(`api/payment/v1/card-info`, data, {
+    headers: {
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+}
+
+export const confirmationPayment = async data => {
   try {
-    const result = await axiosPublic.post(`api/payment/v1/card-info`, data, {
+    const response = await axiosPublic.post('/api/payment/v1/confirmation', data, {
       headers: {
         Authorization: `Bearer ${access_token}`,
       },
     });
-    toast.info(result.data.message);
-  } catch (ex) {
-    toast.error(ex.response.data.message);
+    toast.success(response.data.message);
+  } catch (e) {
+    toast.error(e);
   }
 };
