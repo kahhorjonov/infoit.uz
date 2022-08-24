@@ -1,6 +1,10 @@
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUsers } from 'store/thunk';
 // @mui material components
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
+import { MenuItem, Select } from '@mui/material';
 
 // @mui material components
 import Icon from '@mui/material/Icon';
@@ -15,14 +19,22 @@ import DashboardLayout from 'examples/LayoutContainers/DashboardLayout';
 import DashboardNavbar from 'examples/Navbars/DashboardNavbar';
 
 // Material Dashboard 2 React components
-import UsersTable from "./components/UsersTable/UsersTable"
+import UsersTable from './components/UsersTable/UsersTable';
 
 function Users() {
+  const dispatch = useDispatch();
+  const {
+    users: { pagination },
+  } = useSelector(store => store);
+
+  const [role, setRole] = useState('ROLE_USER');
+
+  useEffect(() => {
+    dispatch(getUsers({ role, pagination }));
+  }, [dispatch, role]);
+
   return (
     <DashboardLayout>
-      {/* <ModalComp status={open} onClose={handleClose}>
-        <CategoryForm formType='add' onClose={handleClose} />
-      </ModalComp> */}
       <DashboardNavbar />
       <MDBox pt={6} pb={3}>
         <Grid container spacing={6}>
@@ -44,14 +56,22 @@ function Users() {
                   Users
                 </MDTypography>
                 <MDBox display='flex' alignItems='center' gap={3}>
-                  <MDButton>
+                  <Select
+                    variant='standard'
+                    value={role}
+                    sx={{ width: '100px', height: '30px', color: 'white !important' }}
+                    onChange={e => setRole(e.target.value)}
+                  >
+                    <MenuItem value='ROLE_USER'>USER</MenuItem>
+                    <MenuItem value='ROLE_ADMIN'>ADMIN</MenuItem>
+                  </Select>
+                  {/* <MDButton>
                     <Icon>add</Icon>
-                  </MDButton>
+                  </MDButton> */}
                 </MDBox>
               </MDBox>
               <MDBox width='100%' p={3}>
-                <UsersTable />
-                {/* {category.isLoading ? <Spiner /> : <CategoriesTable />} */}
+                <UsersTable role={role} />
               </MDBox>
             </Card>
           </Grid>

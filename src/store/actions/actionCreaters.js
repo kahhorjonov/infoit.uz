@@ -15,6 +15,7 @@ import {
   GET_QUIZ_SUCCESS,
   SET_QUIZ_PAGINATION,
   SET_USER_ANSWER,
+  SET_CURRENT_USER,
 } from './actionTypes';
 
 export const getCategoriesProccess = () => ({
@@ -57,6 +58,11 @@ export const getUsersProcess = () => ({
 export const getUsersSuccess = users => ({
   type: GET_USERS_SUCCESS,
   payload: users,
+});
+
+export const setCurrentUser = user => ({
+  type: SET_CURRENT_USER,
+  payload: user,
 });
 
 export const getPlanningTestProccess = () => ({
