@@ -11,7 +11,7 @@ const initialState = {
   currentTestData: {},
   pagination: {
     pageNumber: 1,
-    pageSize: 10,
+    pageSize: 5,
   },
 };
 

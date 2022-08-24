@@ -2,18 +2,18 @@ import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import thunk from 'redux-thunk';
 import {
-  categoriesReducer,
-  planningTestReducer,
-  questionsReducer,
   quizReducer,
   usersReducer,
+  questionsReducer,
+  categoriesReducer,
+  planningTestReducer,
 } from './reducers/index';
 
 const reducers = combineReducers({
-  category: categoriesReducer,
-  questionsData: questionsReducer,
   quiz: quizReducer,
   users: usersReducer,
+  category: categoriesReducer,
+  questionsData: questionsReducer,
   planningTests: planningTestReducer,
 });
 

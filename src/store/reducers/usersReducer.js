@@ -6,7 +6,7 @@ const initialState = {
   count: 0,
   pagination: {
     pageNumber: 1,
-    pageSize: 10,
+    pageSize: 5,
   },
   currentUser: {},
 };

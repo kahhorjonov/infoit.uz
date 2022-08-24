@@ -12,7 +12,7 @@ const initialState = {
   currentQuestion: {},
   pagination: {
     pageNumber: 1,
-    pageSize: 10,
+    pageSize: 5,
   },
 };
 
