@@ -1,0 +1,55 @@
+.MuiBox-root {
+  background: #fff;
+  width: max-content;
+  padding: 16px;
+  border-radius: 20px;
+
+  nav {
+    ul {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 20px;
+      li {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        button {
+          width: 34px;
+          height: 34px;
+          position: relative;
+          background: #27a55d;
+          color: #fff;
+          z-index: 1;
+
+          &:hover {
+            background-color: #27a55d;
+            &::before {
+              z-index: -1;
+              background-color: #27a55e7b;
+            }
+          }
+
+          &::before {
+            content: '';
+            z-index: -1;
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-radius: 50px;
+            box-shadow: 0px 2px 2px rgba(82, 82, 82, 0.25);
+          }
+        }
+        .Mui-selected {
+          background-color: #27a55d;
+          &:hover {
+            background-color: #10542d;
+          }
+          &::before {
+            z-index: -1;
+            background-color: #27a55e7b;
+          }
+        }
+      }
+    }
+  }
+}
