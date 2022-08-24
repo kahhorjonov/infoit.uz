@@ -59,14 +59,12 @@ function Admin() {
       <Routes>
         <Route path='/' exact element={<Main />} />
         <Route path='/profile' exact element={<Profile />} />
-        <Route path='/results' exact element={<OthersResult />} />
+        <Route path='/results/:id' exact element={<OthersResult />} />
         <Route path='/myTests' exact element={<MyTests />} />
         <Route path='/test/:id' exact element={<TestInfo />} />
         <Route path='/buyTest/:id' exact element={<Payment />} />
         <Route path='/quiz/:id' exact element={<Quiz />} />
       </Routes>
-
-      <FooterHome />
     </ThemeProvider>
   );
 }
