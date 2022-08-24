@@ -16,6 +16,8 @@ import {
   SET_QUIZ_PAGINATION,
   SET_USER_ANSWER,
   SET_CURRENT_USER,
+  GET_USER_TESTS_PROCCESS,
+  GET_USER_TESTS_SUCCESS,
 } from './actionTypes';
 
 export const getCategoriesProccess = () => ({
@@ -96,4 +98,13 @@ export const setQuizPageNumber = pageNumber => ({
 export const setUserAnswer = answer => ({
   type: SET_USER_ANSWER,
   payload: answer,
+});
+
+export const getUserTestsProccess = () => ({
+  type: GET_USER_TESTS_PROCCESS,
+});
+
+export const getUserTestsSuccess = tests => ({
+  type: GET_USER_TESTS_SUCCESS,
+  payload: tests,
 });
