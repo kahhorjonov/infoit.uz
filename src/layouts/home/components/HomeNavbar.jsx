@@ -127,7 +127,7 @@ export default function HomeNavbar() {
                     <AccountCircleIcon fontSize='medium' />
                   </button>
                   <div className='rounded-lg dropdown-content'>
-                    <Link className='rounded-lg' to='/'>
+                    <Link className='rounded-lg' to='/profile'>
                       <PersonIcon /> Profil
                     </Link>
                     <hr />

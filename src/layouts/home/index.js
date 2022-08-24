@@ -23,6 +23,7 @@ import TestInfo from './components/TestInfo';
 import Payment from './components/Payment';
 import Quiz from './components/Quiz';
 import MyTests from './components/MyTests';
+import Profile from './components/Profile';
 
 function Admin() {
   const [controller, dispatch] = useMaterialUIController();
@@ -55,6 +56,7 @@ function Admin() {
 
       <Routes>
         <Route path='/' exact element={<Main />} />
+        <Route path='/profile' exact element={<Profile />} />
         <Route path='/myTests' exact element={<MyTests />} />
         <Route path='/test/:id' exact element={<TestInfo />} />
         <Route path='/buyTest/:id' exact element={<Payment />} />

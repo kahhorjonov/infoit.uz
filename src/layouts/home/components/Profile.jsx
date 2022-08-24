@@ -1,95 +1,42 @@
-import { Link } from 'react-router-dom';
-import hand from 'assets/homePage/hand&pen.png';
+import React, { useEffect } from 'react';
 
-// Icons
-import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
-
-// Components
-import CardWhy from '../Cards/CardWhy';
-import CardForTeachers from '../Cards/CardForTeachers';
-import FooterHome from './FooterHome';
-import Tests from './Tests';
+// image
+import coverSm from 'assets/homePage/teacher.png';
 
 export default function Profile() {
   return (
-    <main>
-      <div
-        id='main'
-        className='relative pt-16 pb-32 flex content-center items-center justify-center bg-white min-h-screen-75'
-      >
-        <div className='container relative mx-auto'>
-          <div className='items-center flex flex-wrap'>
-            <div className='w-full lg:w-6/12 px-4 ml-auto mr-auto'>
-              <div className='pr-12 lg:w-8/12'>
-                <h1 className='text-left font-semibold text-4xl'>
-                  INFO <span className='text-blue-900'>IT</span>
-                </h1>
+    <main className='container relative mx-auto p-3'>
+      <h2 className='items-center py-0 mt-24 py-2 text-3xl'>Profil</h2>
 
-                <p className='text-left mt-4 mb-12 text-lg text-blueGray-700 mb-4'>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officia in aut, dolorum
-                  perferendis saepe deleniti dolore fugiat aliquid architecto alias?
-                </p>
-
-                <Link
-                  className='text-left  bg-blue-900 text-white rounded px-6 py-4 text-sm'
-                  to='/login'
-                >
-                  <button
-                    className='bg-transparent uppercase outline-none focus:outline-none ease-linear transition-all duration-150'
-                    type='button'
-                  >
-                    <span>
-                      Test yechishni boshlash &nbsp;
-                      <ArrowRightAltIcon fontSize='small' />
-                    </span>
-                  </button>
-                </Link>
-              </div>
+      <div className='mt-4 relative bg-white flex min-w-0 break-words w-full mb-6 rounded-lg border-0'>
+        <div className='container w-full relative flex mx-auto items-center p-3 px-6'>
+          <div className='md:w-4/12'>
+            <img src={coverSm} alt='2' />
+          </div>
+          <div className='md:w-8/12'>
+            <div className='flex flex-col mx-4'>
+              <label className='text-base mb-3'>Ism</label>
+              <input type='text' className='text-sm text-blueGray-500' defaultValue='Akbarjon' />
             </div>
 
-            <div className='lg:w-6/12 px-4 py-6 ml-auto mr-auto text-center'>
-              <img
-                style={{ width: '708px' }}
-                alt='...'
-                className='rounded-xl ml-auto mr-auto shadow-lg right'
-                src={hand}
-                // src='https://images.unsplash.com/photo-1555212697-194d092e3b8f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80'
-                // src="https://images.unsplash.com/photo-1555212697-194d092e3b8f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
-              />
+            <hr className='bg-lightBlue-400' />
+
+            <div className='flex flex-col mt-12 mx-4'>
+              <label className='text-base mb-3'>Familiya</label>
+              <input type='text' className='text-sm text-blueGray-500' value='Qoxorjonov' />
             </div>
+
+            <hr />
+
+            <div className='flex flex-col mt-12 mx-4'>
+              <label className='text-base mb-3'>Telefon raqam</label>
+              <input type='text' className='text-sm text-blueGray-500' value='+998903093028' />
+            </div>
+
+            <hr />
           </div>
         </div>
       </div>
-
-      {/* section tests */}
-
-      <section id='tests' className='relative py-20 bg-white'>
-        <div className='container mx-auto px-4'>
-          <div className='items-center flex flex-wrap'>
-            <Tests />
-          </div>
-        </div>
-      </section>
-
-      {/* section carts */}
-
-      <section id='about-us' className='relative py-20 bg-white'>
-        <div className='container mx-auto px-4'>
-          <div className='items-center flex flex-wrap'>
-            <CardWhy />
-          </div>
-        </div>
-      </section>
-
-      <section id='for-teachers' className='relative py-20 bg-white'>
-        <div className='container mx-auto px-4'>
-          <div className='items-center flex flex-wrap'>
-            <CardForTeachers />
-          </div>
-        </div>
-      </section>
-
-      <FooterHome />
     </main>
   );
 }
