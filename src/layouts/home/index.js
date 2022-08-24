@@ -65,8 +65,6 @@ function Admin() {
         <Route path='/buyTest/:id' exact element={<Payment />} />
         <Route path='/quiz/:id' exact element={<Quiz />} />
       </Routes>
-
-      <FooterHome />
     </ThemeProvider>
   );
 }
