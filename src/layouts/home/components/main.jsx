@@ -32,7 +32,7 @@ export default function Home() {
 
                 <Link
                   className='text-left  bg-blue-900 text-white rounded px-6 py-4 text-sm'
-                  to='/login'
+                  to='/myTests'
                 >
                   <button
                     className='bg-transparent uppercase outline-none focus:outline-none ease-linear transition-all duration-150'
