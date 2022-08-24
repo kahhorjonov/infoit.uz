@@ -1,5 +1,5 @@
 import QuizPagination from 'components/QuizPagination/QuizPagination';
-import CardQuiz from '../Cards/CardQuiz';
+import CardQuiz from '../Cards/CardQuiz/CardQuiz';
 
 export default function Quiz() {
   return (
