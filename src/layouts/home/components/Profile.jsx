@@ -10,7 +10,7 @@ import CardForTeachers from '../Cards/CardForTeachers';
 import FooterHome from './FooterHome';
 import Tests from './Tests';
 
-export default function Home() {
+export default function Profile() {
   return (
     <main>
       <div
@@ -32,7 +32,7 @@ export default function Home() {
 
                 <Link
                   className='text-left  bg-blue-900 text-white rounded px-6 py-4 text-sm'
-                  to='/myTests'
+                  to='/login'
                 >
                   <button
                     className='bg-transparent uppercase outline-none focus:outline-none ease-linear transition-all duration-150'

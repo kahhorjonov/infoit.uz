@@ -20,9 +20,6 @@ export default function HomeNavbar() {
   const path =
     decodedToken() && decodedToken().roles && decodedToken().roles.name.slice(5).toLowerCase();
 
-  console.log(path);
-  console.log(decodedToken());
-
   return (
     <nav className='top-0 fixed z-50 w-full flex flex-wrap items-center justify-between px-4 py-3 navbar-expand-lg bg-white shadow'>
       <div className='container px-4 mx-auto flex flex-wrap items-center justify-between'>
@@ -134,7 +131,7 @@ export default function HomeNavbar() {
                       <PersonIcon /> Profil
                     </Link>
                     <hr />
-                    <Link to='/' className='rounded-lg'>
+                    <Link to='/myTests' className='rounded-lg'>
                       <QuizIcon /> Testlarim
                     </Link>
                     <hr />
