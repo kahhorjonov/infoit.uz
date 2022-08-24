@@ -5,9 +5,19 @@ import { Link } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
 
+// Services
+import { decodedToken } from 'services/authService';
+
 export default function HomeNavbar() {
   const [navbarOpen, setNavbarOpen] = useState(false);
-  const { pathname } = window.location;
+  const { hash: pathname } = window.location;
+  const { pathname: main } = window.location;
+
+  const path =
+    decodedToken() && decodedToken().roles && decodedToken().roles.name.slice(5).toLowerCase();
+
+  console.log(path);
+  console.log(decodedToken());
 
   return (
     <nav className='top-0 fixed z-50 w-full flex flex-wrap items-center justify-between px-4 py-3 navbar-expand-lg bg-white shadow'>
@@ -39,38 +49,38 @@ export default function HomeNavbar() {
         >
           <ul className='flex flex-col lg:flex-row list-none lg:ml-auto'>
             <li className='flex items-center'>
-              <Link to='/' className='px-3 flex items-center text-xs uppercase font-bold'>
+              <a href='#main' className='px-3 flex items-center text-xs uppercase font-bold'>
                 <span
                   className={
-                    pathname === '/'
+                    pathname === '#main' && main === '/'
                       ? 'lg:hover:underline underline text-blueGray-700text-blueGray-700'
                       : 'text-blueGray-200'
                   }
                 >
                   Asosiy
                 </span>
-              </Link>
+              </a>
             </li>
             <li className='flex items-center'>
-              <Link to='/about-us' className='px-3 flex items-center text-xs uppercase font-bold'>
+              <a href='#about-us' className='px-3 flex items-center text-xs uppercase font-bold'>
                 <span
                   className={
-                    pathname === '/about-us'
+                    pathname === '#about-us'
                       ? 'lg:hover:underline underline text-blueGray-700text-blueGray-700'
                       : 'text-blueGray-200'
                   }
                 >
                   Biz haqimizda
                 </span>
-              </Link>
+              </a>
             </li>
 
             <li className='flex items-center'>
-              <Link to='/tests' className='px-3 flex items-center text-xs uppercase font-bold'>
+              <a href='#tests' className='px-3 flex items-center text-xs uppercase font-bold'>
                 <span className='lg:hover:underline'>
                   <span
                     className={
-                      pathname === '/tests'
+                      pathname === '#tests'
                         ? 'lg:hover:underline underline text-blueGray-700text-blueGray-700'
                         : 'text-blueGray-200'
                     }
@@ -78,36 +88,46 @@ export default function HomeNavbar() {
                     Testlar
                   </span>
                 </span>
-              </Link>
+              </a>
             </li>
 
             <li className='flex items-center'>
-              <Link
-                to='/for-teachers'
+              <a
+                href='#for-teachers'
                 className='px-3 flex items-center text-xs uppercase font-bold mr-4'
               >
                 <span
                   className={
-                    pathname === '/for-teachers'
+                    pathname === '#for-teachers'
                       ? 'lg:hover:underline underline text-blueGray-700text-blueGray-700'
                       : 'text-blueGray-200'
                   }
                 >
                   O`qituvchilar uchun
                 </span>
-              </Link>
+              </a>
             </li>
 
-            <li className='flex items-center'>
-              <Link className='rounded border-figma border py-1 px-2 text-sm mr-4' to='/login'>
-                <button
-                  className='bg-transparent font-semibold uppercase outline-none focus:outline-none ease-linear transition-all duration-150'
-                  type='button'
-                >
-                  <MeetingRoomIcon fontSize='small' /> Kirish
-                </button>
-              </Link>
-            </li>
+            {path !== 'user' ? (
+              <li className='flex items-center'>
+                <Link className='rounded border-figma border py-1 px-2 text-sm mr-4' to='/login'>
+                  <button
+                    className='bg-transparent font-semibold uppercase outline-none focus:outline-none ease-linear transition-all duration-150'
+                    type='button'
+                  >
+                    <MeetingRoomIcon fontSize='small' /> Kirish
+                  </button>
+                </Link>
+              </li>
+            ) : (
+              <li className='flex items-center'>
+                <select name='' id=''>
+                  <option className='text-xs'>Profil</option>
+                  <option className='text-xs'>Testlarim</option>
+                  <option className='text-xs'>Chiqish</option>
+                </select>
+              </li>
+            )}
           </ul>
         </div>
       </div>

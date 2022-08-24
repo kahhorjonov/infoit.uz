@@ -13,7 +13,10 @@ import Tests from './Tests';
 export default function Home() {
   return (
     <main>
-      <div className='relative pt-16 pb-32 flex content-center items-center justify-center bg-white min-h-screen-75'>
+      <div
+        id='main'
+        className='relative pt-16 pb-32 flex content-center items-center justify-center bg-white min-h-screen-75'
+      >
         <div className='container relative mx-auto'>
           <div className='items-center flex flex-wrap'>
             <div className='w-full lg:w-6/12 px-4 ml-auto mr-auto'>
@@ -60,7 +63,7 @@ export default function Home() {
 
       {/* section tests */}
 
-      <section className='relative py-20 bg-white'>
+      <section id='tests' className='relative py-20 bg-white'>
         <div className='container mx-auto px-4'>
           <div className='items-center flex flex-wrap'>
             <Tests />
@@ -70,7 +73,7 @@ export default function Home() {
 
       {/* section carts */}
 
-      <section className='relative py-20 bg-white'>
+      <section id='about-us' className='relative py-20 bg-white'>
         <div className='container mx-auto px-4'>
           <div className='items-center flex flex-wrap'>
             <CardWhy />
@@ -78,7 +81,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className='relative py-20 bg-white'>
+      <section id='for-teachers' className='relative py-20 bg-white'>
         <div className='container mx-auto px-4'>
           <div className='items-center flex flex-wrap'>
             <CardForTeachers />
