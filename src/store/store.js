@@ -4,6 +4,7 @@ import thunk from 'redux-thunk';
 import {
   quizReducer,
   usersReducer,
+  userTestsReducer,
   questionsReducer,
   categoriesReducer,
   planningTestReducer,
@@ -13,6 +14,7 @@ const reducers = combineReducers({
   quiz: quizReducer,
   users: usersReducer,
   category: categoriesReducer,
+  userTests: userTestsReducer,
   questionsData: questionsReducer,
   planningTests: planningTestReducer,
 });

@@ -11,6 +11,8 @@ import {
   getQuizSuccess,
   getUsersProcess,
   getUsersSuccess,
+  getUserTestsProccess,
+  getUserTestsSuccess,
   setCurrentPlanningTestData,
   setUserAnswer,
 } from './actions/actionCreaters';
@@ -250,3 +252,17 @@ export const sendAnswer =
       toast.error(e);
     }
   };
+
+export const getUserTests = isSolved => async dispatch => {
+  try {
+    dispatch(getUserTestsProccess());
+    const response = await axiosPublic.get(`api/test/v1/user-tests?isSolvedTests=${isSolved}`, {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+    });
+    dispatch(getUserTestsSuccess({ tests: response.data.objectKoinot, isSolved }));
+  } catch (e) {
+    toast.error(e);
+  }
+};
