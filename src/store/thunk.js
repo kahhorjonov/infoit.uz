@@ -7,8 +7,11 @@ import {
   getPlanningTestSuccess,
   getQuestionsProccess,
   getQuestionsSuccess,
+  getQuizProccess,
+  getQuizSuccess,
   getUsersProcess,
   setCurrentPlanningTestData,
+  setUserAnswer,
 } from './actions/actionCreaters';
 
 const access_token = localStorage.getItem('token');
@@ -197,3 +200,39 @@ export const confirmationPayment = async data => {
     toast.error(e);
   }
 };
+
+export const getQuizs = testId => async dispatch => {
+  try {
+    dispatch(getQuizProccess());
+    const response = await axiosPublic.get(
+      `api/question/v1/get-with-all-question?testId=${testId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      },
+    );
+    dispatch(getQuizSuccess(response.data.objectKoinot));
+  } catch (e) {
+    toast.error(e);
+  }
+};
+
+export const sendAnswer =
+  ({ questionId, questionChoiceId }) =>
+  async dispatch => {
+    try {
+      // const response = await axiosPublic.post(
+      //   `api/question/v1/check-single-question?deviceType=WEB&questionChoiceId=${questionChoiceId}&questionId=${questionId}`,
+      //   {
+      //     headers: {
+      //       Authorization: `Bearer ${access_token}`,
+      //     },
+      //   },
+      // );
+      // console.log(response.data);
+      dispatch(setUserAnswer({ questionId, questionChoiceId }));
+    } catch (e) {
+      toast.error(e);
+    }
+  };

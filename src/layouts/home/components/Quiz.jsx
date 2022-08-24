@@ -1,7 +1,16 @@
 import QuizPagination from 'components/QuizPagination/QuizPagination';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { getQuizs } from 'store/thunk';
 import CardQuiz from '../Cards/CardQuiz/CardQuiz';
 
 export default function Quiz() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getQuizs(2051));
+  }, [dispatch]);
+
   return (
     <div className='relative mt-32'>
       <div className='container mx-auto'>

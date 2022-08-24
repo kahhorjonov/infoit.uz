@@ -1,59 +1,52 @@
-import img from 'assets/images/bg-profile.jpeg';
+import { useDispatch, useSelector } from 'react-redux';
+import { sendAnswer } from 'store/thunk';
+import { Icon } from '@mui/material';
 
 import Styles from './CardQuiz.module.scss';
 
 function CardQuiz() {
+  const dispatch = useDispatch();
+
+  const {
+    quiz: { currentQuiz, pageNumber, userAnswers },
+  } = useSelector(store => store);
+
+  const handleChooseChoice = (questionId, questionChoiceId) => {
+    // console.log({ questionId, questionChoiceId });
+    dispatch(sendAnswer({ questionId, questionChoiceId }));
+  };
+
   return (
     <div className={Styles.cardQuiz}>
-      <p>Savol 1</p>
+      <p>Savol {pageNumber}</p>
       <div className={Styles.question}>
         <div>
-          <p>Savolni o‘qib, variantlardan birini tanlang</p>
-          <span>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit
-            interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per
-            conubia nostra, per inceptos himenaeos. Curabitur tempus urna at turpis condimentum
-            lobortis. Ut commodo efficitur neque.
-          </span>
+          {/* <p>Savolni o‘qib, variantlardan birini tanlang</p> */}
+          <span>{currentQuiz?.name}</span>
         </div>
         <div className={Styles.imageCont}>
-          <img
-            src={img}
-            // src='https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Eiffel_Tower_Vertical.JPG/401px-Eiffel_Tower_Vertical.JPG?20080622213711'
-            alt=''
-          />
+          <img src={currentQuiz?.questionPhoto?.link} alt={currentQuiz?.questionPhoto?.fileId} />
         </div>
       </div>
 
       <div className={Styles.choiceContainer}>
-        <div className={`${Styles.choice} ${Styles.active}`}>
-          <div className={Styles.choiceVariant}>A</div>
-          <span className={Styles.choiceText}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit
-            interdum, ac aliquet odio mattis.
-          </span>
-        </div>
-        <div className={`${Styles.choice}`}>
-          <div className={Styles.choiceVariant}>B</div>
-          <span className={Styles.choiceText}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit
-            interdum, ac aliquet odio mattis.
-          </span>
-        </div>
-        <div className={`${Styles.choice}`}>
-          <div className={Styles.choiceVariant}>C</div>
-          <span className={Styles.choiceText}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit
-            interdum, ac aliquet odio mattis.
-          </span>
-        </div>
-        <div className={`${Styles.choice}`}>
-          <div className={Styles.choiceVariant}>D</div>
-          <span className={Styles.choiceText}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit
-            interdum, ac aliquet odio mattis.
-          </span>
-        </div>
+        {currentQuiz?.choices?.map(choice => (
+          <div
+            key={choice.id}
+            className={`${Styles.choice} ${
+              userAnswers[currentQuiz?.id]?.questionChoiceId === choice.id ? Styles.active : ''
+            } `}
+            onClick={() => handleChooseChoice(currentQuiz?.id, choice?.id)}
+          >
+            <div className={Styles.choiceVariant}>
+              <Icon>check</Icon>
+            </div>
+            <span className={Styles.choiceText}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et
+              velit interdum, ac aliquet odio mattis.
+            </span>
+          </div>
+        ))}
       </div>
     </div>
   );

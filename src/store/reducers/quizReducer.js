@@ -1,16 +1,50 @@
+import {
+  GET_QUIZ_PROCCESS,
+  GET_QUIZ_SUCCESS,
+  SET_QUIZ_PAGINATION,
+  SET_USER_ANSWER,
+} from 'store/actions/actionTypes';
+
 const initialState = {
   quizs: [],
-  count: 20,
-  pagination: {
-    pageNumber: 1,
-    pageSize: 1,
-  },
+  count: 1,
+  pageNumber: 1,
+  currentQuiz: {},
+  userAnswers: {},
+};
+
+const handleAddAnswer = (state, payload) => {
+  // console.log(payload);
+  const currentAnswer = state?.userAnswers[payload.questionId];
+  const userAnswers = {
+    ...state.userAnswers,
+    [payload.questionId]: currentAnswer
+      ? { ...currentAnswer, questionChoiceId: payload.questionChoiceId }
+      : payload,
+  };
+
+  return { ...state, userAnswers };
 };
 
 export const quizReducer = (state = initialState, action) => {
   switch (action.type) {
-    case '':
-      return { ...state };
+    case GET_QUIZ_PROCCESS:
+      return { ...state, isLoading: true };
+
+    case GET_QUIZ_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        quizs: action.payload,
+        currentQuiz: action.payload[0],
+        count: action.payload.length,
+      };
+
+    case SET_QUIZ_PAGINATION:
+      return { ...state, pageNumber: action.payload, currentQuiz: state.quizs[action.payload] };
+
+    case SET_USER_ANSWER:
+      return handleAddAnswer(state, action.payload);
 
     default:
       return state;
