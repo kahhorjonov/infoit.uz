@@ -36,7 +36,7 @@ function Basic() {
   const path =
     decodedToken() && decodedToken().roles && decodedToken().roles.name.slice(5).toLowerCase();
 
-  if (path) {
+  if (path==="admin") {
     window.location.replace(`/${path}`);
   } else {
     return (

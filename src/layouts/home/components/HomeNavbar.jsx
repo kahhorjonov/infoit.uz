@@ -5,10 +5,19 @@ import { Link } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
 
+// Services
+import { decodedToken } from 'services/authService';
+
 export default function HomeNavbar() {
   const [navbarOpen, setNavbarOpen] = useState(false);
   const { hash: pathname } = window.location;
   const { pathname: main } = window.location;
+
+  const path =
+    decodedToken() && decodedToken().roles && decodedToken().roles.name.slice(5).toLowerCase();
+
+  console.log(path);
+  console.log(decodedToken());
 
   return (
     <nav className='top-0 fixed z-50 w-full flex flex-wrap items-center justify-between px-4 py-3 navbar-expand-lg bg-white shadow'>
@@ -99,16 +108,26 @@ export default function HomeNavbar() {
               </a>
             </li>
 
-            <li className='flex items-center'>
-              <Link className='rounded border-figma border py-1 px-2 text-sm mr-4' to='/login'>
-                <button
-                  className='bg-transparent font-semibold uppercase outline-none focus:outline-none ease-linear transition-all duration-150'
-                  type='button'
-                >
-                  <MeetingRoomIcon fontSize='small' /> Kirish
-                </button>
-              </Link>
-            </li>
+            {path !== 'user' ? (
+              <li className='flex items-center'>
+                <Link className='rounded border-figma border py-1 px-2 text-sm mr-4' to='/login'>
+                  <button
+                    className='bg-transparent font-semibold uppercase outline-none focus:outline-none ease-linear transition-all duration-150'
+                    type='button'
+                  >
+                    <MeetingRoomIcon fontSize='small' /> Kirish
+                  </button>
+                </Link>
+              </li>
+            ) : (
+              <li className='flex items-center'>
+                <select name='' id=''>
+                  <option className='text-xs'>Profil</option>
+                  <option className='text-xs'>Testlarim</option>
+                  <option className='text-xs'>Chiqish</option>
+                </select>
+              </li>
+            )}
           </ul>
         </div>
       </div>
