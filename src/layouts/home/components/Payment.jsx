@@ -7,7 +7,7 @@ import coverSm from 'assets/homePage/image 3081.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPlanningTestById } from 'store/thunk';
 
-// components
+// component
 import CardPayment from '../Cards/CardPayment';
 
 export default function Payment() {
