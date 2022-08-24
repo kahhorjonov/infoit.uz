@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserTests } from 'store/thunk';
 
+import cover from 'assets/homePage/Testcover.png';
+
 import { MenuItem, Select } from '@mui/material';
 import Spiner from 'components/Loader/Spiner';
-
-// image
-import coverSm from 'assets/homePage/image 3081.png';
 
 const seconToMinut = second => second / 1000 / 60;
 
@@ -15,6 +15,12 @@ export default function MyTests() {
   const { userTests } = useSelector(store => store);
 
   const [solve, setSolve] = useState('false');
+
+  const navigate = useNavigate();
+
+  const startTest = id => {
+    navigate(`/quiz/${id}`);
+  };
 
   useEffect(() => {
     dispatch(getUserTests(solve));
@@ -46,9 +52,18 @@ export default function MyTests() {
             <div className='items-center py-0 shadow-lg py-2'>
               <div className='container relative mx-auto flex flex-wrap justify-between items-center p-3'>
                 <div className='flex'>
-                  <img src={test?.photo?.link} alt={test?.photo?.id || '...'} />
+                  <img
+                    style={{ maxHeight: '110px' }}
+                    src={test?.photo?.link || cover}
+                    alt={test?.photo?.id || '...'}
+                  />
                   <div className='mx-4'>
-                    <h2 className='text-2xl mb-2'>{test?.name}</h2>
+                    <h2
+                      onClick={() => startTest(test?.id)}
+                      className='text-2xl mb-4 cursor-pointer hover:underline'
+                    >
+                      {test?.name}
+                    </h2>
                     <p className='text-blueGray-400 text-xs mb-2'>
                       Savollar soni {test?.questionsCount} ta
                     </p>
@@ -58,7 +73,7 @@ export default function MyTests() {
                   </div>
                 </div>
 
-                <div style={{ width: '70px' }} className='flex flex-col mx-4'>
+                <div style={{ width: '180px' }} className='flex flex-col mx-4 text-right'>
                   <h2 className='text-base mb-2'>Status</h2>
                   <p
                     className={`${
@@ -66,6 +81,12 @@ export default function MyTests() {
                     } text-sm mb-2`}
                   >
                     {solve === 'false' ? 'Sotib olingan' : 'Yechib bo`lingan'}
+                  </p>
+                  <p
+                    onClick={() => navigate(`/results/${test?.id}`)}
+                    className='cursor-pointer hover:underline text-blueGray-500 text-xs mb-2'
+                  >
+                    Boshqalarni natijasini ko`rish
                   </p>
                 </div>
               </div>
