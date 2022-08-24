@@ -24,6 +24,8 @@ import Payment from './components/Payment';
 import Quiz from './components/Quiz';
 import MyTests from './components/MyTests';
 import Profile from './components/Profile';
+import OthersResult from './components/OthersResult';
+import FooterHome from './components/FooterHome';
 
 function Admin() {
   const [controller, dispatch] = useMaterialUIController();
@@ -57,11 +59,14 @@ function Admin() {
       <Routes>
         <Route path='/' exact element={<Main />} />
         <Route path='/profile' exact element={<Profile />} />
+        <Route path='/results' exact element={<OthersResult />} />
         <Route path='/myTests' exact element={<MyTests />} />
         <Route path='/test/:id' exact element={<TestInfo />} />
         <Route path='/buyTest/:id' exact element={<Payment />} />
         <Route path='/quiz/:id' exact element={<Quiz />} />
       </Routes>
+
+      <FooterHome />
     </ThemeProvider>
   );
 }
