@@ -1,5 +1,5 @@
 import img from 'assets/images/bg-profile.jpeg';
-import teacher from 'assets/homePage/teacher.png';
+
 import Styles from './CardQuiz.module.scss';
 
 function CardQuiz() {
@@ -26,8 +26,29 @@ function CardQuiz() {
       </div>
 
       <div className={Styles.choiceContainer}>
-        <div className={Styles.choice}>
-          <span className={Styles.choiceVariant}>A</span>
+        <div className={`${Styles.choice} ${Styles.active}`}>
+          <div className={Styles.choiceVariant}>A</div>
+          <span className={Styles.choiceText}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit
+            interdum, ac aliquet odio mattis.
+          </span>
+        </div>
+        <div className={`${Styles.choice}`}>
+          <div className={Styles.choiceVariant}>B</div>
+          <span className={Styles.choiceText}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit
+            interdum, ac aliquet odio mattis.
+          </span>
+        </div>
+        <div className={`${Styles.choice}`}>
+          <div className={Styles.choiceVariant}>C</div>
+          <span className={Styles.choiceText}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit
+            interdum, ac aliquet odio mattis.
+          </span>
+        </div>
+        <div className={`${Styles.choice}`}>
+          <div className={Styles.choiceVariant}>D</div>
           <span className={Styles.choiceText}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit
             interdum, ac aliquet odio mattis.

@@ -15,7 +15,7 @@ export default function Quiz() {
       <hr className='mt-6 hr-3' />
 
       <div className='container mx-auto mt-20 mb-24'>
-        <div className='flex gap-5'>
+        <div className='flex'>
           <QuizPagination />
           <CardQuiz />
         </div>

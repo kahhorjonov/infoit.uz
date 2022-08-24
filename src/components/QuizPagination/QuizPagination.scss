@@ -1,4 +1,4 @@
-.MuiBox-root {
+.quizPagination {
   background: #fff;
   width: max-content;
   padding: 16px;
@@ -13,41 +13,33 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        button {
+
+        .pageItem {
           width: 34px;
           height: 34px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           position: relative;
-          background: #27a55d;
+          background: #8d96b2;
           color: #fff;
+          border-radius: 50px;
           z-index: 1;
-
-          &:hover {
-            background-color: #27a55d;
-            &::before {
-              z-index: -1;
-              background-color: #27a55e7b;
-            }
-          }
 
           &::before {
             content: '';
-            z-index: -1;
-            position: absolute;
             width: 50px;
             height: 50px;
+            position: absolute;
             border-radius: 50px;
             box-shadow: 0px 2px 2px rgba(82, 82, 82, 0.25);
           }
         }
-        .Mui-selected {
-          background-color: #27a55d;
-          &:hover {
-            background-color: #10542d;
-          }
-          &::before {
-            z-index: -1;
-            background-color: #27a55e7b;
-          }
+        .active {
+          background-color: #649dff;
+        }
+        .choosed {
+          background-color: #ffc000;
         }
       }
     }
