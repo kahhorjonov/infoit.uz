@@ -41,7 +41,6 @@ export function setToken(jwt) {
   if (jwt && parsedJwt.exp * 1000 > Date.now()) {
     localStorage.setItem('token', jwt);
     if (path === 'admin') return window.location.replace(`/${path}`);
-    if (path === 'user') return window.location.replace('/');
   }
   return null;
 }
