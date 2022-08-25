@@ -19,6 +19,8 @@ import {
   GET_USER_TESTS_PROCCESS,
   GET_USER_TESTS_SUCCESS,
   SET_USER_CURRENT_TEST_INFO,
+  GET_MY_DATAS_PROCESS,
+  GET_MY_DATAS_SUCCESS,
 } from './actionTypes';
 
 export const getCategoriesProccess = () => ({
@@ -110,8 +112,16 @@ export const getUserTestsSuccess = tests => ({
   payload: tests,
 });
 
-
 export const setUserCurrentTestInfo = testInfo => ({
   type: SET_USER_CURRENT_TEST_INFO,
   payload: testInfo,
+});
+
+export const getMyDatasProcess = () => ({
+  type: GET_MY_DATAS_PROCESS,
+});
+
+export const getMyDatasSuccess = profileData => ({
+  type: GET_MY_DATAS_SUCCESS,
+  payload: profileData,
 });
