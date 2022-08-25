@@ -306,7 +306,7 @@ button {
 
 /**
  * Work around a Firefox/IE bug where the transparent `button` background
- * results in a loss of the default `button` focus styles.
+ * results in a loss of the default `button` :  styles.
  */
 
 fieldset {
@@ -412,6 +412,11 @@ img {
 
 textarea {
   resize: vertical;
+}
+
+input:disabled {
+  --tw-bg-opacity: 1;
+  background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
 }
 
 input::-webkit-input-placeholder,
@@ -1886,6 +1891,10 @@ video {
 
 .opacity-80 {
   opacity: 0.8;
+}
+
+.outlined {
+  outline: #4285f4 !important;
 }
 
 .outline-none {

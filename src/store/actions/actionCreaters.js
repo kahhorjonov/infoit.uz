@@ -18,6 +18,8 @@ import {
   SET_CURRENT_USER,
   GET_USER_TESTS_PROCCESS,
   GET_USER_TESTS_SUCCESS,
+  GET_MY_DATAS_PROCESS,
+  GET_MY_DATAS_SUCCESS,
 } from './actionTypes';
 
 export const getCategoriesProccess = () => ({
@@ -107,4 +109,13 @@ export const getUserTestsProccess = () => ({
 export const getUserTestsSuccess = tests => ({
   type: GET_USER_TESTS_SUCCESS,
   payload: tests,
+});
+
+export const getMyDatasProcess = () => ({
+  type: GET_MY_DATAS_PROCESS,
+});
+
+export const getMyDatasSuccess = profileData => ({
+  type: GET_MY_DATAS_SUCCESS,
+  payload: profileData,
 });
