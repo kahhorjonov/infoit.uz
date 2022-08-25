@@ -11,7 +11,13 @@ function UserForm() {
   const {
     users: { currentUser, pagination },
   } = useSelector(store => store);
-  const [userData, setUserData] = useState({ ...currentUser });
+  const [userData, setUserData] = useState({
+    id: currentUser?.id,
+    balance: currentUser?.balance,
+    firstName: currentUser?.firstName,
+    lastName: currentUser?.lastName,
+    roles: currentUser?.roles,
+  });
   const [edit, setEdit] = useState(true);
 
   const handleChangeUserData = (name, value) => {

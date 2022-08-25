@@ -1,6 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { sendAnswer } from 'store/thunk';
 import { Icon } from '@mui/material';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 import Styles from './CardQuiz.module.scss';
 
@@ -8,7 +10,7 @@ function CardQuiz() {
   const dispatch = useDispatch();
 
   const {
-    quiz: { currentQuiz, pageNumber, userAnswers },
+    quiz: { currentQuiz, pageNumber, count, userAnswers },
   } = useSelector(store => store);
 
   const handleChooseChoice = (questionId, questionChoiceId) => {
@@ -47,6 +49,17 @@ function CardQuiz() {
             </span>
           </div>
         ))}
+      </div>
+
+      <div className='flex'>
+        <div className='flex items-center'>
+          <ArrowBackIosIcon />
+          <h1 className='mx-2'>
+            {pageNumber} / {count}
+          </h1>
+          <ArrowForwardIosIcon />
+        </div>
+        
       </div>
     </div>
   );
