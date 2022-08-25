@@ -41,6 +41,7 @@ import Notifications from 'layouts/notifications';
 import Profile from 'layouts/profile';
 import Login from 'layouts/authentication/sign-in';
 import Register from 'layouts/authentication/sign-up';
+import Logout from 'layouts/admin/Logout';
 
 function Admin() {
   const [controller, dispatch] = useMaterialUIController();
@@ -137,6 +138,7 @@ function Admin() {
         <Route path='/profile' exact element={<Profile />} />
         <Route path='/login' exact element={<Login />} />
         <Route path='/register' exact element={<Register />} />
+        <Route path='/logout' exact element={<Logout />} />
       </Routes>
     </ThemeProvider>
   );

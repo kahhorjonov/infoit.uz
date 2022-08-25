@@ -5,11 +5,12 @@ import Billing from 'layouts/billing';
 import Notifications from 'layouts/notifications';
 import Profile from 'layouts/profile';
 // import SignIn from 'layouts/authentication/sign-in';
-// import SignUp from 'layouts/authentication/sign-up';
+import SignUp from 'layouts/authentication/sign-up';
 import Categories from 'layouts/categories/Categories';
 import CreateTest from 'layouts/tests/CreateTest';
 import CreateQuestion from 'layouts/createQuestion/CreateQuestion';
 import Users from 'layouts/users/Users';
+import Logout from 'layouts/admin/Logout';
 
 // @mui icons
 import Icon from '@mui/material/Icon';
@@ -114,6 +115,15 @@ const routes = [
   //   user: 'admin',
   //   component: <SignUp />,
   // },
+  {
+    type: 'collapse',
+    name: 'Logout',
+    key: 'logout',
+    icon: <Icon fontSize='small'>logout</Icon>,
+    route: '/admin/logout',
+    user: 'admin',
+    component: <Logout />,
+  },
 ];
 
 export default routes;
