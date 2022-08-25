@@ -22,22 +22,26 @@ function PageItem({ page, selected, onClick, choosed }) {
 PageItem.propTypes = {
   page: PropTypes.number,
   selected: PropTypes.bool,
-  choosed: PropTypes.string,
+  choosed: PropTypes.bool,
   onClick: PropTypes.func,
 };
 
 function QuizPagination() {
   const dispatch = useDispatch();
-  const { quiz } = useSelector(store => store);
+  const {
+    quiz: { pageNumber, count, quizs, userAnswers },
+  } = useSelector(store => store);
 
-  const handleChangePageNumber = pageNumber => dispatch(setQuizPageNumber(pageNumber));
+  const handleChangePageNumber = pageNum => dispatch(setQuizPageNumber(pageNum));
 
   return (
     <Box className='quizPagination'>
       <Pagination
-        renderItem={item => <PageItem {...item} choosed='' />}
-        page={quiz?.pageNumber}
-        count={quiz?.count}
+        renderItem={item => (
+          <PageItem {...item} choosed={userAnswers[quizs[item?.page]?.id] ? true : false} />
+        )}
+        page={pageNumber}
+        count={count}
         boundaryCount={7}
         siblingCount={1}
         hidePrevButton

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Icon, MenuItem, Select } from '@mui/material';
 import MDBox from 'components/MDBox';
 import MDInput from 'components/MDInput';
@@ -7,16 +7,11 @@ import MDTypography from 'components/MDTypography';
 import { addUser } from 'store/thunk';
 
 function UserForm() {
+  const dispatch = useDispatch();
   const {
-    users: { currentUser },
+    users: { currentUser, pagination },
   } = useSelector(store => store);
-  const [userData, setUserData] = useState({
-    id: currentUser?.id,
-    firstName: currentUser?.firstName,
-    lastName: currentUser?.lastName,
-    roles: currentUser?.roles,
-    balance: currentUser?.balance,
-  });
+  const [userData, setUserData] = useState({ ...currentUser });
   const [edit, setEdit] = useState(true);
 
   const handleChangeUserData = (name, value) => {
@@ -25,7 +20,7 @@ function UserForm() {
 
   const handleSave = user => {
     console.log(user);
-    addUser(user);
+    dispatch(addUser({ user, pagination, role: currentUser.role }));
     setEdit(true);
   };
 
