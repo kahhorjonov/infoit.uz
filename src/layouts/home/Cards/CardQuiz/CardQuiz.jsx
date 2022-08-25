@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { sendAnswer } from 'store/thunk';
+import MDButton from 'components/MDButton';
 import { Icon } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -14,7 +15,6 @@ function CardQuiz() {
   } = useSelector(store => store);
 
   const handleChooseChoice = (questionId, questionChoiceId) => {
-    // console.log({ questionId, questionChoiceId });
     dispatch(sendAnswer({ questionId, questionChoiceId }));
   };
 
@@ -59,7 +59,9 @@ function CardQuiz() {
           </h1>
           <ArrowForwardIosIcon />
         </div>
-        
+        <MDButton type='button' variant='contained' color='secondary'>
+          Keyingi test
+        </MDButton>
       </div>
     </div>
   );

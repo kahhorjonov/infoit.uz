@@ -13,6 +13,7 @@ const initialState = {
   pageNumber: 1,
   currentQuiz: {},
   currentTest: {},
+  isLoading: false,
   userAnswers: userAnswersLS || {},
 };
 

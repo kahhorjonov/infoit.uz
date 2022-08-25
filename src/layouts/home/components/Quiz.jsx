@@ -1,9 +1,9 @@
-import { Icon } from '@mui/material';
+import Spiner from 'components/Loader/Spiner';
 import QuizPagination from 'components/QuizPagination/QuizPagination';
 import Timer from 'components/Timer/Timer';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getQuizs } from 'store/thunk';
 
 import CardQuiz from '../Cards/CardQuiz/CardQuiz';
@@ -11,22 +11,21 @@ import CardQuiz from '../Cards/CardQuiz/CardQuiz';
 export default function Quiz() {
   const dispatch = useDispatch();
   const {
-    quiz: { quizs, pageNumber, count },
+    quiz: { isLoading, quizs, pageNumber, count },
   } = useSelector(store => store);
-  const navigate = useNavigate();
   const params = useParams();
   const timeLs = localStorage.getItem('timeMinutes');
 
   const time = new Date();
-  time.setSeconds(time.getSeconds() + 60 * (timeLs > 0 ? timeLs : 10));
+  time.setSeconds(time.getSeconds() + 60 * (timeLs > 0 ? parseInt(timeLs, 10) + 1 : 10));
 
   // useEffect(() => {
-  //   !quizs.length && navigate('/myTests');
-  // }, [quizs, params]);
+  //   quizs.length === 0 && navigate('/myTests');
+  // }, [quizs]);
 
-  // useEffect(() => {
-  //   dispatch(getQuizs(params?.id));
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(getQuizs(params?.id));
+  }, [dispatch]);
 
   return (
     <div className='relative mt-32'>
@@ -42,10 +41,14 @@ export default function Quiz() {
       <hr className='mt-6 hr-3' />
 
       <div className='container mx-auto mt-20 mb-24'>
-        <div className='flex'>
-          <QuizPagination />
-          <CardQuiz />
-        </div>
+        {isLoading ? (
+          <Spiner />
+        ) : (
+          <div className='flex'>
+            <QuizPagination />
+            <CardQuiz />
+          </div>
+        )}
       </div>
     </div>
   );
