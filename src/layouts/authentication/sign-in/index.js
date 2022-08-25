@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 // react-router-dom components
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 // @mui material components
 import Card from '@mui/material/Card';
@@ -26,17 +26,23 @@ function Basic() {
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
 
+  const navigate = useNavigate();
+  const location = useLocation();
+  const redirectPath = location.state?.path || '/';
+
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
 
   const handleLogin = async () => {
     const result = await login(phone, password);
     setToken(result.data.objectKoinot.accessToken);
+
+    navigate(redirectPath, { replace: true });
   };
 
   const path =
     decodedToken() && decodedToken().roles && decodedToken().roles.name.slice(5).toLowerCase();
 
-  if (path==="admin") {
+  if (path === 'admin') {
     window.location.replace(`/${path}`);
   } else {
     return (

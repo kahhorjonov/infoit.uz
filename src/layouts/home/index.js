@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 
+import RequireAuthForUser from 'layouts/authentication/RequireAuthForUser';
+
 // @mui material components
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -25,7 +27,6 @@ import Quiz from './components/Quiz';
 import MyTests from './components/MyTests';
 import Profile from './components/Profile';
 import OthersResult from './components/OthersResult';
-import FooterHome from './components/FooterHome';
 
 function Admin() {
   const [controller, dispatch] = useMaterialUIController();
@@ -58,12 +59,57 @@ function Admin() {
 
       <Routes>
         <Route path='/' exact element={<Main />} />
-        <Route path='/profile' exact element={<Profile />} />
-        <Route path='/results/:id' exact element={<OthersResult />} />
-        <Route path='/myTests' exact element={<MyTests />} />
+        <Route
+          path='/profile'
+          exact
+          element={
+            <RequireAuthForUser>
+              <Profile />
+            </RequireAuthForUser>
+          }
+        />
+        <Route
+          path='/results/:id'
+          exact
+          element={
+            <RequireAuthForUser>
+              <OthersResult />
+            </RequireAuthForUser>
+          }
+        />
+        <Route
+          path='/myTests'
+          exact
+          element={
+            <RequireAuthForUser>
+              <MyTests />
+            </RequireAuthForUser>
+          }
+        />
+        <Route
+          path='/buyTest/:id'
+          exact
+          element={
+            <RequireAuthForUser>
+              <Payment />
+            </RequireAuthForUser>
+          }
+        />
+        <Route
+          path='/quiz/:id'
+          exact
+          element={
+            <RequireAuthForUser>
+              <Quiz />
+            </RequireAuthForUser>
+          }
+        />
+        {/* <Route path='/profile' exact element={<Profile />} /> */}
+        {/* <Route path='/results/:id' exact element={<OthersResult />} /> */}
+        {/* <Route path='/myTests' exact element={<MyTests />} /> */}
         <Route path='/test/:id' exact element={<TestInfo />} />
-        <Route path='/buyTest/:id' exact element={<Payment />} />
-        <Route path='/quiz/:id' exact element={<Quiz />} />
+        {/* <Route path='/buyTest/:id' exact element={<Payment />} /> */}
+        {/* <Route path='/quiz/:id' exact element={<Quiz />} /> */}
       </Routes>
     </ThemeProvider>
   );
