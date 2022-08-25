@@ -5,13 +5,17 @@ import {
   SET_USER_ANSWER,
 } from 'store/actions/actionTypes';
 
+const userAnswersLS = JSON.parse(localStorage.getItem('userAnswers'));
+
 const initialState = {
   quizs: [],
   count: 1,
   pageNumber: 1,
   currentQuiz: {},
-  userAnswers: {},
+  userAnswers: userAnswersLS || {},
 };
+
+console.log(initialState);
 
 const handleAddAnswer = (state, payload) => {
   // console.log(payload);
@@ -22,6 +26,8 @@ const handleAddAnswer = (state, payload) => {
       ? { ...currentAnswer, questionChoiceId: payload.questionChoiceId }
       : payload,
   };
+
+  // localStorage.setItem('userAnswers', JSON.stringify(userAnswers));
 
   return { ...state, userAnswers };
 };
