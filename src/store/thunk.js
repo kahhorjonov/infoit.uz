@@ -3,6 +3,8 @@ import { toast } from 'react-toastify';
 import {
   getCategoriesProccess,
   getCategoriesSuccess,
+  getMyDatasProcess,
+  getMyDatasSuccess,
   getPlanningTestProccess,
   getPlanningTestSuccess,
   getQuestionsProccess,
@@ -269,5 +271,33 @@ export const getUserTests = isSolved => async dispatch => {
     dispatch(getUserTestsSuccess({ tests: response.data.objectKoinot, isSolved }));
   } catch (e) {
     toast.error(e);
+  }
+};
+
+export const getMe = () => async dispatch => {
+  try {
+    dispatch(getMyDatasProcess());
+    const response = await axiosPublic.get('api/auth/v1/me', {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+    });
+
+    dispatch(getMyDatasSuccess(response.data.objectKoinot));
+  } catch (e) {
+    toast.error(e);
+  }
+};
+
+export const updateMe = async data => {
+  try {
+    const response = await axiosPublic.post('api/auth/v1/edit-me', data, {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+    });
+    console.log(response);
+  } catch (error) {
+    toast.error(error);
   }
 };

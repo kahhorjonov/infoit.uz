@@ -18,7 +18,6 @@ import {
   SET_CURRENT_USER,
   GET_USER_TESTS_PROCCESS,
   GET_USER_TESTS_SUCCESS,
-  SET_USER_CURRENT_TEST_INFO,
 } from './actionTypes';
 
 export const getCategoriesProccess = () => ({
@@ -108,9 +107,4 @@ export const getUserTestsProccess = () => ({
 export const getUserTestsSuccess = tests => ({
   type: GET_USER_TESTS_SUCCESS,
   payload: tests,
-});
-
-export const setUserCurrentTestInfo = testInfo => ({
-  type: SET_USER_CURRENT_TEST_INFO,
-  payload: testInfo,
 });
