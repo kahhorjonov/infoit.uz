@@ -12,13 +12,11 @@ const initialState = {
   count: 1,
   pageNumber: 1,
   currentQuiz: {},
+  currentTest: {},
   userAnswers: userAnswersLS || {},
 };
 
-console.log(initialState);
-
 const handleAddAnswer = (state, payload) => {
-  // console.log(payload);
   const currentAnswer = state?.userAnswers[payload.questionId];
   const userAnswers = {
     ...state.userAnswers,
@@ -27,7 +25,7 @@ const handleAddAnswer = (state, payload) => {
       : payload,
   };
 
-  // localStorage.setItem('userAnswers', JSON.stringify(userAnswers));
+  localStorage.setItem('userAnswers', JSON.stringify(userAnswers));
 
   return { ...state, userAnswers };
 };

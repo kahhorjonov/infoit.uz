@@ -1,15 +1,25 @@
 import QuizPagination from 'components/QuizPagination/QuizPagination';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { getQuizs } from 'store/thunk';
 import CardQuiz from '../Cards/CardQuiz/CardQuiz';
 
 export default function Quiz() {
   const dispatch = useDispatch();
+  const {
+    quiz: { quizs },
+  } = useSelector(store => store);
+  const navigate = useNavigate();
+  const params = useParams();
 
-  useEffect(() => {
-    dispatch(getQuizs(2051));
-  }, [dispatch]);
+  // useEffect(() => {
+  //   !quizs.length && navigate('/myTests');
+  // }, [quizs, params]);
+
+  // useEffect(() => {
+  //   dispatch(getQuizs(params?.id));
+  // }, [dispatch]);
 
   return (
     <div className='relative mt-32'>

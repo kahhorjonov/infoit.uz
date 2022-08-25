@@ -1,8 +1,13 @@
-import { GET_USER_TESTS_PROCCESS, GET_USER_TESTS_SUCCESS } from 'store/actions/actionTypes';
+import {
+  GET_USER_TESTS_PROCCESS,
+  GET_USER_TESTS_SUCCESS,
+  SET_USER_CURRENT_TEST_INFO,
+} from 'store/actions/actionTypes';
 
 const initialState = {
   isLoading: false,
   tests: [],
+  currentTest: {},
 };
 
 export const userTestsReducer = (state = initialState, action) => {
@@ -16,6 +21,9 @@ export const userTestsReducer = (state = initialState, action) => {
         isLoading: false,
         tests: action.payload.tests,
       };
+
+    case SET_USER_CURRENT_TEST_INFO:
+      return { ...state, currentTest: action.payload };
 
     default:
       return state;

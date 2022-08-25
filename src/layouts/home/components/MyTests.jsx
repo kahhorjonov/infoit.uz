@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserTests } from 'store/thunk';
+import { getUserTests, getQuizs } from 'store/thunk';
 
 import cover from 'assets/homePage/Testcover.png';
 
 import { MenuItem, Select } from '@mui/material';
 import Spiner from 'components/Loader/Spiner';
+import { setUserCurrentTestInfo } from 'store/actions/actionCreaters';
 
 const seconToMinut = second => second / 1000 / 60;
 
@@ -18,8 +19,11 @@ export default function MyTests() {
 
   const navigate = useNavigate();
 
-  const startTest = id => {
-    navigate(`/quiz/${id}`);
+  const startTest = test => {
+    dispatch(getQuizs(test?.id));
+    // dispatch(setUserCurrentTestInfo(test));
+
+    userTests?.test?.length && navigate(`/quiz/${test?.id}`);
   };
 
   useEffect(() => {
@@ -59,7 +63,7 @@ export default function MyTests() {
                   />
                   <div className='mx-4'>
                     <h2
-                      onClick={() => startTest(test?.id)}
+                      onClick={() => startTest(test)}
                       className='text-2xl mb-4 cursor-pointer hover:underline'
                     >
                       {test?.name}

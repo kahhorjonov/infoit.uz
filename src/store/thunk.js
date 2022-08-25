@@ -234,7 +234,8 @@ export const getQuizs = testId => async dispatch => {
     );
     dispatch(getQuizSuccess(response.data.objectKoinot));
   } catch (e) {
-    toast.error(e);
+    console.log(e?.response?.data?.message);
+    toast.error(e?.response?.data?.message);
   }
 };
 
