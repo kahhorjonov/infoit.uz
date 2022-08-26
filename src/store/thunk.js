@@ -210,14 +210,22 @@ export function sendCardDetails(data) {
   });
 }
 
-export const confirmationPayment = async data => {
+export const confirmationPayment = async code => {
   try {
-    const response = await axiosPublic.post('/api/payment/v1/confirmation', data, {
-      headers: {
-        Authorization: `Bearer ${access_token}`,
+    const response = await axiosPublic.post(
+      `api/payment/v1/confirmation?confirmationCode=${code}`,
+      {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
       },
-    });
+    );
+    console.log(response);
     toast.success(response.data.message);
+    toast.success('Testni `Mening testlarim` bo`limidan topishingiz mumkin');
+    setTimeout(() => {
+      window.location.replace('/');
+    }, 2500);
   } catch (e) {
     toast.error(e);
   }
