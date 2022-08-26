@@ -343,3 +343,12 @@ export const updateMe = async data => {
     toast.error(error);
   }
 };
+
+export const register = async data => {
+  try {
+    const response = await axiosPublic.post('api/auth/v1/register', data);
+    console.log(response);
+  } catch (error) {
+    toast.error(error);
+  }
+};
