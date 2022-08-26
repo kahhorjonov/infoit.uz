@@ -16,18 +16,9 @@ function Timer({ expiryTimestamp }) {
 
   return (
     <div className={Styles.timerContainer}>
-      <div>
-        <h1>{hours}</h1>
-        <span>hour</span>
-      </div>
-      <div>
-        <h1>{minutes}</h1>
-        <span>minut</span>
-      </div>
-      <div>
-        <h1>{seconds}</h1>
-        <span>second</span>
-      </div>
+      {hours ? <h1>{hours} : </h1> : ''}
+      <h1>{minutes}:</h1>
+      <h1> {seconds}</h1>
     </div>
   );
 }

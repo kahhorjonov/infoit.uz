@@ -1,4 +1,5 @@
 import Spiner from 'components/Loader/Spiner';
+import MDButton from 'components/MDButton';
 import QuizPagination from 'components/QuizPagination/QuizPagination';
 import Timer from 'components/Timer/Timer';
 import { useEffect } from 'react';
@@ -12,12 +13,15 @@ export default function Quiz() {
   const dispatch = useDispatch();
   const {
     quiz: { isLoading, quizs, pageNumber, count },
+    userTests: { currentTest },
   } = useSelector(store => store);
   const params = useParams();
   const timeLs = localStorage.getItem('timeMinutes');
 
+  const testDuration = currentTest.durationTimeInMinutes / 1000 / 60;
+
   const time = new Date();
-  time.setSeconds(time.getSeconds() + 60 * (timeLs > 0 ? parseInt(timeLs, 10) + 1 : 10));
+  time.setSeconds(time.getSeconds() + 60 * (timeLs > 0 ? timeLs + 1 : testDuration));
 
   // useEffect(() => {
   //   quizs.length === 0 && navigate('/myTests');
@@ -31,11 +35,16 @@ export default function Quiz() {
     <div className='relative mt-32'>
       <div className='container mx-auto flex justify-between'>
         <div>
-          <h1 className='text-4xl font-bold'>Fizika fanidan test topshiriqlari</h1>
-          <p>Savollar soni: 30 ta</p>
-          <p>Davomiyligi: 1 soat 45 minut</p>
+          <h1 className='text-4xl font-bold'>{currentTest?.name}</h1>
+          <p>Savollar soni: {currentTest?.questionsCount} ta</p>
+          <p>Davomiyligi: {testDuration} minut</p>
         </div>
-        <Timer expiryTimestamp={time} />
+        <div className='flex items-center gap-3'>
+          <Timer expiryTimestamp={time} />
+          <MDButton type='button' color='error'>
+            Testni to‘xtatish
+          </MDButton>
+        </div>
       </div>
 
       <hr className='mt-6 hr-3' />
