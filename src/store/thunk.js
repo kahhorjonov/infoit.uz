@@ -231,7 +231,7 @@ export const confirmationPayment = async code => {
   }
 };
 
-export const getQuizTest = async testId => {
+export const startUserTest = async testId => {
   try {
     const response = await axiosPublic.get(
       `api/question/v1/get-with-all-question?testId=${testId}`,
@@ -244,6 +244,24 @@ export const getQuizTest = async testId => {
     return response;
   } catch (error) {
     return error.response.data;
+  }
+};
+
+export const finishUserTest = async testId => {
+  try {
+    const response = await axiosPublic.post(
+      `/api/test/v1/finish-test&testId=${testId}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      },
+    );
+
+    console.log(response.data);
+  } catch (e) {
+    toast.error(e);
   }
 };
 
@@ -269,18 +287,15 @@ export const sendAnswer =
   ({ questionId, questionChoiceId }) =>
   async dispatch => {
     try {
-      const response = await axiosPublic.post(
-        `api/question/v1/check-single-question?deviceType=WEB&questionChoiceId=${parseInt(
-          questionChoiceId,
-          10,
-        )}&questionId=${parseInt(questionId, 10)}`,
+      await axiosPublic.post(
+        `api/question/v1/check-single-question?deviceType=WEB&questionChoiceId=${questionChoiceId}&questionId=${questionId}`,
+        {},
         {
           headers: {
-            Authorization: `Bearer ${access_token}`,
+            authorization: `Bearer ${access_token}`,
           },
         },
       );
-      console.log(response.data);
       dispatch(setUserAnswer({ questionId, questionChoiceId }));
     } catch (e) {
       toast.error(e);

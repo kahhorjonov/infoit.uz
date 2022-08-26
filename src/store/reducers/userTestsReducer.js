@@ -4,10 +4,18 @@ import {
   SET_USER_CURRENT_TEST_INFO,
 } from 'store/actions/actionTypes';
 
+const currentTestInfo = JSON.parse(localStorage.getItem('currentTestInfo'));
+
 const initialState = {
   isLoading: false,
   tests: [],
-  currentTest: {},
+  currentTest: currentTestInfo || {},
+};
+
+const handleSetCurrentTestInfo = (state, payload) => {
+  localStorage.setItem('currentTestInfo', JSON.stringify(payload));
+
+  return { ...state, currentTest: payload };
 };
 
 export const userTestsReducer = (state = initialState, action) => {
@@ -23,7 +31,7 @@ export const userTestsReducer = (state = initialState, action) => {
       };
 
     case SET_USER_CURRENT_TEST_INFO:
-      return { ...state, currentTest: action.payload };
+      return handleSetCurrentTestInfo(state, action.payload);
 
     default:
       return state;

@@ -4,6 +4,7 @@ import MDButton from 'components/MDButton';
 import { Icon } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { setQuizPageNumber } from 'store/actions/actionCreaters';
 
 import Styles from './CardQuiz.module.scss';
 
@@ -16,6 +17,10 @@ function CardQuiz() {
 
   const handleChooseChoice = (questionId, questionChoiceId) => {
     dispatch(sendAnswer({ questionId, questionChoiceId }));
+  };
+
+  const handleClickPrev = (pageNum, action) => {
+    dispatch(setQuizPageNumber(action ? pageNum + 1 : pageNum - 1));
   };
 
   return (
@@ -51,15 +56,21 @@ function CardQuiz() {
         ))}
       </div>
 
-      <div className='flex'>
+      <div className='flex  justify-between mt-6'>
+        <div />
         <div className='flex items-center'>
-          <ArrowBackIosIcon />
+          <ArrowBackIosIcon onClick={() => handleClickPrev(pageNumber, false)} />
           <h1 className='mx-2'>
             {pageNumber} / {count}
           </h1>
-          <ArrowForwardIosIcon />
+          <ArrowForwardIosIcon onClick={() => handleClickPrev(pageNumber, true)} />
         </div>
-        <MDButton type='button' variant='contained' color='secondary'>
+        <MDButton
+          type='button'
+          variant='contained'
+          color='secondary'
+          onClick={() => handleClickPrev(pageNumber, true)}
+        >
           Keyingi test
         </MDButton>
       </div>

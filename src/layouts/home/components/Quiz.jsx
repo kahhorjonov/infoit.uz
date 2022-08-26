@@ -5,7 +5,7 @@ import Timer from 'components/Timer/Timer';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getQuizs } from 'store/thunk';
+import { getQuizs, finishUserTest } from 'store/thunk';
 
 import CardQuiz from '../Cards/CardQuiz/CardQuiz';
 
@@ -23,10 +23,11 @@ export default function Quiz() {
   const time = new Date();
   time.setSeconds(time.getSeconds() + 60 * (timeLs > 0 ? timeLs + 1 : testDuration));
 
+  const handleFinishedTest = testId => finishUserTest(testId);
+
   // useEffect(() => {
   //   quizs.length === 0 && navigate('/myTests');
   // }, [quizs]);
-
   useEffect(() => {
     dispatch(getQuizs(params?.id));
   }, [dispatch]);
@@ -41,7 +42,7 @@ export default function Quiz() {
         </div>
         <div className='flex items-center gap-3'>
           <Timer expiryTimestamp={time} />
-          <MDButton type='button' color='error'>
+          <MDButton type='button' color='error' onClick={() => handleFinishedTest(currentTest?.id)}>
             Testni to‘xtatish
           </MDButton>
         </div>

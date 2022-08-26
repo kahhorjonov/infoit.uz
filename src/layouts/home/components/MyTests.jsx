@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserTests, getQuizTest } from 'store/thunk';
+import { getUserTests, startUserTest } from 'store/thunk';
 
 import cover from 'assets/homePage/Testcover.png';
 
 import { MenuItem, Select } from '@mui/material';
 import Spiner from 'components/Loader/Spiner';
-import { setUserCurrentTestInfo } from 'store/actions/actionCreaters';
+import { setUserCurrentTestInfo, setQuizPageNumber } from 'store/actions/actionCreaters';
 import { toast } from 'react-toastify';
 
 const seconToMinut = second => second / 1000 / 60;
@@ -15,8 +15,7 @@ const seconToMinut = second => second / 1000 / 60;
 export default function MyTests() {
   const dispatch = useDispatch();
   const {
-    userTests,
-    quiz: { quizs },
+    userTests: { isLoading, tests, pageNumber },
   } = useSelector(store => store);
 
   const [solve, setSolve] = useState('false');
@@ -25,9 +24,9 @@ export default function MyTests() {
 
   const startTest = async test => {
     // dispatch(getQuizs(test?.id));
-    const status = await getQuizTest(test?.id);
+    const status = await startUserTest(test?.id);
 
-    status.success === 409 ? toast.error(status.message) : navigate(`/quiz/${test?.id}`);
+    status.success !== 200 ? toast.error(status.message) : navigate(`/quiz/${test?.id}`);
     console.log(status);
 
     dispatch(setUserCurrentTestInfo(test));
@@ -52,10 +51,10 @@ export default function MyTests() {
         </Select>
       </div>
 
-      {userTests?.isLoading ? (
+      {isLoading ? (
         <Spiner />
       ) : (
-        userTests?.tests?.map(test => (
+        tests?.map(test => (
           <div
             key={test.id}
             className='mt-4 relative bg-white flex flex-col min-w-0 break-words w-full mb-6 rounded-lg border-0'
