@@ -21,7 +21,7 @@ export default function Payment() {
 
   return (
     <div className='relative flex flex-col min-w-0 break-words w-full min-h-screen mb-6 shadow-lg rounded-lg border-0'>
-      <div className='items-center py-0 mt-16 shadow-lg py-2'>
+      <div className='items-center mt-20 shadow-lg py-2'>
         <div className='container relative mx-auto flex items-center p-3'>
           <img src={coverSm} alt='2' />
           <div className='flex flex-col mx-4'>
@@ -32,7 +32,7 @@ export default function Payment() {
           </div>
         </div>
       </div>
-      <div className='flex-auto px-10 lg:px-10 py-10 pt-0 mt-10'>
+      <div className='flex-auto px-10 lg:px-10 py-10'>
         <div className='flex items-center justify-center'>
           <h6 className='text-lg font-bold uppercase'>To`lovni amalga oshirish</h6>
         </div>

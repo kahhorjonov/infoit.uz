@@ -11,6 +11,7 @@ import uzcard from 'assets/homePage/Uzcard-01 1.png';
 export default function CardTest({ planningTests }) {
   const [cardNumber, setCardNumber] = useState('');
   const [expDate, setExpDate] = useState('');
+  const [confirmationCode, setConfirmationCode] = useState('');
   const [confirmation, setConfirmation] = useState(false);
 
   // amount: planningTests?.currentTestData?.price,
@@ -33,7 +34,7 @@ export default function CardTest({ planningTests }) {
   };
 
   const handleConfirmation = () => {
-    confirmationPayment({ confirmationCode: '34567' });
+    confirmationPayment(confirmationCode);
   };
 
   return (
@@ -71,7 +72,7 @@ export default function CardTest({ planningTests }) {
         {confirmation ? (
           <div className='relative px-2'>
             <label className='block text-xs'>Tasdiqlash kodi</label>
-            <input className='border px-2' />
+            <input className='border px-2' onChange={e => setConfirmationCode(e.target.value)} />
           </div>
         ) : null}
 
