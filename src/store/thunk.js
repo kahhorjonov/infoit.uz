@@ -245,8 +245,9 @@ export const startUserTest = async testId => {
         },
       },
     );
-    return response;
+    return response.data;
   } catch (error) {
+    console.log(error.response.data);
     return error.response.data;
   }
 };

@@ -18,7 +18,7 @@ export default function MyTests() {
     userTests: { isLoading, tests, pageNumber },
   } = useSelector(store => store);
 
-  const [solve, setSolve] = useState('false');
+  const [solve, setSolve] = useState(false);
 
   const navigate = useNavigate();
 
@@ -26,7 +26,7 @@ export default function MyTests() {
     // dispatch(getQuizs(test?.id));
     const status = await startUserTest(test?.id);
 
-    status.success !== 200 ? toast.error(status.message) : navigate(`/quiz/${test?.id}`);
+    status.success === 200 ? navigate(`/quiz/${test?.id}`) : toast.error(status.message);
     console.log(status);
 
     dispatch(setUserCurrentTestInfo(test));
@@ -86,11 +86,9 @@ export default function MyTests() {
                 <div style={{ width: '180px' }} className='flex flex-col mx-4 text-right'>
                   <h2 className='text-base mb-2'>Status</h2>
                   <p
-                    className={`${
-                      solve === 'false' ? 'text-emerald-500' : 'text-blueGray-500'
-                    } text-sm mb-2`}
+                    className={`${!solve ? 'text-emerald-500' : 'text-blueGray-500'} text-sm mb-2`}
                   >
-                    {solve === 'false' ? 'Sotib olingan' : 'Yechib bo`lingan'}
+                    {!solve ? 'Sotib olingan' : 'Yechib bo`lingan'}
                   </p>
                   <p
                     onClick={() => navigate(`/results/${test?.id}`)}

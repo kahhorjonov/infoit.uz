@@ -15,6 +15,7 @@ export default function Quiz() {
     quiz: { isLoading, quizs, pageNumber, count },
     userTests: { currentTest },
   } = useSelector(store => store);
+  const navigate = useNavigate();
   const params = useParams();
   const timeLs = localStorage.getItem('timeMinutes');
 
@@ -23,7 +24,12 @@ export default function Quiz() {
   const time = new Date();
   time.setSeconds(time.getSeconds() + 60 * (timeLs > 0 ? timeLs + 1 : testDuration));
 
-  const handleFinishedTest = testId => finishUserTest(testId);
+  const handleFinishedTest = testId => {
+    localStorage.removeItem('userAnswers');
+    localStorage.removeItem('timeMinutes');
+    navigate('/myTests');
+    // finishUserTest(testId);
+  };
 
   // useEffect(() => {
   //   quizs.length === 0 && navigate('/myTests');
