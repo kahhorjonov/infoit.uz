@@ -1,11 +1,8 @@
 // Material Dashboard 2 React layouts
 import Dashboard from 'layouts/dashboard';
-import Tables from 'layouts/tables';
-import Billing from 'layouts/billing';
-import Notifications from 'layouts/notifications';
-import Profile from 'layouts/profile';
-// import SignIn from 'layouts/authentication/sign-in';
-import SignUp from 'layouts/authentication/sign-up';
+// import Tables from 'layouts/tables';
+// import Notifications from 'layouts/notifications';
+// import Profile from 'layouts/profile';
 import Categories from 'layouts/categories/Categories';
 import CreateTest from 'layouts/tests/CreateTest';
 import CreateQuestion from 'layouts/createQuestion/CreateQuestion';
@@ -61,42 +58,42 @@ const routes = [
     user: 'admin',
     component: <Users />,
   },
-  {
-    type: 'collapse',
-    name: 'Tables',
-    key: 'tables',
-    icon: <Icon fontSize='small'>table_view</Icon>,
-    route: '/admin/tables',
-    user: 'admin',
-    component: <Tables />,
-  },
-  {
-    type: 'collapse',
-    name: 'Billing',
-    key: 'billing',
-    icon: <Icon fontSize='small'>receipt_long</Icon>,
-    route: '/admin/billing',
-    user: 'admin',
-    component: <Billing />,
-  },
-  {
-    type: 'collapse',
-    name: 'Notifications',
-    key: 'notifications',
-    icon: <Icon fontSize='small'>notifications</Icon>,
-    route: '/admin/notifications',
-    user: 'admin',
-    component: <Notifications />,
-  },
-  {
-    type: 'collapse',
-    name: 'Profile',
-    key: 'profile',
-    icon: <Icon fontSize='small'>person</Icon>,
-    route: '/admin/profile',
-    user: 'admin',
-    component: <Profile />,
-  },
+  // {
+  //   type: 'collapse',
+  //   name: 'Tables',
+  //   key: 'tables',
+  //   icon: <Icon fontSize='small'>table_view</Icon>,
+  //   route: '/admin/tables',
+  //   user: 'admin',
+  //   component: <Tables />,
+  // },
+  // {
+  //   type: 'collapse',
+  //   name: 'Billing',
+  //   key: 'billing',
+  //   icon: <Icon fontSize='small'>receipt_long</Icon>,
+  //   route: '/admin/billing',
+  //   user: 'admin',
+  //   component: <Billing />,
+  // },
+  // {
+  //   type: 'collapse',
+  //   name: 'Notifications',
+  //   key: 'notifications',
+  //   icon: <Icon fontSize='small'>notifications</Icon>,
+  //   route: '/admin/notifications',
+  //   user: 'admin',
+  //   component: <Notifications />,
+  // },
+  // {
+  //   type: 'collapse',
+  //   name: 'Profile',
+  //   key: 'profile',
+  //   icon: <Icon fontSize='small'>person</Icon>,
+  //   route: '/admin/profile',
+  //   user: 'admin',
+  //   component: <Profile />,
+  // },
   // {
   //   type: 'collapse',
   //   name: 'Sign In',

@@ -27,7 +27,6 @@ import Quiz from './components/Quiz';
 import MyTests from './components/MyTests';
 import Profile from './components/Profile';
 import OthersResult from './components/OthersResult';
-import NotFound from './components/NotFound';
 
 function Admin() {
   const [controller, dispatch] = useMaterialUIController();

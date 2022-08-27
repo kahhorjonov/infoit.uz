@@ -35,10 +35,9 @@ import CreateQuestion from 'layouts/createQuestion/CreateQuestion';
 import CreateTest from 'layouts/tests/CreateTest';
 import Categories from 'layouts/categories/Categories';
 import Users from 'layouts/users/Users';
-import Tables from 'layouts/tables';
-import Billing from 'layouts/billing';
-import Notifications from 'layouts/notifications';
-import Profile from 'layouts/profile';
+// import Tables from 'layouts/tables';
+// import Notifications from 'layouts/notifications';
+// import Profile from 'layouts/profile';
 import Login from 'layouts/authentication/sign-in';
 import Register from 'layouts/authentication/sign-up';
 import Logout from 'layouts/admin/Logout';
@@ -132,10 +131,9 @@ function Admin() {
         <Route path='/createTest' exact element={<CreateTest />} />
         <Route path='/categories' exact element={<Categories />} />
         <Route path='/users' exact element={<Users />} />
-        <Route path='/tables' exact element={<Tables />} />
-        <Route path='/billing' exact element={<Billing />} />
-        <Route path='/notifications' exact element={<Notifications />} />
-        <Route path='/profile' exact element={<Profile />} />
+        {/* <Route path='/tables' exact element={<Tables />} /> */}
+        {/* <Route path='/notifications' exact element={<Notifications />} /> */}
+        {/* <Route path='/profile' exact element={<Profile />} /> */}
         <Route path='/login' exact element={<Login />} />
         <Route path='/register' exact element={<Register />} />
         <Route path='/logout' exact element={<Logout />} />
