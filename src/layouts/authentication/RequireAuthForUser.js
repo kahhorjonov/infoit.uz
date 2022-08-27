@@ -8,10 +8,7 @@ const RequireAuthForUser = ({ children }) => {
   const location = useLocation();
   const tokenRole =
     decodedToken() && decodedToken().roles && decodedToken().roles.name.slice(5).toLowerCase();
-  //   const childrenRole = children.type && children.type.name.toLowerCase();
-
   if (!decodedToken()) {
-    // window.location.replace('/');
     return <Navigate to='/login' state={{ path: location.pathname }} replace />;
   }
   if (tokenRole === 'user') {

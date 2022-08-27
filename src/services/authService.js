@@ -1,6 +1,8 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 
+import { toast } from 'react-toastify';
+
 import api from 'utils/config.json';
 
 const { baseURL } = api;
@@ -45,35 +47,25 @@ export function setToken(jwt) {
   return null;
 }
 
-// const me = () => {
-//   const config = {
-//     headers: { Authorization: `Bearer ${token}` },
-//   };
+export const register = async data => {
+  try {
+    const {
+      data: {
+        objectKoinot: { accessToken },
+      },
+    } = await axios.post(`${baseURL}/auth/v1/register`, data);
 
-//   return axios.get(baseURL + "/user/me", config);
-// };
+    const parsedJwt = parseJwt(accessToken);
 
-// export const register = async (data) => {
-//   try {
-//     const { data: jwt } = await axios.post(baseURL + "/user/registerUser", data);
-
-//     const path = jwtDecode(jwt).roles[0].roleName.slice(5).toLowerCase();
-//     const parsedJwt = parseJwt(jwt);
-
-//     if (jwt) {
-//       if (parsedJwt.exp * 1000 < Date.now()) {
-//         return;
-//       } else {
-//         localStorage.setItem("token", jwt);
-//         return window.location.replace(`/${path}`);
-//       }
-//     }
-//   } catch (error) {}
-// };
-
-// export const logout = () => {
-//   localStorage.removeItem("token");
-// };
+    if (accessToken && parsedJwt.exp * 1000 > Date.now()) {
+      localStorage.setItem('token', accessToken);
+    }
+    return window.location.replace('/');
+  } catch (error) {
+    toast.error(error);
+  }
+  return null;
+};
 
 export const decodedToken = () => {
   const jwt = localStorage.getItem('token');
@@ -86,27 +78,9 @@ export const decodedToken = () => {
   return decodedJwt;
 };
 
-// export function loginWithJwt(jwt) {
-//   const parsedJwt = parseJwt(localStorage.getItem("token"));
-
-//   if (parsedJwt && parsedJwt.exp * 1000 < Date.now()) {
-//     return alert("Profilga qaytadan kiring");
-//   } else {
-//     localStorage.setItem("token", jwt);
-//   }
-// }
-
-// export default {
-//   me,
-//   register,
-//   logout,
-//   loginWithJwt,
-//   useAuth,
-//   decodedToken,
-// };
-
 export default {
   login,
   decodedToken,
   getTokenFromStorage,
+  register,
 };

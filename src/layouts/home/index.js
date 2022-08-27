@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 
 import RequireAuthForUser from 'layouts/authentication/RequireAuthForUser';
 
@@ -27,6 +27,7 @@ import Quiz from './components/Quiz';
 import MyTests from './components/MyTests';
 import Profile from './components/Profile';
 import OthersResult from './components/OthersResult';
+import NotFound from './components/NotFound';
 
 function Admin() {
   const [controller, dispatch] = useMaterialUIController();
@@ -110,6 +111,7 @@ function Admin() {
         <Route path='/test/:id' exact element={<TestInfo />} />
         {/* <Route path='/buyTest/:id' exact element={<Payment />} /> */}
         {/* <Route path='/quiz/:id' exact element={<Quiz />} /> */}
+        <Route path='*' element={<Navigate to='/' replace />} />
       </Routes>
     </ThemeProvider>
   );

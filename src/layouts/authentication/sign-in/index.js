@@ -5,7 +5,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 // @mui material components
 import Card from '@mui/material/Card';
-import Switch from '@mui/material/Switch';
+// import Switch from '@mui/material/Switch';
 // import Grid from "@mui/material/Grid";
 // import MuiLink from "@mui/material/Link";
 
@@ -60,7 +60,7 @@ function Basic() {
             textAlign='center'
           >
             <MDTypography variant='h4' fontWeight='medium' color='white' mt={1}>
-              Sign in
+              Kirish
             </MDTypography>
           </MDBox>
           <MDBox pt={4} pb={3} px={3}>
@@ -68,7 +68,7 @@ function Basic() {
               <MDBox mb={2}>
                 <MDInput
                   type='phone'
-                  label='Phone'
+                  label='Telefon'
                   fullWidth
                   onChange={e => setPhone(e.target.value)}
                 />
@@ -76,12 +76,12 @@ function Basic() {
               <MDBox mb={2}>
                 <MDInput
                   type='password'
-                  label='Password'
+                  label='Parol'
                   fullWidth
                   onChange={e => setPassword(e.target.value)}
                 />
               </MDBox>
-              <MDBox display='flex' alignItems='center' ml={-1}>
+              {/* <MDBox display='flex' alignItems='center' ml={-1}>
                 <Switch checked={rememberMe} onChange={handleSetRememberMe} />
                 <MDTypography
                   variant='button'
@@ -92,24 +92,24 @@ function Basic() {
                 >
                   &nbsp;&nbsp;Remember me
                 </MDTypography>
-              </MDBox>
+              </MDBox> */}
               <MDBox mt={4} mb={1}>
                 <MDButton variant='gradient' color='info' fullWidth onClick={handleLogin}>
-                  sign in
+                  Kirish
                 </MDButton>
               </MDBox>
               <MDBox mt={3} mb={1} textAlign='center'>
                 <MDTypography variant='button' color='text'>
-                  Don&apos;t have an account?{' '}
+                  {/* Don&apos;t have an account?{' '} */}
                   <MDTypography
                     component={Link}
-                    to='/authentication/sign-up'
+                    to='/register'
                     variant='button'
                     color='info'
                     fontWeight='medium'
                     textGradient
                   >
-                    Sign up
+                    Ro`yxatdan o`tish
                   </MDTypography>
                 </MDTypography>
               </MDBox>
