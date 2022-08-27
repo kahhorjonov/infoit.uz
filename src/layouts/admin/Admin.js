@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 
 // @mui material components
 import { ThemeProvider } from '@mui/material/styles';
@@ -139,6 +139,7 @@ function Admin() {
         <Route path='/login' exact element={<Login />} />
         <Route path='/register' exact element={<Register />} />
         <Route path='/logout' exact element={<Logout />} />
+        <Route path='*' element={<Navigate to='/admin/dashboard' replace />} />
       </Routes>
     </ThemeProvider>
   );

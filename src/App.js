@@ -13,9 +13,9 @@ import theme from 'assets/theme';
 // Layouts
 import Home from 'layouts/home/index';
 import Admin from 'layouts/admin/Admin';
-import User from 'layouts/user/User';
 import SignIn from 'layouts/authentication/sign-in';
 import SignUp from 'layouts/authentication/sign-up';
+import NotFound from 'layouts/home/components/NotFound';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -61,15 +61,16 @@ export default function App() {
         <Route path='/*' element={<Home />} />
         <Route
           path='/admin/*'
+          exact
           element={
             <RequireAuth>
               <Admin />
             </RequireAuth>
           }
         />
-        <Route path='/user/*' element={<User />} />
         <Route path='/login' element={<SignIn />} />
         <Route path='/register' element={<SignUp />} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
     </ThemeProvider>
   );
