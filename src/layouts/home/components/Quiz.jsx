@@ -22,7 +22,7 @@ export default function Quiz() {
   const testDuration = currentTest.durationTimeInMinutes / 1000 / 60;
 
   const time = new Date();
-  time.setSeconds(time.getSeconds() + 60 * (timeLs > 0 ? timeLs + 1 : testDuration));
+  time.setSeconds(time.getSeconds() + 60 * (timeLs > 0 ? timeLs : testDuration));
 
   const handleFinishedTest = testId => {
     localStorage.removeItem('userAnswers');
