@@ -5,7 +5,7 @@ import {
 } from 'store/actions/actionTypes';
 
 const initialState = {
-  isLoading: false,
+  isLoading: true,
   questions: [],
   count: null,
   pageable: {},

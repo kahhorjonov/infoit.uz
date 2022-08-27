@@ -8,7 +8,6 @@ import Spiner from 'components/Loader/Spiner';
 
 import ModalComp from 'components/Modal/ModalComp';
 import CardTestInfo from 'layouts/home/Cards/CardTestInfo';
-import cover from 'assets/homePage/Testcover.png';
 import Styles from '../TestTable.module.scss';
 
 function PlanningTestTable({ onChangeActionType }) {
@@ -41,12 +40,13 @@ function PlanningTestTable({ onChangeActionType }) {
   };
 
   useEffect(() => {
-    dispatch(
-      getPlanningTest({
-        categoryId: category?.currentCategory?.id || '',
-        pagination: planningTests?.pagination,
-      }),
-    );
+    category?.currentCategory?.id &&
+      dispatch(
+        getPlanningTest({
+          categoryId: category?.currentCategory?.id,
+          pagination: planningTests?.pagination,
+        }),
+      );
   }, [dispatch, category?.currentCategory]);
 
   return (

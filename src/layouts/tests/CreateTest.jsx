@@ -72,11 +72,7 @@ function CreateTest() {
   }, [actionType, planningTests.currentTestData]);
 
   useEffect(() => {
-    setNewTest({ ...newTest, categoryId: category.currentCategory.id });
-  }, [category.currentCategory]);
-
-  useEffect(() => {
-    dispatch(getCategories());
+    dispatch(getCategories(true));
   }, [dispatch]);
 
   return (

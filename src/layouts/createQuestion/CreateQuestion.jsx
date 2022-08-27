@@ -24,14 +24,14 @@ import Table from './components/Table/Table';
 
 function CreateQuestion() {
   const dispatch = useDispatch();
-  const { category, questionsData } = useSelector(state => state);
+  const { category } = useSelector(state => state);
   const [createQStatus, setCreateQStatus] = useState(false);
 
   const handleOpen = () => setCreateQStatus(true);
   const handleClose = () => setCreateQStatus(false);
 
   useEffect(() => {
-    dispatch(getCategories());
+    dispatch(getCategories(true));
   }, [dispatch]);
 
   return (
@@ -40,7 +40,6 @@ function CreateQuestion() {
         <Form
           formType='add'
           categoryId={category?.currentCategory?.id || 0}
-          pagination={questionsData?.pagination}
           onClose={handleClose}
         />
       </ModalComp>

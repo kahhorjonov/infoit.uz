@@ -8,7 +8,9 @@ import CategoryForm from '../CategoryForm';
 import Styles from './CategoryTable.module.scss';
 
 function CategoriesTable() {
-  const { category } = useSelector(store => store);
+  const {
+    category: { currentCategory },
+  } = useSelector(store => store);
   const [open, setOpen] = useState({ status: false, currCategory: {} });
 
   const handleOpen = currCategory => setOpen({ ...open, status: true, currCategory });
@@ -28,7 +30,7 @@ function CategoriesTable() {
           </tr>
         </thead>
         <tbody>
-          {category?.currentCategory?.child?.map((c, idx) => (
+          {currentCategory?.children?.map((c, idx) => (
             <tr key={c.id} onClick={() => handleOpen(c)}>
               <td>{idx + 1}</td>
               <td>{c.nameUz}</td>

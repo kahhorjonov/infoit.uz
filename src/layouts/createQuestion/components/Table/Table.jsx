@@ -40,12 +40,13 @@ function Table() {
   };
 
   useEffect(() => {
-    dispatch(
-      getQuestions({
-        categoryId: category?.currentCategory?.id,
-        pagination: questionsData?.pagination,
-      }),
-    );
+    category?.currentCategory?.id &&
+      dispatch(
+        getQuestions({
+          categoryId: category?.currentCategory?.id,
+          pagination: questionsData?.pagination,
+        }),
+      );
   }, [dispatch, category?.currentCategory]);
 
   return (
@@ -54,7 +55,6 @@ function Table() {
         <Form
           formType='view'
           categoryId={category?.currentCategory?.id || questionsData?.currentQuestion?.category?.id}
-          pagination={questionsData?.pagination}
           questionNumber={1}
           onClose={handleClose}
           questionData={questionsData?.currentQuestion}

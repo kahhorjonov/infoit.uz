@@ -19,12 +19,12 @@ const TreeViewItem = ({ id, name, child }) => {
   const childs = child && child.length > 0;
 
   return (
-    <TreeItem nodeId={JSON.stringify({ id, child })} label={name}>
+    <TreeItem nodeId={JSON.stringify({ id, children: child })} label={name}>
       {childs &&
         child.map(ch => (
           <TreeViewItem
             key={ch.id}
-            nodeId={JSON.stringify({ id: ch.id, child: ch.children })}
+            nodeId={JSON.stringify({ id: ch.id, children: ch.children })}
             id={ch.id}
             name={ch.nameUz}
             child={ch.children}
@@ -42,7 +42,9 @@ TreeViewItem.propTypes = {
 
 function DropDown({ position = 'bottom-end', color = 'white' }) {
   const dispatch = useDispatch();
-  const { category } = useSelector(store => store);
+  const {
+    category: { currentCategory, categories },
+  } = useSelector(store => store);
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
   const [placement, setPlacement] = useState();
@@ -56,14 +58,18 @@ function DropDown({ position = 'bottom-end', color = 'white' }) {
   const handleChange = (event, nodeIds) => {
     const data = JSON.parse(nodeIds);
     dispatch(
-      setCurrentCategories({ name: event.target.textContent, id: data?.id, child: data?.child }),
+      setCurrentCategories({
+        nameUz: event.target.textContent,
+        id: data?.id,
+        children: data?.children,
+      }),
     );
   };
 
   return (
     <div>
       <MDButton variant='outlined' type='button' color={color} onClick={handleClick(position)}>
-        {category?.currentCategory?.name || 'Category'}{' '}
+        {currentCategory?.nameUz || 'Category'}
         <Icon
           style={{
             marginLeft: '5rem',
@@ -83,12 +89,14 @@ function DropDown({ position = 'bottom-end', color = 'white' }) {
                 defaultExpandIcon={<ChevronRightIcon />}
                 sx={{ maxHeight: '50vh', flexGrow: 1, maxWidth: 400, overflowY: 'auto' }}
                 onNodeSelect={handleChange}
-                selected={[category.currentCategory.id.toString()]}
+                selected={[
+                  JSON.stringify({ id: currentCategory?.id, children: currentCategory?.children }),
+                ]}
               >
-                {category.categories?.map(c => (
+                {categories?.map(c => (
                   <TreeViewItem
                     key={c.id}
-                    nodeId={JSON.stringify({ id: c.id, child: c.children })}
+                    nodeId={JSON.stringify({ id: c.id, children: c.children })}
                     // nodeId={c.id.toString()}
                     id={c.id}
                     name={c.nameUz}

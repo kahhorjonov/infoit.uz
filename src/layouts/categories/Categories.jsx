@@ -33,7 +33,7 @@ function Categories() {
   const handleClose = () => setOpen(false);
 
   useEffect(() => {
-    dispatch(getCategories());
+    dispatch(getCategories(false));
   }, [dispatch]);
 
   return (

@@ -30,12 +30,13 @@ function TestTable({ onAddQuestionId }) {
   };
 
   useEffect(() => {
-    dispatch(
-      getQuestions({
-        categoryId: category.currentCategory.id,
-        pagination: questionsData.pagination,
-      }),
-    );
+    category.currentCategory.id &&
+      dispatch(
+        getQuestions({
+          categoryId: category.currentCategory.id,
+          pagination: questionsData.pagination,
+        }),
+      );
   }, [dispatch, category.currentCategory.id]);
 
   return (

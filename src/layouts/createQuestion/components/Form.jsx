@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { PropTypes } from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import TextArea from 'components/TextArea/TextArea';
 import MDTypography from 'components/MDTypography';
 import MDBox from 'components/MDBox';
@@ -9,28 +9,30 @@ import { v4 } from 'uuid';
 import MDButton from 'components/MDButton';
 import { addQuestion, editQuestion } from '../../../store/thunk';
 
-function Form({ formType, questionData, categoryId, pagination, onClose }) {
+function Form({ formType, categoryId, onClose }) {
   const dispatch = useDispatch();
+  const {
+    questionsData: { pagination, currentQuestion },
+  } = useSelector(store => store);
   const [actionType, setActionType] = useState(formType);
-  const [correctChoiceId, setCorrectChoiceId] = useState('');
   const [questionsForm, setQuestionsForm] = useState({
-    idx: actionType !== 'add' && questionData.id ? questionData.id : '',
-    text: actionType !== 'add' && questionData?.name ? questionData?.name : '',
+    idx: actionType !== 'add' && currentQuestion.id ? currentQuestion.id : '',
+    text: actionType !== 'add' && currentQuestion?.name ? currentQuestion?.name : '',
     categoryId:
-      actionType !== 'add' && questionData?.category?.id
-        ? questionData?.category?.id
+      actionType !== 'add' && currentQuestion?.category?.id
+        ? currentQuestion?.category?.id
         : categoryId || '',
     attachmentId:
-      actionType !== 'add' && questionData?.questionPhoto?.fileId
-        ? questionData.questionPhoto.fileId
+      actionType !== 'add' && currentQuestion?.questionPhoto?.fileId
+        ? currentQuestion.questionPhoto.fileId
         : '',
     questionPhoto:
-      actionType !== 'add' && questionData?.questionPhoto?.fileName
-        ? questionData?.questionPhoto?.link
+      actionType !== 'add' && currentQuestion?.questionPhoto?.fileName
+        ? currentQuestion?.questionPhoto?.link
         : '',
     choices:
-      actionType !== 'add' && questionData?.choices
-        ? questionData?.choices?.map(choice => ({
+      actionType !== 'add' && currentQuestion?.choices
+        ? currentQuestion?.choices?.map(choice => ({
             idx: choice?.id,
             attachmentId: choice?.choicePhoto?.fileId,
             choicePhoto: choice?.choicePhoto?.link,
@@ -40,7 +42,7 @@ function Form({ formType, questionData, categoryId, pagination, onClose }) {
         : [{ idx: v4(), attachmentId: 0, choicePhoto: '', correct: false, text: '' }],
   });
 
-  // console.log(questionData);
+  // console.log(currentQuestion);
 
   const handleAddAnswer = () => {
     const newChoice = { idx: v4(), attachmentId: 0, choicePhoto: '', correct: false, text: '' };
@@ -84,7 +86,7 @@ function Form({ formType, questionData, categoryId, pagination, onClose }) {
       onClose();
     }
     if (actionType === 'edit') {
-      dispatch(editQuestion({ ...question, id: questionData.id }, categoryId, pagination));
+      dispatch(editQuestion({ ...question, id: currentQuestion.id }, categoryId, pagination));
       setActionType('view');
     }
   };
@@ -166,8 +168,6 @@ function Form({ formType, questionData, categoryId, pagination, onClose }) {
 Form.propTypes = {
   formType: PropTypes.string,
   categoryId: PropTypes.number,
-  questionData: PropTypes.object,
-  pagination: PropTypes.object,
   onClose: PropTypes.func,
 };
 
