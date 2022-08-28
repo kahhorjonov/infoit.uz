@@ -69,7 +69,7 @@ function UserForm() {
         label='Balance'
         fullWidth
         placeholder='Balance'
-        onChange={e => handleChangeUserData('balance', e.target.value)}
+        onChange={e => handleChangeUserData('balance', parseInt(e.target.value, 10))}
       />
       <MDInput
         disabled={edit}

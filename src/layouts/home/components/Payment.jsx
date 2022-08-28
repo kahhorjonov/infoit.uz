@@ -12,7 +12,9 @@ import CardPayment from '../Cards/CardPayment';
 
 export default function Payment() {
   const dispatch = useDispatch();
-  const { planningTests } = useSelector(store => store);
+  const {
+    planningTests: { currentTestData },
+  } = useSelector(store => store);
   const { id } = useParams();
 
   useEffect(() => {
@@ -25,9 +27,10 @@ export default function Payment() {
         <div className='container relative mx-auto flex items-center p-3'>
           <img src={coverSm} alt='2' />
           <div className='flex flex-col mx-4'>
-            <h2 className='text-2xl'>{planningTests?.currentTestData?.category?.nameUz}</h2>
+            <h2 className='text-2xl'>{currentTestData?.name}</h2>
+            <h2 className='text-sm'>{currentTestData?.category?.nameUz}</h2>
             <p className='text-blueGray-400 text-sm'>
-              {planningTests?.currentTestData?.category?.children?.nameUz}
+              {currentTestData?.category?.children?.nameUz}
             </p>
           </div>
         </div>
@@ -38,7 +41,7 @@ export default function Payment() {
         </div>
 
         <div className='flex flex-wrap justify-center mt-6'>
-          <CardPayment planningTests={planningTests} />
+          <CardPayment />
         </div>
       </div>
     </div>

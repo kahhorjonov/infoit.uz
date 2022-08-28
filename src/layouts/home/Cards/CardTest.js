@@ -9,6 +9,7 @@ export default function CardTest({
   id,
   name,
   category,
+  price,
   startVisionTestDate,
   durationTimeInMinutes,
 }) {
@@ -41,7 +42,7 @@ export default function CardTest({
             <span className='text-base whitespace-nowrap'>Narxi:</span>
           </p>
           <p>
-            <span className='whitespace-nowrap font-bold'>45000 so`m</span>
+            <span className='whitespace-nowrap font-bold'>{price} so`m</span>
           </p>
 
           <p className='w-full text-blueGray-400 mt-4 flex justify-between items-center'>
@@ -68,6 +69,7 @@ export default function CardTest({
 CardTest.propTypes = {
   id: PropTypes.number,
   name: PropTypes.string,
+  price: PropTypes.number,
   category: PropTypes.object,
   startVisionTestDate: PropTypes.number,
   durationTimeInMinutes: PropTypes.number,

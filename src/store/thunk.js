@@ -236,6 +236,20 @@ export const confirmationPayment = async code => {
   }
 };
 
+export const buyTest = async testId => {
+  try {
+    const response = await axiosPublic.post(`api/test/v1/buy-test?testId=${testId}`, {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+    });
+
+    console.log(response.data);
+  } catch (e) {
+    toast.error(e);
+  }
+};
+
 export const startUserTest = async testId => {
   try {
     const response = await axiosPublic.get(

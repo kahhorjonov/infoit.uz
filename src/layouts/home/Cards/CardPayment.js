@@ -1,20 +1,23 @@
 import React, { useState } from 'react';
 import InputMask from 'react-input-mask';
-import PropTypes from 'prop-types';
-
-import { sendCardDetails, confirmationPayment } from 'store/thunk';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { sendCardDetails, confirmationPayment, buyTest } from 'store/thunk';
 
 import humo from 'assets/homePage/Humo-01 1.png';
 import uzcard from 'assets/homePage/Uzcard-01 1.png';
 
-export default function CardTest({ planningTests }) {
+export default function CardTest() {
+  const {
+    planningTests: { currentTestData },
+  } = useSelector(store => store);
+  const params = useParams();
+
   const [cardNumber, setCardNumber] = useState('');
   const [expDate, setExpDate] = useState('');
   const [confirmationCode, setConfirmationCode] = useState('');
   const [confirmation, setConfirmation] = useState(false);
-
-  // amount: planningTests?.currentTestData?.price,
 
   const handleSendCardDetails = async () => {
     const data = {
@@ -23,14 +26,16 @@ export default function CardTest({ planningTests }) {
       expireDate: `${expDate.slice(3, 5)}${expDate.slice(0, 2)}`,
     };
 
-    try {
-      const result = await sendCardDetails(data);
-      toast.info(result.data.message);
-      setConfirmation(true);
-    } catch (ex) {
-      toast.error(ex.response.data.message);
-      setConfirmation(true);
-    }
+    await buyTest(params?.id);
+
+    // try {
+    //   const result = await sendCardDetails(data);
+    //   toast.info(result.data.message);
+    //   setConfirmation(true);
+    // } catch (ex) {
+    //   toast.error(ex.response.data.message);
+    //   setConfirmation(true);
+    // }
   };
 
   const handleConfirmation = () => {
@@ -61,7 +66,7 @@ export default function CardTest({ planningTests }) {
         <div className='flex items-center relative w-full max-w-full py-4 px-2'>
           <div className='w-full md:w-6/12 '>
             <p className='text-sm font-bold'>Summa</p>
-            <p className='text-xs'>{planningTests?.currentTestData?.price} so`m</p>
+            <p className='text-xs'>{currentTestData?.price} so`m</p>
           </div>
           <div className='flex items-center md:w-6/12 relative mt-4'>
             <img style={{ height: '40px' }} className='md:w-6/12' src={humo} alt='1' />
@@ -101,7 +106,3 @@ export default function CardTest({ planningTests }) {
     </div>
   );
 }
-
-CardTest.propTypes = {
-  planningTests: PropTypes.object,
-};
