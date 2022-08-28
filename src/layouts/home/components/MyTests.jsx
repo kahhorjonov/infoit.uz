@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserTests, startUserTest } from 'store/thunk';
-
 import cover from 'assets/homePage/Testcover.png';
 
 import { MenuItem, Select } from '@mui/material';
 import Spiner from 'components/Loader/Spiner';
-import { setUserCurrentTestInfo, setQuizPageNumber } from 'store/actions/actionCreaters';
+import { setUserCurrentTestInfo } from 'store/actions/actionCreaters';
 import { toast } from 'react-toastify';
 
 const seconToMinut = second => second / 1000 / 60;
@@ -15,7 +14,7 @@ const seconToMinut = second => second / 1000 / 60;
 export default function MyTests() {
   const dispatch = useDispatch();
   const {
-    userTests: { isLoading, tests, pageNumber },
+    userTests: { isLoading, tests },
   } = useSelector(store => store);
 
   const [solve, setSolve] = useState(false);
@@ -27,10 +26,12 @@ export default function MyTests() {
     const status = await startUserTest(test?.id);
 
     status.success === 200 ? navigate(`/quiz/${test?.id}`) : toast.error(status.message);
-    console.log(status);
+    // console.log(status);
 
     dispatch(setUserCurrentTestInfo(test));
   };
+
+  // console.log(new Date(new Date(tests[0]?.finishVisionTestDate).getTime()).toLocaleTimeString());
 
   useEffect(() => {
     dispatch(getUserTests(solve));
@@ -69,7 +70,7 @@ export default function MyTests() {
                   />
                   <div className='mx-4'>
                     <h2
-                      onClick={() => startTest(test)}
+                      onClick={() => !solve && startTest(test)}
                       className='text-2xl mb-4 cursor-pointer hover:underline'
                     >
                       {test?.name}

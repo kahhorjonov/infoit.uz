@@ -11,6 +11,8 @@ function CreateTestForm({
   image,
   questionsCount,
   durationTimeInMinutes,
+  startTestDate,
+  finishTestDate,
   startVisionTestDate,
   finishVisionTestDate,
   onChangeTestData,
@@ -63,9 +65,25 @@ function CreateTestForm({
         focused
       />
       <MDInput
+        value={startTestDate && new Date(startTestDate).toISOString().substr(0, 16)}
+        onChange={e => onChangeTestData('startTestDate', e.target.value)}
+        label='Start Test'
+        type='datetime-local'
+        fullWidth
+        focused
+      />
+      <MDInput
+        value={finishTestDate && new Date(finishTestDate).toISOString().substr(0, 16)}
+        onChange={e => onChangeTestData('finishTestDate', e.target.value)}
+        label='Finish Test'
+        type='datetime-local'
+        fullWidth
+        focused
+      />
+      <MDInput
         value={startVisionTestDate && new Date(startVisionTestDate).toISOString().substr(0, 16)}
         onChange={e => onChangeTestData('startVisionTestDate', e.target.value)}
-        label='Start Test'
+        label='Start Vision Test'
         type='datetime-local'
         fullWidth
         focused
@@ -73,7 +91,7 @@ function CreateTestForm({
       <MDInput
         value={finishVisionTestDate && new Date(finishVisionTestDate).toISOString().substr(0, 16)}
         onChange={e => onChangeTestData('finishVisionTestDate', e.target.value)}
-        label='Finish Test'
+        label='Finish Vision Test'
         type='datetime-local'
         fullWidth
         focused
@@ -140,6 +158,8 @@ CreateTestForm.propTypes = {
   image: PropTypes.string,
   questionsCount: PropTypes.number,
   onChangeTestData: PropTypes.func,
+  startTestDate: PropTypes.node,
+  finishTestDate: PropTypes.node,
   startVisionTestDate: PropTypes.node,
   finishVisionTestDate: PropTypes.node,
   durationTimeInMinutes: PropTypes.number,

@@ -19,9 +19,8 @@ function CardQuiz() {
     dispatch(sendAnswer({ questionId, questionChoiceId }));
   };
 
-  const handleClickPrev = (pageNum, action) => {
-    dispatch(setQuizPageNumber(action ? pageNum + 1 : pageNum - 1));
-  };
+  const handleClickNext = pageNum => pageNumber < count && dispatch(setQuizPageNumber(pageNum + 1));
+  const handleClickPrev = pageNum => pageNumber > 1 && dispatch(setQuizPageNumber(pageNum - 1));
 
   return (
     <div className={Styles.cardQuiz}>
@@ -59,17 +58,24 @@ function CardQuiz() {
       <div className='flex  justify-between mt-6'>
         <div />
         <div className='flex items-center'>
-          <ArrowBackIosIcon onClick={() => handleClickPrev(pageNumber, false)} />
+          <ArrowBackIosIcon
+            color={pageNumber === 1 ? 'secondary' : ''}
+            onClick={() => handleClickPrev(pageNumber)}
+          />
           <h1 className='mx-2'>
             {pageNumber} / {count}
           </h1>
-          <ArrowForwardIosIcon onClick={() => handleClickPrev(pageNumber, true)} />
+          <ArrowForwardIosIcon
+            color={pageNumber === 30 ? 'secondary' : ''}
+            onClick={() => handleClickNext(pageNumber)}
+          />
         </div>
         <MDButton
+          disabled={pageNumber === 30}
           type='button'
           variant='contained'
           color='secondary'
-          onClick={() => handleClickPrev(pageNumber, true)}
+          onClick={() => handleClickNext(pageNumber)}
         >
           Keyingi test
         </MDButton>

@@ -46,7 +46,7 @@ export const quizReducer = (state = initialState, action) => {
       };
 
     case SET_QUIZ_PAGINATION:
-      return { ...state, pageNumber: action.payload, currentQuiz: state.quizs[action.payload] };
+      return { ...state, pageNumber: action.payload, currentQuiz: state.quizs[action.payload - 1] };
 
     case SET_USER_ANSWER:
       return handleAddAnswer(state, action.payload);

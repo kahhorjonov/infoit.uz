@@ -14,12 +14,15 @@ import PlanningTestTable from './components/PlanningTestsTable/PlanningTestTable
 
 function CreateTest() {
   const dispatch = useDispatch();
-  const { category, planningTests } = useSelector(store => store);
+  const {
+    category: { currentCategory },
+    planningTests,
+  } = useSelector(store => store);
   const [actionType, setActionType] = useState('view');
   const [newTest, setNewTest] = useState({
     name: '',
     image: '',
-    categoryId: category?.currentCategory?.id,
+    categoryId: '',
     price: 0,
     durationTimeInMinutes: 0,
     questionsCount: 0,
@@ -47,7 +50,9 @@ function CreateTest() {
   };
 
   const handleSave = data => {
-    dispatch(addPlanningTest(data));
+    actionType === 'add'
+      ? dispatch(addPlanningTest({ ...data, categoryId: currentCategory?.id }))
+      : dispatch(addPlanningTest(data));
     console.log(data);
     setActionType('view');
   };
@@ -95,7 +100,7 @@ function CreateTest() {
           </MDTypography>
           <MDBox display='flex' alignItems='center' gap={3}>
             <DropDown />
-            {actionType === 'view' && category?.currentCategory?.id && (
+            {actionType === 'view' && currentCategory?.id && (
               <MDButton
                 onClick={() => {
                   setActionType('add');

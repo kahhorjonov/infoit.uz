@@ -1,4 +1,5 @@
 import { axiosPublic } from 'services/axiosPublic';
+import { getTokenFromStorage } from 'services/authService';
 import { toast } from 'react-toastify';
 import {
   getCategoriesProccess,
@@ -19,7 +20,7 @@ import {
   setUserAnswer,
 } from './actions/actionCreaters';
 
-const access_token = localStorage.getItem('token');
+const access_token = getTokenFromStorage();
 
 export const getCategories = addCurrCategory => async dispatch => {
   try {
@@ -292,6 +293,7 @@ export const sendAnswer =
   ({ questionId, questionChoiceId }) =>
   async dispatch => {
     try {
+      dispatch(setUserAnswer({ questionId, questionChoiceId }));
       await axiosPublic.post(
         `api/question/v1/check-single-question?deviceType=WEB&questionChoiceId=${questionChoiceId}&questionId=${questionId}`,
         {},
@@ -301,7 +303,6 @@ export const sendAnswer =
           },
         },
       );
-      dispatch(setUserAnswer({ questionId, questionChoiceId }));
     } catch (e) {
       toast.error(e);
     }

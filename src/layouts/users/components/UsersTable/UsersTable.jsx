@@ -54,20 +54,17 @@ function UsersTable({ role }) {
               </tr>
             </thead>
             <tbody>
-              {users?.map(
-                (user, idx) =>
-                  user && (
-                    <tr key={user.id} onClick={() => handleCurrentUser(user)}>
-                      <td>{idx + 1 + pagination.pageSize * (pagination.pageNumber - 1)}</td>
-                      <td>
-                        {user?.firstName} {user?.lastName}
-                      </td>
-                      <td>{user?.balance}</td>
-                      <td>{user?.phoneNumber}</td>
-                      <td>{user?.address}</td>
-                    </tr>
-                  ),
-              )}
+              {users?.map((user, idx) => (
+                <tr key={user.id} onClick={() => handleCurrentUser(user)}>
+                  <td>{idx + 1 + pagination.pageSize * (pagination.pageNumber - 1)}</td>
+                  <td>
+                    {user?.firstName} {user?.lastName}
+                  </td>
+                  <td>{user?.balance}</td>
+                  <td>{user?.phoneNumber}</td>
+                  <td>{user?.address}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
           <PaginationTable
