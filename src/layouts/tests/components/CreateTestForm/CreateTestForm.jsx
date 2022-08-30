@@ -23,6 +23,9 @@ function CreateTestForm({
     onChangeTestData('image', { attachmentId: attechmentId, imageUrl: URL.createObjectURL(img) });
   };
 
+  console.log(finishVisionTestDate);
+  console.log(finishVisionTestDate && new Date(finishVisionTestDate).toISOString().substr(0, 16));
+
   return (
     <MDBox display='flex' flexDirection='column' gap={2}>
       <MDTypography textAlign='center' textTransform='uppercase' fontWeight='bold'>
@@ -65,7 +68,7 @@ function CreateTestForm({
         focused
       />
       <MDInput
-        value={startTestDate && new Date(startTestDate).toISOString().substr(0, 16)}
+        value={startTestDate}
         onChange={e => onChangeTestData('startTestDate', e.target.value)}
         label='Start Test'
         type='datetime-local'
@@ -73,7 +76,7 @@ function CreateTestForm({
         focused
       />
       <MDInput
-        value={finishTestDate && new Date(finishTestDate).toISOString().substr(0, 16)}
+        value={finishTestDate}
         onChange={e => onChangeTestData('finishTestDate', e.target.value)}
         label='Finish Test'
         type='datetime-local'
@@ -81,7 +84,7 @@ function CreateTestForm({
         focused
       />
       <MDInput
-        value={startVisionTestDate && new Date(startVisionTestDate).toISOString().substr(0, 16)}
+        value={startVisionTestDate}
         onChange={e => onChangeTestData('startVisionTestDate', e.target.value)}
         label='Start Vision Test'
         type='datetime-local'
@@ -89,7 +92,7 @@ function CreateTestForm({
         focused
       />
       <MDInput
-        value={finishVisionTestDate && new Date(finishVisionTestDate).toISOString().substr(0, 16)}
+        value={finishVisionTestDate}
         onChange={e => onChangeTestData('finishVisionTestDate', e.target.value)}
         label='Finish Vision Test'
         type='datetime-local'

@@ -16,7 +16,7 @@ function CreateTest() {
   const dispatch = useDispatch();
   const {
     category: { currentCategory },
-    planningTests,
+    planningTests: { currentTestData },
   } = useSelector(store => store);
   const [actionType, setActionType] = useState('view');
   const [newTest, setNewTest] = useState({
@@ -61,20 +61,24 @@ function CreateTest() {
     actionType === 'edit' &&
       setNewTest({
         ...newTest,
-        id: planningTests?.currentTestData?.id,
-        name: planningTests?.currentTestData?.name,
-        image: planningTests?.currentTestData?.photo?.link,
-        attachmentId: planningTests?.currentTestData?.photo?.id,
-        categoryId: planningTests?.currentTestData?.category?.id,
-        price: planningTests?.currentTestData?.price,
-        durationTimeInMinutes: new Date(
-          planningTests?.currentTestData?.durationTimeInMinutes,
-        ).getMinutes(),
-        questionsCount: planningTests?.currentTestData?.questionsCount,
-        startVisionTestDate: planningTests?.currentTestData?.startVisionTestDate,
-        finishVisionTestDate: planningTests?.currentTestData?.finishVisionTestDate,
+        id: currentTestData?.id,
+        name: currentTestData?.name,
+        image: currentTestData?.photo?.link,
+        attachmentId: currentTestData?.photo?.id,
+        categoryId: currentTestData?.category?.id,
+        price: currentTestData?.price,
+        durationTimeInMinutes: new Date(currentTestData?.durationTimeInMinutes).getMinutes(),
+        questionsCount: currentTestData?.questionsCount,
+        startTestDate: new Date(currentTestData?.startTestDate).toISOString().substr(0, 16),
+        finishTestDate: new Date(currentTestData?.finishTestDate).toISOString().substr(0, 16),
+        startVisionTestDate: new Date(currentTestData?.startVisionTestDate)
+          .toISOString()
+          .substr(0, 16),
+        finishVisionTestDate: new Date(currentTestData?.finishVisionTestDate)
+          .toISOString()
+          .substr(0, 16),
       });
-  }, [actionType, planningTests.currentTestData]);
+  }, [actionType, currentTestData]);
 
   useEffect(() => {
     dispatch(getCategories(true));

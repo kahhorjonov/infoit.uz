@@ -97,7 +97,7 @@ function Form({ formType, categoryId, onClose }) {
 
   return (
     <MDBox display='flex' flexDirection='column' gap={2}>
-      <MDBox xs={12}>
+      <MDBox>
         <MDTypography variant='text' color='text' fontSize='5' fontWeight='bold'>
           Question: {formType === 'view' && questionsForm?.idx}
         </MDTypography>
@@ -122,7 +122,7 @@ function Form({ formType, categoryId, onClose }) {
           />
         </MDBox>
       </MDBox>
-      <MDBox xs={5}>
+      <MDBox xs={5} style={{ maxHeight: '50vh', overflowY: 'scroll' }}>
         {questionsForm?.choices?.map(answer => (
           <MDBox key={answer.idx} display='flex' alignItems='center' gap={1}>
             <ChoiceInput

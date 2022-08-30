@@ -12,8 +12,13 @@ import Styles from '../TestTable.module.scss';
 
 function PlanningTestTable({ onChangeActionType }) {
   const dispatch = useDispatch();
-  const { category, planningTests } = useSelector(store => store);
+  const {
+    category: { currentCategory },
+    planningTests: { isLoading, planning, currentTestData, count, pagination },
+  } = useSelector(store => store);
   const [testInfo, setTestInfo] = useState(false);
+
+  const milliSecondsToMinutes = milliSeconds => milliSeconds / 1000 / 60;
 
   // console.log(planningTest);
 
@@ -25,29 +30,29 @@ function PlanningTestTable({ onChangeActionType }) {
   const handleChangeCurrPage = pageNumber => {
     dispatch(
       getPlanningTest({
-        categoryId: category?.currentCategory?.id || '',
-        pagination: { ...planningTests?.pagination, pageNumber },
+        categoryId: currentCategory?.id || '',
+        pagination: { ...pagination, pageNumber },
       }),
     );
   };
   const handleChangePageSize = pageSize => {
     dispatch(
       getPlanningTest({
-        categoryId: category?.currentCategory?.id || '',
-        pagination: { ...planningTests?.pagination, pageNumber: 1, pageSize },
+        categoryId: currentCategory?.id || '',
+        pagination: { ...pagination, pageNumber: 1, pageSize },
       }),
     );
   };
 
   useEffect(() => {
-    category?.currentCategory?.id &&
+    currentCategory?.id &&
       dispatch(
         getPlanningTest({
-          categoryId: category?.currentCategory?.id,
-          pagination: planningTests?.pagination,
+          categoryId: currentCategory?.id,
+          pagination,
         }),
       );
-  }, [dispatch, category?.currentCategory]);
+  }, [dispatch, currentCategory]);
 
   return (
     <MDBox bgColor='white' coloredShadow='dark' borderRadius='xl' p={3}>
@@ -55,22 +60,22 @@ function PlanningTestTable({ onChangeActionType }) {
         <div className='items-center flex'>
           <div className='w-full  px-4'>
             <img
-              alt={planningTests?.currentTestData?.photo?.fileName || '...'}
+              alt={currentTestData?.photo?.fileName || '...'}
               className='rounded-xl ml-auto mr-auto shadow-lg right'
-              src={planningTests?.currentTestData?.photo?.link}
+              src={currentTestData?.photo?.link}
             />
           </div>
 
           <div className='w-full px-4'>
             <CardTestInfo
               workingComp='admin'
-              planningTests={planningTests?.currentTestData}
+              planningTests={currentTestData}
               onChangeAction={type => onChangeActionType(type)}
             />
           </div>
         </div>
       </ModalComp>
-      {planningTests?.isLoading ? (
+      {isLoading ? (
         <Spiner />
       ) : (
         <>
@@ -87,16 +92,12 @@ function PlanningTestTable({ onChangeActionType }) {
               </tr>
             </thead>
             <tbody>
-              {planningTests?.planning?.map((testData, idx) => (
+              {planning?.map((testData, idx) => (
                 <tr key={testData?.id} onClick={() => handleOpenCurrentTestData(testData.id)}>
-                  <td>
-                    {idx +
-                      1 +
-                      planningTests.pagination.pageSize * (planningTests.pagination.pageNumber - 1)}
-                  </td>
+                  <td>{idx + 1 + pagination.pageSize * (pagination.pageNumber - 1)}</td>
                   <td>{testData?.name}</td>
                   <td>{testData?.questionsCount}</td>
-                  <td>{new Date(testData?.durationTimeInMinutes).getMinutes()}</td>
+                  <td>{milliSecondsToMinutes(testData?.durationTimeInMinutes)}</td>
                   <td>{testData?.price}</td>
                   <td>{new Date(testData?.startVisionTestDate).toLocaleString()}</td>
                   <td>{new Date(testData?.finishVisionTestDate).toLocaleString()}</td>
@@ -105,9 +106,9 @@ function PlanningTestTable({ onChangeActionType }) {
             </tbody>
           </table>
           <PaginationTable
-            dataCount={planningTests?.count}
-            pageNumber={planningTests?.pagination?.pageNumber}
-            pageSize={planningTests?.pagination?.pageSize}
+            dataCount={count}
+            pageNumber={pagination?.pageNumber}
+            pageSize={pagination?.pageSize}
             onChangeCurrPage={pageNumber => handleChangeCurrPage(pageNumber)}
             onChangePageSize={pageSize => handleChangePageSize(pageSize)}
           />

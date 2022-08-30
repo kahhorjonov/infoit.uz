@@ -9,6 +9,12 @@ import { getQuizs, finishUserTest } from 'store/thunk';
 
 import CardQuiz from '../Cards/CardQuiz/CardQuiz';
 
+const quizsLocal = [
+  {
+    
+  }
+];
+
 export default function Quiz() {
   const dispatch = useDispatch();
   const {
@@ -17,18 +23,27 @@ export default function Quiz() {
   } = useSelector(store => store);
   const navigate = useNavigate();
   const params = useParams();
-  const timeLs = localStorage.getItem('timeMinutes');
+  const timeLs = JSON.parse(localStorage.getItem('time'));
+  // const { hours, minutes, seconds } = timeLs;
 
   const testDuration = currentTest.durationTimeInMinutes / 1000 / 60;
 
   const time = new Date();
-  time.setSeconds(time.getSeconds() + 60 * (timeLs > 0 ? timeLs : testDuration));
+  time.setSeconds(time.getSeconds() + 60 * 1);
+
+  // console.log(timeLs);
+
+  // if (timeLs && (timeLs.hours > 0 || timeLs.minutes > 0 || timeLs.seconds > 0)) {
+  //   timeLs.hours > 0 && time.setHours(60 * timeLs.hours);
+  //   timeLs.minutes > 0 && time.setMinutes(60 * timeLs.minutes);
+  //   timeLs.seconds > 0 && time.setSeconds(60 * timeLs.seconds);
+  // } else time.setMinutes(60 * testDuration);
 
   const handleFinishedTest = testId => {
     localStorage.removeItem('userAnswers');
     localStorage.removeItem('timeMinutes');
     navigate('/myTests');
-    // finishUserTest(testId);
+    // finishUserTest(testId);zz
   };
 
   // useEffect(() => {

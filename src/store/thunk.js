@@ -238,15 +238,18 @@ export const confirmationPayment = async code => {
 
 export const buyTest = async testId => {
   try {
-    const response = await axiosPublic.post(`api/test/v1/buy-test?testId=${testId}`, {
-      headers: {
-        Authorization: `Bearer ${access_token}`,
+    const response = await axiosPublic.post(
+      `api/test/v1/buy-test?testId=${testId}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
       },
-    });
-
-    console.log(response.data);
+    );
+    toast.success(response.data.message);
   } catch (e) {
-    toast.error(e);
+    toast.error(e.response.data.message);
   }
 };
 
