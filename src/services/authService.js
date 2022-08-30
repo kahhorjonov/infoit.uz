@@ -30,7 +30,7 @@ export const getTokenFromStorage = () => {
 
 export const login = (phoneNumber, password) => {
   const result = axios.post(`${baseURL}/auth/v1/login`, {
-    phoneNumber,
+    phoneNumber: `+998${phoneNumber}`,
     password,
   });
 

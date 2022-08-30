@@ -14,6 +14,7 @@ import MDBox from 'components/MDBox';
 import MDTypography from 'components/MDTypography';
 import MDInput from 'components/MDInput';
 import MDButton from 'components/MDButton';
+import InputMask from 'react-input-mask';
 
 // Authentication layout components
 import CoverLayout from 'layouts/authentication/components/CoverLayout';
@@ -25,7 +26,7 @@ function Cover() {
   const [password, setPassword] = useState('');
 
   const handleRegister = () => {
-    register({ firstName, lastName, phoneNumber, password });
+    register({ firstName, lastName, phoneNumber: `+998${phoneNumber}`, password });
   };
 
   return (
@@ -67,13 +68,14 @@ function Cover() {
               />
             </MDBox>
             <MDBox mb={2}>
-              <MDInput
-                type='phone'
-                label='Telefon'
-                variant='standard'
-                fullWidth
+              <InputMask
+                disabled={false}
+                mask='(99) 999 99 99'
+                maskChar=' '
                 onChange={e => setPhoneNumber(e.target.value)}
-              />
+              >
+                {() => <MDInput label='Telefon' variant='standard' type='phone' fullWidth />}
+              </InputMask>
             </MDBox>
             <MDBox mb={2}>
               <MDInput

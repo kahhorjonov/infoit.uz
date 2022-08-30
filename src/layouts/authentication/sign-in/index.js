@@ -1,13 +1,11 @@
 import { useState } from 'react';
+import InputMask from 'react-input-mask';
 
 // react-router-dom components
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 // @mui material components
 import Card from '@mui/material/Card';
-// import Switch from '@mui/material/Switch';
-// import Grid from "@mui/material/Grid";
-// import MuiLink from "@mui/material/Link";
 
 // Material Dashboard 2 React components
 import MDBox from 'components/MDBox';
@@ -66,12 +64,20 @@ function Basic() {
           <MDBox pt={4} pb={3} px={3}>
             <MDBox component='form' role='form'>
               <MDBox mb={2}>
-                <MDInput
+                <InputMask
+                  disabled={false}
+                  mask='(99) 999 99 99'
+                  maskChar=' '
+                  onChange={e => setPhone(e.target.value)}
+                >
+                  {() => <MDInput label='Telefon' type='phone' fullWidth />}
+                </InputMask>
+                {/* <MDInput
                   type='phone'
                   label='Telefon'
                   fullWidth
                   onChange={e => setPhone(e.target.value)}
-                />
+                ></MDInput> */}
               </MDBox>
               <MDBox mb={2}>
                 <MDInput
