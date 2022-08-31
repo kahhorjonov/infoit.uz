@@ -18,6 +18,7 @@ import InputMask from 'react-input-mask';
 
 // Authentication layout components
 import CoverLayout from 'layouts/authentication/components/CoverLayout';
+import { toast } from 'react-toastify';
 
 function Cover() {
   const [firstName, setFirstName] = useState('');
@@ -26,7 +27,13 @@ function Cover() {
   const [password, setPassword] = useState('');
 
   const handleRegister = () => {
-    register({ firstName, lastName, phoneNumber: `+998${phoneNumber}`, password });
+    const phone = phoneNumber.split(' ');
+    let edited = phone[0].slice(1, 3);
+    phone.forEach((phoneValue, index) => {
+      index >= 1 ? (edited += phoneValue) : '';
+    });
+
+    register({ firstName, lastName, phoneNumber: `+998${edited}`, password });
   };
 
   return (
@@ -53,6 +60,7 @@ function Cover() {
               <MDInput
                 type='text'
                 label='Ism'
+                inputProps={{ maxLength: 25 }}
                 variant='standard'
                 fullWidth
                 onChange={e => setFirstName(e.target.value)}
@@ -62,6 +70,7 @@ function Cover() {
               <MDInput
                 type='text'
                 label='Familiya'
+                inputProps={{ maxLength: 25 }}
                 variant='standard'
                 fullWidth
                 onChange={e => setLastName(e.target.value)}
@@ -82,6 +91,7 @@ function Cover() {
                 type='password'
                 label='Parol'
                 variant='standard'
+                maxLength={25}
                 fullWidth
                 onChange={e => setPassword(e.target.value)}
               />

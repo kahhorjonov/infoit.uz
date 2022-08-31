@@ -18,6 +18,7 @@ import BasicLayout from 'layouts/authentication/components/BasicLayout';
 
 // Services
 import { login, setToken, decodedToken } from 'services/authService';
+import { toast } from 'react-toastify';
 
 function Basic() {
   const [phone, setPhone] = useState('');
@@ -31,10 +32,20 @@ function Basic() {
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
 
   const handleLogin = async () => {
-    const result = await login(phone, password);
-    setToken(result.data.objectKoinot.accessToken);
+    const phoneNumber = phone.split(' ');
+    let edited = phoneNumber[0].slice(1, 3);
+    phoneNumber.forEach((phoneValue, index) => {
+      index >= 1 ? (edited += phoneValue) : '';
+    });
 
-    navigate(redirectPath, { replace: true });
+    try {
+      const result = await login(edited, password);
+      setToken(result.data.objectKoinot.accessToken);
+      toast.success(result.data.message);
+      navigate(redirectPath, { replace: true });
+    } catch (error) {
+      toast.error(error.response.data.objectKoinot[0].expelling);
+    }
   };
 
   const path =
@@ -84,6 +95,7 @@ function Basic() {
                   type='password'
                   label='Parol'
                   fullWidth
+                  inputProps={{ maxLength: 25 }}
                   onChange={e => setPassword(e.target.value)}
                 />
               </MDBox>

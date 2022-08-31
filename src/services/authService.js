@@ -47,22 +47,23 @@ export function setToken(jwt) {
   return null;
 }
 
-export const register = async data => {
+export const register = async datas => {
   try {
-    const {
-      data: {
-        objectKoinot: { accessToken },
-      },
-    } = await axios.post(`${baseURL}/auth/v1/register`, data);
+    const result = await axios.post(`${baseURL}/auth/v1/register`, datas);
+    const { accessToken } = result.data.objectKoinot;
 
     const parsedJwt = parseJwt(accessToken);
 
     if (accessToken && parsedJwt.exp * 1000 > Date.now()) {
       localStorage.setItem('token', accessToken);
     }
-    return window.location.replace('/');
+
+    toast.success(result.data.message);
+    setTimeout(() => {
+      window.location.replace('/');
+    }, 1500);
   } catch (error) {
-    toast.error(error);
+    toast.error(error.response.data.objectKoinot[0].expelling);
   }
   return null;
 };
