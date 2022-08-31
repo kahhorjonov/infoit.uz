@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Icon } from '@mui/material';
+import { FormControl, Icon, InputLabel, MenuItem, Select } from '@mui/material';
 import MDBox from 'components/MDBox';
 import MDInput from 'components/MDInput';
 import MDTypography from 'components/MDTypography';
@@ -9,22 +9,18 @@ function CreateTestForm({
   name,
   price,
   image,
-  questionsCount,
-  durationTimeInMinutes,
+  active,
   startTestDate,
   finishTestDate,
-  startVisionTestDate,
-  finishVisionTestDate,
+  questionsCount,
   onChangeTestData,
+  durationTimeInMinutes,
 }) {
   const handleGetImageId = async img => {
     const { attechmentId } = await uploadPhoto(img, 'TEST');
 
     onChangeTestData('image', { attachmentId: attechmentId, imageUrl: URL.createObjectURL(img) });
   };
-
-  console.log(finishVisionTestDate);
-  console.log(finishVisionTestDate && new Date(finishVisionTestDate).toISOString().substr(0, 16));
 
   return (
     <MDBox display='flex' flexDirection='column' gap={2}>
@@ -40,6 +36,19 @@ function CreateTestForm({
         fullWidth
         focused
       />
+      <FormControl fullWidth focused>
+        <InputLabel id='active_select_id'>Active</InputLabel>
+        <Select
+          labelId='active_select_id'
+          value={active}
+          onChange={e => onChangeTestData('active', e.target.value)}
+          label='Active'
+          style={{ height: '40px', padding: '2px' }}
+        >
+          <MenuItem value='true'>Active</MenuItem>
+          <MenuItem value='false'>No active</MenuItem>
+        </Select>
+      </FormControl>
       <MDInput
         value={durationTimeInMinutes}
         onChange={e => onChangeTestData('durationTimeInMinutes', parseInt(e.target.value, 10))}
@@ -83,22 +92,7 @@ function CreateTestForm({
         fullWidth
         focused
       />
-      <MDInput
-        value={startVisionTestDate}
-        onChange={e => onChangeTestData('startVisionTestDate', e.target.value)}
-        label='Start Vision Test'
-        type='datetime-local'
-        fullWidth
-        focused
-      />
-      <MDInput
-        value={finishVisionTestDate}
-        onChange={e => onChangeTestData('finishVisionTestDate', e.target.value)}
-        label='Finish Vision Test'
-        type='datetime-local'
-        fullWidth
-        focused
-      />
+
       {image ? (
         <div style={{ position: 'relative' }}>
           <img
@@ -159,12 +153,11 @@ CreateTestForm.propTypes = {
   name: PropTypes.string,
   price: PropTypes.number,
   image: PropTypes.string,
-  questionsCount: PropTypes.number,
-  onChangeTestData: PropTypes.func,
+  active: PropTypes.bool,
   startTestDate: PropTypes.node,
   finishTestDate: PropTypes.node,
-  startVisionTestDate: PropTypes.node,
-  finishVisionTestDate: PropTypes.node,
+  questionsCount: PropTypes.number,
+  onChangeTestData: PropTypes.func,
   durationTimeInMinutes: PropTypes.number,
 };
 

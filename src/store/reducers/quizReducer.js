@@ -3,18 +3,20 @@ import {
   GET_QUIZ_SUCCESS,
   SET_QUIZ_PAGINATION,
   SET_USER_ANSWER,
+  GET_RESULT_TEST_SUCCESS,
 } from 'store/actions/actionTypes';
 
 const userAnswersLS = JSON.parse(localStorage.getItem('userAnswers'));
 
 const initialState = {
   quizs: [],
+  result: [],
   count: 1,
   pageNumber: 1,
   currentQuiz: {},
-  currentTest: {},
   isLoading: false,
   userAnswers: userAnswersLS || {},
+  correctAnswersCount: 0,
 };
 
 const handleAddAnswer = (state, payload) => {
@@ -50,6 +52,17 @@ export const quizReducer = (state = initialState, action) => {
 
     case SET_USER_ANSWER:
       return handleAddAnswer(state, action.payload);
+
+    case GET_RESULT_TEST_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        pageNumber: 1,
+        quizs: action.payload.questions,
+        count: action.payload.questionsCount,
+        correctAnswersCount: action.payload.correctAnswersCount,
+        currentQuiz: action.payload.questions[0],
+      };
 
     default:
       return state;

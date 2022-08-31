@@ -2,11 +2,13 @@ import {
   SET_CURRENT_TEST_DATA,
   GET_PLANNING_TESTS_PROCCESS,
   GET_PLANNING_TESTS_SUCCESS,
+  GET_PLANNING_TESTS_FOR_USER_SUCCESS,
 } from 'store/actions/actionTypes';
 
 const initialState = {
   isLoading: true,
-  planning: [],
+  forAdmin: [],
+  forUser: [],
   count: null,
   currentTestData: {},
   pagination: {
@@ -24,7 +26,16 @@ export const planningTestReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        planning: action.payload.data.content,
+        forAdmin: action.payload.data.content,
+        count: action.payload.data.totalPages,
+        pagination: action.payload.pagination,
+      };
+
+    case GET_PLANNING_TESTS_FOR_USER_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        forUser: action.payload.data.content,
         count: action.payload.data.totalPages,
         pagination: action.payload.pagination,
       };

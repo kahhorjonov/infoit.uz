@@ -22,16 +22,12 @@ export default function MyTests() {
   const navigate = useNavigate();
 
   const startTest = async test => {
-    // dispatch(getQuizs(test?.id));
     const status = await startUserTest(test?.id);
 
     status.success === 200 ? navigate(`/quiz/${test?.id}`) : toast.error(status.message);
-    // console.log(status);
 
     dispatch(setUserCurrentTestInfo(test));
   };
-
-  // console.log(new Date(new Date(tests[0]?.finishVisionTestDate).getTime()).toLocaleTimeString());
 
   useEffect(() => {
     dispatch(getUserTests(solve));
@@ -64,7 +60,7 @@ export default function MyTests() {
               <div className='container relative mx-auto flex flex-wrap justify-between items-center p-3'>
                 <div className='flex'>
                   <img
-                    style={{ maxHeight: '110px' }}
+                    style={{ maxHeight: '110px', borderRadius: '7px' }}
                     src={test?.photo?.link || cover}
                     alt={test?.photo?.id || '...'}
                   />

@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { sendAnswer } from 'store/thunk';
+import { useParams } from 'react-router-dom';
 import MDButton from 'components/MDButton';
 import { Icon } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
@@ -10,6 +11,9 @@ import Styles from './CardQuiz.module.scss';
 
 function CardQuiz() {
   const dispatch = useDispatch();
+  const params = useParams();
+
+  const paramPathName = params['*'].split('/')[0];
 
   const {
     quiz: { currentQuiz, pageNumber, count, userAnswers },
@@ -28,7 +32,8 @@ function CardQuiz() {
       <div className={Styles.question}>
         <div>
           {/* <p>Savolni o‘qib, variantlardan birini tanlang</p> */}
-          <span>{currentQuiz?.name}</span>
+          {paramPathName === 'quiz' && <span>{currentQuiz?.name}</span>}
+          {paramPathName === 'result' && <span>{currentQuiz?.questionText}</span>}
         </div>
         <div className={Styles.imageCont}>
           <img src={currentQuiz?.questionPhoto?.link} alt={currentQuiz?.questionPhoto?.fileId} />
@@ -38,18 +43,34 @@ function CardQuiz() {
       <div className={Styles.choiceContainer}>
         {currentQuiz?.choices?.map(choice => (
           <div
-            key={choice.id}
+            key={choice?.choiceId}
             className={`${Styles.choice} ${
-              userAnswers[currentQuiz?.id]?.questionChoiceId === choice.id ? Styles.active : ''
-            } `}
-            onClick={() => handleChooseChoice(currentQuiz?.id, choice?.id)}
+              paramPathName === 'quiz' &&
+              userAnswers[currentQuiz?.id]?.questionChoiceId === choice.id
+                ? Styles.active
+                : ''
+            } ${
+              paramPathName === 'result' && choice?.correct
+                ? choice.userAnswer
+                  ? Styles.correctChoice
+                  : Styles.uncorrectChoice
+                : ''
+            }
+            `}
+            onClick={() =>
+              paramPathName === 'quiz' && handleChooseChoice(currentQuiz?.id, choice?.id)
+            }
           >
             <div className={Styles.choiceVariant}>
               <Icon>check</Icon>
             </div>
+            <div className={Styles.choiceImageContainer}>
+              {choice?.choicePhoto?.link && (
+                <img src={choice?.choicePhoto?.link} alt={choice?.choicePhoto?.fileId || '...'} />
+              )}
+            </div>
             <span className={Styles.choiceText}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et
-              velit interdum, ac aliquet odio mattis.
+              {paramPathName === 'quiz' ? choice?.text : choice?.choice}
             </span>
           </div>
         ))}

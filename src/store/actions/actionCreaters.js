@@ -21,6 +21,8 @@ import {
   SET_USER_CURRENT_TEST_INFO,
   GET_MY_DATAS_PROCESS,
   GET_MY_DATAS_SUCCESS,
+  GET_PLANNING_TESTS_FOR_USER_SUCCESS,
+  GET_RESULT_TEST_SUCCESS,
 } from './actionTypes';
 
 export const getCategoriesProccess = () => ({
@@ -78,6 +80,10 @@ export const getPlanningTestSuccess = testData => ({
   type: GET_PLANNING_TESTS_SUCCESS,
   payload: testData,
 });
+export const getPlanningTestForUserSuccess = testData => ({
+  type: GET_PLANNING_TESTS_FOR_USER_SUCCESS,
+  payload: testData,
+});
 
 export const setCurrentPlanningTestData = testData => ({
   type: SET_CURRENT_TEST_DATA,
@@ -101,6 +107,11 @@ export const setQuizPageNumber = pageNumber => ({
 export const setUserAnswer = answer => ({
   type: SET_USER_ANSWER,
   payload: answer,
+});
+
+export const getResultTestSuccess = result => ({
+  type: GET_RESULT_TEST_SUCCESS,
+  payload: result,
 });
 
 export const getUserTestsProccess = () => ({

@@ -2,69 +2,117 @@ import Spiner from 'components/Loader/Spiner';
 import MDButton from 'components/MDButton';
 import QuizPagination from 'components/QuizPagination/QuizPagination';
 import Timer from 'components/Timer/Timer';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import { getResultTestSuccess } from 'store/actions/actionCreaters';
 import { getQuizs, finishUserTest } from 'store/thunk';
+import ModalComp from 'components/Modal/ModalComp';
+import MDBox from 'components/MDBox';
+import MDTypography from 'components/MDTypography';
+import resultJson from './result.json';
 
 import CardQuiz from '../Cards/CardQuiz/CardQuiz';
-
-const quizsLocal = [
-  {
-    
-  }
-];
 
 export default function Quiz() {
   const dispatch = useDispatch();
   const {
-    quiz: { isLoading, quizs, pageNumber, count },
+    quiz: { isLoading, correctAnswersCount },
     userTests: { currentTest },
   } = useSelector(store => store);
+  const [openModal, setOpenModal] = useState(false);
+
   const navigate = useNavigate();
   const params = useParams();
-  const timeLs = JSON.parse(localStorage.getItem('time'));
-  // const { hours, minutes, seconds } = timeLs;
+
+  const paramPathName = params['*'].split('/')[0];
 
   const testDuration = currentTest.durationTimeInMinutes / 1000 / 60;
 
   const time = new Date();
-  time.setSeconds(time.getSeconds() + 60 * 1);
+  time.setSeconds(time.getSeconds() + 60 * testDuration);
 
-  // console.log(timeLs);
+  const handleOpen = () => setOpenModal(true);
+  const handleClose = () => setOpenModal(false);
 
-  // if (timeLs && (timeLs.hours > 0 || timeLs.minutes > 0 || timeLs.seconds > 0)) {
-  //   timeLs.hours > 0 && time.setHours(60 * timeLs.hours);
-  //   timeLs.minutes > 0 && time.setMinutes(60 * timeLs.minutes);
-  //   timeLs.seconds > 0 && time.setSeconds(60 * timeLs.seconds);
-  // } else time.setMinutes(60 * testDuration);
-
-  const handleFinishedTest = testId => {
-    localStorage.removeItem('userAnswers');
-    localStorage.removeItem('timeMinutes');
-    navigate('/myTests');
-    // finishUserTest(testId);zz
+  const handleFinishedTest = async testId => {
+    const response = await finishUserTest(testId);
+    if (response.success === 200) {
+      // dispatch(getResultTestSuccess(resultJson.objectKoinot));
+      console.log(response.data.objectKoinot);
+      dispatch(getResultTestSuccess(response.data.objectKoinot));
+      handleClose();
+      localStorage.removeItem('userAnswers');
+      navigate(`/result/${testId}`);
+    }
   };
 
   // useEffect(() => {
   //   quizs.length === 0 && navigate('/myTests');
   // }, [quizs]);
   useEffect(() => {
-    dispatch(getQuizs(params?.id));
+    paramPathName === 'quiz' && dispatch(getQuizs(params?.id));
   }, [dispatch]);
 
   return (
     <div className='relative mt-32'>
+      <ModalComp width='280px' status={openModal} onClose={handleClose}>
+        {/* <MDBox display='flex' justifyContent='space-between'>
+          <MDBox>
+            <h2 className='text-4xl font-bold'>{currentTest?.name}</h2>
+            <p>Savollar soni: {currentTest?.questionsCount} ta</p>
+            <p>To`g`ri javoblar soni: {correctAnswersCount} ta</p>
+            <p>Davomiyligi: {testDuration} minut</p>
+          </MDBox>
+          <MDBox height='maxContent' bgColor='primary'>
+            <img
+              src={currentTest?.questionPhoto?.link}
+              alt={currentTest?.questionPhoto?.id || '...'}
+            />
+          </MDBox>
+        </MDBox> */}
+        <MDTypography textAlign='center'>Rostdan ham testni tugatmoqchimisiz?</MDTypography>
+        <MDBox display='flex' justifyContent='space-between' mt={3} gap={2}>
+          <MDButton
+            fullWidth
+            type='button'
+            variant='contained'
+            color='success'
+            onClick={() => {
+              handleFinishedTest(currentTest?.id);
+              // handleClose();
+              // navigate(`/result/${currentTest?.id}`);
+            }}
+          >
+            Ha
+          </MDButton>
+          <MDButton
+            fullWidth
+            type='button'
+            variant='contained'
+            color='secondary'
+            onClick={() => handleClose()}
+          >
+            Yo`q
+          </MDButton>
+        </MDBox>
+      </ModalComp>
       <div className='container mx-auto flex justify-between'>
         <div>
-          <h1 className='text-4xl font-bold'>{currentTest?.name}</h1>
+          <h2 className='text-4xl font-bold'>{currentTest?.name}</h2>
           <p>Savollar soni: {currentTest?.questionsCount} ta</p>
+          {paramPathName === 'result' && <p>To`g`ri javoblar soni: {correctAnswersCount} ta</p>}
           <p>Davomiyligi: {testDuration} minut</p>
         </div>
         <div className='flex items-center gap-3'>
-          <Timer expiryTimestamp={time} />
-          <MDButton type='button' color='error' onClick={() => handleFinishedTest(currentTest?.id)}>
-            Testni to‘xtatish
+          {paramPathName === 'quiz' && <Timer expiryTimestamp={time} />}
+          <MDButton
+            type='button'
+            color={paramPathName === 'quiz' ? 'error' : 'secondary'}
+            // onClick={() => handleFinishedTest(currentTest?.id)}
+            onClick={() => (paramPathName === 'quiz' ? handleOpen() : navigate('/'))}
+          >
+            {paramPathName === 'quiz' ? 'Testni to‘xtatish' : 'Testdan chiqish'}
           </MDButton>
         </div>
       </div>

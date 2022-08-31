@@ -11,7 +11,10 @@ import FooterHome from './FooterHome';
 
 export default function TestInfo() {
   const dispatch = useDispatch();
-  const { category, planningTests } = useSelector(store => store);
+  const {
+    category,
+    planningTests: { planning, currentTestData },
+  } = useSelector(store => store);
   const { id } = useParams();
 
   useEffect(() => {
@@ -21,7 +24,7 @@ export default function TestInfo() {
   useEffect(() => {
     dispatch(
       getPlanningTest({
-        categoryId: planningTests?.currentTestData?.category?.id || '',
+        categoryId: currentTestData?.category?.id || '',
         pagination: { pageNumber: 1, pageSize: 6 },
       }),
     );
@@ -37,7 +40,7 @@ export default function TestInfo() {
             </div>
 
             <div className='w-full lg:w-6/12 xl:w-4/12 px-4 ml-auto mr-auto'>
-              <CardTestInfo planningTests={planningTests.currentTestData} />
+              <CardTestInfo planningTests={currentTestData} />
             </div>
           </div>
         </div>
@@ -73,7 +76,7 @@ export default function TestInfo() {
       <section className='relative py-20 bg-white'>
         <div className='container mx-auto px-4'>
           <div className='flex flex-wrap'>
-            {planningTests?.planning?.map(test => (
+            {planning?.map(test => (
               <div key={test.id} className='w-full lg:w-6/12 xl:w-4/12 px-4 py-2'>
                 <CardTestInfo planningTests={test} />
               </div>

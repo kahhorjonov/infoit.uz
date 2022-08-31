@@ -6,6 +6,7 @@ import {
   getCategoriesSuccess,
   getMyDatasProcess,
   getMyDatasSuccess,
+  getPlanningTestForUserSuccess,
   getPlanningTestProccess,
   getPlanningTestSuccess,
   getQuestionsProccess,
@@ -135,15 +136,32 @@ export const uploadPhoto = async (photo, type) => {
 export const getPlanningTest =
   ({ categoryId, pagination }) =>
   async dispatch => {
+    console.log(1);
     try {
       dispatch(getPlanningTestProccess());
       const response = await axiosPublic.get(
-        `api/test/v1/find-all?category=${categoryId}&page=${pagination.pageNumber - 1}&size=${
+        `api/test/v1/find-all-admin?category=${categoryId}&page=${pagination.pageNumber - 1}&size=${
           pagination.pageSize
         }&search=`,
       );
 
       dispatch(getPlanningTestSuccess({ data: response.data.objectKoinot, pagination }));
+    } catch (e) {
+      toast.error(e);
+    }
+  };
+
+export const getPlanningTestForUser =
+  ({ categoryId, pagination }) =>
+  async dispatch => {
+    try {
+      dispatch(getPlanningTestProccess());
+      const response = await axiosPublic.get(
+        `api/test/v1/find-all-user?category=${categoryId}&page=${pagination.pageNumber - 1}&size=${
+          pagination.pageSize
+        }&search=`,
+      );
+      dispatch(getPlanningTestForUserSuccess({ data: response.data.objectKoinot, pagination }));
     } catch (e) {
       toast.error(e);
     }
@@ -155,7 +173,7 @@ export const addPlanningTest = data => async dispatch => {
       headers: { Authorization: `Bearer ${access_token}` },
     });
     console.log(response.data);
-    // toast.success('');
+    toast.success(`${response.data.message} test`);
     dispatch(
       getPlanningTest({ categoryId: data.categoryId, pagination: { pageNumber: 1, pageSize: 10 } }),
     );
@@ -265,7 +283,6 @@ export const startUserTest = async testId => {
     );
     return response.data;
   } catch (error) {
-    console.log(error.response.data);
     return error.response.data;
   }
 };
@@ -273,7 +290,7 @@ export const startUserTest = async testId => {
 export const finishUserTest = async testId => {
   try {
     const response = await axiosPublic.post(
-      `/api/test/v1/finish-test&testId=${testId}`,
+      `/api/test/v1/finish-test?testId=${testId}`,
       {},
       {
         headers: {
@@ -281,10 +298,10 @@ export const finishUserTest = async testId => {
         },
       },
     );
-
-    console.log(response.data);
+    return response.data;
   } catch (e) {
-    toast.error(e);
+    toast.error(e.response.data.error);
+    return e.response.status;
   }
 };
 
