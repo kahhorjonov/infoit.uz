@@ -22,16 +22,15 @@ function CreateTest() {
   const [newTest, setNewTest] = useState({
     name: '',
     image: '',
-    categoryId: '',
     price: 0,
-    durationTimeInMinutes: 0,
-    questionsCount: 0,
-    attachmentId: '',
+    active: true,
+    categoryId: '',
     questionsId: [],
-    startTestDate: '',
-    finishTestDate: '',
-    startVisionTestDate: '',
-    finishVisionTestDate: '',
+    attachmentId: '',
+    questionsCount: 0,
+    durationTimeInMinutes: 0,
+    startTestDate: new Date(),
+    finishTestDate: new Date(),
   });
 
   const handleChangeTestData = (name, value) => {
@@ -53,7 +52,6 @@ function CreateTest() {
     actionType === 'add'
       ? dispatch(addPlanningTest({ ...data, categoryId: currentCategory?.id }))
       : dispatch(addPlanningTest(data));
-    console.log(data);
     setActionType('view');
   };
 
@@ -64,19 +62,14 @@ function CreateTest() {
         id: currentTestData?.id,
         name: currentTestData?.name,
         image: currentTestData?.photo?.link,
-        attachmentId: currentTestData?.photo?.id,
-        categoryId: currentTestData?.category?.id,
         price: currentTestData?.price,
-        durationTimeInMinutes: new Date(currentTestData?.durationTimeInMinutes).getMinutes(),
+        active: currentTestData?.active,
+        categoryId: currentTestData?.category?.id,
+        attachmentId: currentTestData?.photo?.id,
         questionsCount: currentTestData?.questionsCount,
         startTestDate: new Date(currentTestData?.startTestDate).toISOString().substr(0, 16),
         finishTestDate: new Date(currentTestData?.finishTestDate).toISOString().substr(0, 16),
-        startVisionTestDate: new Date(currentTestData?.startVisionTestDate)
-          .toISOString()
-          .substr(0, 16),
-        finishVisionTestDate: new Date(currentTestData?.finishVisionTestDate)
-          .toISOString()
-          .substr(0, 16),
+        durationTimeInMinutes: new Date(currentTestData?.durationTimeInMinutes).getMinutes(),
       });
   }, [actionType, currentTestData]);
 
@@ -114,9 +107,14 @@ function CreateTest() {
               </MDButton>
             )}
             {(actionType === 'add' || actionType === 'edit') && (
-              <MDButton onClick={() => handleSave(newTest)}>
-                <Icon>check</Icon>
-              </MDButton>
+              <>
+                <MDButton onClick={() => setActionType('view')}>
+                  <Icon>cancel</Icon>
+                </MDButton>
+                <MDButton onClick={() => handleSave(newTest)}>
+                  <Icon>check</Icon>
+                </MDButton>
+              </>
             )}
           </MDBox>
         </MDBox>

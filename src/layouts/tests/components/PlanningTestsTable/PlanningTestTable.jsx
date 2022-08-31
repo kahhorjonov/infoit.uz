@@ -14,7 +14,7 @@ function PlanningTestTable({ onChangeActionType }) {
   const dispatch = useDispatch();
   const {
     category: { currentCategory },
-    planningTests: { isLoading, planning, currentTestData, count, pagination },
+    planningTests: { isLoading, forAdmin, currentTestData, count, pagination },
   } = useSelector(store => store);
   const [testInfo, setTestInfo] = useState(false);
 
@@ -92,15 +92,15 @@ function PlanningTestTable({ onChangeActionType }) {
               </tr>
             </thead>
             <tbody>
-              {planning?.map((testData, idx) => (
+              {forAdmin?.map((testData, idx) => (
                 <tr key={testData?.id} onClick={() => handleOpenCurrentTestData(testData.id)}>
                   <td>{idx + 1 + pagination.pageSize * (pagination.pageNumber - 1)}</td>
                   <td>{testData?.name}</td>
                   <td>{testData?.questionsCount}</td>
                   <td>{milliSecondsToMinutes(testData?.durationTimeInMinutes)}</td>
                   <td>{testData?.price}</td>
-                  <td>{new Date(testData?.startVisionTestDate).toLocaleString()}</td>
-                  <td>{new Date(testData?.finishVisionTestDate).toLocaleString()}</td>
+                  <td>{new Date(testData?.startTestDate).toISOString().substr(0, 16)}</td>
+                  <td>{new Date(testData?.finishTestDate).toISOString().substr(0, 16)}</td>
                 </tr>
               ))}
             </tbody>

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import DropDown from 'components/DropDown/DropDown';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCategories, getPlanningTest } from 'store/thunk';
+import { getCategories, getPlanningTestForUser } from 'store/thunk';
 
 // components
 import Spiner from 'components/Loader/Spiner';
@@ -9,16 +9,19 @@ import CardTest from '../Cards/CardTest';
 
 export default function Tests() {
   const dispatch = useDispatch();
-  const { planningTests, category } = useSelector(store => store);
+  const {
+    planningTests: { forUser, isLoading },
+    category: { currentCategory },
+  } = useSelector(store => store);
 
   useEffect(() => {
     dispatch(
-      getPlanningTest({
-        categoryId: category?.currentCategory?.id || '',
+      getPlanningTestForUser({
+        categoryId: currentCategory?.id || '',
         pagination: { pageNumber: 1, pageSize: 6 },
       }),
     );
-  }, [dispatch, category?.currentCategory]);
+  }, []);
 
   useEffect(() => {
     dispatch(getCategories());
@@ -43,11 +46,11 @@ export default function Tests() {
           </ul>
         </div> */}
 
-        {planningTests.isLoading ? (
+        {isLoading ? (
           <Spiner />
         ) : (
           <div className='flex flex-wrap mt-6'>
-            {planningTests?.planning?.map(test => (
+            {forUser?.map(test => (
               <CardTest key={test.id} {...test} />
             ))}
           </div>

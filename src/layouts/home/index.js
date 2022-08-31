@@ -104,6 +104,15 @@ function Admin() {
             </RequireAuthForUser>
           }
         />
+        <Route
+          path='/result/:id'
+          exact
+          element={
+            <RequireAuthForUser>
+              <Quiz />
+            </RequireAuthForUser>
+          }
+        />
         {/* <Route path='/profile' exact element={<Profile />} /> */}
         {/* <Route path='/results/:id' exact element={<OthersResult />} /> */}
         {/* <Route path='/myTests' exact element={<MyTests />} /> */}
