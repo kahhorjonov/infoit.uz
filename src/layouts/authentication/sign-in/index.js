@@ -40,7 +40,8 @@ function Basic() {
 
   const handleLogin = async () => {
     if (password.password && phone.phone) {
-      const phoneNumber = phone.split(' ');
+      const phoneNumber = phone.phone.split(' ');
+
       let edited = phoneNumber[0].slice(1, 3);
       phoneNumber.forEach((phoneValue, index) => {
         index >= 1 ? (edited += phoneValue) : '';
@@ -52,7 +53,7 @@ function Basic() {
         toast.success(result.data.message);
         navigate(redirectPath, { replace: true });
       } catch (error) {
-        toast.error(error.response.data.objectKoinot[0].expelling);
+        toast.error(error?.response?.data?.objectKoinot[0]?.expelling);
       }
     } else {
       setPhone({ ...phone, isOpened: true });
