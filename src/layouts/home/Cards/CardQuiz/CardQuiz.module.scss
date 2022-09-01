@@ -20,6 +20,8 @@
     }
     .imageCont {
       height: max-content;
+      border-radius: 7px;
+      overflow: hidden;
       img {
         max-width: 250px;
       }
@@ -39,6 +41,8 @@
       box-shadow: 0px 2px 2px rgba(82, 82, 82, 0.25);
       .choiceImageContainer {
         width: 150px;
+        border-radius: 7px;
+        overflow: hidden;
         // height: 200px;
         img {
           width: 100%;

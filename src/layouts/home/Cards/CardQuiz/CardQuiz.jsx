@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { sendAnswer } from 'store/thunk';
 import { useParams } from 'react-router-dom';
+import { v4 } from 'uuid';
+import { setQuizPageNumber } from 'store/actions/actionCreaters';
 import MDButton from 'components/MDButton';
 import { Icon } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { setQuizPageNumber } from 'store/actions/actionCreaters';
 
 import Styles from './CardQuiz.module.scss';
 
@@ -43,13 +44,15 @@ function CardQuiz() {
       <div className={Styles.choiceContainer}>
         {currentQuiz?.choices?.map(choice => (
           <div
-            key={choice?.choiceId}
-            className={`${Styles.choice} ${
+            key={v4()}
+            className={`${Styles.choice} 
+            ${
               paramPathName === 'quiz' &&
               userAnswers[currentQuiz?.id]?.questionChoiceId === choice.id
                 ? Styles.active
                 : ''
-            } ${
+            } 
+            ${
               paramPathName === 'result' && choice?.correct
                 ? choice.userAnswer
                   ? Styles.correctChoice
@@ -64,11 +67,11 @@ function CardQuiz() {
             <div className={Styles.choiceVariant}>
               <Icon>check</Icon>
             </div>
-            <div className={Styles.choiceImageContainer}>
-              {choice?.choicePhoto?.link && (
+            {choice?.choicePhoto?.link && (
+              <div className={Styles.choiceImageContainer}>
                 <img src={choice?.choicePhoto?.link} alt={choice?.choicePhoto?.fileId || '...'} />
-              )}
-            </div>
+              </div>
+            )}
             <span className={Styles.choiceText}>
               {paramPathName === 'quiz' ? choice?.text : choice?.choice}
             </span>

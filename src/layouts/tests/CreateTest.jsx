@@ -29,8 +29,8 @@ function CreateTest() {
     attachmentId: '',
     questionsCount: 0,
     durationTimeInMinutes: 0,
-    startTestDate: new Date(),
-    finishTestDate: new Date(),
+    startTestDate: new Date().toISOString().substr(0, 16),
+    finishTestDate: new Date().toISOString().substr(0, 16),
   });
 
   const handleChangeTestData = (name, value) => {
