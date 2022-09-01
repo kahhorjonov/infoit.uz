@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 // image
-import coverSm from 'assets/homePage/image 3081.png';
+import coverSm from 'assets/images/testcover.png';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { getPlanningTestById } from 'store/thunk';
@@ -25,7 +25,11 @@ export default function Payment() {
     <div className='relative flex flex-col min-w-0 break-words w-full min-h-screen mb-6 shadow-lg rounded-lg border-0'>
       <div className='items-center mt-20 shadow-lg py-2'>
         <div className='container relative mx-auto flex items-center p-3'>
-          <img src={coverSm} alt='2' />
+          <img
+            style={{ width: '60px', height: '75px' }}
+            src={coverSm && currentTestData?.photo?.link}
+            alt='2'
+          />
           <div className='flex flex-col mx-4'>
             <h2 className='text-2xl'>{currentTestData?.name}</h2>
             <h2 className='text-sm'>{currentTestData?.category?.nameUz}</h2>

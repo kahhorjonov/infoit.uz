@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getPlanningTest, getPlanningTestById } from 'store/thunk';
-import cover from 'assets/homePage/Testcover.png';
+import cover from 'assets/images/testcover.png';
 
 // Components
 
@@ -33,7 +33,7 @@ export default function TestInfo() {
   return (
     <main>
       <div className='relative pt-16 pb-32 flex content-center items-center justify-center bg-white min-h-screen-75'>
-        <div className='container relative mx-auto'>
+        <div className='mt-8 container relative mx-auto'>
           <div className='items-center flex flex-wrap'>
             <div className='w-full lg:w-6/12 xl:w-4/12 px-4 py-6 ml-auto mr-auto text-center'>
               <img

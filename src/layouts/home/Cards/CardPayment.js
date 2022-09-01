@@ -21,21 +21,21 @@ export default function CardTest() {
 
   const handleSendCardDetails = async () => {
     const data = {
-      amount: '5000',
+      amount: currentTestData?.price,
       card: cardNumber.trim(),
       expireDate: `${expDate.slice(3, 5)}${expDate.slice(0, 2)}`,
     };
 
-    await buyTest(params?.id);
+    // await buyTest(params?.id);
 
-    // try {
-    //   const result = await sendCardDetails(data);
-    //   toast.info(result.data.message);
-    //   setConfirmation(true);
-    // } catch (ex) {
-    //   toast.error(ex.response.data.message);
-    //   setConfirmation(true);
-    // }
+    try {
+      const result = await sendCardDetails(data);
+      toast.info(result.data.message);
+      setConfirmation(true);
+    } catch (ex) {
+      toast.error(ex.response.data.message);
+      setConfirmation(true);
+    }
   };
 
   const handleConfirmation = () => {
