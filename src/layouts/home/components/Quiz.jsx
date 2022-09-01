@@ -39,9 +39,8 @@ export default function Quiz() {
     const response = await finishUserTest(testId);
     if (response.success === 200) {
       // dispatch(getResultTestSuccess(resultJson.objectKoinot));
-      console.log(response.data.objectKoinot);
-      dispatch(getResultTestSuccess(response.data.objectKoinot));
       handleClose();
+      dispatch(getResultTestSuccess(response.objectKoinot));
       localStorage.removeItem('userAnswers');
       navigate(`/result/${testId}`);
     }
@@ -78,11 +77,7 @@ export default function Quiz() {
             type='button'
             variant='contained'
             color='success'
-            onClick={() => {
-              handleFinishedTest(currentTest?.id);
-              // handleClose();
-              // navigate(`/result/${currentTest?.id}`);
-            }}
+            onClick={() => handleFinishedTest(currentTest?.id)}
           >
             Ha
           </MDButton>

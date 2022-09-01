@@ -1,20 +1,30 @@
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTimer } from 'react-timer-hook';
 import { toast } from 'react-toastify';
+import { getResultTestSuccess } from 'store/actions/actionCreaters';
+import { finishUserTest } from 'store/thunk';
+import result from '../../layouts/home/components/result.json';
 
 import Styles from './Timer.module.scss';
 
 function Timer({ expiryTimestamp }) {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = useParams();
   const { seconds, minutes, hours, days, isRunning, start, pause, resume, restart } = useTimer({
     expiryTimestamp,
-    onExpire: () => {
-      toast.warning('Time out!');
-      navigate(`/result/${params?.id}`);
+    onExpire: async () => {
+      const response = await finishUserTest(params?.id);
+      if (response.success === 200) {
+        toast.warning('Time out!');
+        // dispatch(getResultTestSuccess(result.objectKoinot));
+        dispatch(getResultTestSuccess(response.objectKoinot));
+        localStorage.removeItem('userAnswers');
+        navigate(`/result/${params?.id}`);
+      }
     },
-    // console.warn('onExpire called'),
   });
 
   return (
