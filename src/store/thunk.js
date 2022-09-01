@@ -282,7 +282,7 @@ export const finishUserTest = async testId => {
         },
       },
     );
-    // console.log(response);
+
     return response.data;
   } catch (e) {
     toast.error(e.response.data.error);
