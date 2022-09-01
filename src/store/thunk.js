@@ -240,12 +240,11 @@ export const confirmationPayment = async code => {
         },
       },
     );
-    console.log(response);
+
     toast.success(response.data.message);
-    toast.success('Testni `Mening testlarim` bo`limidan topishingiz mumkin');
     setTimeout(() => {
-      window.location.replace('/');
-    }, 2500);
+      window.location.replace('/topup');
+    }, 2000);
   } catch (e) {
     toast.error(e);
   }

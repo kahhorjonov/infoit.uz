@@ -27,6 +27,7 @@ import Quiz from './components/Quiz';
 import MyTests from './components/MyTests';
 import Profile from './components/Profile';
 import OthersResult from './components/OthersResult';
+import TopUp from './components/TopUp';
 
 function Admin() {
   const [controller, dispatch] = useMaterialUIController();
@@ -65,6 +66,15 @@ function Admin() {
           element={
             <RequireAuthForUser>
               <Profile />
+            </RequireAuthForUser>
+          }
+        />
+        <Route
+          path='/topup'
+          exact
+          element={
+            <RequireAuthForUser>
+              <TopUp />
             </RequireAuthForUser>
           }
         />

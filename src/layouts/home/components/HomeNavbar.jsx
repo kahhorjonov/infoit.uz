@@ -8,6 +8,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PersonIcon from '@mui/icons-material/Person';
 import LogoutIcon from '@mui/icons-material/Logout';
 import QuizIcon from '@mui/icons-material/Quiz';
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 
 // Services
 import { decodedToken } from 'services/authService';
@@ -129,6 +130,10 @@ export default function HomeNavbar() {
                   <div className='rounded-lg dropdown-content'>
                     <Link className='rounded-lg' to='/profile'>
                       <PersonIcon /> Profil
+                    </Link>
+                    <hr />
+                    <Link className='rounded-lg' to='/topup'>
+                      <AccountBalanceWalletIcon /> Hisobni to`ldirish
                     </Link>
                     <hr />
                     <Link to='/myTests' className='rounded-lg'>
