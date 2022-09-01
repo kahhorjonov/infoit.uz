@@ -295,7 +295,11 @@ export const finishUserTest = async testId => {
         },
       },
     );
+<<<<<<< HEAD
 
+=======
+    console.log(response);
+>>>>>>> b08b645 (Quiz Page)
     return response.data;
   } catch (e) {
     toast.error(e.response.data.error);
