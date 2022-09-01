@@ -1,13 +1,37 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 // icons
 import AccessTimeFilled from '@mui/icons-material/AccessTimeFilled';
 import Spiner from 'components/Loader/Spiner';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { getMe, buyTest } from 'store/thunk';
+import { toast } from 'react-toastify';
+
 export default function CardTestInfo({ planningTests, workingComp, onChangeAction }) {
+  const {
+    profileData: { isLoading, profileData },
+  } = useSelector(store => store);
+
+  const dispatch = useDispatch();
+  const [profile, setProfile] = useState({ ...profileData });
+
+  const params = useParams();
   const navigate = useNavigate();
+
+  const handleBuyTest = () => {
+    buyTest(params?.id);
+  };
+
+  useEffect(() => {
+    dispatch(getMe());
+  }, [dispatch]);
+
+  useEffect(() => {
+    setProfile({ ...profileData });
+  }, [profileData]);
 
   return (
     <div className='relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg p-2'>
@@ -65,7 +89,21 @@ export default function CardTestInfo({ planningTests, workingComp, onChangeActio
               </button>
             ) : (
               <button
-                onClick={() => navigate(`/buyTest/${planningTests?.id}`)}
+                onClick={
+                  profile?.balance >= 5000 && profile?.balance > planningTests?.price
+                    ? () => {
+                        toast.success("Testni 'Mening Testlarim' bo`limidan topishingiz mumkun");
+                        handleBuyTest();
+                      }
+                    : () => {
+                        toast.error(
+                          'Hisobda yetarli mablang mavjud emas, iltimos hisobingizni to`ldiring',
+                        );
+                        setTimeout(() => {
+                          navigate(`/buyTest/${planningTests?.id}`);
+                        }, 1500);
+                      }
+                }
                 type='button'
                 className='w-full bg-lightBlue-600'
                 style={{

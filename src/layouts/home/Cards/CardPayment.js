@@ -26,8 +26,6 @@ export default function CardTest() {
       expireDate: `${expDate.slice(3, 5)}${expDate.slice(0, 2)}`,
     };
 
-    // await buyTest(params?.id);
-
     try {
       const result = await sendCardDetails(data);
       toast.info(result.data.message);
@@ -38,8 +36,13 @@ export default function CardTest() {
     }
   };
 
-  const handleConfirmation = () => {
-    confirmationPayment(confirmationCode);
+  const handleConfirmation = async () => {
+    try {
+      confirmationPayment(confirmationCode);
+      buyTest(params?.id);
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
   };
 
   return (

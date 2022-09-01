@@ -231,23 +231,11 @@ export function sendCardDetails(data) {
 }
 
 export const confirmationPayment = async code => {
-  try {
-    const response = await axiosPublic.post(
-      `api/payment/v1/confirmation?confirmationCode=${code}`,
-      {
-        headers: {
-          Authorization: `Bearer ${access_token}`,
-        },
-      },
-    );
-
-    toast.success(response.data.message);
-    setTimeout(() => {
-      window.location.replace('/topup');
-    }, 2000);
-  } catch (e) {
-    toast.error(e);
-  }
+  return await axiosPublic.post(`api/payment/v1/confirmation?confirmationCode=${code}`, {
+    headers: {
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
 };
 
 export const buyTest = async testId => {
