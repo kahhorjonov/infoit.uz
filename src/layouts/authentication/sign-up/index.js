@@ -1,5 +1,8 @@
 import { useState } from 'react';
 
+import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { InputAdornment, IconButton } from '@mui/material';
+
 import { register } from 'services/authService';
 
 // react-router-dom components
@@ -21,19 +24,40 @@ import CoverLayout from 'layouts/authentication/components/CoverLayout';
 import { toast } from 'react-toastify';
 
 function Cover() {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [password, setPassword] = useState('');
+  const [firstName, setFirstName] = useState({ firstName: '', isOpened: false });
+  const [lastName, setLastName] = useState({ lastName: '', isOpened: false });
+  const [phoneNumber, setPhoneNumber] = useState({ phoneNumber: '', isOpened: false });
+  const [password, setPassword] = useState({ password: '', isOpened: false });
+  const [passwordConf, setPasswordConf] = useState({ passwordConf: '', isOpened: false });
+
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
+  const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
   const handleRegister = () => {
-    const phone = phoneNumber.split(' ');
-    let edited = phone[0].slice(1, 3);
-    phone.forEach((phoneValue, index) => {
-      index >= 1 ? (edited += phoneValue) : '';
-    });
+    if (
+      firstName.firstName &&
+      lastName.lastName &&
+      phoneNumber.phoneNumber &&
+      password.password &&
+      passwordConf.passwordConf
+    ) {
+      const phone = phoneNumber.phoneNumber.split(' ');
+      let edited = phone[0].slice(1, 3);
+      phone.forEach((phoneValue, index) => {
+        index >= 1 ? (edited += phoneValue) : '';
+      });
 
-    register({ firstName, lastName, phoneNumber: `+998${edited}`, password });
+      const payload = {
+        firstName: firstName.firstName,
+        lastName: lastName.lastName,
+        phoneNumber: `+998${edited}`,
+        password: password.password,
+        passwordConf: passwordConf.passwordConf,
+      };
+
+      register(payload);
+    }
   };
 
   return (
@@ -45,7 +69,7 @@ function Cover() {
           borderRadius='lg'
           coloredShadow='success'
           mx={2}
-          mt={-3}
+          mt={-5}
           p={3}
           mb={1}
           textAlign='center'
@@ -60,20 +84,22 @@ function Cover() {
               <MDInput
                 type='text'
                 label='Ism'
-                inputProps={{ maxLength: 25 }}
+                InputProps={{ maxLength: 25, error: !firstName.firstName && firstName.isOpened }}
                 variant='standard'
                 fullWidth
-                onChange={e => setFirstName(e.target.value)}
+                onChange={e => setFirstName({ ...firstName, firstName: e.target.value })}
+                onClick={() => setFirstName({ ...firstName, isOpened: true })}
               />
             </MDBox>
             <MDBox mb={2}>
               <MDInput
                 type='text'
                 label='Familiya'
-                inputProps={{ maxLength: 25 }}
+                InputProps={{ maxLength: 25, error: !lastName.lastName && lastName.isOpened }}
                 variant='standard'
                 fullWidth
-                onChange={e => setLastName(e.target.value)}
+                onChange={e => setLastName({ ...lastName, lastName: e.target.value })}
+                onClick={() => setLastName({ ...lastName, isOpened: true })}
               />
             </MDBox>
             <MDBox mb={2}>
@@ -81,19 +107,59 @@ function Cover() {
                 disabled={false}
                 mask='(99) 999 99 99'
                 maskChar=' '
-                onChange={e => setPhoneNumber(e.target.value)}
+                onChange={e => setPhoneNumber({ ...phoneNumber, phoneNumber: e.target.value })}
               >
-                {() => <MDInput label='Telefon' variant='standard' type='phone' fullWidth />}
+                {() => (
+                  <MDInput
+                    onClick={() => setPhoneNumber({ ...phoneNumber, isOpened: true })}
+                    label='Telefon'
+                    variant='standard'
+                    type='phone'
+                    fullWidth
+                    InputProps={{
+                      error: !phoneNumber.phoneNumber && phoneNumber.isOpened,
+                    }}
+                  />
+                )}
               </InputMask>
             </MDBox>
             <MDBox mb={2}>
               <MDInput
-                type='password'
+                type={showPassword ? 'text' : 'password'}
                 label='Parol'
+                variant='standard'
+                fullWidth
+                onClick={() => setPassword({ ...password, isOpened: true })}
+                onChange={e => setPassword({ ...password, password: e.target.value })}
+                InputProps={{
+                  error: !password.password && password.isOpened,
+                  endAdornment: (
+                    <InputAdornment position='end'>
+                      <IconButton
+                        size='small'
+                        aria-label='toggle password visibility'
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                      >
+                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </MDBox>
+            <MDBox mb={2}>
+              <MDInput
+                type={showPassword ? 'text' : 'password'}
+                label='Parol (qaytadan)'
                 variant='standard'
                 maxLength={25}
                 fullWidth
-                onChange={e => setPassword(e.target.value)}
+                onClick={() => setPasswordConf({ ...passwordConf, isOpened: true })}
+                onChange={e => setPasswordConf({ ...passwordConf, passwordConf: e.target.value })}
+                InputProps={{
+                  error: !passwordConf.passwordConf && passwordConf.isOpened,
+                }}
               />
             </MDBox>
             {/* <MDBox display='flex' alignItems='center' ml={-1}>
@@ -118,7 +184,7 @@ function Cover() {
               </MDTypography>
             </MDBox> */}
             <MDBox mt={4} mb={1}>
-              <MDButton variant='gradient' color='info' fullWidth onClick={() => handleRegister()}>
+              <MDButton variant='gradient' color='info' fullWidth onClick={handleRegister}>
                 Kirish
               </MDButton>
             </MDBox>
