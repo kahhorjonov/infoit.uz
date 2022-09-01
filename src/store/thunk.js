@@ -231,7 +231,7 @@ export function sendCardDetails(data) {
 }
 
 export const confirmationPayment = async code => {
-  return await axiosPublic.post(`api/payment/v1/confirmation?confirmationCode=${code}`, {
+  await axiosPublic.post(`api/payment/v1/confirmation?confirmationCode=${code}`, {
     headers: {
       Authorization: `Bearer ${access_token}`,
     },
