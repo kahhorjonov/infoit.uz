@@ -215,7 +215,6 @@ export const addUser =
       const response = await axiosPublic.post(`/api/user/v1/register`, user, {
         headers: { Authorization: `Bearer ${access_token}` },
       });
-      console.log(response.data);
 
       dispatch(getUsers({ role, pagination }));
     } catch (e) {
@@ -296,7 +295,7 @@ export const finishUserTest = async testId => {
         },
       },
     );
-    console.log(response);
+    // console.log(response);
     return response.data;
   } catch (e) {
     toast.error(e.response.data.error);
@@ -377,16 +376,15 @@ export const updateMe = async data => {
         Authorization: `Bearer ${access_token}`,
       },
     });
-    console.log(response);
+    toast.success(response.data.message);
   } catch (error) {
-    toast.error(error);
+    toast.error(error.response.data.message);
   }
 };
 
 export const register = async data => {
   try {
     const response = await axiosPublic.post('api/auth/v1/register', data);
-    console.log(response);
   } catch (error) {
     toast.error(error);
   }

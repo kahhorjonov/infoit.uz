@@ -19,7 +19,7 @@ Use a more readable tab size (opinionated).
 
 /* Scroll Bar Style */
 
-::-webkit-scrollbar {
+::-we stkit-scrollbar {
   width: 20px;
 }
 

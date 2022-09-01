@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Icon } from '@mui/material';
 import Spiner from 'components/Loader/Spiner';
 // image
-import coverSm from 'assets/homePage/teacher.png';
+import coverSm from 'assets/images/user.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMe, updateMe } from 'store/thunk';
 
@@ -21,6 +21,10 @@ export default function Profile() {
     setProfile({ ...profile, [name]: value });
   };
 
+  const handleUpdateProfile = () => {
+    updateMe(profile);
+  };
+
   useEffect(() => {
     dispatch(getMe());
   }, [dispatch]);
@@ -33,16 +37,19 @@ export default function Profile() {
     <main className='container relative mx-auto p-3'>
       <div className='mt-24 flex justify-between items-center'>
         <h2 className='items-center py-2 text-3xl'>Profil</h2>
-        <Icon
-          fontSize='medium'
-          className='cursor-pointer'
-          onClick={() => {
-            setIsDisabled(!isDisabled);
-            isDisabled ? null : updateMe(profile);
-          }}
-        >
-          {isDisabled ? 'edit' : 'check'}
-        </Icon>
+        <div className='flex'>
+          <span className='text-base px-3'>{profile?.balance} so`m</span>
+          <Icon
+            fontSize='medium'
+            className='cursor-pointer'
+            onClick={() => {
+              setIsDisabled(!isDisabled);
+              isDisabled ? null : handleUpdateProfile();
+            }}
+          >
+            {isDisabled ? 'edit' : 'check'}
+          </Icon>
+        </div>
       </div>
 
       {isLoading ? (
@@ -51,7 +58,7 @@ export default function Profile() {
         <div className='mt-4 relative bg-white flex min-w-0 break-words w-full mb-6 rounded-lg border-0'>
           <div className='container w-full relative flex mx-auto items-center p-3 px-6'>
             <div className='md:w-4/12'>
-              <img src={coverSm} alt='2' />
+              <img style={{ width: '80%', height: '80%' }} src={coverSm} alt='2' />
             </div>
             <div className='md:w-8/12'>
               <div className='flex flex-col mx-4'>
