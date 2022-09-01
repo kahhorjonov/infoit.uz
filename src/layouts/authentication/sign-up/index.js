@@ -21,7 +21,7 @@ import InputMask from 'react-input-mask';
 
 // Authentication layout components
 import CoverLayout from 'layouts/authentication/components/CoverLayout';
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
 
 function Cover() {
   const [firstName, setFirstName] = useState({ firstName: '', isOpened: false });
@@ -53,7 +53,6 @@ function Cover() {
         lastName: lastName.lastName,
         phoneNumber: `+998${edited}`,
         password: password.password,
-        passwordConf: passwordConf.passwordConf,
       };
 
       register(payload);
