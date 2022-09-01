@@ -98,7 +98,7 @@ function Basic() {
                       onClick={() => setPhone({ ...phone, isOpened: true })}
                       InputProps={{
                         require: true,
-                        error: phone && phone.isOpened,
+                        error: !phone.phone && phone.isOpened,
                       }}
                       label='Telefon'
                       type='phone'
@@ -122,7 +122,7 @@ function Basic() {
                   // inputProps={{ maxLength: 25 }}
                   onChange={e => setPassword({ ...password, password: e.target.value })}
                   InputProps={{
-                    error: password && password.isOpened,
+                    error: !password.password && password.isOpened,
                     endAdornment: (
                       <InputAdornment position='end'>
                         <IconButton
