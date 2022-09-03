@@ -7,12 +7,15 @@ import MDBox from 'components/MDBox';
 import ChoiceInput from 'components/ChoiceInput/ChoiceInput';
 import { v4 } from 'uuid';
 import MDButton from 'components/MDButton';
-import { addQuestion, editQuestion } from '../../../store/thunk';
+import { Icon } from '@mui/material';
+import { toast } from 'react-toastify';
+import { addQuestion, deleteQuestion, editQuestion, getQuestions } from '../../../store/thunk';
 
 function Form({ formType, categoryId, onClose }) {
   const dispatch = useDispatch();
   const {
     questionsData: { pagination, currentQuestion },
+    category: { currentCategory },
   } = useSelector(store => store);
   const [actionType, setActionType] = useState(formType);
   const [questionsForm, setQuestionsForm] = useState({
@@ -80,27 +83,57 @@ function Form({ formType, categoryId, onClose }) {
     setQuestionsForm({ ...questionsForm, choices });
   };
 
+  const handleTestChoiceChecked = () =>
+    questionsForm?.choices?.filter(
+      choice => choice.correct && (choice?.text || choice.attachmentId),
+    )[0]
+      ? true
+      : toast.error('Error filling answers!');
+
+  const handleTestQuestionWrite = () =>
+    questionsForm?.text || questionsForm?.attachmentId
+      ? true
+      : toast.error('Error filling question!');
+
   const handleSave = question => {
-    if (actionType === 'add') {
+    if (
+      actionType === 'add' &&
+      handleTestQuestionWrite() === true &&
+      handleTestChoiceChecked() === true
+    ) {
       dispatch(addQuestion(question, categoryId, pagination));
       onClose();
     }
+
     if (actionType === 'edit') {
       dispatch(editQuestion({ ...question, id: currentQuestion.id }, categoryId, pagination));
       setActionType('view');
     }
   };
 
-  const handleDelete = () => {
+  const handleDelete = async testId => {
+    const response = await deleteQuestion(testId);
+    response === 200 &&
+      dispatch(
+        getQuestions({
+          categoryId: currentCategory?.id,
+          pagination: { ...pagination, pageNumber: 1 },
+        }),
+      );
     onClose();
   };
 
   return (
     <MDBox display='flex' flexDirection='column' gap={2}>
-      <MDBox>
+      <MDBox display='flex' alignItems='center' justifyContent='space-between'>
         <MDTypography variant='text' color='text' fontSize='5' fontWeight='bold'>
           Question: {formType === 'view' && questionsForm?.idx}
         </MDTypography>
+        {actionType !== 'view' && (
+          <MDButton fontSize='5' onClick={() => handleAddAnswer()}>
+            <Icon>add</Icon>
+          </MDButton>
+        )}
       </MDBox>
       <MDBox xs={5}>
         <MDBox display='flex' alignItems='center' gap={1}>
@@ -122,7 +155,7 @@ function Form({ formType, categoryId, onClose }) {
           />
         </MDBox>
       </MDBox>
-      <MDBox xs={5} style={{ maxHeight: '50vh', overflowY: 'scroll' }}>
+      <MDBox xs={5} style={{ maxHeight: '50vh', overflowY: 'auto' }}>
         {questionsForm?.choices?.map(answer => (
           <MDBox key={answer.idx} display='flex' alignItems='center' gap={1}>
             <ChoiceInput
@@ -156,7 +189,7 @@ function Form({ formType, categoryId, onClose }) {
           <MDButton fullWidth color='success' onClick={() => setActionType('edit')}>
             Edit
           </MDButton>
-          <MDButton fullWidth color='secondary' onClick={() => handleDelete()}>
+          <MDButton fullWidth color='secondary' onClick={() => handleDelete(currentQuestion?.id)}>
             Delete
           </MDButton>
         </MDBox>

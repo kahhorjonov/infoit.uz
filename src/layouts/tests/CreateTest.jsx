@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCategories, addPlanningTest } from 'store/thunk';
+import { toast } from 'react-toastify';
 import { Icon, Grid } from '@mui/material';
 import DashboardLayout from 'examples/LayoutContainers/DashboardLayout';
 import DashboardNavbar from 'examples/Navbars/DashboardNavbar';
@@ -48,11 +49,24 @@ function CreateTest() {
     } else setNewTest({ ...newTest, questionsId: idsArray?.filter(ids => ids !== id) });
   };
 
+  const handleTestValidation = () => {
+    if (newTest?.name === '') toast.error('Enter the test name!');
+    else if (!newTest?.durationTimeInMinutes)
+      toast.error('Enter the test duration time in minutes!');
+    // else if (!newTest?.price) toast.error('Enter the test price!');
+    else if (!newTest?.questionsCount) toast.error('Enter the test questions count!');
+    if (!newTest?.attachmentId) toast.error('Enter the test cover!');
+    else return true;
+    return false;
+  };
+
   const handleSave = data => {
-    actionType === 'add'
-      ? dispatch(addPlanningTest({ ...data, categoryId: currentCategory?.id }))
-      : dispatch(addPlanningTest(data));
-    setActionType('view');
+    if (handleTestValidation()) {
+      actionType === 'add'
+        ? dispatch(addPlanningTest({ ...data, categoryId: currentCategory?.id }))
+        : dispatch(addPlanningTest(data));
+      setActionType('view');
+    }
   };
 
   useEffect(() => {
