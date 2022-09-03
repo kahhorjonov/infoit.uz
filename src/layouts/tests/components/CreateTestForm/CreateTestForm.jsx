@@ -35,10 +35,12 @@ function CreateTestForm({
         type='text'
         fullWidth
         focused
+        required
       />
-      <FormControl fullWidth focused>
+      <FormControl fullWidth focused required>
         <InputLabel id='active_select_id'>Active</InputLabel>
         <Select
+          required
           labelId='active_select_id'
           value={active}
           onChange={e => onChangeTestData('active', e.target.value)}
@@ -57,6 +59,7 @@ function CreateTestForm({
         type='number'
         fullWidth
         focused
+        required
       />
       <MDInput
         value={price}
@@ -66,6 +69,7 @@ function CreateTestForm({
         type='number'
         fullWidth
         focused
+        required
       />
       <MDInput
         value={questionsCount}
@@ -75,6 +79,7 @@ function CreateTestForm({
         type='number'
         fullWidth
         focused
+        required
       />
       <MDInput
         value={startTestDate}
@@ -83,6 +88,7 @@ function CreateTestForm({
         type='datetime-local'
         fullWidth
         focused
+        required
       />
       <MDInput
         value={finishTestDate}
@@ -91,6 +97,7 @@ function CreateTestForm({
         type='datetime-local'
         fullWidth
         focused
+        required
       />
 
       {image ? (

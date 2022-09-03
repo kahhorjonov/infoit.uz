@@ -105,6 +105,19 @@ export const editQuestion = (question, categoryId, pagination) => async dispatch
   }
 };
 
+export const deleteQuestion = async testId => {
+  try {
+    const response = await axiosPublic.delete(`api/question/v1?questionId=${testId}`, {
+      headers: { Authorization: `Bearer ${access_token}` },
+    });
+    toast.success(response.data.message);
+    return response.data.success;
+  } catch (e) {
+    toast.error(`${e.response.data.message}, ${e.response.data.objectKoinot[0].expelling}`);
+    return e.response.data.success;
+  }
+};
+
 export const uploadPhoto = async (photo, type) => {
   let image;
   const formBody = new FormData();
