@@ -12,6 +12,7 @@ import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 
 // Services
 import { decodedToken } from 'services/authService';
+import { toast } from 'react-toastify';
 
 export default function HomeNavbar() {
   const [navbarOpen, setNavbarOpen] = useState(false);
@@ -142,7 +143,10 @@ export default function HomeNavbar() {
                     <hr />
                     <Link
                       to='/'
-                      onClick={() => localStorage.removeItem('token')}
+                      onClick={() => {
+                        toast.success('Profildan chiqdingiz');
+                        localStorage.removeItem('token');
+                      }}
                       className='rounded-lg'
                     >
                       <LogoutIcon /> Chiqish
