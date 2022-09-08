@@ -21,7 +21,7 @@ export default function Tests() {
         pagination: { pageNumber: 1, pageSize: 6 },
       }),
     );
-  }, []);
+  }, [currentCategory]);
 
   useEffect(() => {
     dispatch(getCategories());
