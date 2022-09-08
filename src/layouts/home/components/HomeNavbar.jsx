@@ -12,7 +12,6 @@ import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 
 // Services
 import { decodedToken } from 'services/authService';
-import { toast } from 'react-toastify';
 
 export default function HomeNavbar() {
   const [navbarOpen, setNavbarOpen] = useState(false);
