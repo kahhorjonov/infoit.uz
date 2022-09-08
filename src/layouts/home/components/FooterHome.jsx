@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 // Icons
 import PhoneIcon from '@mui/icons-material/Phone';
@@ -20,14 +21,14 @@ export default function FooterHome() {
               <EmailIcon /> &nbsp; InfoIT@gmail.com
             </h5>
           </div>
-          <div className='w-full lg:w-6/12 '>
+          <div className='w-full lg:w-6/12 mt-6'>
             <div className='flex flex-wrap items-top mb-6'>
               <div className='w-full lg:w-4/12 ml-auto'>
                 <ul className='list-unstyled flex flex-col gap-2'>
                   <li>
                     <a
                       className='text-blueGray-600 hover:text-blueGray-800 font-semibold block text-sm'
-                      href='https://www.creative-tim.com/presentation?ref=nr-footer'
+                      href='#about-us'
                     >
                       {/* About Us */}
                       Biz haqimizda
@@ -36,19 +37,19 @@ export default function FooterHome() {
                   <li>
                     <a
                       className='text-blueGray-600 hover:text-blueGray-800 font-semibold block  text-sm'
-                      href='https://blog.creative-tim.com?ref=nr-footer'
+                      href='#tests'
                     >
                       Testlar
                     </a>
                   </li>
-                  <li>
+                  {/* <li>
                     <a
                       className='text-blueGray-600 hover:text-blueGray-800 font-semibold block  text-sm'
                       href='https://www.github.com/creativetimofficial?ref=nr-footer'
                     >
                       Abiturientlar uchun
                     </a>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
               <div className='w-full lg:w-4/12'>
@@ -56,26 +57,26 @@ export default function FooterHome() {
                   <li>
                     <a
                       className='text-blueGray-600 hover:text-blueGray-800 font-semibold block text-sm'
-                      href='https://github.com/creativetimofficial/notus-react/blob/main/LICENSE.md?ref=nr-footer'
+                      href='#for-teachers'
                     >
                       O`qituvchilar uchun
                     </a>
                   </li>
-                  <li>
+                  {/* <li>
                     <a
                       className='text-blueGray-600 hover:text-blueGray-800 font-semibold block text-sm'
                       href='https://creative-tim.com/terms?ref=nr-footer'
                     >
                       Statistika
                     </a>
-                  </li>
+                  </li> */}
                   <li>
-                    <a
+                    <Link
                       className='text-blueGray-600 hover:text-blueGray-800 font-semibold block text-sm'
-                      href='https://creative-tim.com/privacy?ref=nr-footer'
+                      to='/profile'
                     >
                       Mening Profilim
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
