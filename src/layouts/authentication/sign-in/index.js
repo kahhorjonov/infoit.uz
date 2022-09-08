@@ -50,7 +50,7 @@ function Basic() {
       try {
         const result = await login(edited, password.password);
         setToken(result.data.objectKoinot.accessToken);
-        toast.success(result.data.message);
+        // toast.success(result.data.message);
         navigate(redirectPath, { replace: true });
       } catch (error) {
         toast.error(error?.response?.data?.objectKoinot[0]?.expelling);

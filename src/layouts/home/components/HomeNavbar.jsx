@@ -144,7 +144,7 @@ export default function HomeNavbar() {
                     <Link
                       to='/'
                       onClick={() => {
-                        toast.success('Profildan chiqdingiz');
+                        // toast.success('Profildan chiqdingiz');
                         localStorage.removeItem('token');
                       }}
                       className='rounded-lg'

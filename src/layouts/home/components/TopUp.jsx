@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import InputMask from 'react-input-mask';
-import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { sendCardDetails, confirmationPayment } from 'store/thunk';
 

@@ -95,13 +95,17 @@ export default function CardTestInfo({ planningTests, workingComp, onChangeActio
                         toast.success("Testni 'Mening Testlarim' bo`limidan topishingiz mumkun");
                         handleBuyTest();
                       }
-                    : () => {
+                    : profile?.balance
+                    ? () => {
                         toast.error(
                           'Hisobda yetarli mablang mavjud emas, iltimos hisobingizni to`ldiring',
                         );
                         setTimeout(() => {
                           navigate(`/buyTest/${planningTests?.id}`);
                         }, 1500);
+                      }
+                    : () => {
+                        navigate('/login');
                       }
                 }
                 type='button'
