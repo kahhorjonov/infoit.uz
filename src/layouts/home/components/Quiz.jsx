@@ -17,7 +17,7 @@ import CardQuiz from '../Cards/CardQuiz/CardQuiz';
 export default function Quiz() {
   const dispatch = useDispatch();
   const {
-    quiz: { isLoading, correctAnswersCount },
+    quiz: { isLoading, correctAnswersCount, quizs },
     userTests: { currentTest },
   } = useSelector(store => store);
   const [openModal, setOpenModal] = useState(false);
@@ -46,12 +46,15 @@ export default function Quiz() {
     }
   };
 
-  // useEffect(() => {
-  //   quizs.length === 0 && navigate('/myTests');
-  // }, [quizs]);
+  useEffect(() => {
+    quizs.length === 0 && navigate('/myTests');
+  }, []);
+
   useEffect(() => {
     paramPathName === 'quiz' && dispatch(getQuizs(params?.id));
   }, [dispatch]);
+
+  window.addEventListener('beforeunload', () => false);
 
   return (
     <div className='relative mt-32'>

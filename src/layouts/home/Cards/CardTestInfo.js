@@ -22,7 +22,8 @@ export default function CardTestInfo({ planningTests, workingComp, onChangeActio
   const navigate = useNavigate();
 
   const handleBuyTest = () => {
-    buyTest(params?.id);
+    if (!profileData?.username) navigate('/login');
+    // buyTest(params?.id);
   };
 
   useEffect(() => {
@@ -89,25 +90,26 @@ export default function CardTestInfo({ planningTests, workingComp, onChangeActio
               </button>
             ) : (
               <button
-                onClick={
-                  profile?.balance >= 5000 && profile?.balance > planningTests?.price
-                    ? () => {
-                        toast.success("Testni 'Mening Testlarim' bo`limidan topishingiz mumkun");
-                        handleBuyTest();
-                      }
-                    : profile?.balance
-                    ? () => {
-                        toast.error(
-                          'Hisobda yetarli mablang mavjud emas, iltimos hisobingizni to`ldiring',
-                        );
-                        setTimeout(() => {
-                          navigate(`/buyTest/${planningTests?.id}`);
-                        }, 1500);
-                      }
-                    : () => {
-                        navigate('/login');
-                      }
-                }
+                onClick={() => handleBuyTest()}
+                // onClick={
+                //   profile?.balance >= 5000 && profile?.balance > planningTests?.price
+                //     ? () => {
+                //         toast.success("Testni 'Mening Testlarim' bo`limidan topishingiz mumkun");
+                //         handleBuyTest();
+                //       }
+                //     : profile?.balance
+                //     ? () => {
+                //         toast.error(
+                //           'Hisobda yetarli mablang mavjud emas, iltimos hisobingizni to`ldiring',
+                //         );
+                //         setTimeout(() => {
+                //           navigate(`/buyTest/${planningTests?.id}`);
+                //         }, 1500);
+                //       }
+                //     : () => {
+                //         navigate('/login');
+                //       }
+                // }
                 type='button'
                 className='w-full bg-lightBlue-600'
                 style={{
