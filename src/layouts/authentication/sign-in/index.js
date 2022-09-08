@@ -51,7 +51,8 @@ function Basic() {
         const result = await login(edited, password.password);
         setToken(result.data.objectKoinot.accessToken);
         // toast.success(result.data.message);
-        navigate(redirectPath, { replace: true });
+        // navigate(redirectPath, { replace: true });
+        window.location.replace(redirectPath);
       } catch (error) {
         toast.error(error?.response?.data?.objectKoinot[0]?.expelling);
       }
@@ -98,7 +99,6 @@ function Basic() {
                     <MDInput
                       onClick={() => setPhone({ ...phone, isOpened: true })}
                       InputProps={{
-                        require: true,
                         error: !phone.phone && phone.isOpened,
                       }}
                       label='Telefon'

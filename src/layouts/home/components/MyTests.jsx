@@ -87,12 +87,12 @@ export default function MyTests() {
                   >
                     {!solve ? 'Sotib olingan' : 'Yechib bo`lingan'}
                   </p>
-                  <p
+                  {/* <p
                     onClick={() => navigate(`/results/${test?.id}`)}
                     className='cursor-pointer hover:underline text-blueGray-500 text-xs mb-2'
                   >
                     Boshqalarni natijasini ko`rish
-                  </p>
+                  </p> */}
                 </div>
               </div>
             </div>

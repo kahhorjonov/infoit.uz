@@ -262,6 +262,7 @@ export const buyTest = async testId => {
         },
       },
     );
+    console.log(response);
     toast.success(response.data.message);
   } catch (e) {
     toast.error(e.response.data.message);
