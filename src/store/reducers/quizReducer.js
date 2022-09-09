@@ -34,6 +34,7 @@ const handleAddAnswer = (state, payload) => {
 };
 
 export const quizReducer = (state = initialState, action) => {
+  // console.log(action.payload);
   switch (action.type) {
     case GET_QUIZ_PROCCESS:
       return { ...state, isLoading: true };

@@ -13,6 +13,7 @@ import {
   getQuestionsSuccess,
   getQuizProccess,
   getQuizSuccess,
+  getResultTestSuccess,
   getUsersProcess,
   getUsersSuccess,
   getUserTestsProccess,
@@ -181,10 +182,10 @@ export const getPlanningTestForUser =
 
 export const addPlanningTest = data => async dispatch => {
   try {
-    const response = await axiosPublic.post('api/test/v1/save', data, {
+    await axiosPublic.post('api/test/v1/save', data, {
       headers: { Authorization: `Bearer ${access_token}` },
     });
-    toast.success(`${response.data.message} test`);
+    toast.success('Muvaffaqiyatli amalga oshirildi!');
     dispatch(
       getPlanningTest({ categoryId: data.categoryId, pagination: { pageNumber: 1, pageSize: 10 } }),
     );
@@ -263,7 +264,7 @@ export const buyTest = async testId => {
       },
     );
     console.log(response);
-    toast.success(response.data.message);
+    toast.success('Test sotib olindi!');
   } catch (e) {
     toast.error(e.response.data.message);
   }
@@ -301,6 +302,20 @@ export const finishUserTest = async testId => {
   } catch (e) {
     toast.error(e.response.data.error);
     return e.response.status;
+  }
+};
+
+export const resultTest = testId => async dispatch => {
+  try {
+    dispatch(getQuizProccess());
+    const response = await axiosPublic.get(`api/test/v1/test-results?testId=${testId}`, {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+    });
+    dispatch(getResultTestSuccess(response.data.objectKoinot));
+  } catch (e) {
+    console.log(e.response);
   }
 };
 

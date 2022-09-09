@@ -22,8 +22,9 @@ export default function CardTestInfo({ planningTests, workingComp, onChangeActio
   const navigate = useNavigate();
 
   const handleBuyTest = () => {
+    // console.log(params);
     if (!profileData?.username) navigate('/login');
-    // buyTest(params?.id);
+    else buyTest(params?.id);
   };
 
   useEffect(() => {

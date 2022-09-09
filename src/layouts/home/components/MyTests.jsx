@@ -87,12 +87,17 @@ export default function MyTests() {
                   >
                     {!solve ? 'Sotib olingan' : 'Yechib bo`lingan'}
                   </p>
-                  {/* <p
-                    onClick={() => navigate(`/results/${test?.id}`)}
-                    className='cursor-pointer hover:underline text-blueGray-500 text-xs mb-2'
-                  >
-                    Boshqalarni natijasini ko`rish
-                  </p> */}
+                  {solve && (
+                    <p
+                      onClick={() => {
+                        dispatch(setUserCurrentTestInfo(test));
+                        navigate(`/result/${test?.id}`);
+                      }}
+                      className='cursor-pointer hover:underline text-blueGray-500 text-xs mb-2'
+                    >
+                      Natija
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
