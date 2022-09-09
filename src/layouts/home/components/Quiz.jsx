@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getResultTestSuccess } from 'store/actions/actionCreaters';
-import { getQuizs, finishUserTest } from 'store/thunk';
+import { getQuizs, finishUserTest, resultTest } from 'store/thunk';
 import ModalComp from 'components/Modal/ModalComp';
 import MDBox from 'components/MDBox';
 import MDTypography from 'components/MDTypography';
@@ -28,7 +28,7 @@ export default function Quiz() {
   const paramPathName = params['*'].split('/')[0];
 
   const testDuration = currentTest.durationTimeInMinutes / 1000 / 60;
-
+  // console.log(testDuration);
   const time = new Date();
   time.setSeconds(time.getSeconds() + 60 * testDuration);
 
@@ -47,11 +47,12 @@ export default function Quiz() {
   };
 
   useEffect(() => {
-    quizs.length === 0 && navigate('/myTests');
+    quizs.length === 0 && paramPathName !== 'result' && navigate('/myTests');
   }, []);
 
   useEffect(() => {
     paramPathName === 'quiz' && dispatch(getQuizs(params?.id));
+    paramPathName === 'result' && dispatch(resultTest(params?.id));
   }, [dispatch]);
 
   window.addEventListener('beforeunload', () => false);
@@ -59,20 +60,6 @@ export default function Quiz() {
   return (
     <div className='relative mt-32'>
       <ModalComp width='280px' status={openModal} onClose={handleClose}>
-        {/* <MDBox display='flex' justifyContent='space-between'>
-          <MDBox>
-            <h2 className='text-4xl font-bold'>{currentTest?.name}</h2>
-            <p>Savollar soni: {currentTest?.questionsCount} ta</p>
-            <p>To`g`ri javoblar soni: {correctAnswersCount} ta</p>
-            <p>Davomiyligi: {testDuration} minut</p>
-          </MDBox>
-          <MDBox height='maxContent' bgColor='primary'>
-            <img
-              src={currentTest?.questionPhoto?.link}
-              alt={currentTest?.questionPhoto?.id || '...'}
-            />
-          </MDBox>
-        </MDBox> */}
         <MDTypography textAlign='center'>Rostdan ham testni tugatmoqchimisiz?</MDTypography>
         <MDBox display='flex' justifyContent='space-between' mt={3} gap={2}>
           <MDButton

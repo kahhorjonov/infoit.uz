@@ -50,12 +50,11 @@ function CreateTest() {
   };
 
   const handleTestValidation = () => {
-    if (newTest?.name === '') toast.error('Enter the test name!');
-    else if (!newTest?.durationTimeInMinutes)
-      toast.error('Enter the test duration time in minutes!');
+    if (newTest?.name === '') toast.error('Test nomini kiriting!');
+    else if (!newTest?.durationTimeInMinutes) toast.error('Test ishlash vaqtini kiriting!');
     // else if (!newTest?.price) toast.error('Enter the test price!');
-    else if (!newTest?.questionsCount) toast.error('Enter the test questions count!');
-    if (!newTest?.attachmentId) toast.error('Enter the test cover!');
+    else if (!newTest?.questionsCount) toast.error('Savollar sonini kiriting!');
+    if (!newTest?.attachmentId) toast.error('Test uchun muqova tanlang!');
     else return true;
     return false;
   };
@@ -79,7 +78,7 @@ function CreateTest() {
         price: currentTestData?.price,
         active: currentTestData?.active,
         categoryId: currentTestData?.category?.id,
-        attachmentId: currentTestData?.photo?.id,
+        attachmentId: currentTestData?.photo?.fileId,
         questionsCount: currentTestData?.questionsCount,
         startTestDate: new Date(currentTestData?.startTestDate).toISOString().substr(0, 16),
         finishTestDate: new Date(currentTestData?.finishTestDate).toISOString().substr(0, 16),
