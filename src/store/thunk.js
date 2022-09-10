@@ -218,7 +218,7 @@ export const getUsers =
       );
       dispatch(getUsersSuccess({ users: response.data.objectKoinot, pagination }));
     } catch (e) {
-      toast.error(e);
+      toast.error(e.response.data.message);
     }
   };
 
@@ -226,10 +226,9 @@ export const addUser =
   ({ user, pagination, role }) =>
   async dispatch => {
     try {
-      const response = await axiosPublic.post(`/api/user/v1/register`, user, {
+      await axiosPublic.post(`/api/user/v1/register`, user, {
         headers: { Authorization: `Bearer ${access_token}` },
       });
-
       dispatch(getUsers({ role, pagination }));
     } catch (e) {
       toast.error(e);
