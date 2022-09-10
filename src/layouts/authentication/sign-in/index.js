@@ -52,7 +52,10 @@ function Basic() {
         setToken(result.data.objectKoinot.accessToken);
         // toast.success(result.data.message);
         // navigate(redirectPath, { replace: true });
-        window.location.replace(`/${redirectPath}`);
+        console.log(result.data.objectKoinot.roles[0].slice(5).toLowerCase());
+        result.data.objectKoinot.roles[0].slice(5).toLowerCase() === 'user'
+          ? window.location.replace('/')
+          : window.location.replace(`/${redirectPath}`);
       } catch (error) {
         toast.error(error?.response?.data?.objectKoinot[0]?.expelling);
       }
