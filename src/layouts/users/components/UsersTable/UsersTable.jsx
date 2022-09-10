@@ -33,6 +33,7 @@ function UsersTable({ role }) {
   const handleChangePageSize = pageSize => {
     dispatch(getUsers({ role, pagination: { ...pagination, pageNumber: 1, pageSize } }));
   };
+  
 
   return (
     <MDBox>

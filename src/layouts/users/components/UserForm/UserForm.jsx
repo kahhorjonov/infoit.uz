@@ -25,8 +25,7 @@ function UserForm() {
   };
 
   const handleSave = user => {
-    console.log(user);
-    dispatch(addUser({ user, pagination, role: currentUser.role }));
+    dispatch(addUser({ user, pagination, role: currentUser.roles[0] }));
     setEdit(true);
   };
 
