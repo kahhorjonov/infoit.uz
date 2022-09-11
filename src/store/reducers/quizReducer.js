@@ -51,8 +51,8 @@ export const quizReducer = (state = initialState, action) => {
         duration: action.payload.timer,
       };
 
-    // case GET_CURRENT_QUIZ_TIME:
-    //   return { ...state, duration: action.payload };
+    case GET_CURRENT_QUIZ_TIME:
+      return { ...state, duration: action.payload };
 
     case SET_QUIZ_PAGINATION:
       return { ...state, pageNumber: action.payload, currentQuiz: state.quizs[action.payload - 1] };
