@@ -14,6 +14,7 @@ function TestTable({ onAddQuestionId }) {
   const handleChangeCurrPage = pageNumber => {
     dispatch(
       getQuestions({
+        search: '',
         categoryId: category.currentCategory.id,
         pagination: { ...questionsData.pagination, pageNumber },
       }),
@@ -23,6 +24,7 @@ function TestTable({ onAddQuestionId }) {
   const handleChangePageSize = pageSize => {
     dispatch(
       getQuestions({
+        search: '',
         categoryId: category.currentCategory.id,
         pagination: { ...questionsData.pagination, pageNumber: 1, pageSize },
       }),
@@ -30,9 +32,11 @@ function TestTable({ onAddQuestionId }) {
   };
 
   useEffect(() => {
+    console.log(category.currentCategory.id, questionsData);
     category.currentCategory.id &&
       dispatch(
         getQuestions({
+          search: '',
           categoryId: category.currentCategory.id,
           pagination: questionsData.pagination,
         }),

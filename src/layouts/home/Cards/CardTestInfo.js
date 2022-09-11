@@ -21,12 +21,14 @@ export default function CardTestInfo({ planningTests, workingComp, onChangeActio
   const params = useParams();
   const navigate = useNavigate();
 
-  const handleBuyTest = () => {
-    // console.log(params);
+  const handleBuyTest = async () => {
     if (!profileData?.username) {
       navigate('/login');
       localStorage.setItem('buy', planningTests?.id);
-    } else buyTest(params?.id);
+    } else {
+      const status = await buyTest(params?.id);
+      status === 200 && navigate('/myTests');
+    }
   };
 
   useEffect(() => {
