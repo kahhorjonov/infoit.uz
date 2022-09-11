@@ -55,23 +55,21 @@ export default function TestInfo() {
       <section className='relative py-20 bg-white'>
         <div className='container mx-auto px-4'>
           <div className='items-center flex flex-wrap px-4 py-2'>
-            <h2 className='font-bold text-2xl mb-4'>Description</h2>
+            <h2 className='font-bold text-2xl mb-4'>Yo`riqnoma</h2>
             <p className='text-blueGray-400 text-lg'>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum modi quasi consequatur
-              rerum doloremque odio cum nobis ut dicta recusandae tempora aliquam soluta sapiente,
-              consectetur impedit voluptatem rem veritatis magni ipsa natus distinctio,
-              exercitationem vero!
+              Test uchun to`lov sizni InfoIT hisob raqamingizdan yechiladi. Testni vaqtiga e`tibor
+              bering va shu vaqtda o`zingiz uchun qulay muhit yarating. Masalan, internet
+              tezligingiz qurilmangizni quvvatini tekshiring, imkon qadar shovqin bo`lmagan joy
+              tanlang.
             </p>
 
             <br />
 
             <p className='text-blueGray-400 text-lg'>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem vitae reiciendis est
-              nemo ipsam perspiciatis dignissimos! Ut, laudantium nobis dicta, sint porro eos a qui
-              unde exercitationem optio quia dignissimos officiis cumque aut similique magnam nam
-              nesciunt ex sequi reprehenderit. Error, dolores eveniet? Tenetur placeat magni
-              distinctio officiis sunt et, voluptatibus quaerat ex non vel aperiam quam, ducimus,
-              tempora cumque!
+              Testni yechishga tayyor ekanligingizga ishonchigiz komil bo`lsa, hisobingizga o`tib u
+              yerda sotib olingan teslar bo`limidan, sotib olgan testingizni tanlang, shuda test
+              boshlanadi. Testni qayta yecha olmaysiz shuning uchun boshlashdan oldin tepadagi
+              fikirlarga rioya qiling
             </p>
           </div>
         </div>
