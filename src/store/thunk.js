@@ -258,7 +258,7 @@ export const confirmationPayment = async code => {
 
 export const buyTest = async testId => {
   try {
-    await axiosPublic.post(
+    const response = await axiosPublic.post(
       `api/test/v1/buy-test?testId=${testId}`,
       {},
       {
@@ -267,10 +267,11 @@ export const buyTest = async testId => {
         },
       },
     );
-    // console.log(response);
     toast.success('Test sotib olindi!');
+    return response.status;
   } catch (e) {
     toast.error(e.response.data.message);
+    return e.response.status;
   }
 };
 

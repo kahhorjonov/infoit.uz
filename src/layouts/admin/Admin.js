@@ -42,6 +42,8 @@ import Login from 'layouts/authentication/sign-in';
 import Register from 'layouts/authentication/sign-up';
 import Logout from 'layouts/admin/Logout';
 
+// import Logo from '../../assets/images/small-logos/'
+
 function Admin() {
   const [controller, dispatch] = useMaterialUIController();
   const {
@@ -116,7 +118,7 @@ function Admin() {
       <Sidenav
         color={sidenavColor}
         brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
-        brandName='Material Dashboard 2'
+        brandName='Info IT'
         routes={routes}
         onMouseEnter={handleOnMouseEnter}
         onMouseLeave={handleOnMouseLeave}
