@@ -9,17 +9,20 @@ import result from '../../layouts/home/components/result.json';
 
 import Styles from './Timer.module.scss';
 
-function Timer({ expiryTimestamp }) {
+function Timer({ duration }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = useParams();
-  const { seconds, minutes, hours, days, isRunning, start, pause, resume, restart } = useTimer({
+
+  const expiryTimestamp = new Date();
+  expiryTimestamp.setSeconds(duration);
+  const { seconds, minutes, hours } = useTimer({
     expiryTimestamp,
     onExpire: async () => {
       const response = await finishUserTest(params?.id);
       if (response.success === 200) {
         toast.warning('Time out!');
-        // dispatch(getResultTestSuccess(result.objectKoinot));
+        dispatch(getResultTestSuccess(result.objectKoinot));
         dispatch(getResultTestSuccess(response.objectKoinot));
         localStorage.removeItem('userAnswers');
         navigate(`/result/${params?.id}`);
@@ -37,7 +40,7 @@ function Timer({ expiryTimestamp }) {
 }
 
 Timer.propTypes = {
-  expiryTimestamp: PropTypes.object,
+  duration: PropTypes.number,
 };
 
 export default Timer;

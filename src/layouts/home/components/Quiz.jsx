@@ -27,12 +27,8 @@ export default function Quiz() {
 
   const paramPathName = params['*'].split('/')[0];
 
-  const testDuration = duration / 1000 / 60;
+  const testDuration = duration / 1000;
   const testDurationTime = currentTest.durationTimeInMinutes / 1000 / 60;
-
-  // console.log(testDuration);
-  const time = new Date();
-  time.setSeconds(time.getSeconds() + 60 * testDuration);
 
   const handleOpen = () => setOpenModal(true);
   const handleClose = () => setOpenModal(false);
@@ -92,7 +88,7 @@ export default function Quiz() {
           <p>Davomiyligi: {testDurationTime} minut</p>
         </div>
         <div className='flex items-center gap-3'>
-          {paramPathName === 'quiz' && <Timer expiryTimestamp={time} />}
+          {paramPathName === 'quiz' && <Timer duration={testDuration} />}
           <MDButton
             type='button'
             color={paramPathName === 'quiz' ? 'error' : 'secondary'}
