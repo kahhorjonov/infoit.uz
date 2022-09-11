@@ -3,6 +3,7 @@ import {
   GET_PLANNING_TESTS_PROCCESS,
   GET_PLANNING_TESTS_SUCCESS,
   GET_PLANNING_TESTS_FOR_USER_SUCCESS,
+  SEARCH_PLANNING_TESTS,
 } from 'store/actions/actionTypes';
 
 const initialState = {
@@ -10,6 +11,7 @@ const initialState = {
   forAdmin: [],
   forUser: [],
   count: null,
+  search: '',
   currentTestData: {},
   pagination: {
     pageNumber: 1,
@@ -39,6 +41,9 @@ export const planningTestReducer = (state = initialState, action) => {
         count: action.payload.data.totalPages,
         pagination: action.payload.pagination,
       };
+
+    case SEARCH_PLANNING_TESTS:
+      return { ...state, search: action.payload };
 
     case SET_CURRENT_TEST_DATA:
       return { ...state, currentTestData: action.payload };

@@ -68,14 +68,14 @@ export const deleteCategory = categoryId => async dispatch => {
 };
 
 export const getQuestions =
-  ({ categoryId, pagination }) =>
+  ({ search, categoryId, pagination }) =>
   async dispatch => {
     try {
       dispatch(getQuestionsProccess());
       const response = await axiosPublic.get(
-        `api/question/v1?category=${categoryId || ''}&page=${pagination.pageNumber - 1}&size=${
+        `api/question/v1?category=${categoryId}&page=${pagination.pageNumber - 1}&size=${
           pagination.pageSize
-        }`,
+        }&search=${search}`,
         {
           headers: {
             Authorization: `Bearer ${access_token}`,
@@ -151,14 +151,14 @@ export const uploadPhoto = async (photo, type) => {
 };
 
 export const getPlanningTest =
-  ({ categoryId, pagination }) =>
+  ({ search, categoryId, pagination }) =>
   async dispatch => {
     try {
       dispatch(getPlanningTestProccess());
       const response = await axiosPublic.get(
         `api/test/v1/find-all-admin?category=${categoryId}&page=${pagination.pageNumber - 1}&size=${
           pagination.pageSize
-        }&search=`,
+        }&search=${search}`,
       );
 
       dispatch(getPlanningTestSuccess({ data: response.data.objectKoinot, pagination }));
@@ -207,14 +207,14 @@ export const getPlanningTestById = id => async dispatch => {
 };
 
 export const getUsers =
-  ({ role = '', pagination }) =>
+  ({ search, role = '', pagination }) =>
   async dispatch => {
     try {
       dispatch(getUsersProcess());
       const response = await axiosPublic.get(
         `api/user/v1?page=${pagination.pageNumber - 1}&role=${role}&size=${
           pagination.pageSize
-        }&sortType=DESC`,
+        }&search=${search}&sortType=DESC`,
         {
           headers: { Authorization: `Bearer ${access_token}` },
         },

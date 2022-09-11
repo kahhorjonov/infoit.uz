@@ -2,6 +2,7 @@ import {
   GET_QUESTIONS_PROCCESS,
   GET_QUESTIONS_SUCCESS,
   SET_CURRENT_QUESTION,
+  SEARCH_QUESTIONS,
 } from 'store/actions/actionTypes';
 
 const initialState = {
@@ -10,6 +11,7 @@ const initialState = {
   count: null,
   pageable: {},
   currentQuestion: {},
+  search: '',
   pagination: {
     pageNumber: 1,
     pageSize: 5,
@@ -29,6 +31,9 @@ export const questionsReducer = (state = initialState, action) => {
         questions: action.payload.questions.content,
         pagination: action.payload.pagination,
       };
+
+    case SEARCH_QUESTIONS:
+      return { ...state, search: action.payload };
 
     case SET_CURRENT_QUESTION:
       return { ...state, currentQuestion: action.payload };

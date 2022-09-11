@@ -11,7 +11,10 @@ import Styles from './Table.module.scss';
 
 function Table() {
   const dispatch = useDispatch();
-  const { category, questionsData } = useSelector(store => store);
+  const {
+    category: { currentCategory },
+    questionsData: { isLoading, pagination, count, questions, currentQuestion, search },
+  } = useSelector(store => store);
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
@@ -20,16 +23,18 @@ function Table() {
   const handleChangePage = pageNumber => {
     dispatch(
       getQuestions({
-        categoryId: category?.currentCategory?.id,
-        pagination: { ...questionsData?.pagination, pageNumber },
+        search,
+        categoryId: currentCategory?.id,
+        pagination: { ...pagination, pageNumber },
       }),
     );
   };
   const handleChangePageSize = pageSize => {
     dispatch(
       getQuestions({
-        categoryId: category?.currentCategory?.id,
-        pagination: { ...questionsData?.pagination, pageNumber: 1, pageSize },
+        search,
+        categoryId: currentCategory?.id,
+        pagination: { ...pagination, pageNumber: 1, pageSize },
       }),
     );
   };
@@ -40,27 +45,28 @@ function Table() {
   };
 
   useEffect(() => {
-    category?.currentCategory?.id &&
+    currentCategory?.id &&
       dispatch(
         getQuestions({
-          categoryId: category?.currentCategory?.id,
-          pagination: questionsData?.pagination,
+          search,
+          pagination,
+          categoryId: currentCategory?.id,
         }),
       );
-  }, [dispatch, category?.currentCategory]);
+  }, [dispatch, currentCategory, search]);
 
   return (
     <MDBox sx='100%'>
       <ModalComp status={open} onClose={handleClose}>
         <Form
           formType='view'
-          categoryId={category?.currentCategory?.id || questionsData?.currentQuestion?.category?.id}
+          categoryId={currentCategory?.id || currentQuestion?.category?.id}
           questionNumber={1}
           onClose={handleClose}
-          questionData={questionsData?.currentQuestion}
+          questionData={currentQuestion}
         />
       </ModalComp>
-      {questionsData.isLoading ? (
+      {isLoading ? (
         <Spiner />
       ) : (
         <>
@@ -73,13 +79,9 @@ function Table() {
               </tr>
             </thead>
             <tbody>
-              {questionsData?.questions?.map((question, idx) => (
+              {questions?.map((question, idx) => (
                 <tr key={question.id} onClick={() => handleChooseQuestion(question)}>
-                  <td>
-                    {idx +
-                      1 +
-                      questionsData.pagination.pageSize * (questionsData.pagination.pageNumber - 1)}
-                  </td>
+                  <td>{idx + 1 + pagination.pageSize * (pagination.pageNumber - 1)}</td>
                   <td>
                     <img src='' alt='' />
                     {question?.name}
@@ -90,9 +92,9 @@ function Table() {
             </tbody>
           </table>
           <PaginationTable
-            dataCount={questionsData.count}
-            pageNumber={questionsData.pagination.pageNumber}
-            pageSize={questionsData.pagination.pageSize}
+            dataCount={count}
+            pageNumber={pagination.pageNumber}
+            pageSize={pagination.pageSize}
             onChangeCurrPage={page => handleChangePage(page)}
             onChangePageSize={pageSize => handleChangePageSize(pageSize)}
           />

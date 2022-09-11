@@ -14,7 +14,7 @@ function PlanningTestTable({ onChangeActionType }) {
   const dispatch = useDispatch();
   const {
     category: { currentCategory },
-    planningTests: { isLoading, forAdmin, currentTestData, count, pagination },
+    planningTests: { isLoading, forAdmin, currentTestData, count, pagination, search },
   } = useSelector(store => store);
   const [testInfo, setTestInfo] = useState(false);
 
@@ -30,6 +30,7 @@ function PlanningTestTable({ onChangeActionType }) {
   const handleChangeCurrPage = pageNumber => {
     dispatch(
       getPlanningTest({
+        search,
         categoryId: currentCategory?.id || '',
         pagination: { ...pagination, pageNumber },
       }),
@@ -38,6 +39,7 @@ function PlanningTestTable({ onChangeActionType }) {
   const handleChangePageSize = pageSize => {
     dispatch(
       getPlanningTest({
+        search,
         categoryId: currentCategory?.id || '',
         pagination: { ...pagination, pageNumber: 1, pageSize },
       }),
@@ -46,13 +48,8 @@ function PlanningTestTable({ onChangeActionType }) {
 
   useEffect(() => {
     currentCategory?.id &&
-      dispatch(
-        getPlanningTest({
-          categoryId: currentCategory?.id,
-          pagination,
-        }),
-      );
-  }, [dispatch, currentCategory]);
+      dispatch(getPlanningTest({ search, pagination, categoryId: currentCategory?.id }));
+  }, [dispatch, currentCategory, search]);
 
   return (
     <MDBox bgColor='white' coloredShadow='dark' borderRadius='xl' p={3}>

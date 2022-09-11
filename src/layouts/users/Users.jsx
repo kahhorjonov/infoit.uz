@@ -24,14 +24,14 @@ import UsersTable from './components/UsersTable/UsersTable';
 function Users() {
   const dispatch = useDispatch();
   const {
-    users: { pagination },
+    users: { pagination, search },
   } = useSelector(store => store);
 
   const [role, setRole] = useState('ROLE_USER');
 
   useEffect(() => {
-    dispatch(getUsers({ role, pagination }));
-  }, [dispatch, role]);
+    dispatch(getUsers({ search, role, pagination }));
+  }, [dispatch, role, search]);
 
   return (
     <DashboardLayout>
