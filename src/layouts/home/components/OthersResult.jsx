@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { getStatisticsTestId } from 'store/thunk';
@@ -13,6 +13,7 @@ import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 export default function OthersResult() {
   const dispatch = useDispatch();
   const params = useParams();
+  const navigate = useNavigate();
 
   const {
     statisticsData: { isLoading, pagination, count, usersSolved, testStatisticsTestIdData },
@@ -38,7 +39,10 @@ export default function OthersResult() {
   return (
     <div className='min-h-screen mt-24'>
       <div className='items-center text-2xl'>
-        <h2 className='container mx-auto p-3 items-center py-4 text-xl'>
+        <h2
+          onClick={() => navigate(-1)}
+          className='container mx-auto p-3 items-center py-4 text-xl cursor-pointer'
+        >
           <KeyboardBackspaceIcon fontSize='large' />
           <span className=''> Ortga qaytish</span>
         </h2>
