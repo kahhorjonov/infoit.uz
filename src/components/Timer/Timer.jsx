@@ -23,14 +23,14 @@ function Timer() {
   const { seconds, minutes, hours } = useTimer({
     expiryTimestamp,
     onExpire: async () => {
-      dispatch(getResultTestSuccess(result.objectKoinot));
-      // const response = await finishUserTest(params?.id);
-      // if (response.success === 200) {
-      //   toast.warning('Time out!');
-      //   dispatch(getResultTestSuccess(response.objectKoinot));
-      //   localStorage.removeItem('userAnswers');
-      //   navigate(`/result/${params?.id}`);
-      // }
+      // dispatch(getResultTestSuccess(result.objectKoinot));
+      const response = await finishUserTest(params?.id);
+      if (response.success === 200) {
+        toast.warning('Time out!');
+        dispatch(getResultTestSuccess(response.objectKoinot));
+        localStorage.removeItem('userAnswers');
+        navigate(`/result/${params?.id}`);
+      }
     },
   });
 
