@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 // Icons
 import MenuIcon from '@mui/icons-material/Menu';
@@ -18,6 +18,8 @@ export default function HomeNavbar() {
   const [navbarOpen, setNavbarOpen] = useState(false);
   const { hash: pathname } = window.location;
   const { pathname: main } = window.location;
+
+  const navigate = useNavigate();
 
   const path =
     decodedToken() && decodedToken().roles && decodedToken().roles.name.slice(5).toLowerCase();
@@ -52,7 +54,13 @@ export default function HomeNavbar() {
         >
           <ul className='flex flex-col lg:flex-row list-none lg:ml-auto'>
             <li className='flex items-center'>
-              <a href='#main' className='px-3 flex items-center text-xs uppercase font-bold'>
+              <a
+                href='#main'
+                className='px-3 flex items-center text-xs uppercase font-bold'
+                onClick={() => {
+                  navigate('/');
+                }}
+              >
                 <span
                   className={
                     pathname === '#main' && main === '/'
@@ -65,7 +73,13 @@ export default function HomeNavbar() {
               </a>
             </li>
             <li className='flex items-center'>
-              <a href='#about-us' className='px-3 flex items-center text-xs uppercase font-bold'>
+              <a
+                href='#about-us'
+                className='px-3 flex items-center text-xs uppercase font-bold'
+                onClick={() => {
+                  navigate('/');
+                }}
+              >
                 <span
                   className={
                     pathname === '#about-us'
@@ -79,7 +93,13 @@ export default function HomeNavbar() {
             </li>
 
             <li className='flex items-center'>
-              <a href='#tests' className='px-3 flex items-center text-xs uppercase font-bold'>
+              <a
+                href='#tests'
+                className='px-3 flex items-center text-xs uppercase font-bold'
+                onClick={() => {
+                  navigate('/');
+                }}
+              >
                 <span className='lg:hover:underline'>
                   <span
                     className={
@@ -98,6 +118,9 @@ export default function HomeNavbar() {
               <a
                 href='#for-teachers'
                 className='px-3 flex items-center text-xs uppercase font-bold mr-4'
+                onClick={() => {
+                  navigate('/');
+                }}
               >
                 <span
                   className={

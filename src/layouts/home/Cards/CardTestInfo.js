@@ -23,8 +23,10 @@ export default function CardTestInfo({ planningTests, workingComp, onChangeActio
 
   const handleBuyTest = () => {
     // console.log(params);
-    if (!profileData?.username) navigate('/login');
-    else buyTest(params?.id);
+    if (!profileData?.username) {
+      navigate('/login');
+      localStorage.setItem('buy', planningTests?.id);
+    } else buyTest(params?.id);
   };
 
   useEffect(() => {
