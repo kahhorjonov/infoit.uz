@@ -9,6 +9,7 @@ import {
   categoriesReducer,
   planningTestReducer,
   getMeReducer,
+  statisticsReducer,
 } from './reducers/index';
 
 const reducers = combineReducers({
@@ -19,6 +20,7 @@ const reducers = combineReducers({
   questionsData: questionsReducer,
   planningTests: planningTestReducer,
   profileData: getMeReducer,
+  statisticsData: statisticsReducer,
 });
 
 export const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));

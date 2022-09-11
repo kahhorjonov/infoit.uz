@@ -24,6 +24,8 @@ import {
   GET_PLANNING_TESTS_FOR_USER_SUCCESS,
   GET_RESULT_TEST_SUCCESS,
   GET_CURRENT_QUIZ_TIME,
+  GET_DASHBOARD_STATISTCS_PROCESS,
+  GET_DASHBOARD_STATISTCS_SUCCESS,
 } from './actionTypes';
 
 export const getCategoriesProccess = () => ({
@@ -141,4 +143,13 @@ export const getMyDatasProcess = () => ({
 export const getMyDatasSuccess = profileData => ({
   type: GET_MY_DATAS_SUCCESS,
   payload: profileData,
+});
+
+export const getDashboardStatisticsProcess = () => ({
+  type: GET_DASHBOARD_STATISTCS_PROCESS,
+});
+
+export const getDashboardStatisticsSuccess = statisticsData => ({
+  type: GET_DASHBOARD_STATISTCS_SUCCESS,
+  payload: statisticsData,
 });
