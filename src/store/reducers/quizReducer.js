@@ -4,6 +4,7 @@ import {
   SET_QUIZ_PAGINATION,
   SET_USER_ANSWER,
   GET_RESULT_TEST_SUCCESS,
+  GET_CURRENT_QUIZ_TIME,
 } from 'store/actions/actionTypes';
 
 const userAnswersLS = JSON.parse(localStorage.getItem('userAnswers'));
@@ -17,6 +18,7 @@ const initialState = {
   isLoading: false,
   userAnswers: userAnswersLS || {},
   correctAnswersCount: 0,
+  duration: 0,
 };
 
 const handleAddAnswer = (state, payload) => {
@@ -47,6 +49,9 @@ export const quizReducer = (state = initialState, action) => {
         currentQuiz: action.payload[0],
         count: action.payload.length,
       };
+
+    case GET_CURRENT_QUIZ_TIME:
+      return { ...state, duration: action.payload };
 
     case SET_QUIZ_PAGINATION:
       return { ...state, pageNumber: action.payload, currentQuiz: state.quizs[action.payload - 1] };

@@ -13,8 +13,6 @@
   },
   "plugins": ["react", "prettier"],
   "rules": {
-    //
-
     "prettier/prettier": 0,
     "no-console": 1,
     "no-plusplus": 0,
@@ -49,6 +47,10 @@
     "react/jsx-props-no-spreading": "off",
     "import/no-named-as-default": "off",
     "linebreak-style": ["off"],
+    "default-param-last": "off",
+    "no-unneeded-ternary": "off",
+    "no-unused-expressions": "off",
+    "camelcase": "off",
     "no-multiple-empty-lines": [
       "error",
       {
@@ -65,28 +67,6 @@
       }
     ],
     "react/static-property-placement": ["error", "static public field"],
-
-    //
-
-    // "prettier/prettier": [
-    //   "error",
-    //   {
-    //     "endOfLine": "auto"
-    //   }
-    // ],
-
-    "default-param-last": "off",
-    "react/react-in-jsx-scope": "off",
-    "no-unneeded-ternary": "off",
-    "no-unused-expressions": "off",
-    "camelcase": "off",
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    // "react/jsx-props-no-spreading": [
-    //   1,
-    //   {
-    //     "custom": "ignore"
-    //   }
-    // ],
     "react/jsx-curly-spacing": [2, "never"]
   },
   "settings": { "import/resolver": { "node": { "paths": ["src"] } } }

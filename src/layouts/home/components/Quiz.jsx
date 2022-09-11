@@ -6,18 +6,18 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getResultTestSuccess } from 'store/actions/actionCreaters';
-import { getQuizs, finishUserTest, resultTest } from 'store/thunk';
+import { getQuizs, finishUserTest, resultTest, getCurrentTestTime } from 'store/thunk';
 import ModalComp from 'components/Modal/ModalComp';
 import MDBox from 'components/MDBox';
 import MDTypography from 'components/MDTypography';
-import resultJson from './result.json';
+// import resultJson from './result.json';
 
 import CardQuiz from '../Cards/CardQuiz/CardQuiz';
 
 export default function Quiz() {
   const dispatch = useDispatch();
   const {
-    quiz: { isLoading, correctAnswersCount, quizs },
+    quiz: { isLoading, correctAnswersCount, quizs, duration },
     userTests: { currentTest },
   } = useSelector(store => store);
   const [openModal, setOpenModal] = useState(false);
@@ -27,7 +27,9 @@ export default function Quiz() {
 
   const paramPathName = params['*'].split('/')[0];
 
-  const testDuration = currentTest.durationTimeInMinutes / 1000 / 60;
+  const testDuration = duration / 1000 / 60;
+  const testDurationTime = currentTest.durationTimeInMinutes / 1000 / 60;
+
   // console.log(testDuration);
   const time = new Date();
   time.setSeconds(time.getSeconds() + 60 * testDuration);
@@ -51,11 +53,11 @@ export default function Quiz() {
   }, []);
 
   useEffect(() => {
-    paramPathName === 'quiz' && dispatch(getQuizs(params?.id));
+    if (paramPathName === 'quiz') {
+      dispatch(getQuizs(params?.id));
+    }
     paramPathName === 'result' && dispatch(resultTest(params?.id));
   }, [dispatch]);
-
-  window.addEventListener('beforeunload', () => false);
 
   return (
     <div className='relative mt-32'>
@@ -87,7 +89,7 @@ export default function Quiz() {
           <h2 className='text-4xl font-bold'>{currentTest?.name}</h2>
           <p>Savollar soni: {currentTest?.questionsCount} ta</p>
           {paramPathName === 'result' && <p>To`g`ri javoblar soni: {correctAnswersCount} ta</p>}
-          <p>Davomiyligi: {testDuration} minut</p>
+          <p>Davomiyligi: {testDurationTime} minut</p>
         </div>
         <div className='flex items-center gap-3'>
           {paramPathName === 'quiz' && <Timer expiryTimestamp={time} />}

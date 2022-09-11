@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import {
   getCategoriesProccess,
   getCategoriesSuccess,
+  getCurrentQuizTime,
   getMyDatasProcess,
   getMyDatasSuccess,
   getPlanningTestForUserSuccess,
@@ -253,7 +254,7 @@ export const confirmationPayment = async code => {
 
 export const buyTest = async testId => {
   try {
-    const response = await axiosPublic.post(
+    await axiosPublic.post(
       `api/test/v1/buy-test?testId=${testId}`,
       {},
       {
@@ -262,7 +263,7 @@ export const buyTest = async testId => {
         },
       },
     );
-    console.log(response);
+    // console.log(response);
     toast.success('Test sotib olindi!');
   } catch (e) {
     toast.error(e.response.data.message);
@@ -318,6 +319,20 @@ export const resultTest = testId => async dispatch => {
   }
 };
 
+export const getCurrentTestTime = () => async dispatch => {
+  try {
+    const response = await axiosPublic.get('api/test/v1/test-time-left', {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+    });
+    console.log(response.data.objectKoinot);
+    dispatch(getCurrentQuizTime(response.data.objectKoinot));
+  } catch (e) {
+    console.log(e.response);
+  }
+};
+
 export const getQuizs = testId => async dispatch => {
   try {
     dispatch(getQuizProccess());
@@ -330,6 +345,7 @@ export const getQuizs = testId => async dispatch => {
       },
     );
     dispatch(getQuizSuccess(response.data.objectKoinot));
+    dispatch(getCurrentTestTime());
   } catch (e) {
     //   console.log(e?.response?.data?.message);
     //   toast.error(e?.response?.data?.message);

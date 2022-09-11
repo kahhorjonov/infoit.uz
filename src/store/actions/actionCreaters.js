@@ -23,6 +23,7 @@ import {
   GET_MY_DATAS_SUCCESS,
   GET_PLANNING_TESTS_FOR_USER_SUCCESS,
   GET_RESULT_TEST_SUCCESS,
+  GET_CURRENT_QUIZ_TIME,
 } from './actionTypes';
 
 export const getCategoriesProccess = () => ({
@@ -97,6 +98,11 @@ export const getQuizProccess = () => ({
 export const getQuizSuccess = quizs => ({
   type: GET_QUIZ_SUCCESS,
   payload: quizs,
+});
+
+export const getCurrentQuizTime = time => ({
+  type: GET_CURRENT_QUIZ_TIME,
+  payload: time,
 });
 
 export const setQuizPageNumber = pageNumber => ({
