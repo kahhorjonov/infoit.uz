@@ -1,9 +1,15 @@
-import { GET_USERS_PROCESS, GET_USERS_SUCCESS, SET_CURRENT_USER } from 'store/actions/actionTypes';
+import {
+  GET_USERS_PROCESS,
+  GET_USERS_SUCCESS,
+  SET_CURRENT_USER,
+  SEARCH_USERS,
+} from 'store/actions/actionTypes';
 
 const initialState = {
   isLoading: false,
   users: [],
   count: 0,
+  search: '',
   pagination: {
     pageNumber: 1,
     pageSize: 5,
@@ -24,6 +30,9 @@ export const usersReducer = (state = initialState, action) => {
         count: action.payload.users.totalPages,
         pagination: action.payload.pagination,
       };
+
+    case SEARCH_USERS:
+      return { ...state, search: action.payload };
 
     case SET_CURRENT_USER:
       return { ...state, currentUser: action.payload };

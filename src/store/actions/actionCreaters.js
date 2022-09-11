@@ -26,6 +26,9 @@ import {
   GET_CURRENT_QUIZ_TIME,
   GET_DASHBOARD_STATISTCS_PROCESS,
   GET_DASHBOARD_STATISTCS_SUCCESS,
+  SEARCH_QUESTIONS,
+  SEARCH_USERS,
+  SEARCH_PLANNING_TESTS,
 } from './actionTypes';
 
 export const getCategoriesProccess = () => ({
@@ -56,6 +59,11 @@ export const setCurrentQuestion = currentQustion => ({
   payload: currentQustion,
 });
 
+export const searchQuestions = search => ({
+  type: SEARCH_QUESTIONS,
+  payload: search,
+});
+
 export const setQuestionsPagination = pagination => ({
   type: SET_QUESTION_PAGINATION,
   payload: pagination,
@@ -75,6 +83,11 @@ export const setCurrentUser = user => ({
   payload: user,
 });
 
+export const searchUsers = search => ({
+  type: SEARCH_USERS,
+  payload: search,
+});
+
 export const getPlanningTestProccess = () => ({
   type: GET_PLANNING_TESTS_PROCCESS,
 });
@@ -91,6 +104,11 @@ export const getPlanningTestForUserSuccess = testData => ({
 export const setCurrentPlanningTestData = testData => ({
   type: SET_CURRENT_TEST_DATA,
   payload: testData,
+});
+
+export const searchPlanningTests = search => ({
+  type: SEARCH_PLANNING_TESTS,
+  payload: search,
 });
 
 export const getQuizProccess = () => ({
