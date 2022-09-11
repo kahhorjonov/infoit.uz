@@ -64,7 +64,7 @@ export default function HomeNavbar() {
                 <span
                   className={
                     pathname === '#main' && main === '/'
-                      ? 'lg:hover:underline underline text-blueGray-700text-blueGray-700'
+                      ? 'lg:hover:underline underline text-blueGray-700 text-blueGray-700'
                       : 'text-blueGray-200'
                   }
                 >
@@ -83,7 +83,7 @@ export default function HomeNavbar() {
                 <span
                   className={
                     pathname === '#about-us'
-                      ? 'lg:hover:underline underline text-blueGray-700text-blueGray-700'
+                      ? 'lg:hover:underline underline text-blueGray-700 text-blueGray-700'
                       : 'text-blueGray-200'
                   }
                 >
@@ -104,7 +104,7 @@ export default function HomeNavbar() {
                   <span
                     className={
                       pathname === '#tests'
-                        ? 'lg:hover:underline underline text-blueGray-700text-blueGray-700'
+                        ? 'lg:hover:underline underline text-blueGray-700 text-blueGray-700'
                         : 'text-blueGray-200'
                     }
                   >
@@ -125,7 +125,7 @@ export default function HomeNavbar() {
                 <span
                   className={
                     pathname === '#for-teachers'
-                      ? 'lg:hover:underline underline text-blueGray-700text-blueGray-700'
+                      ? 'lg:hover:underline underline text-blueGray-700 text-blueGray-700'
                       : 'text-blueGray-200'
                   }
                 >

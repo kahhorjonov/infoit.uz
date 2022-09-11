@@ -79,7 +79,7 @@ function Admin() {
           }
         />
         <Route
-          path='/results/:id'
+          path='/others-results/:id'
           exact
           element={
             <RequireAuthForUser>
@@ -123,6 +123,7 @@ function Admin() {
             </RequireAuthForUser>
           }
         />
+
         {/* <Route path='/profile' exact element={<Profile />} /> */}
         {/* <Route path='/results/:id' exact element={<OthersResult />} /> */}
         {/* <Route path='/myTests' exact element={<MyTests />} /> */}
