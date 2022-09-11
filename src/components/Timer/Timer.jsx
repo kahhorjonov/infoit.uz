@@ -1,5 +1,4 @@
-import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTimer } from 'react-timer-hook';
 import { toast } from 'react-toastify';
@@ -9,13 +8,18 @@ import result from '../../layouts/home/components/result.json';
 
 import Styles from './Timer.module.scss';
 
-function Timer({ duration }) {
+function Timer() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = useParams();
+  const {
+    quiz: { duration },
+  } = useSelector(store => store);
+
+  const testDuration = duration / 1000;
 
   const expiryTimestamp = new Date();
-  expiryTimestamp.setSeconds(duration);
+  expiryTimestamp.setSeconds(testDuration);
   const { seconds, minutes, hours } = useTimer({
     expiryTimestamp,
     onExpire: async () => {
@@ -38,9 +42,5 @@ function Timer({ duration }) {
     </div>
   );
 }
-
-Timer.propTypes = {
-  duration: PropTypes.number,
-};
 
 export default Timer;

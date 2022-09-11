@@ -25,9 +25,9 @@ const select = {
       overflow: 'unset',
     },
 
-    icon: {
-      display: 'none',
-    },
+    // icon: {
+    //   display: 'none',
+    // },
   },
 };
 

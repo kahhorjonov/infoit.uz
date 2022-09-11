@@ -331,7 +331,8 @@ export const getCurrentTestTime = () => async dispatch => {
         Authorization: `Bearer ${access_token}`,
       },
     });
-    console.log(response.data.objectKoinot);
+
+    // console.log(response.data.objectKoinot);
     dispatch(getCurrentQuizTime(response.data.objectKoinot));
   } catch (e) {
     console.log(e.response);
@@ -349,11 +350,18 @@ export const getQuizs = testId => async dispatch => {
         },
       },
     );
-    dispatch(getQuizSuccess(response.data.objectKoinot));
-    dispatch(getCurrentTestTime());
+
+    const timer = await axiosPublic.get('api/test/v1/test-time-left', {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+    });
+
+    // dispatch(getCurrentTestTime());
+    dispatch(getQuizSuccess({ quizs: response.data.objectKoinot, timer }));
   } catch (e) {
+    toast.error(e?.response?.data?.message);
     //   console.log(e?.response?.data?.message);
-    //   toast.error(e?.response?.data?.message);
   }
 };
 

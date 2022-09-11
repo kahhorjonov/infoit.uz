@@ -40,7 +40,7 @@ export default function MyTests() {
         <Select
           value={solve}
           variant='standard'
-          sx={{ width: '200px', height: '40px', fontSize: '1.2rem' }}
+          sx={{ width: '200px', height: '40px', fontSize: '1.2rem', background: 'white' }}
           onChange={e => setSolve(e.target.value)}
         >
           <MenuItem value='false'>Sotib olingan</MenuItem>

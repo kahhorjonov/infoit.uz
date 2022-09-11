@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { sendAnswer } from 'store/thunk';
 import { useParams } from 'react-router-dom';
 import { v4 } from 'uuid';
+import PropTypes from 'prop-types';
 import { setQuizPageNumber } from 'store/actions/actionCreaters';
 import MDButton from 'components/MDButton';
 import { Icon } from '@mui/material';
@@ -10,7 +11,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 import Styles from './CardQuiz.module.scss';
 
-function CardQuiz() {
+function CardQuiz({ onFinishTest }) {
   const dispatch = useDispatch();
   const params = useParams();
 
@@ -95,17 +96,21 @@ function CardQuiz() {
           />
         </div>
         <MDButton
-          disabled={pageNumber === 30}
+          // disabled={pageNumber === 30}
           type='button'
           variant='contained'
           color='secondary'
-          onClick={() => handleClickNext(pageNumber)}
+          onClick={() => (pageNumber === 30 ? onFinishTest() : handleClickNext(pageNumber))}
         >
-          Keyingi test
+          {pageNumber === 30 ? 'Testni tugatish' : 'Keyingi test'}
         </MDButton>
       </div>
     </div>
   );
 }
+
+CardQuiz.propTypes = {
+  onFinishTest: PropTypes.func,
+};
 
 export default CardQuiz;

@@ -17,7 +17,7 @@ import CardQuiz from '../Cards/CardQuiz/CardQuiz';
 export default function Quiz() {
   const dispatch = useDispatch();
   const {
-    quiz: { isLoading, correctAnswersCount, quizs, duration },
+    quiz: { isLoading, correctAnswersCount, quizs },
     userTests: { currentTest },
   } = useSelector(store => store);
   const [openModal, setOpenModal] = useState(false);
@@ -27,7 +27,6 @@ export default function Quiz() {
 
   const paramPathName = params['*'].split('/')[0];
 
-  const testDuration = duration / 1000;
   const testDurationTime = currentTest.durationTimeInMinutes / 1000 / 60;
 
   const handleOpen = () => setOpenModal(true);
@@ -88,7 +87,7 @@ export default function Quiz() {
           <p>Davomiyligi: {testDurationTime} minut</p>
         </div>
         <div className='flex items-center gap-3'>
-          {paramPathName === 'quiz' && <Timer duration={testDuration} />}
+          {paramPathName === 'quiz' && <Timer />}
           <MDButton
             type='button'
             color={paramPathName === 'quiz' ? 'error' : 'secondary'}
@@ -108,7 +107,7 @@ export default function Quiz() {
         ) : (
           <div className='flex'>
             <QuizPagination />
-            <CardQuiz />
+            <CardQuiz onFinishTest={() => handleOpen()} />
           </div>
         )}
       </div>
