@@ -16,9 +16,9 @@ export default function CardForTeachers() {
         <div className='flex flex-col lg:w-8/12 p-2'>
           <h1 className='uppercase mb-4 font-bold'>O`qituvchilar uchun</h1>
           <span className='text-left text-sm'>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sit temporibus labore
-            perferendis ea laudantium, nisi, sed exercitationem magni facere reprehenderit illum! Et
-            excepturi doloremque maxime placeat. Exercitationem, corporis non. Voluptatum.
+            Bizni platformamizda nafaqat o`quvchilar balki o`z ustida ishlashdan to`xtmaydigan
+            bilimga tashna o`qtuvchilar uchun ham savollar bor, bu o`qtuvchilarni har yili
+            topshiradigan atesstatsiya savollariga o`xshatib tuzilgan.
           </span>
 
           <Link

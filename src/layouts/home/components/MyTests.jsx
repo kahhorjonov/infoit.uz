@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserTests, startUserTest } from 'store/thunk';
+import { getUserTests, startUserTest, getCurrentTestTime } from 'store/thunk';
 import cover from 'assets/homePage/Testcover.png';
 
 import { MenuItem, Select } from '@mui/material';
@@ -23,6 +23,7 @@ export default function MyTests() {
 
   const startTest = async test => {
     const status = await startUserTest(test?.id);
+    dispatch(getCurrentTestTime());
 
     status.success === 200 ? navigate(`/quiz/${test?.id}`) : toast.error(status.message);
 

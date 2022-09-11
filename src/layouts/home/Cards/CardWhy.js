@@ -16,9 +16,9 @@ export default function CardWhy() {
         <div className='lg:w-8/12 p-2 flex flex-col'>
           <h1 className='uppercase mb-4 font-bold'>Nega aynan biz?</h1>
           <span className='text-left text-sm'>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sit temporibus labore
-            perferendis ea laudantium, nisi, sed exercitationem magni facere reprehenderit illum! Et
-            excepturi doloremque maxime placeat. Exercitationem, corporis non. Voluptatum.
+            Chunki bizni maqsadimiz kelayotgan yangi yilda 500+ ta sifatli test va 25000+ ta
+            qiziqarli savol chiqarish va uni 10000+ ta bilim ixlosmandlariga yetkazib ularni
+            bilimlariga o`z hissamizni qo`shish.
           </span>
 
           <Link
@@ -45,7 +45,7 @@ export default function CardWhy() {
             </div>
             <div className='flex flex-col px-2'>
               <span className='text-base text-lightBlue-600'>500+</span>
-              <span className='text-base'>ORTIQ TEST</span>
+              <span className='text-base'>TEST</span>
             </div>
           </div>
 
@@ -54,8 +54,8 @@ export default function CardWhy() {
               <img src={icon} alt='...' className='rounded-2xl shadow-lg' />
             </div>
             <div className='flex flex-col px-2'>
-              <span className='text-base text-lightBlue-600'>500+</span>
-              <span className='text-base'>ORTIQ TEST</span>
+              <span className='text-base text-lightBlue-600'>10 000+</span>
+              <span className='text-base'>SAVOLLAR</span>
             </div>
           </div>
 
@@ -64,12 +64,12 @@ export default function CardWhy() {
               <img src={icon} alt='...' className='rounded-2xl shadow-lg' />
             </div>
             <div className='flex flex-col px-2'>
-              <span className='text-base text-lightBlue-600'>500+</span>
-              <span className='text-base'>ORTIQ TEST</span>
+              <span className='text-base text-lightBlue-600'>10 000+</span>
+              <span className='text-base'>FOYDALANUVCHI</span>
             </div>
           </div>
 
-          <div className='flex flex-row bg-grey w-full lg:w-5/12 p-3 rounded-lg m-4'>
+          {/* <div className='flex flex-row bg-grey w-full lg:w-5/12 p-3 rounded-lg m-4'>
             <div className='px-2'>
               <img src={icon} alt='...' className='rounded-2xl shadow-lg' />
             </div>
@@ -77,7 +77,7 @@ export default function CardWhy() {
               <span className='text-base text-lightBlue-600'>500+</span>
               <span className='text-base'>ORTIQ TEST</span>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

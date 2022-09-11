@@ -26,8 +26,9 @@ export default function Home() {
                 </h1>
 
                 <p className='text-left mt-4 mb-12 text-lg text-blueGray-700 mb-4'>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officia in aut, dolorum
-                  perferendis saepe deleniti dolore fugiat aliquid architecto alias?
+                  InfoIT bu bilimini sinashni istaydigan, hamma uchun bu yerda siz bir nechta
+                  yo`nalishlar bo`yicha bilimingizni qanday darajada ekanligini bilasiz, testlar
+                  o`quvchi va o`qtuvchilar uchun.
                 </p>
 
                 <Link
