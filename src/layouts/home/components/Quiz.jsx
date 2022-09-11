@@ -94,7 +94,7 @@ export default function Quiz() {
             // onClick={() => handleFinishedTest(currentTest?.id)}
             onClick={() => (paramPathName === 'quiz' ? handleOpen() : navigate('/myTests'))}
           >
-            {paramPathName === 'quiz' ? 'Testni to‘xtatish' : 'Testdan chiqish'}
+            {paramPathName === 'quiz' ? 'Testni yakunlash' : 'Testdan chiqish'}
           </MDButton>
         </div>
       </div>
