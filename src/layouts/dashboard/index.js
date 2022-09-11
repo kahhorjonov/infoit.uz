@@ -1,3 +1,8 @@
+import React, { useEffect } from 'react';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { getDashboardStatistics } from 'store/thunk';
+
 // @mui material components
 import Grid from '@mui/material/Grid';
 
@@ -10,7 +15,7 @@ import DashboardNavbar from 'examples/Navbars/DashboardNavbar';
 // import Footer from "examples/Footer";
 import ReportsBarChart from 'examples/Charts/BarCharts/ReportsBarChart';
 import ReportsLineChart from 'examples/Charts/LineCharts/ReportsLineChart';
-// import ComplexStatisticsCard from 'examples/Cards/StatisticsCards/ComplexStatisticsCard';
+import ComplexStatisticsCard from 'examples/ComplexStatisticsCard/index';
 
 // Data
 import reportsBarChartData from 'layouts/dashboard/data/reportsBarChartData';
@@ -21,25 +26,29 @@ import Projects from 'layouts/dashboard/components/Projects';
 import OrdersOverview from 'layouts/dashboard/components/OrdersOverview';
 
 function Dashboard() {
+  const dispatch = useDispatch();
+  const {
+    statisticsData: { statisticsData },
+  } = useSelector(store => store);
+
   const { sales, tasks } = reportsLineChartData;
+
+  useEffect(() => {
+    dispatch(getDashboardStatistics());
+  }, []);
 
   return (
     <DashboardLayout>
       <DashboardNavbar />
       <MDBox py={3}>
-        {/* <Grid container spacing={3}>
+        <Grid container spacing={3}>
           <Grid item xs={12} md={6} lg={3}>
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
                 color='dark'
-                icon='weekend'
-                title='Bookings'
-                count={281}
-                percentage={{
-                  color: 'success',
-                  amount: '+55%',
-                  label: 'than lask week',
-                }}
+                icon='quiz'
+                title='Testlar'
+                count={statisticsData?.testCount}
               />
             </MDBox>
           </Grid>
@@ -47,13 +56,8 @@ function Dashboard() {
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
                 icon='leaderboard'
-                title="Today's Users"
-                count='2,300'
-                percentage={{
-                  color: 'success',
-                  amount: '+3%',
-                  label: 'than last month',
-                }}
+                title='Yechilgan Testlar'
+                count={statisticsData?.solvedTests}
               />
             </MDBox>
           </Grid>
@@ -61,14 +65,9 @@ function Dashboard() {
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
                 color='success'
-                icon='store'
-                title='Revenue'
-                count='34k'
-                percentage={{
-                  color: 'success',
-                  amount: '+1%',
-                  label: 'than yesterday',
-                }}
+                icon='shopping_cart'
+                title='Sotib olingan testlar'
+                count={statisticsData?.boughtTests}
               />
             </MDBox>
           </Grid>
@@ -77,17 +76,12 @@ function Dashboard() {
               <ComplexStatisticsCard
                 color='primary'
                 icon='person_add'
-                title='Followers'
-                count='+91'
-                percentage={{
-                  color: 'success',
-                  amount: '',
-                  label: 'Just updated',
-                }}
+                title='Foydalanuvchilar'
+                count={statisticsData?.userCount}
               />
             </MDBox>
           </Grid>
-        </Grid> */}
+        </Grid>
         <MDBox mt={4.5}>
           <Grid container spacing={3}>
             <Grid item xs={12} md={6} lg={4}>

@@ -21,6 +21,8 @@ import {
   getUserTestsSuccess,
   setCurrentPlanningTestData,
   setUserAnswer,
+  getDashboardStatisticsProcess,
+  getDashboardStatisticsSuccess,
 } from './actions/actionCreaters';
 
 const access_token = getTokenFromStorage();
@@ -418,5 +420,20 @@ export const register = async data => {
     const response = await axiosPublic.post('api/auth/v1/register', data);
   } catch (error) {
     toast.error(error);
+  }
+};
+
+export const getDashboardStatistics = () => async dispatch => {
+  try {
+    dispatch(getDashboardStatisticsProcess());
+    const response = await axiosPublic.get('api/statistics/v1/overall', {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+    });
+
+    dispatch(getDashboardStatisticsSuccess(response?.data?.objectKoinot));
+  } catch (e) {
+    toast.error(e);
   }
 };
