@@ -93,7 +93,7 @@ export default function Quiz() {
             type='button'
             color={paramPathName === 'quiz' ? 'error' : 'secondary'}
             // onClick={() => handleFinishedTest(currentTest?.id)}
-            onClick={() => (paramPathName === 'quiz' ? handleOpen() : navigate('/'))}
+            onClick={() => (paramPathName === 'quiz' ? handleOpen() : navigate('/myTests'))}
           >
             {paramPathName === 'quiz' ? 'Testni to‘xtatish' : 'Testdan chiqish'}
           </MDButton>
