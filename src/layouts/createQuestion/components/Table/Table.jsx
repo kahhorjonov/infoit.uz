@@ -15,6 +15,7 @@ function Table() {
     category: { currentCategory },
     questionsData: { isLoading, pagination, count, questions, currentQuestion, search },
   } = useSelector(store => store);
+
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
