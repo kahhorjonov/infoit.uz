@@ -23,6 +23,8 @@ import {
   setUserAnswer,
   getDashboardStatisticsProcess,
   getDashboardStatisticsSuccess,
+  getStatisticsTestIdProcess,
+  getStatisticsTestIdSuccess,
 } from './actions/actionCreaters';
 
 const access_token = getTokenFromStorage();
@@ -446,3 +448,27 @@ export const getDashboardStatistics = () => async dispatch => {
     toast.error(e);
   }
 };
+
+export const getStatisticsTestId =
+  ({ pagination, id }) =>
+  async dispatch => {
+    try {
+      dispatch(getStatisticsTestIdProcess());
+      const response = await axiosPublic.get(
+        `api/statistics/v1/statistics-by-test-id?page=${pagination.pageNumber - 1}&size=${
+          pagination?.pageSize
+        }&test_id=${id}`,
+        {
+          headers: { Authorization: `Bearer ${access_token}` },
+        },
+      );
+      dispatch(
+        getStatisticsTestIdSuccess({
+          testStatisticsIdData: response.data.objectKoinot,
+          pagination,
+        }),
+      );
+    } catch (e) {
+      toast.error(e.response.data.message);
+    }
+  };

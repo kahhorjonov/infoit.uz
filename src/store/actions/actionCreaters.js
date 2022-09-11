@@ -29,6 +29,8 @@ import {
   SEARCH_QUESTIONS,
   SEARCH_USERS,
   SEARCH_PLANNING_TESTS,
+  GET_TEST_STATISTICS_TEST_ID_PROCESS,
+  GET_TEST_STATISTICS_TEST_ID_SUCCESS,
 } from './actionTypes';
 
 export const getCategoriesProccess = () => ({
@@ -170,4 +172,13 @@ export const getDashboardStatisticsProcess = () => ({
 export const getDashboardStatisticsSuccess = statisticsData => ({
   type: GET_DASHBOARD_STATISTCS_SUCCESS,
   payload: statisticsData,
+});
+
+export const getStatisticsTestIdProcess = () => ({
+  type: GET_TEST_STATISTICS_TEST_ID_PROCESS,
+});
+
+export const getStatisticsTestIdSuccess = testStatisticsTestId => ({
+  type: GET_TEST_STATISTICS_TEST_ID_SUCCESS,
+  payload: testStatisticsTestId,
 });

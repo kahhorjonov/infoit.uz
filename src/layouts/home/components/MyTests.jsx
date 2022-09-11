@@ -101,7 +101,7 @@ export default function MyTests() {
 
                       <p
                         onClick={() => navigate(`/others-results/${test?.id}`)}
-                        className='text-blueGray-500 text-xs mb-2'
+                        className='text-blueGray-500 text-xs mb-2 cursor-pointer hover:underline'
                       >
                         Boshqalarni natijasini ko`rish
                       </p>
