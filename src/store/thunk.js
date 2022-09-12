@@ -362,7 +362,7 @@ export const getQuizs = testId => async dispatch => {
     });
 
     // dispatch(getCurrentTestTime());
-    dispatch(getQuizSuccess({ quizs: response.data.objectKoinot, timer }));
+    dispatch(getQuizSuccess({ quizs: response.data.objectKoinot, timer: timer.data.objectKoinot }));
   } catch (e) {
     toast.error(e?.response?.data?.message);
     //   console.log(e?.response?.data?.message);

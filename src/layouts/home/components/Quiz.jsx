@@ -43,9 +43,11 @@ export default function Quiz() {
     }
   };
 
-  useEffect(() => {
-    quizs.length === 0 && paramPathName !== 'result' && navigate('/myTests');
-  }, []);
+  // useEffect(() => {
+  //   quizs.length === 0 && paramPathName !== 'result' && navigate('/myTests');
+  // }, []);
+
+  // console.log(paramPathName);
 
   useEffect(() => {
     if (paramPathName === 'quiz') {
@@ -79,38 +81,40 @@ export default function Quiz() {
           </MDButton>
         </MDBox>
       </ModalComp>
-      <div className='container mx-auto flex justify-between'>
-        <div>
-          <h2 className='text-4xl font-bold'>{currentTest?.name}</h2>
-          <p>Savollar soni: {currentTest?.questionsCount} ta</p>
-          {paramPathName === 'result' && <p>To`g`ri javoblar soni: {correctAnswersCount} ta</p>}
-          <p>Davomiyligi: {testDurationTime} minut</p>
-        </div>
-        <div className='flex items-center gap-3'>
-          {paramPathName === 'quiz' && <Timer />}
-          <MDButton
-            type='button'
-            color={paramPathName === 'quiz' ? 'error' : 'secondary'}
-            // onClick={() => handleFinishedTest(currentTest?.id)}
-            onClick={() => (paramPathName === 'quiz' ? handleOpen() : navigate('/myTests'))}
-          >
-            {paramPathName === 'quiz' ? 'Testni yakunlash' : 'Testdan chiqish'}
-          </MDButton>
-        </div>
-      </div>
-
-      <hr className='mt-6 hr-3' />
-
-      <div className='container mx-auto mt-20 mb-24'>
-        {isLoading ? (
-          <Spiner />
-        ) : (
-          <div className='flex'>
-            <QuizPagination />
-            <CardQuiz onFinishTest={() => handleOpen()} />
+      {isLoading ? (
+        <Spiner />
+      ) : (
+        <>
+          <div className='container mx-auto flex justify-between'>
+            <div>
+              <h2 className='text-4xl font-bold'>{currentTest?.name}</h2>
+              <p>Savollar soni: {currentTest?.questionsCount} ta</p>
+              {paramPathName === 'result' && <p>To`g`ri javoblar soni: {correctAnswersCount} ta</p>}
+              <p>Davomiyligi: {testDurationTime} minut</p>
+            </div>
+            <div className='flex items-center gap-3'>
+              {paramPathName === 'quiz' && <Timer />}
+              <MDButton
+                type='button'
+                color={paramPathName === 'quiz' ? 'error' : 'secondary'}
+                // onClick={() => handleFinishedTest(currentTest?.id)}
+                onClick={() => (paramPathName === 'quiz' ? handleOpen() : navigate('/myTests'))}
+              >
+                {paramPathName === 'quiz' ? 'Testni yakunlash' : 'Testdan chiqish'}
+              </MDButton>
+            </div>
           </div>
-        )}
-      </div>
+
+          <hr className='mt-6 hr-3' />
+
+          <div className='container mx-auto mt-20 mb-24'>
+            <div className='flex'>
+              <QuizPagination />
+              <CardQuiz onFinishTest={() => handleOpen()} />
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }
