@@ -23,11 +23,12 @@ export default function MyTests() {
 
   const startTest = async test => {
     const status = await startUserTest(test?.id);
-    dispatch(getCurrentTestTime());
 
-    status.success === 200 ? navigate(`/quiz/${test?.id}`) : toast.error(status.message);
-
-    dispatch(setUserCurrentTestInfo(test));
+    if (status.success === 200) {
+      dispatch(getCurrentTestTime());
+      dispatch(setUserCurrentTestInfo(test));
+      navigate(`/quiz/${test?.id}`);
+    } else toast.error(status.message);
   };
 
   useEffect(() => {

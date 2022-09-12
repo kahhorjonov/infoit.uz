@@ -18,7 +18,7 @@ const initialState = {
   isLoading: false,
   userAnswers: userAnswersLS || {},
   correctAnswersCount: 0,
-  duration: 0,
+  duration: null,
 };
 
 const handleAddAnswer = (state, payload) => {

@@ -14,7 +14,7 @@ import { addQuestion, deleteQuestion, editQuestion, getQuestions } from '../../.
 function Form({ formType, categoryId, onClose }) {
   const dispatch = useDispatch();
   const {
-    questionsData: { pagination, currentQuestion },
+    questionsData: { pagination, currentQuestion, search },
     category: { currentCategory },
   } = useSelector(store => store);
   const [actionType, setActionType] = useState(formType);
@@ -101,12 +101,14 @@ function Form({ formType, categoryId, onClose }) {
       handleTestQuestionWrite() === true &&
       handleTestChoiceChecked() === true
     ) {
-      dispatch(addQuestion(question, categoryId, pagination));
+      dispatch(addQuestion(question, categoryId, pagination, search));
       onClose();
     }
 
     if (actionType === 'edit') {
-      dispatch(editQuestion({ ...question, id: currentQuestion.id }, categoryId, pagination));
+      dispatch(
+        editQuestion({ ...question, id: currentQuestion.id }, categoryId, pagination, search),
+      );
       setActionType('view');
     }
   };
@@ -116,6 +118,7 @@ function Form({ formType, categoryId, onClose }) {
     response === 200 &&
       dispatch(
         getQuestions({
+          search: '',
           categoryId: currentCategory?.id,
           pagination: { ...pagination, pageNumber: 1 },
         }),

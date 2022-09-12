@@ -91,21 +91,21 @@ export const getQuestions =
     }
   };
 
-export const addQuestion = (question, categoryId, pagination) => async dispatch => {
+export const addQuestion = (question, categoryId, pagination, search) => async dispatch => {
   try {
     const response = await axiosPublic.post('api/question/v1/save', [question]);
     toast.success(response.data.message);
-    dispatch(getQuestions({ categoryId, pagination }));
+    dispatch(getQuestions({ search, categoryId, pagination }));
   } catch (e) {
     toast.error(e);
   }
 };
 
-export const editQuestion = (question, categoryId, pagination) => async dispatch => {
+export const editQuestion = (question, categoryId, pagination, search) => async dispatch => {
   try {
     const response = await axiosPublic.post('api/question/v1/edit', question);
     toast.success(response.data.message);
-    dispatch(getQuestions({ categoryId, pagination }));
+    dispatch(getQuestions({ search, categoryId, pagination }));
   } catch (e) {
     toast.error(e);
   }
@@ -192,7 +192,11 @@ export const addPlanningTest = data => async dispatch => {
     });
     toast.success('Muvaffaqiyatli amalga oshirildi!');
     dispatch(
-      getPlanningTest({ categoryId: data.categoryId, pagination: { pageNumber: 1, pageSize: 10 } }),
+      getPlanningTest({
+        search: data?.search,
+        categoryId: data.categoryId,
+        pagination: { pageNumber: 1, pageSize: 10 },
+      }),
     );
   } catch (e) {
     toast.error(e);
@@ -228,13 +232,13 @@ export const getUsers =
   };
 
 export const addUser =
-  ({ user, pagination, role }) =>
+  ({ search, user, pagination, role }) =>
   async dispatch => {
     try {
       await axiosPublic.post(`/api/user/v1/register`, user, {
         headers: { Authorization: `Bearer ${access_token}` },
       });
-      dispatch(getUsers({ role, pagination }));
+      dispatch(getUsers({ search, role, pagination }));
     } catch (e) {
       toast.error(e);
     }

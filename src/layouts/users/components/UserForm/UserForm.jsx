@@ -9,7 +9,7 @@ import { addUser } from 'store/thunk';
 function UserForm() {
   const dispatch = useDispatch();
   const {
-    users: { currentUser, pagination },
+    users: { currentUser, pagination, search },
   } = useSelector(store => store);
   const [userData, setUserData] = useState({
     id: currentUser?.id,
@@ -25,7 +25,7 @@ function UserForm() {
   };
 
   const handleSave = user => {
-    dispatch(addUser({ user, pagination, role: currentUser.roles[0] }));
+    dispatch(addUser({ search, user, pagination, role: currentUser.roles[0] }));
     setEdit(true);
   };
 

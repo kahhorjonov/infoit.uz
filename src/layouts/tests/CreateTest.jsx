@@ -17,7 +17,7 @@ function CreateTest() {
   const dispatch = useDispatch();
   const {
     category: { currentCategory },
-    planningTests: { currentTestData },
+    planningTests: { currentTestData, search },
   } = useSelector(store => store);
   const [actionType, setActionType] = useState('view');
   const [newTest, setNewTest] = useState({
@@ -62,8 +62,8 @@ function CreateTest() {
   const handleSave = data => {
     if (handleTestValidation()) {
       actionType === 'add'
-        ? dispatch(addPlanningTest({ ...data, categoryId: currentCategory?.id }))
-        : dispatch(addPlanningTest(data));
+        ? dispatch(addPlanningTest({ ...data, search, categoryId: currentCategory?.id }))
+        : dispatch(addPlanningTest({ ...data, search }));
       setActionType('view');
     }
   };
