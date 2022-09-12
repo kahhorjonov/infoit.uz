@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUserTests, startUserTest, getCurrentTestTime } from 'store/thunk';
 import cover from 'assets/homePage/Testcover.png';
 
-import { MenuItem, Select } from '@mui/material';
+import { MenuItem, Select, Icon } from '@mui/material';
 import Spiner from 'components/Loader/Spiner';
 import { setUserCurrentTestInfo } from 'store/actions/actionCreaters';
 import { toast } from 'react-toastify';
@@ -29,6 +29,11 @@ export default function MyTests() {
       dispatch(setUserCurrentTestInfo(test));
       navigate(`/quiz/${test?.id}`);
     } else toast.error(status.message);
+  };
+
+  const handleNavigateResults = test => {
+    dispatch(setUserCurrentTestInfo(test));
+    navigate(`/result/${test?.id}`);
   };
 
   useEffect(() => {
@@ -68,7 +73,7 @@ export default function MyTests() {
                   />
                   <div className='mx-4'>
                     <h2
-                      onClick={() => !solve && startTest(test)}
+                      onClick={() => (!solve ? startTest(test) : handleNavigateResults(test))}
                       className='text-2xl mb-4 cursor-pointer hover:underline'
                     >
                       {test?.name}
@@ -92,20 +97,11 @@ export default function MyTests() {
                   {solve && (
                     <div>
                       <p
-                        onClick={() => {
-                          dispatch(setUserCurrentTestInfo(test));
-                          navigate(`/result/${test?.id}`);
-                        }}
-                        className='cursor-pointer hover:underline text-blueGray-500 text-xs mb-2'
-                      >
-                        Natija
-                      </p>
-
-                      <p
                         onClick={() => navigate(`/others-results/${test?.id}`)}
                         className='text-blueGray-500 text-xs mb-2 cursor-pointer hover:underline'
                       >
-                        Boshqalarni natijasini ko`rish
+                        <Icon fontSize='large'>group</Icon>
+                        {/* Boshqalarni natijasini ko`rish */}
                       </p>
                     </div>
                   )}

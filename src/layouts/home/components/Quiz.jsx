@@ -43,9 +43,9 @@ export default function Quiz() {
     }
   };
 
-  // useEffect(() => {
-  //   quizs.length === 0 && paramPathName !== 'result' && navigate('/myTests');
-  // }, []);
+  useEffect(() => {
+    quizs.length === 0 && paramPathName !== 'result' && navigate('/myTests');
+  }, []);
 
   useEffect(() => {
     if (paramPathName === 'quiz') {
