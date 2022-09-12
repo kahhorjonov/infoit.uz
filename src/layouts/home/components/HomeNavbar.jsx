@@ -12,7 +12,6 @@ import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 
 // Services
 import { decodedToken } from 'services/authService';
-import { toast } from 'react-toastify';
 
 export default function HomeNavbar() {
   const [navbarOpen, setNavbarOpen] = useState(false);
@@ -20,7 +19,6 @@ export default function HomeNavbar() {
   const { pathname: main } = window.location;
 
   const navigate = useNavigate();
-
   const path =
     decodedToken() && decodedToken().roles && decodedToken().roles.name.slice(5).toLowerCase();
 
@@ -117,7 +115,7 @@ export default function HomeNavbar() {
             <li className='flex items-center'>
               <a
                 href='#for-teachers'
-                className='px-3 flex items-center text-xs uppercase font-bold mr-4'
+                className='px-3 flex items-center text-xs uppercase font-bold'
                 onClick={() => {
                   navigate('/');
                 }}
@@ -133,6 +131,27 @@ export default function HomeNavbar() {
                 </span>
               </a>
             </li>
+
+            {path === 'user' ? (
+              <li className='flex items-center'>
+                <p
+                  className='px-3 flex items-center text-xs uppercase font-bold mr-4 cursor-pointer'
+                  onClick={() => {
+                    navigate('/myTests');
+                  }}
+                >
+                  <span
+                    className={
+                      main === '/myTests'
+                        ? 'lg:hover:underline underline text-blueGray-700 text-blueGray-700'
+                        : 'text-blueGray-200'
+                    }
+                  >
+                    Mening Testlarim
+                  </span>
+                </p>
+              </li>
+            ) : null}
 
             {path !== 'user' ? (
               <li className='flex items-center'>
