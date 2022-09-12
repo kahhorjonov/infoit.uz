@@ -1,0 +1,35 @@
+.usersTable {
+  width: 100%;
+  font-size: 0.9rem;
+  color: gray;
+  th,
+  td {
+    text-align: start;
+    padding: 1rem 0.8rem;
+  }
+  border-collapse: collapse;
+  thead {
+    tr {
+      th {
+        border-bottom: 3px solid gray;
+      }
+    }
+  }
+  tbody {
+    tr {
+      td {
+        border-bottom: 1px solid gray;
+      }
+      :nth-child(1) {
+        width: 30px;
+      }
+      // :nth-child(2) {
+      //   width: 30%;
+      // }
+      &:hover {
+        background: rgb(243, 243, 243);
+        cursor: pointer;
+      }
+    }
+  }
+}
