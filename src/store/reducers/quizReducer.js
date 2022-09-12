@@ -46,8 +46,8 @@ export const quizReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         quizs: action.payload.quizs,
-        currentQuiz: action.payload[0],
-        count: action.payload.length,
+        currentQuiz: action.payload.quizs[0],
+        count: action.payload.quizs.length,
         duration: action.payload.timer,
       };
 

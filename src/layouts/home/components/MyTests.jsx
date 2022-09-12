@@ -8,6 +8,7 @@ import { MenuItem, Select, Icon } from '@mui/material';
 import Spiner from 'components/Loader/Spiner';
 import { setUserCurrentTestInfo } from 'store/actions/actionCreaters';
 import { toast } from 'react-toastify';
+import MDButton from 'components/MDButton';
 
 const seconToMinut = second => second / 1000 / 60;
 
@@ -44,7 +45,25 @@ export default function MyTests() {
     <main className='container relative mx-auto p-3'>
       <div className='flex items-center justify-between mt-24'>
         <h2 className='items-center py-0 py-2 text-3xl'>Mening testlarim</h2>
-        <Select
+        <div className='flex gap-2'>
+          <MDButton
+            type='button'
+            variant={!solve ? 'contained' : 'outlined'}
+            color={!solve ? 'info' : 'secondary'}
+            onClick={() => setSolve(false)}
+          >
+            Sotib olingan
+          </MDButton>
+          <MDButton
+            type='button'
+            variant={solve ? 'contained' : 'outlined'}
+            color={solve ? 'info' : 'secondary'}
+            onClick={() => setSolve(true)}
+          >
+            Yechib bo`lingan
+          </MDButton>
+        </div>
+        {/* <Select
           value={solve}
           variant='standard'
           sx={{ width: '200px', height: '40px', fontSize: '1.2rem', background: 'white' }}
@@ -52,7 +71,7 @@ export default function MyTests() {
         >
           <MenuItem value='false'>Sotib olingan</MenuItem>
           <MenuItem value='true'>Yechib bo`lingan</MenuItem>
-        </Select>
+        </Select> */}
       </div>
 
       {isLoading ? (
