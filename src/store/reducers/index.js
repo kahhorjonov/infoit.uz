@@ -6,3 +6,4 @@ export * from './quizReducer';
 export * from './userTestsReducer';
 export * from './getMeReducer';
 export * from './statisticsReducer';
+export * from './dashboardStatisticsReducer';

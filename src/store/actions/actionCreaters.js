@@ -31,6 +31,8 @@ import {
   SEARCH_PLANNING_TESTS,
   GET_TEST_STATISTICS_TEST_ID_PROCESS,
   GET_TEST_STATISTICS_TEST_ID_SUCCESS,
+  GET_STATISTICS_TABLE_PROCESS,
+  GET_STATISTICS_TABLE_SUCCESS,
 } from './actionTypes';
 
 export const getCategoriesProccess = () => ({
@@ -180,5 +182,14 @@ export const getStatisticsTestIdProcess = () => ({
 
 export const getStatisticsTestIdSuccess = testStatisticsTestId => ({
   type: GET_TEST_STATISTICS_TEST_ID_SUCCESS,
+  payload: testStatisticsTestId,
+});
+
+export const getStatisticsTableProcess = () => ({
+  type: GET_STATISTICS_TABLE_PROCESS,
+});
+
+export const getStatisticsTableSuccess = testStatisticsTestId => ({
+  type: GET_STATISTICS_TABLE_SUCCESS,
   payload: testStatisticsTestId,
 });

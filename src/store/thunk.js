@@ -25,6 +25,8 @@ import {
   getDashboardStatisticsSuccess,
   getStatisticsTestIdProcess,
   getStatisticsTestIdSuccess,
+  getStatisticsTableProcess,
+  getStatisticsTableSuccess,
 } from './actions/actionCreaters';
 
 const access_token = getTokenFromStorage();
@@ -448,6 +450,20 @@ export const getDashboardStatistics = () => async dispatch => {
     });
 
     dispatch(getDashboardStatisticsSuccess(response?.data?.objectKoinot));
+  } catch (e) {
+    toast.error(e);
+  }
+};
+
+export const getDashboardStatisticsTable = () => async dispatch => {
+  try {
+    dispatch(getStatisticsTableProcess());
+    const response = await axiosPublic.get('api/statistics/v1/test', {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+    });
+    dispatch(getStatisticsTableSuccess(response?.data?.objectKoinot));
   } catch (e) {
     toast.error(e);
   }
