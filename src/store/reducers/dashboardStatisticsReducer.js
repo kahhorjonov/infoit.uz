@@ -7,7 +7,6 @@ const initialState = {
   isLoading: false,
   dashboardStatistics: [],
   count: 0,
-  search: '',
   pagination: {
     pageNumber: 1,
     pageSize: 5,
