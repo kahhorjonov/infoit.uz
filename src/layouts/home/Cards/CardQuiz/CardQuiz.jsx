@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { sendAnswer } from 'store/thunk';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { v4 } from 'uuid';
 import PropTypes from 'prop-types';
 import { setQuizPageNumber } from 'store/actions/actionCreaters';
@@ -13,6 +13,7 @@ import Styles from './CardQuiz.module.scss';
 
 function CardQuiz({ onFinishTest }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const params = useParams();
 
   const paramPathName = params['*'].split('/')[0];
@@ -91,7 +92,7 @@ function CardQuiz({ onFinishTest }) {
             {pageNumber} / {count}
           </h1>
           <ArrowForwardIosIcon
-            color={pageNumber === 30 ? 'secondary' : ''}
+            color={pageNumber === count ? 'secondary' : ''}
             onClick={() => handleClickNext(pageNumber)}
           />
         </div>
@@ -99,10 +100,22 @@ function CardQuiz({ onFinishTest }) {
           // disabled={pageNumber === 30}
           type='button'
           variant='contained'
-          color='secondary'
-          onClick={() => (pageNumber === 30 ? onFinishTest() : handleClickNext(pageNumber))}
+          color={
+            paramPathName === 'quiz' ? (pageNumber === count ? 'error' : 'secondary') : 'secondary'
+          }
+          onClick={() =>
+            paramPathName === 'quiz'
+              ? pageNumber === count
+                ? onFinishTest()
+                : handleClickNext(pageNumber)
+              : navigate('/myTests')
+          }
         >
-          {pageNumber === 30 ? 'Testni tugatish' : 'Keyingi test'}
+          {paramPathName === 'quiz'
+            ? pageNumber === count
+              ? 'Testni tugatish'
+              : 'Keyingi test'
+            : 'Testni chiqish'}
         </MDButton>
       </div>
     </div>
