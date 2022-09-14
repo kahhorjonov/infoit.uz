@@ -9,17 +9,25 @@ import Spiner from 'components/Loader/Spiner';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMe, buyTest } from 'store/thunk';
 import { toast } from 'react-toastify';
+import ModalComp from 'components/Modal/ModalComp';
+import MDButton from 'components/MDButton';
+import MDBox from 'components/MDBox';
+import MDTypography from 'components/MDTypography';
 
 export default function CardTestInfo({ planningTests, workingComp, onChangeAction }) {
+  const dispatch = useDispatch();
   const {
     profileData: { isLoading, profileData },
   } = useSelector(store => store);
+  const [openModal, setOpenModal] = useState(false);
 
-  const dispatch = useDispatch();
   const [profile, setProfile] = useState({ ...profileData });
 
   const params = useParams();
   const navigate = useNavigate();
+
+  const handleOpen = () => setOpenModal(true);
+  const handleClose = () => setOpenModal(false);
 
   const handleBuyTest = async () => {
     if (!profileData?.username) {
@@ -28,6 +36,7 @@ export default function CardTestInfo({ planningTests, workingComp, onChangeActio
     } else {
       const status = await buyTest(params?.id);
       status === 200 && navigate('/myTests');
+      handleClose();
     }
   };
 
@@ -41,6 +50,29 @@ export default function CardTestInfo({ planningTests, workingComp, onChangeActio
 
   return (
     <div className='relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg p-2'>
+      <ModalComp width='300px' status={openModal} onClose={handleClose}>
+        <MDTypography textAlign='center'>Sotib olishni istaysizmi?</MDTypography>
+        <MDBox display='flex' justifyContent='space-between' gap={2} marginTop={2}>
+          <MDButton
+            type='button'
+            fullWidth
+            variant='contained'
+            color='success'
+            onClick={() => handleBuyTest()}
+          >
+            Ha
+          </MDButton>
+          <MDButton
+            type='button'
+            fullWidth
+            variant='contained'
+            color='secondary'
+            onClick={handleClose}
+          >
+            Yo`q
+          </MDButton>
+        </MDBox>
+      </ModalComp>
       {planningTests?.id ? (
         <div className='flex-auto p-4'>
           <div className='flex flex-wrap'>
@@ -104,26 +136,7 @@ export default function CardTestInfo({ planningTests, workingComp, onChangeActio
               </button>
             ) : (
               <button
-                onClick={() => handleBuyTest()}
-                // onClick={
-                //   profile?.balance >= 5000 && profile?.balance > planningTests?.price
-                //     ? () => {
-                //         toast.success("Testni 'Mening Testlarim' bo`limidan topishingiz mumkun");
-                //         handleBuyTest();
-                //       }
-                //     : profile?.balance
-                //     ? () => {
-                //         toast.error(
-                //           'Hisobda yetarli mablang mavjud emas, iltimos hisobingizni to`ldiring',
-                //         );
-                //         setTimeout(() => {
-                //           navigate(`/buyTest/${planningTests?.id}`);
-                //         }, 1500);
-                //       }
-                //     : () => {
-                //         navigate('/login');
-                //       }
-                // }
+                onClick={() => handleOpen()}
                 type='button'
                 className='w-full bg-lightBlue-600'
                 style={{
