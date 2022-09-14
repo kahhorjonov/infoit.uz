@@ -55,8 +55,8 @@ function CardQuiz({ onFinishTest }) {
                 : ''
             } 
             ${
-              paramPathName === 'result' && choice?.correct
-                ? choice.userAnswer
+              paramPathName === 'result' && choice?.userAnswer
+                ? choice.correct
                   ? Styles.correctChoice
                   : Styles.uncorrectChoice
                 : ''

@@ -5,14 +5,7 @@ import { useNavigate } from 'react-router-dom';
 // icons
 import AccessTimeFilled from '@mui/icons-material/AccessTimeFilled';
 
-export default function CardTest({
-  id,
-  name,
-  category,
-  price,
-  startVisionTestDate,
-  durationTimeInMinutes,
-}) {
+export default function CardTest({ id, name, category, price, startTestDate }) {
   const navigate = useNavigate();
 
   return (
@@ -24,19 +17,19 @@ export default function CardTest({
               <span className='font-semibold text-lg text-blueGray-700'>{name}</span>
             </div>
           </div>
-          <span className='text-sm whitespace-nowrap'>Kategoriya</span>
-          <p className='text-base whitespace-nowrap font-bold'>{category.nameUz}</p>
+          {/* <span className='text-sm whitespace-nowrap'>Kategoriya</span> */}
+          <p className='text-base whitespace-nowrap font-bold mt-2'>{category.nameUz}</p>
           <p className='mt-4 text-base flex items-center text-lightBlue-600'>
             <AccessTimeFilled />
-            <span className='text-sm ml-1'>Davomiyligi</span>
+            <span className='text-sm ml-1'>Boshlanish vaqti</span>
           </p>
           <p>
             <span className='text-sm whitespace-nowrap mr-2'>
-              {new Date(startVisionTestDate).toLocaleDateString()}
+              {new Date(startTestDate).toISOString().substring(0, 16).replace('T', ', ')}
             </span>
-            <span className='text-sm whitespace-nowrap font-bold'>
+            {/* <span className='text-sm whitespace-nowrap font-bold'>
               {new Date(durationTimeInMinutes).toLocaleTimeString()}
-            </span>
+            </span> */}
           </p>
           <p>
             <span className='text-base whitespace-nowrap'>Narxi:</span>
@@ -71,6 +64,5 @@ CardTest.propTypes = {
   name: PropTypes.string,
   price: PropTypes.number,
   category: PropTypes.object,
-  startVisionTestDate: PropTypes.number,
-  durationTimeInMinutes: PropTypes.number,
+  startTestDate: PropTypes.number,
 };
