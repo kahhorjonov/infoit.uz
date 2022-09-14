@@ -76,6 +76,8 @@ export default function MyTests() {
 
       {isLoading ? (
         <Spiner />
+      ) : tests.length === 0 ? (
+        <h1 className='text-center text-2xl mt-20'>Test mavjud emas!</h1>
       ) : (
         tests?.map(test => (
           <div
