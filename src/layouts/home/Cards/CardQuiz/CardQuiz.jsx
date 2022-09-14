@@ -113,7 +113,7 @@ function CardQuiz({ onFinishTest }) {
         >
           {paramPathName === 'quiz'
             ? pageNumber === count
-              ? 'Testni tugatish'
+              ? 'Testni yakunlash'
               : 'Keyingi test'
             : 'Testni chiqish'}
         </MDButton>

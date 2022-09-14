@@ -95,15 +95,26 @@ export default function MyTests() {
                   <div className='mx-4'>
                     <h2
                       onClick={() => (!solve ? startTest(test) : handleNavigateResults(test))}
-                      className='text-2xl mb-4 cursor-pointer hover:underline'
+                      className='text-2xl cursor-pointer hover:underline'
                     >
                       {test?.name}
                     </h2>
-                    <p className='text-blueGray-400 text-xs mb-2'>
+                    <p className='text-blueGray-400 text-xs'>
                       Savollar soni {test?.questionsCount} ta
                     </p>
                     <p className='text-blueGray-400 text-xs'>
                       Davomiyligi {seconToMinut(test?.durationTimeInMinutes)} minut
+                    </p>
+                    <p className='text-blueGray-400 text-xs'>
+                      Boshlanish vaqti:{' '}
+                      {new Date(test?.startTestDate).toISOString().substr(0, 16).replace('T', ', ')}
+                    </p>
+                    <p className='text-blueGray-400 text-xs'>
+                      Boshlanish vaqti:{' '}
+                      {new Date(test?.finishTestDate)
+                        .toISOString()
+                        .substr(0, 16)
+                        .replace('T', ', ')}
                     </p>
                   </div>
                 </div>
@@ -115,6 +126,14 @@ export default function MyTests() {
                   >
                     {!solve ? 'Sotib olingan' : 'Yechib bo`lingan'}
                   </p>
+                  {!solve && (
+                    <p
+                      className='text-sm mb-2 hover:underline cursor-pointer'
+                      onClick={() => !solve && startTest(test)}
+                    >
+                      Testni boshlash
+                    </p>
+                  )}
                   {solve && (
                     <div>
                       <p
