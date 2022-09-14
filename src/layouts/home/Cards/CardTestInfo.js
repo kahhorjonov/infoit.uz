@@ -48,15 +48,20 @@ export default function CardTestInfo({ planningTests, workingComp, onChangeActio
               <span className='font-semibold text-lg text-blueGray-700'>{planningTests?.name}</span>
             </div>
           </div>
-          <span className='text-sm whitespace-nowrap'>Kategoriya</span>
-          <p className='text-base whitespace-nowrap font-bold'>{planningTests?.category?.nameUz}</p>
+          {/* <span className='text-sm whitespace-nowrap'>Kategoriya</span> */}
+          <p className='text-base whitespace-nowrap font-bold mt-2'>
+            {planningTests?.category?.nameUz}
+          </p>
           <p className='mt-4 text-base flex items-center text-lightBlue-600'>
             <AccessTimeFilled />
             <span className='text-sm ml-1'>Boshlanish vaqti</span>
           </p>
           <p>
             <span className='text-sm whitespace-nowrap mr-2'>
-              {new Date(planningTests?.startTestDate).toISOString().substr(0, 16)}
+              {new Date(planningTests?.startTestDate)
+                .toISOString()
+                .substr(0, 16)
+                .replace('T', ', ')}
             </span>
           </p>
 
@@ -66,17 +71,21 @@ export default function CardTestInfo({ planningTests, workingComp, onChangeActio
           </p>
           <p>
             <span className='text-sm whitespace-nowrap mr-2'>
-              {new Date(planningTests?.finishTestDate).toISOString().substr(0, 16)}
+              {new Date(planningTests?.finishTestDate)
+                .toISOString()
+                .substr(0, 16)
+                .replace('T', ', ')}
             </span>
             {/* <span className='text-sm whitespace-nowrap font-bold'>{statEndTime}</span> */}
           </p>
 
           <p className='mt-4'>
             <span className='text-base whitespace-nowrap'>Narxi:</span>
+            <span className='whitespace-nowrap font-bold ml-2'>{planningTests?.price} so`m</span>
           </p>
-          <p>
+          {/* <p>
             <span className='whitespace-nowrap font-bold'>{planningTests?.price} so`m</span>
-          </p>
+          </p> */}
 
           <p className='w-full text-blueGray-400 mt-4 flex justify-between items-center'>
             {workingComp === 'admin' ? (
