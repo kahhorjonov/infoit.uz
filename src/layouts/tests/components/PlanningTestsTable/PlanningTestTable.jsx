@@ -80,12 +80,12 @@ function PlanningTestTable({ onChangeActionType }) {
             <thead>
               <tr>
                 <th>№</th>
-                <th>Test Name</th>
-                <th>Questions Count</th>
-                <th>Duration</th>
-                <th>Price</th>
-                <th>Start date</th>
-                <th>Finish date</th>
+                <th>Test mavzusi</th>
+                <th>Savollar soni</th>
+                <th>Davomiyligi</th>
+                <th>Test narxi</th>
+                <th>Test boshlanish vaqti</th>
+                <th>Test amal qilish muddati</th>
               </tr>
             </thead>
             <tbody>

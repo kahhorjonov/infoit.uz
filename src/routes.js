@@ -15,7 +15,7 @@ import Icon from '@mui/material/Icon';
 const routes = [
   {
     type: 'collapse',
-    name: 'Dashboard',
+    name: 'Statistika',
     key: 'dashboard',
     icon: <Icon fontSize='small'>dashboard</Icon>,
     route: '/admin/dashboard',
@@ -24,7 +24,7 @@ const routes = [
   },
   {
     type: 'collapse',
-    name: 'Create a questions',
+    name: 'Savollar',
     key: 'createQuestion',
     icon: <Icon fontSize='small'>add</Icon>,
     route: '/admin/createQuestion',
@@ -33,7 +33,7 @@ const routes = [
   },
   {
     type: 'collapse',
-    name: 'Create a test',
+    name: 'Testlar',
     key: 'createTest',
     icon: <Icon fontSize='small'>quiz</Icon>,
     route: '/admin/createTest',
@@ -42,7 +42,7 @@ const routes = [
   },
   {
     type: 'collapse',
-    name: 'Categories',
+    name: 'Kategoriyalar',
     key: 'categories',
     icon: <Icon fontSize='small'>category</Icon>,
     route: '/admin/categories',
@@ -51,7 +51,7 @@ const routes = [
   },
   {
     type: 'collapse',
-    name: 'Users',
+    name: 'Foydalanuvchilar',
     key: 'users',
     icon: <Icon fontSize='small'>group</Icon>,
     route: '/admin/users',
@@ -114,7 +114,7 @@ const routes = [
   // },
   {
     type: 'collapse',
-    name: 'Logout',
+    name: 'Chiqish',
     key: 'logout',
     icon: <Icon fontSize='small'>logout</Icon>,
     route: '/admin/logout',

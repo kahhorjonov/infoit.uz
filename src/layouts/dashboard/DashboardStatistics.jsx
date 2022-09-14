@@ -33,10 +33,10 @@ function DashboardStatisticstable() {
           <table className={Styles.usersTable}>
             <thead>
               <tr>
-                <th>№</th>
-                <th>Nomi</th>
+                <th> </th>
+                <th>Test mavzusi</th>
                 <th>Foyda</th>
-                <th>Userlar soni</th>
+                <th>Foydalanuvchilar soni</th>
               </tr>
             </thead>
             <tbody>

@@ -32,7 +32,7 @@ function UserForm() {
   return (
     <MDBox display='flex' flexDirection='column' gap={2}>
       <MDBox display='flex' alignItems='center' justifyContent='space-between'>
-        <MDTypography>USER ID: {userData?.id}</MDTypography>
+        <MDTypography>Foydalanuvchi: {userData?.id}</MDTypography>
         {edit ? (
           <Icon fontSize='medium' onClick={() => setEdit(false)}>
             edit
@@ -57,25 +57,25 @@ function UserForm() {
         fullWidth
         onChange={e => handleChangeUserData('roles', e.target.value)}
       >
-        <MenuItem value='ROLE_USER'>ROLE_USER</MenuItem>
-        <MenuItem value='ROLE_ADMIN'>ROLE_ADMIN</MenuItem>
+        <MenuItem value='ROLE_USER'>Foydalanuvchi</MenuItem>
+        <MenuItem value='ROLE_ADMIN'>Admin</MenuItem>
       </Select>
 
       <MDInput
         disabled={edit}
         type='number'
         value={userData?.balance || ''}
-        label='Balance'
+        label='Balans'
         fullWidth
-        placeholder='Balance'
+        placeholder='Balans'
         onChange={e => handleChangeUserData('balance', parseInt(e.target.value, 10))}
       />
       <MDInput
         disabled={edit}
         value={userData?.password || ''}
-        label='Password'
+        label='Parol'
         fullWidth
-        placeholder='Password'
+        placeholder='Parol'
         onChange={e => handleChangeUserData('password', e.target.value)}
       />
     </MDBox>

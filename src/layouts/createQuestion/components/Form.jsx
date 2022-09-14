@@ -130,7 +130,7 @@ function Form({ formType, categoryId, onClose }) {
     <MDBox display='flex' flexDirection='column' gap={2}>
       <MDBox display='flex' alignItems='center' justifyContent='space-between'>
         <MDTypography variant='text' color='text' fontSize='5' fontWeight='bold'>
-          Question: {formType === 'view' && questionsForm?.idx}
+          Savol: {formType === 'view' && questionsForm?.idx}
         </MDTypography>
         {actionType !== 'view' && (
           <MDButton fontSize='5' onClick={() => handleAddAnswer()}>
@@ -177,23 +177,23 @@ function Form({ formType, categoryId, onClose }) {
       {actionType === 'edit' || actionType === 'add' ? (
         <MDBox width='100%' display='flex' alignItems='center' gap={1}>
           <MDButton fullWidth color='success' onClick={() => handleSave(questionsForm)}>
-            Save
+            Saqlash
           </MDButton>
           <MDButton
             fullWidth
             color='secondary'
             onClick={actionType === 'add' ? onClose : () => setActionType('view')}
           >
-            Cancel
+            Bekor qilish
           </MDButton>
         </MDBox>
       ) : (
         <MDBox width='100%' display='flex' alignItems='center' gap={1}>
           <MDButton fullWidth color='success' onClick={() => setActionType('edit')}>
-            Edit
+            Tahrirlash
           </MDButton>
           <MDButton fullWidth color='secondary' onClick={() => handleDelete(currentQuestion?.id)}>
-            Delete
+            O`chirish
           </MDButton>
         </MDBox>
       )}

@@ -7,7 +7,7 @@ import Spiner from 'components/Loader/Spiner';
 import PaginationTable from 'components/Pagination/Pagination';
 import Styles from '../TestTable.module.scss';
 
-function TestTable({ onAddQuestionId }) {
+function TestTable({ questionsId, onAddQuestionId }) {
   const dispatch = useDispatch();
   const { category, questionsData } = useSelector(store => store);
 
@@ -32,7 +32,7 @@ function TestTable({ onAddQuestionId }) {
   };
 
   useEffect(() => {
-    console.log(category.currentCategory.id, questionsData);
+    // console.log(category.currentCategory.id, questionsData);
     category.currentCategory.id &&
       dispatch(
         getQuestions({
@@ -54,14 +54,18 @@ function TestTable({ onAddQuestionId }) {
               <tr>
                 <th> </th>
                 <th>№</th>
-                <th>Questions</th>
+                <th>Savollar</th>
               </tr>
             </thead>
             <tbody>
               {questionsData?.questions?.map((test, idx) => (
-                <tr key={test.id}>
+                <tr key={test.id} onClick={() => onAddQuestionId(test.id)}>
                   <td>
-                    <input type='checkbox' onChange={e => onAddQuestionId(test.id)} />
+                    <input
+                      type='checkbox'
+                      checked={questionsId?.filter(id => id === test.id)[0] ? true : false}
+                      onChange={() => onAddQuestionId(test.id)}
+                    />
                   </td>
                   <td>
                     {idx +
@@ -87,6 +91,7 @@ function TestTable({ onAddQuestionId }) {
 }
 
 TestTable.propTypes = {
+  questionsId: PropTypes.array,
   onAddQuestionId: PropTypes.func,
 };
 

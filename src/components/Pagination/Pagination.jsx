@@ -9,7 +9,7 @@ function PaginationTable(props) {
   return (
     <Box className='pagination'>
       <Box className='leftCont'>
-        <span>Page Size:</span>
+        <span>Elementlar soni:</span>
         <select
           value={pageSize}
           onChange={e => {
@@ -32,7 +32,7 @@ function PaginationTable(props) {
       <Box className='rightCont'>
         <div>
           <span variant='string'>
-            To {pageNumber} From {dataCount || 0}
+            {pageNumber} dan {dataCount || 0} gacha
           </span>
         </div>
 

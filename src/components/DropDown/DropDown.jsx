@@ -51,9 +51,12 @@ function DropDown({ position = 'bottom-end', color = 'white' }) {
 
   const handleClick = newPlacement => event => {
     setAnchorEl(event.currentTarget);
-    setOpen(prev => placement !== newPlacement || !prev);
+    // setOpen(prev => placement !== newPlacement || !prev);
+    setOpen(true);
     setPlacement(newPlacement);
   };
+
+  const handleClose = () => setOpen(false);
 
   const handleChange = (event, nodeIds) => {
     const data = JSON.parse(nodeIds);
@@ -67,9 +70,9 @@ function DropDown({ position = 'bottom-end', color = 'white' }) {
   };
 
   return (
-    <div>
+    <div onMouseLeave={() => handleClose()}>
       <MDButton variant='outlined' type='button' color={color} onClick={handleClick(position)}>
-        {currentCategory?.nameUz || 'Category'}
+        {currentCategory?.nameUz || 'Fanlar'}
         <Icon
           style={{
             marginLeft: '5rem',
