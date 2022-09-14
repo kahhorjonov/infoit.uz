@@ -40,6 +40,7 @@ export const planningTestReducer = (state = initialState, action) => {
         forUser: action.payload.data.content,
         count: action.payload.data.totalPages,
         pagination: action.payload.pagination,
+        elementsCount: action.payload.data.totalElements,
       };
 
     case SEARCH_PLANNING_TESTS:

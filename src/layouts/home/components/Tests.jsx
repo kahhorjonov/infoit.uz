@@ -1,27 +1,33 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import DropDown from 'components/DropDown/DropDown';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCategories, getPlanningTestForUser } from 'store/thunk';
 
 // components
+import MDButton from 'components/MDButton';
 import Spiner from 'components/Loader/Spiner';
 import CardTest from '../Cards/CardTest';
 
 export default function Tests() {
   const dispatch = useDispatch();
   const {
-    planningTests: { forUser, isLoading },
+    planningTests: { forUser, isLoading, elementsCount },
     category: { currentCategory },
   } = useSelector(store => store);
+
+  const [pagination, setPagination] = useState({
+    pageNumber: 1,
+    pageSize: 6,
+  });
 
   useEffect(() => {
     dispatch(
       getPlanningTestForUser({
+        pagination,
         categoryId: currentCategory?.id || '',
-        pagination: { pageNumber: 1, pageSize: 6 },
       }),
     );
-  }, [currentCategory]);
+  }, [currentCategory, pagination]);
 
   useEffect(() => {
     dispatch(getCategories());
@@ -49,12 +55,25 @@ export default function Tests() {
         {isLoading ? (
           <Spiner />
         ) : (
-          <div className='flex flex-wrap mt-6'>
+          <div className='flex flex-wrap my-6'>
             {forUser?.map(test => (
               <CardTest key={test.id} {...test} />
             ))}
           </div>
         )}
+        <MDButton
+          disabled={pagination?.pageSize <= elementsCount ? false : true}
+          type='button'
+          variant='outlined'
+          color='info'
+          fullWidth
+          onClick={() =>
+            pagination?.pageSize <= elementsCount &&
+            setPagination({ ...pagination, pageSize: pagination.pageSize + 3 })
+          }
+        >
+          Yana yuklash...
+        </MDButton>
       </div>
     </div>
   );
