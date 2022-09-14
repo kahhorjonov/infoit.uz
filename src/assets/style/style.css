@@ -3267,3 +3267,7 @@ video {
 .dropdown:hover .dropdown-content {
   display: block;
 }
+
+.css-g6lm7c-MuiTypography-root {
+  font-size: 0.88rem !important;
+}

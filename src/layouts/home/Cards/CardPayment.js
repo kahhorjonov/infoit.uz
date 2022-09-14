@@ -51,10 +51,10 @@ export default function CardTest() {
         <div className='relative px-2'>
           <label className='block text-xs'>Karta raqami</label>
           <InputMask
-            mask='9999999999999999'
+            mask='9999 9999 9999 9999'
             type='text'
             className='border px-2'
-            onChange={e => setCardNumber(e.target.value)}
+            onChange={e => setCardNumber(e.target.value).replace(/\s/g, '')}
           />
         </div>
         <div className='relative px-2 mt-4'>
