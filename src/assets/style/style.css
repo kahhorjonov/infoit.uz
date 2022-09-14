@@ -931,8 +931,8 @@ video {
 }
 
 .bg-figma {
-  --tw-bg-opacity: 1;
-  background-color: #f0f0f0;
+  /* --tw-bg-opacity: 1; */
+  background-color: rgb(249, 248, 248);
 }
 
 .bg-grey {

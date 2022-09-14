@@ -15,7 +15,7 @@ export default function Home() {
     <main>
       <div
         id='main'
-        className='relative pt-16 pb-32 flex content-center items-center justify-center bg-white min-h-screen-75'
+        className='relative pt-16 pb-32 flex content-center items-center justify-center bg-figma min-h-screen-75'
       >
         <div className='container relative mx-auto'>
           <div className='items-center flex flex-wrap'>
@@ -64,7 +64,7 @@ export default function Home() {
 
       {/* section tests */}
 
-      <section id='tests' className='relative py-20 bg-white'>
+      <section id='tests' className='relative py-20 bg-figma'>
         <div className='container mx-auto px-4'>
           <div className='items-center flex flex-wrap'>
             <Tests />
