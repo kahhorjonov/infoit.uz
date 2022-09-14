@@ -45,7 +45,7 @@ function CategoryForm({ formType, currCategory, onClose }) {
 
   return (
     <MDBox display='flex' flexDirection='column' gap={2}>
-      <ModalComp width='15%' status={openDeleteModal} onClose={handleClose}>
+      <ModalComp width='350px' status={openDeleteModal} onClose={handleClose}>
         <MDTypography textAlign='center' mb={1}>
           O`chirishni davom ettirasizmi?
         </MDTypography>

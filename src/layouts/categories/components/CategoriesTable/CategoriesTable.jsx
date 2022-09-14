@@ -18,7 +18,7 @@ function CategoriesTable() {
 
   return (
     <MDBox>
-      <ModalComp status={open.status} onClose={handleClose}>
+      <ModalComp width='400px' status={open.status} onClose={handleClose}>
         <CategoryForm formType='view' currCategory={open.currCategory} />
       </ModalComp>
       <table className={Styles.categoryTable}>
