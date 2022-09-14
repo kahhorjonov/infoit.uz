@@ -63,7 +63,7 @@ export default function HomeNavbar() {
                   className={
                     pathname === '#main' && main === '/'
                       ? 'lg:hover:underline underline text-blueGray-700 text-blueGray-700'
-                      : 'text-blueGray-200'
+                      : 'text-blueGray-400'
                   }
                 >
                   Asosiy
@@ -82,7 +82,7 @@ export default function HomeNavbar() {
                   className={
                     pathname === '#about-us'
                       ? 'lg:hover:underline underline text-blueGray-700 text-blueGray-700'
-                      : 'text-blueGray-200'
+                      : 'text-blueGray-400'
                   }
                 >
                   Biz haqimizda
@@ -103,7 +103,7 @@ export default function HomeNavbar() {
                     className={
                       pathname === '#tests'
                         ? 'lg:hover:underline underline text-blueGray-700 text-blueGray-700'
-                        : 'text-blueGray-200'
+                        : 'text-blueGray-400'
                     }
                   >
                     Testlar
@@ -124,7 +124,7 @@ export default function HomeNavbar() {
                   className={
                     pathname === '#for-teachers'
                       ? 'lg:hover:underline underline text-blueGray-700 text-blueGray-700'
-                      : 'text-blueGray-200'
+                      : 'text-blueGray-400'
                   }
                 >
                   O`qituvchilar uchun
@@ -144,7 +144,7 @@ export default function HomeNavbar() {
                     className={
                       main === '/myTests'
                         ? 'lg:hover:underline underline text-blueGray-700 text-blueGray-700'
-                        : 'text-blueGray-200'
+                        : 'text-blueGray-400'
                     }
                   >
                     Mening Testlarim
