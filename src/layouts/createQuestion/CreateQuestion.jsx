@@ -61,7 +61,7 @@ function CreateQuestion() {
                 justifyContent='space-between'
               >
                 <MDTypography variant='h6' color='white'>
-                  Questions
+                  Savollar
                 </MDTypography>
                 <MDBox display='flex' alignItems='center' gap={3}>
                   <DropDown />

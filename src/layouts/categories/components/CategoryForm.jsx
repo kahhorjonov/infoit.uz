@@ -72,9 +72,9 @@ function CategoryForm({ formType, currCategory, onClose }) {
       </ModalComp>
       <MDBox display='flex' justifyContent='space-between' xs={12}>
         <MDTypography variant='text' color='text' fontSize='5' fontWeight='bold'>
-          Create Category
+          Kategoriya qo`shish
         </MDTypography>
-        <MDTypography>Parent Category: {category?.currentCategory?.name}</MDTypography>
+        {/* <MDTypography>Parent Category: {category?.currentCategory?.name}</MDTypography> */}
       </MDBox>
       <MDBox xs={5}>
         <MDBox display='flex' alignItems='center' gap={1}>
@@ -82,10 +82,10 @@ function CategoryForm({ formType, currCategory, onClose }) {
             disabled={actionType === 'view' ? true : false}
             value={newCategory?.nameUz}
             fullWidth
-            label='Category Name UZ'
+            label='Kategoriya nomi'
             onChange={e => handleChangeCategory('nameUz', e.target.value)}
           />
-          <MDInput
+          {/* <MDInput
             disabled={actionType === 'view' ? true : false}
             value={newCategory?.nameRu}
             fullWidth
@@ -98,29 +98,29 @@ function CategoryForm({ formType, currCategory, onClose }) {
             fullWidth
             label='Category Name EN'
             onChange={e => handleChangeCategory('nameEn', e.target.value)}
-          />
+          /> */}
         </MDBox>
       </MDBox>
       {actionType === 'edit' || actionType === 'add' ? (
         <MDBox width='100%' display='flex' alignItems='center' gap={1}>
           <MDButton fullWidth color='success' onClick={() => handleSave(newCategory)}>
-            Save
+            Saqlash
           </MDButton>
           <MDButton
             fullWidth
             color='secondary'
             onClick={actionType === 'add' ? onClose : () => setActionType('view')}
           >
-            Cancel
+            Bekor qilish
           </MDButton>
         </MDBox>
       ) : (
         <MDBox width='100%' display='flex' alignItems='center' gap={1}>
           <MDButton fullWidth color='success' onClick={() => setActionType('edit')}>
-            Edit
+            Tahrirlash
           </MDButton>
           <MDButton fullWidth color='secondary' onClick={() => handleOpen()}>
-            Delete
+            O`chirish
           </MDButton>
         </MDBox>
       )}

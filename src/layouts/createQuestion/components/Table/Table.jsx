@@ -73,9 +73,9 @@ function Table() {
           <table className={Styles.table}>
             <thead>
               <tr>
-                <th>ID</th>
-                <th>Question</th>
-                <th>Right Answer</th>
+                <th>№</th>
+                <th>Savollar</th>
+                <th>To`g`ri javoblar</th>
               </tr>
             </thead>
             <tbody>

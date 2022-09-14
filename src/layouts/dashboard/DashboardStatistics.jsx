@@ -39,9 +39,9 @@ function DashboardStatisticstable() {
             <thead>
               <tr>
                 <th> </th>
-                <th>Nomi</th>
+                <th>Test mavzusi</th>
                 <th>Foyda</th>
-                <th>Userlar soni</th>
+                <th>Foydalanuvchilar soni</th>
               </tr>
             </thead>
             <tbody>

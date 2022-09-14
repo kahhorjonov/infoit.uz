@@ -59,7 +59,7 @@ function Categories() {
                 justifyContent='space-between'
               >
                 <MDTypography variant='h6' color='white'>
-                  Categories
+                  Kategoriyalar
                 </MDTypography>
                 <MDBox display='flex' alignItems='center' gap={3}>
                   <DropDown />

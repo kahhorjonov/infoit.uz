@@ -4,6 +4,7 @@ import MDBox from 'components/MDBox';
 import MDInput from 'components/MDInput';
 import MDTypography from 'components/MDTypography';
 import { uploadPhoto } from 'store/thunk';
+import { toast } from 'react-toastify';
 
 function CreateTestForm({
   name,
@@ -30,32 +31,32 @@ function CreateTestForm({
       <MDInput
         value={name}
         onChange={e => onChangeTestData('name', e.target.value)}
-        label='Name'
-        placeholder='Test Name'
+        label='Test mavzusi'
+        placeholder='Test mavzusi'
         type='text'
         fullWidth
         focused
         required
       />
       <FormControl fullWidth focused required>
-        <InputLabel id='active_select_id'>Active</InputLabel>
+        <InputLabel id='active_select_id'>Test holati</InputLabel>
         <Select
           required
           labelId='active_select_id'
           value={active}
           onChange={e => onChangeTestData('active', e.target.value)}
-          label='Active'
+          label='Test holati'
           style={{ height: '40px', padding: '2px' }}
         >
-          <MenuItem value='true'>Active</MenuItem>
-          <MenuItem value='false'>No active</MenuItem>
+          <MenuItem value='true'>Ko`rinsin</MenuItem>
+          <MenuItem value='false'>Ko`rinmasin</MenuItem>
         </Select>
       </FormControl>
       <MDInput
         value={durationTimeInMinutes}
         onChange={e => onChangeTestData('durationTimeInMinutes', parseInt(e.target.value, 10))}
-        label='Duration'
-        placeholder='Duration'
+        label='Davomiyligi (minut)'
+        placeholder='Davomiyligi (minut)'
         type='number'
         fullWidth
         focused
@@ -64,8 +65,8 @@ function CreateTestForm({
       <MDInput
         value={price}
         onChange={e => onChangeTestData('price', parseInt(e.target.value, 10))}
-        label='Price'
-        placeholder='Price'
+        label='Test narxi (so`m)'
+        placeholder='Test narxi (so`m)'
         type='number'
         fullWidth
         focused
@@ -74,8 +75,8 @@ function CreateTestForm({
       <MDInput
         value={questionsCount}
         onChange={e => onChangeTestData('questionsCount', parseInt(e.target.value, 10))}
-        label='Count'
-        placeholder='Questions count'
+        label='Test soni'
+        placeholder='Test soni'
         type='number'
         fullWidth
         focused
@@ -83,8 +84,13 @@ function CreateTestForm({
       />
       <MDInput
         value={startTestDate}
-        onChange={e => onChangeTestData('startTestDate', e.target.value)}
-        label='Start Test'
+        onChange={e =>
+          Date.parse(e.target.value) > Date.parse(new Date())
+            ? onChangeTestData('startTestDate', e.target.value)
+            : toast.warning('Test boshlanish vaqti noto`g`ri.')
+        }
+        // onChange={e => console.log(Date.parse(e.target.value))}
+        label='Test boshlanish vaqti'
         type='datetime-local'
         fullWidth
         focused
@@ -92,8 +98,12 @@ function CreateTestForm({
       />
       <MDInput
         value={finishTestDate}
-        onChange={e => onChangeTestData('finishTestDate', e.target.value)}
-        label='Finish Test'
+        onChange={e =>
+          Date.parse(e.target.value) > Date.parse(new Date())
+            ? onChangeTestData('finishTestDate', e.target.value)
+            : toast.warning('Test amal qilish muddati noto`g`ri.')
+        }
+        label='Test amal qilish muddati'
         type='datetime-local'
         fullWidth
         focused
@@ -142,7 +152,7 @@ function CreateTestForm({
             fontSize: '0.9rem',
           }}
         >
-          Test cover <Icon fontSize='large'>image</Icon>
+          Test mavzusiga doir rasm <Icon fontSize='large'>image</Icon>
           <input
             onChange={e => handleGetImageId(e.target.files[0])}
             style={{ display: 'none' }}

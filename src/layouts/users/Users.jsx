@@ -50,17 +50,17 @@ function Users() {
                 justifyContent='space-between'
               >
                 <MDTypography variant='h6' color='white'>
-                  Users
+                  Foydalanuvchilar
                 </MDTypography>
                 <MDBox display='flex' alignItems='center' gap={3}>
                   <Select
                     variant='standard'
                     value={role}
-                    sx={{ width: '100px', height: '30px', color: 'white !important' }}
+                    sx={{ width: '150px', height: '30px', color: 'white !important' }}
                     onChange={e => setRole(e.target.value)}
                   >
-                    <MenuItem value='ROLE_USER'>USER</MenuItem>
-                    <MenuItem value='ROLE_ADMIN'>ADMIN</MenuItem>
+                    <MenuItem value='ROLE_USER'>Foydalanuvchi</MenuItem>
+                    <MenuItem value='ROLE_ADMIN'>Admin</MenuItem>
                   </Select>
                   {/* <MDButton>
                     <Icon>add</Icon>

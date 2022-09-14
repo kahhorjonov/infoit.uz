@@ -24,17 +24,17 @@ function CategoriesTable() {
       <table className={Styles.categoryTable}>
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Category Name</th>
-            <th>Questions Count</th>
+            <th>№</th>
+            <th>Kategoriya</th>
+            <th>Savollari soni</th>
           </tr>
         </thead>
         <tbody>
           {currentCategory?.children?.map((c, idx) => (
-            <tr key={c.id} onClick={() => handleOpen(c)}>
+            <tr key={c?.id} onClick={() => handleOpen(c)}>
               <td>{idx + 1}</td>
-              <td>{c.nameUz}</td>
-              <td>100</td>
+              <td>{c?.nameUz}</td>
+              <td>{c?.questionsCount}</td>
             </tr>
           ))}
         </tbody>

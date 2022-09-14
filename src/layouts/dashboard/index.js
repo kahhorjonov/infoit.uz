@@ -92,7 +92,7 @@ function Dashboard() {
                   justifyContent='space-between'
                 >
                   <MDTypography variant='h6' color='white'>
-                    Test Statistics
+                    Testlar bo`yicha statistika
                   </MDTypography>
                 </MDBox>
                 <MDBox width='100%' p={3}>

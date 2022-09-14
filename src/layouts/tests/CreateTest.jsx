@@ -54,7 +54,9 @@ function CreateTest() {
     else if (!newTest?.durationTimeInMinutes) toast.error('Test ishlash vaqtini kiriting!');
     // else if (!newTest?.price) toast.error('Enter the test price!');
     else if (!newTest?.questionsCount) toast.error('Savollar sonini kiriting!');
-    if (!newTest?.attachmentId) toast.error('Test uchun muqova tanlang!');
+    else if (Date.parse(newTest?.startTestDate) >= Date.parse(newTest?.finishTestDate))
+      toast.error('Test boshlash va tugash vaqtini to`g`ri kiriting!');
+    else if (!newTest?.attachmentId) toast.error('Test uchun muqova tanlang!');
     else return true;
     return false;
   };
@@ -106,7 +108,7 @@ function CreateTest() {
           justifyContent='space-between'
         >
           <MDTypography variant='h6' color='white'>
-            Create Test
+            Testlar
           </MDTypography>
           <MDBox display='flex' alignItems='center' gap={3}>
             <DropDown />
@@ -139,7 +141,10 @@ function CreateTest() {
                 <PlanningTestTable onChangeActionType={type => setActionType(type)} />
               )}
               {(actionType === 'add' || actionType === 'edit') && (
-                <TestTable onAddQuestionId={id => handleAddQuestionId(id)} />
+                <TestTable
+                  questionsId={newTest?.questionsId}
+                  onAddQuestionId={id => handleAddQuestionId(id)}
+                />
               )}
             </Grid>
             {(actionType === 'add' || actionType === 'edit') && (
