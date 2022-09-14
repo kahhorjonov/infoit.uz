@@ -5,7 +5,7 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { InputAdornment, IconButton } from '@mui/material';
 
 // react-router-dom components
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 // @mui material components
 import Card from '@mui/material/Card';
@@ -105,6 +105,11 @@ function Basic() {
                       onClick={() => setPhone({ ...phone, isOpened: true })}
                       InputProps={{
                         error: !phone.phone && phone.isOpened,
+                        startAdornment: (
+                          <InputAdornment position='start' size='xs'>
+                            +998
+                          </InputAdornment>
+                        ),
                       }}
                       label='Telefon'
                       type='phone'

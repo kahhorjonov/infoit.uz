@@ -37,11 +37,12 @@ export default function Profile() {
     <main className='container relative mx-auto p-3'>
       <div className='mt-24 flex justify-between items-center'>
         <h2 className='items-center py-2 text-3xl'>Profil</h2>
-        <div className='flex'>
-          <span className='text-base px-3'>{profile?.balance} so`m</span>
+        <div className='flex items-center'>
+          <span className='font-bold text-lg pl-3'>Sizning hisobingiz: </span>
+          <span className='text-base px-3 mr-4'>{profile?.balance} so`m</span>
           <Icon
             fontSize='medium'
-            className='cursor-pointer'
+            className='cursor-pointer mx-3'
             onClick={() => {
               setIsDisabled(!isDisabled);
               isDisabled ? null : handleUpdateProfile();

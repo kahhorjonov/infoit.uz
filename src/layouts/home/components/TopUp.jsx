@@ -46,10 +46,10 @@ export default function TopUp() {
               <div className='relative px-2'>
                 <label className='block text-xs'>Karta raqami</label>
                 <InputMask
-                  mask='9999999999999999'
+                  mask='9999 9999 9999 9999'
                   type='text'
-                  className='border px-2'
-                  onChange={e => setCardNumber(e.target.value)}
+                  className='border px-3'
+                  onChange={e => setCardNumber(e.target.value.replace(/\s/g, ''))}
                 />
               </div>
               <div className='relative px-2 mt-4'>
@@ -57,7 +57,7 @@ export default function TopUp() {
                 <InputMask
                   mask='99/99'
                   alwaysShowMask='true'
-                  className='border px-2'
+                  className='border px-3'
                   onChange={e => setExpDate(e.target.value)}
                 />
               </div>
@@ -66,7 +66,7 @@ export default function TopUp() {
                 <InputMask
                   mask='999999'
                   maskChar=''
-                  className='border px-2'
+                  className='border px-3'
                   onChange={e => setSumma(e.target.value)}
                 />
               </div>
