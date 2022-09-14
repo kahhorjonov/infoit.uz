@@ -120,6 +120,11 @@ function Cover() {
                     fullWidth
                     InputProps={{
                       error: !phoneNumber.phoneNumber && phoneNumber.isOpened,
+                      startAdornment: (
+                        <InputAdornment position='start' size='xs'>
+                          +998
+                        </InputAdornment>
+                      ),
                     }}
                   />
                 )}
