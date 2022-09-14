@@ -74,7 +74,7 @@ export default function Home() {
 
       {/* section carts */}
 
-      <section id='about-us' className='relative py-20 bg-white'>
+      <section id='about-us' className='relative py-20 bg-figma'>
         <div className='container mx-auto px-4'>
           <div className='items-center flex flex-wrap'>
             <CardWhy />
@@ -82,7 +82,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id='for-teachers' className='relative py-20 bg-white'>
+      <section id='for-teachers' className='relative py-20 bg-figma'>
         <div className='container mx-auto px-4'>
           <div className='items-center flex flex-wrap'>
             <CardForTeachers />
