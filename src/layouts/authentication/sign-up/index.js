@@ -31,8 +31,11 @@ function Cover() {
   const [passwordConf, setPasswordConf] = useState({ passwordConf: '', isOpened: false });
 
   const [showPassword, setShowPassword] = useState(false);
+  const [showPassword2, setShowPassword2] = useState(false);
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
+  const handleClickShowPassword2 = () => setShowPassword2(!showPassword2);
+  const handleMouseDownPassword2 = () => setShowPassword2(!showPassword2);
 
   const handleRegister = () => {
     if (
@@ -149,7 +152,7 @@ function Cover() {
             </MDBox>
             <MDBox mb={2}>
               <MDInput
-                type={showPassword ? 'text' : 'password'}
+                type={showPassword2 ? 'text' : 'password'}
                 label='Parol (qaytadan)'
                 variant='standard'
                 maxLength={25}
@@ -157,7 +160,19 @@ function Cover() {
                 onClick={() => setPasswordConf({ ...passwordConf, isOpened: true })}
                 onChange={e => setPasswordConf({ ...passwordConf, passwordConf: e.target.value })}
                 InputProps={{
-                  error: !passwordConf.passwordConf && passwordConf.isOpened,
+                  error: !password.password && password.isOpened,
+                  endAdornment: (
+                    <InputAdornment position='end'>
+                      <IconButton
+                        size='small'
+                        aria-label='toggle password visibility'
+                        onClick={handleClickShowPassword2}
+                        onMouseDown={handleMouseDownPassword2}
+                      >
+                        {showPassword2 ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
                 }}
               />
             </MDBox>

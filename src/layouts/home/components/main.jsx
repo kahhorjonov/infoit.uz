@@ -64,9 +64,9 @@ export default function Home() {
 
       {/* section tests */}
 
-      <section id='tests' className='relative py-20 bg-figma'>
+      <section className='relative py-20 bg-figma'>
         <div className='container mx-auto px-4'>
-          <div className='items-center flex flex-wrap'>
+          <div id='tests' className='items-center flex flex-wrap'>
             <Tests />
           </div>
         </div>
