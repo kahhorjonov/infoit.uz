@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { FormControl, Icon, InputLabel, MenuItem, Select } from '@mui/material';
+import { FormControl, Icon, InputAdornment, InputLabel, MenuItem, Select } from '@mui/material';
 import MDBox from 'components/MDBox';
 import MDInput from 'components/MDInput';
 import MDTypography from 'components/MDTypography';
@@ -55,22 +55,36 @@ function CreateTestForm({
       <MDInput
         value={durationTimeInMinutes}
         onChange={e => onChangeTestData('durationTimeInMinutes', parseInt(e.target.value, 10))}
-        label='Davomiyligi (minut)'
-        placeholder='Davomiyligi (minut)'
+        label='Davomiyligi'
+        placeholder='Davomiyligi'
         type='number'
         fullWidth
         focused
         required
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position='start' size='xs'>
+              minut
+            </InputAdornment>
+          ),
+        }}
       />
       <MDInput
         value={price}
         onChange={e => onChangeTestData('price', parseInt(e.target.value, 10))}
-        label='Test narxi (so`m)'
-        placeholder='Test narxi (so`m)'
+        label='Test narxi'
+        placeholder='Test narxi'
         type='number'
         fullWidth
         focused
         required
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position='start' size='xs'>
+              so`m
+            </InputAdornment>
+          ),
+        }}
       />
       <MDInput
         value={questionsCount}
@@ -81,6 +95,13 @@ function CreateTestForm({
         fullWidth
         focused
         required
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position='start' size='xs'>
+              ta
+            </InputAdornment>
+          ),
+        }}
       />
       <MDInput
         value={startTestDate}

@@ -38,7 +38,7 @@ function Categories() {
 
   return (
     <DashboardLayout>
-      <ModalComp status={open} onClose={handleClose}>
+      <ModalComp width='400px' status={open} onClose={handleClose}>
         <CategoryForm formType='add' onClose={handleClose} />
       </ModalComp>
       <DashboardNavbar />
