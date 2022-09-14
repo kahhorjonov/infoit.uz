@@ -28,8 +28,8 @@ export default function Tests() {
   }, []);
 
   return (
-    <div className='relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg border-0'>
-      <div className='flex-auto px-10 lg:px-10 py-10 pt-0'>
+    <div className='relative flex flex-col min-w-0 break-words w-full mb-6 rounded-lg border-0'>
+      <div className='flex-auto py-10 pt-0'>
         <div className='flex items-center justify-between mt-24'>
           <h6 className='text-lg font-bold uppercase'>Testlar</h6>
           <DropDown color='dark' />
