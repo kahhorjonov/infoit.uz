@@ -38,7 +38,7 @@ function PaginationTable(props) {
 
         <Pagination
           page={pageNumber}
-          siblingCount={2}
+          siblingCount={1}
           onChange={(event, page) => onChangeCurrPage(page)}
           count={dataCount || 0}
           variant='outlined'
