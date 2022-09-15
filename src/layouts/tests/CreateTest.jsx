@@ -54,8 +54,12 @@ function CreateTest() {
     else if (!newTest?.durationTimeInMinutes) toast.error('Test ishlash vaqtini kiriting!');
     // else if (!newTest?.price) toast.error('Enter the test price!');
     else if (!newTest?.questionsCount) toast.error('Savollar sonini kiriting!');
+    else if (Date.parse(newTest?.startTestDate) < Date.parse(new Date()))
+      toast.error('Test boshlanish vaqtini noto`g`ri!');
+    else if (Date.parse(newTest?.finishTestDate) < Date.parse(new Date()))
+      toast.error('Testning tugash vaqti noto`g`ri!');
     else if (Date.parse(newTest?.startTestDate) >= Date.parse(newTest?.finishTestDate))
-      toast.error('Test boshlash va tugash vaqtini to`g`ri kiriting!');
+      toast.error('Test boshlash va tugash vaqtini noto`g`ri!');
     else if (!newTest?.attachmentId) toast.error('Test uchun muqova tanlang!');
     else return true;
     return false;
