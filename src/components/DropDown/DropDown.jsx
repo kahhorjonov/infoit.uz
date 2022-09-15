@@ -52,7 +52,7 @@ function DropDown({ position = 'bottom-end', color = 'white' }) {
   const handleClick = newPlacement => event => {
     setAnchorEl(event.currentTarget);
     // setOpen(prev => placement !== newPlacement || !prev);
-    setOpen(true);
+    setOpen(!open);
     setPlacement(newPlacement);
   };
 
