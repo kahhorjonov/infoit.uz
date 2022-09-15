@@ -96,8 +96,18 @@ function PlanningTestTable({ onChangeActionType }) {
                   <td>{testData?.questionsCount}</td>
                   <td>{milliSecondsToMinutes(testData?.durationTimeInMinutes)}</td>
                   <td>{testData?.price}</td>
-                  <td>{new Date(testData?.startTestDate).toISOString().substr(0, 16)}</td>
-                  <td>{new Date(testData?.finishTestDate).toISOString().substr(0, 16)}</td>
+                  <td>
+                    {new Date(testData?.startTestDate)
+                      .toISOString()
+                      .substr(0, 16)
+                      .replace('T', ', ')}
+                  </td>
+                  <td>
+                    {new Date(testData?.finishTestDate)
+                      .toISOString()
+                      .substr(0, 16)
+                      .replace('T', ', ')}
+                  </td>
                 </tr>
               ))}
             </tbody>
