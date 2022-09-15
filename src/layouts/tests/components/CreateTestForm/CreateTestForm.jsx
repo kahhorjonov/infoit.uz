@@ -105,11 +105,7 @@ function CreateTestForm({
       />
       <MDInput
         value={startTestDate}
-        onChange={e =>
-          Date.parse(e.target.value) > Date.parse(new Date())
-            ? onChangeTestData('startTestDate', e.target.value)
-            : toast.warning('Test boshlanish vaqti noto`g`ri.')
-        }
+        onChange={e => onChangeTestData('startTestDate', e.target.value)}
         // onChange={e => console.log(Date.parse(e.target.value))}
         label='Test boshlanish vaqti'
         type='datetime-local'
@@ -119,11 +115,7 @@ function CreateTestForm({
       />
       <MDInput
         value={finishTestDate}
-        onChange={e =>
-          Date.parse(e.target.value) > Date.parse(new Date())
-            ? onChangeTestData('finishTestDate', e.target.value)
-            : toast.warning('Test amal qilish muddati noto`g`ri.')
-        }
+        onChange={e => onChangeTestData('finishTestDate', e.target.value)}
         label='Test amal qilish muddati'
         type='datetime-local'
         fullWidth
