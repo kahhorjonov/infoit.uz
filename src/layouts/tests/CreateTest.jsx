@@ -10,8 +10,8 @@ import MDButton from 'components/MDButton';
 import MDTypography from 'components/MDTypography';
 import DropDown from 'components/DropDown/DropDown';
 import TestTable from './components/TestTable/TestsTable';
-import CreateTestForm from './components/CreateTestForm/CreateTestForm';
 import PlanningTestTable from './components/PlanningTestsTable/PlanningTestTable';
+import CreateTestForm from './components/CreateTestForm/CreateTestForm';
 
 function CreateTest() {
   const dispatch = useDispatch();
