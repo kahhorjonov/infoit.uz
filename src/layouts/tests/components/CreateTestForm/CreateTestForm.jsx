@@ -4,7 +4,6 @@ import MDBox from 'components/MDBox';
 import MDInput from 'components/MDInput';
 import MDTypography from 'components/MDTypography';
 import { uploadPhoto } from 'store/thunk';
-import { toast } from 'react-toastify';
 
 function CreateTestForm({
   name,
