@@ -88,12 +88,10 @@ function Form({ formType, categoryId, onClose }) {
       choice => choice.correct && (choice?.text || choice.attachmentId),
     )[0]
       ? true
-      : toast.error('Error filling answers!');
+      : toast.error('To`g`ri javobni belgilang!');
 
   const handleTestQuestionWrite = () =>
-    questionsForm?.text || questionsForm?.attachmentId
-      ? true
-      : toast.error('Error filling question!');
+    questionsForm?.text || questionsForm?.attachmentId ? true : toast.error('Savolni kiriting!');
 
   const handleSave = question => {
     if (
