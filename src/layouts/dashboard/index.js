@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { getDashboardStatistics, getDashboardStatisticsTable } from 'store/thunk';
+import { getDashboardStatistics } from 'store/thunk';
 
 // @mui material components
 import { Card, Grid } from '@mui/material';

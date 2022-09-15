@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUsers, getDashboardStatisticsTable } from 'store/thunk';
-import { setCurrentUser } from 'store/actions/actionCreaters';
+// import { getUsers, getDashboardStatisticsTable } from 'store/thunk';
+import { getDashboardStatisticsTable } from 'store/thunk';
+// import { setCurrentUser } from 'store/actions/actionCreaters';
 
 import MDBox from 'components/MDBox';
 // import ModalComp from 'components/Modal/ModalComp';
 import { Icon } from '@mui/material';
-import PaginationTable from 'components/Pagination/Pagination';
+// import PaginationTable from 'components/Pagination/Pagination';
 import Spiner from 'components/Loader/Spiner';
 // import UserForm from '../UserForm/UserForm';
 import Styles from './UsersTable.module.scss';
@@ -14,7 +15,7 @@ import Styles from './UsersTable.module.scss';
 function DashboardStatisticstable() {
   const dispatch = useDispatch();
   const {
-    dashboardStatistics: { isLoading, dashboardStatistics, pagination, count },
+    dashboardStatistics: { isLoading, dashboardStatistics },
   } = useSelector(store => store);
 
   // const handleChangeCurrentPage = pageNumber => {
@@ -45,7 +46,7 @@ function DashboardStatisticstable() {
               </tr>
             </thead>
             <tbody>
-              {dashboardStatistics?.map((test, idx) => (
+              {dashboardStatistics?.map(test => (
                 <tr key={test.id}>
                   {/* <td>{idx + 1 + pagination.pageSize * (pagination.pageNumber - 1)}</td> */}
                   <td>

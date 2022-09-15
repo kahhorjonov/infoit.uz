@@ -326,7 +326,7 @@ export const resultTest = testId => async dispatch => {
     });
     dispatch(getResultTestSuccess(response.data.objectKoinot));
   } catch (e) {
-    console.log(e.response);
+    toast.error(e.response);
   }
 };
 
@@ -341,7 +341,7 @@ export const getCurrentTestTime = () => async dispatch => {
     // console.log(response.data.objectKoinot);
     dispatch(getCurrentQuizTime(response.data.objectKoinot));
   } catch (e) {
-    console.log(e.response);
+    toast.error(e.response);
   }
 };
 
@@ -434,7 +434,7 @@ export const updateMe = async data => {
 
 export const register = async data => {
   try {
-    const response = await axiosPublic.post('api/auth/v1/register', data);
+    await axiosPublic.post('api/auth/v1/register', data);
   } catch (error) {
     toast.error(error);
   }
