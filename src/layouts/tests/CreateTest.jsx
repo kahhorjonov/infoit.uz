@@ -60,6 +60,8 @@ function CreateTest() {
       toast.error('Testning tugash vaqti noto`g`ri!');
     else if (Date.parse(newTest?.startTestDate) >= Date.parse(newTest?.finishTestDate))
       toast.error('Test boshlash va tugash vaqtini noto`g`ri!');
+    else if (Date.parse(newTest?.startTestDate) >= Date.parse(newTest?.finishTestDate))
+      toast.error('Test boshlash va tugash vaqtini to`g`ri kiriting!');
     else if (!newTest?.attachmentId) toast.error('Test uchun muqova tanlang!');
     else return true;
     return false;
