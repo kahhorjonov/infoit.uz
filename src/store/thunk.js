@@ -463,7 +463,6 @@ export const getDashboardStatisticsTable = () => async dispatch => {
         Authorization: `Bearer ${access_token}`,
       },
     });
-
     dispatch(getStatisticsTableSuccess(response?.data?.objectKoinot));
   } catch (e) {
     toast.error(e);

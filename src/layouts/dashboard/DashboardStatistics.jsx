@@ -1,13 +1,14 @@
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUsers, getDashboardStatisticsTable } from 'store/thunk';
 import { setCurrentUser } from 'store/actions/actionCreaters';
 
 import MDBox from 'components/MDBox';
 // import ModalComp from 'components/Modal/ModalComp';
+import { Icon } from '@mui/material';
 import PaginationTable from 'components/Pagination/Pagination';
 import Spiner from 'components/Loader/Spiner';
 // import UserForm from '../UserForm/UserForm';
-
 import Styles from './UsersTable.module.scss';
 
 function DashboardStatisticstable() {
@@ -23,6 +24,10 @@ function DashboardStatisticstable() {
   // const handleChangePageSize = pageSize => {
   //   dispatch(getUsers({ role, pagination: { ...pagination, pageNumber: 1, pageSize } }));
   // };
+
+  useEffect(() => {
+    dispatch(getDashboardStatisticsTable());
+  }, []);
 
   return (
     <MDBox>
@@ -42,7 +47,10 @@ function DashboardStatisticstable() {
             <tbody>
               {dashboardStatistics?.map((test, idx) => (
                 <tr key={test.id}>
-                  <td>{idx + 1 + pagination.pageSize * (pagination.pageNumber - 1)}</td>
+                  {/* <td>{idx + 1 + pagination.pageSize * (pagination.pageNumber - 1)}</td> */}
+                  <td>
+                    <Icon>quiz</Icon>
+                  </td>
                   <td>{test?.name}</td>
                   <td>{test?.benefit}</td>
                   <td>{test?.userCount}</td>
@@ -50,13 +58,13 @@ function DashboardStatisticstable() {
               ))}
             </tbody>
           </table>
-          <PaginationTable
+          {/* <PaginationTable
             dataCount={count}
             pageNumber={pagination?.pageNumber}
             pageSize={pagination?.pageSize}
-            // onChangeCurrPage={pageNumber => handleChangeCurrentPage(pageNumber)}
-            // onChangePageSize={pageSize => handleChangePageSize(pageSize)}
-          />
+            onChangeCurrPage={pageNumber => handleChangeCurrentPage(pageNumber)}
+            onChangePageSize={pageSize => handleChangePageSize(pageSize)}
+          /> */}
         </>
       )}
     </MDBox>

@@ -29,10 +29,6 @@ function Dashboard() {
     dispatch(getDashboardStatistics());
   }, []);
 
-  useEffect(() => {
-    dispatch(getDashboardStatisticsTable());
-  }, [dispatch]);
-
   return (
     <DashboardLayout>
       <DashboardNavbar />
