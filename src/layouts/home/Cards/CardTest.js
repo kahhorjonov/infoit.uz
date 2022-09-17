@@ -41,7 +41,7 @@ export default function CardTest({ id, name, category, price, startTestDate }) {
           <p className='w-full text-blueGray-400 mt-4 flex justify-between items-center'>
             <button
               type='button'
-              className='w-full bg-lightBlue-600'
+              className='w-full bg-blue-900'
               style={{
                 outline: 'none',
                 padding: '0.4rem 0.6rem',

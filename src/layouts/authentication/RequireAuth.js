@@ -11,6 +11,7 @@ const RequireAuth = ({ children }) => {
   const childrenRole = window.location.pathname.split('/')[1];
 
   if (decodedToken() && tokenRole === childrenRole) {
+    // console.log(children);
     return children;
   }
   if (!decodedToken()) {

@@ -106,11 +106,11 @@ export default function MyTests() {
                       Davomiyligi {seconToMinut(test?.durationTimeInMinutes)} minut
                     </p>
                     <p className='text-blueGray-400 text-xs'>
-                      Boshlanish vaqti:{' '}
+                      Boshlanish vaqti:
                       {new Date(test?.startTestDate).toISOString().substr(0, 16).replace('T', ', ')}
                     </p>
                     <p className='text-blueGray-400 text-xs'>
-                      Boshlanish vaqti:{' '}
+                      Amal qilish muddati:
                       {new Date(test?.finishTestDate)
                         .toISOString()
                         .substr(0, 16)

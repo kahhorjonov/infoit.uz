@@ -32,7 +32,7 @@ export default function Home() {
                 </p>
 
                 <Link
-                  className='text-left  bg-blue-900 text-white rounded px-6 py-4 text-sm'
+                  className='text-left bg-blue-900 text-white rounded px-6 py-4 text-sm'
                   to='/myTests'
                 >
                   <button
