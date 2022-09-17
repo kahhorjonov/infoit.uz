@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
+import { decodedToken } from 'services/authService';
 
 // react-router components
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import RequireAuth from 'layouts/authentication/RequireAuth';
 
 // @mui material components
@@ -15,13 +16,17 @@ import Home from 'layouts/home/index';
 import Admin from 'layouts/admin/Admin';
 import SignIn from 'layouts/authentication/sign-in';
 import SignUp from 'layouts/authentication/sign-up';
-import NotFound from 'layouts/home/components/NotFound';
+// import NotFound from 'layouts/home/components/NotFound';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function App() {
   const { pathname } = useLocation();
+  // const { origin } = window.location;
+  // console.log(origin);
+  // const tokenRole =
+  //   decodedToken() && decodedToken()?.roles && decodedToken()?.roles.name.slice(5)?.toLowerCase();
 
   // Setting page scroll to 0 when changing the route
   useEffect(() => {
@@ -70,7 +75,11 @@ export default function App() {
         />
         <Route path='/login' element={<SignIn />} />
         <Route path='/register' element={<SignUp />} />
-        <Route path='*' element={<NotFound />} />
+        {/* <Route path='*' element={<NotFound />} /> */}
+        {/* {tokenRole === 'admin' ? (
+          <Route path='mytests/' element={<Navigate to={`${origin}/admin`} replace />} />
+        ) : null} */}
+        <Route path='*' element={<Navigate to='/' replace />} />
       </Routes>
     </ThemeProvider>
   );
