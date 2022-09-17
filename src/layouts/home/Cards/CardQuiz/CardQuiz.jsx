@@ -61,6 +61,9 @@ function CardQuiz({ onFinishTest }) {
                   : Styles.uncorrectChoice
                 : ''
             }
+            ${
+              paramPathName === 'result' && choice?.correct && !choice?.userAnswer && Styles.correct
+            }
             `}
             onClick={() =>
               paramPathName === 'quiz' && handleChooseChoice(currentQuiz?.id, choice?.id)
