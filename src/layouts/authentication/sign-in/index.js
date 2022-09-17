@@ -106,8 +106,8 @@ function Basic() {
                       InputProps={{
                         error: !phone.phone && phone.isOpened,
                         startAdornment: (
-                          <InputAdornment position='start' size='xs'>
-                            +998
+                          <InputAdornment position='start'>
+                            <span style={{ fontSize: '0.91rem' }}>+998</span>
                           </InputAdornment>
                         ),
                       }}
