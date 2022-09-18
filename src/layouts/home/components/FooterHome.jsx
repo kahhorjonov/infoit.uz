@@ -5,15 +5,19 @@ import { Link } from 'react-router-dom';
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
 
+import InfoIt_LOGO from 'assets/images/infoit_logo.svg';
+
 export default function FooterHome() {
   return (
     <footer className='relative bg-white pt-8 pb-6'>
       <div className='container mx-auto px-4'>
         <div className='flex flex-wrap text-center lg:text-left'>
           <div className='w-full lg:w-6/12 px-4'>
-            <span className='uppercase text-2xl text-blue-900'>
+            <img src={InfoIt_LOGO} alt='' style={{ width: '72px', height: '62px' }} />
+
+            {/* <span className='uppercase text-2xl text-blue-900'>
               infoit<span className='text-orange'>.uz</span>
-            </span>
+            </span> */}
             <h5 className='text-lg mt-4 mb-2 text-blueGray-600'>
               <PhoneIcon /> &nbsp; +998 88 887-00-00
             </h5>

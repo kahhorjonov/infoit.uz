@@ -13,6 +13,8 @@ import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 // Services
 import { decodedToken } from 'services/authService';
 
+import InfoIt_LOGO from 'assets/images/infoit_logo.svg';
+
 export default function HomeNavbar() {
   const [navbarOpen, setNavbarOpen] = useState(false);
   const { hash: pathname } = window.location;
@@ -28,14 +30,12 @@ export default function HomeNavbar() {
     return (
       <nav className='top-0 fixed z-50 w-full flex flex-wrap items-center justify-between px-4 py-3 navbar-expand-lg bg-white shadow'>
         <div className='container px-4 mx-auto flex flex-wrap items-center justify-between'>
-          <div className='w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start'>
-            <Link
-              to='/'
-              className='text-blueGray-700 text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase'
-            >
-              <span className='text-lg text-blue-900'>
+          <div className='w-full relative flex items-center justify-between lg:w-auto lg:static lg:block lg:justify-start'>
+            <Link to='/' className='text-blueGray-700'>
+              <img src={InfoIt_LOGO} alt='' style={{ width: '72px', height: '62px' }} />
+              {/* <span className='text-lg text-blue-900'>
                 infoit<span className='text-orange'>.uz</span>
-              </span>
+              </span> */}
             </Link>
             <button
               className='cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none'

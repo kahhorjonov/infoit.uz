@@ -29,6 +29,8 @@ import { useMaterialUIController, setMiniSidenav, setOpenConfigurator } from 'co
 import brandWhite from 'assets/images/logo-ct.png';
 import brandDark from 'assets/images/logo-ct-dark.png';
 
+import InfoIt_LOGO from 'assets/images/infoit_logo.svg';
+
 // Pages
 import Dashboard from 'layouts/dashboard';
 import CreateQuestion from 'layouts/createQuestion/CreateQuestion';
@@ -117,7 +119,7 @@ function Admin() {
       <CssBaseline />
       <Sidenav
         color={sidenavColor}
-        brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
+        brand={InfoIt_LOGO}
         brandName='Info IT'
         routes={routes}
         onMouseEnter={handleOnMouseEnter}
