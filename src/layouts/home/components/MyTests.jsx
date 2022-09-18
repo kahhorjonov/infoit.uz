@@ -49,16 +49,24 @@ export default function MyTests() {
           <MDButton
             type='button'
             variant={!solve ? 'contained' : 'outlined'}
-            color={!solve ? 'info' : 'secondary'}
             onClick={() => setSolve(false)}
+            style={{
+              background: !solve && 'rgba(1, 48, 152)',
+              color: !solve ? 'white' : 'gray',
+              borderColor: solve && 'gray',
+            }}
           >
             Sotib olingan
           </MDButton>
           <MDButton
             type='button'
             variant={solve ? 'contained' : 'outlined'}
-            color={solve ? 'info' : 'secondary'}
             onClick={() => setSolve(true)}
+            style={{
+              background: solve && 'rgba(1, 48, 152)',
+              color: solve ? 'white' : 'gray',
+              borderColor: !solve && 'gray',
+            }}
           >
             Yechib bo`lingan
           </MDButton>
