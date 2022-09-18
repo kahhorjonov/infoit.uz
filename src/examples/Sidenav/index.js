@@ -151,7 +151,7 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
           alignItems='center'
           justifyContent='center'
         >
-          {brand && <MDBox component='img' src={brand} alt='Brand' width='6rem' />}
+          {brand && <MDBox component='img' src={brand} alt='Brand' width='5rem' />}
           {/* <MDBox
             width={!brandName && '100%'}
             sx={theme => sidenavLogoLabel(theme, { miniSidenav })}
