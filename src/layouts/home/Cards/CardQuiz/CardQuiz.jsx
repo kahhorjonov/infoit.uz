@@ -111,14 +111,18 @@ function CardQuiz({ onFinishTest }) {
               ? pageNumber === count
                 ? onFinishTest()
                 : handleClickNext(pageNumber)
-              : navigate('/myTests')
+              : pageNumber === count
+              ? navigate('/myTests')
+              : handleClickNext(pageNumber)
           }
         >
           {paramPathName === 'quiz'
             ? pageNumber === count
               ? 'Testni yakunlash'
               : 'Keyingi test'
-            : 'Testni chiqish'}
+            : pageNumber === count
+            ? 'Testni chiqish'
+            : 'Keyingi test'}
         </MDButton>
       </div>
     </div>
