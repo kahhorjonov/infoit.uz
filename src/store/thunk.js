@@ -260,11 +260,15 @@ export function sendCardDetails(data) {
 }
 
 export const confirmationPayment = async code => {
-  await axiosPublic.post(`api/payment/v1/confirmation?confirmationCode=${code}`, {
-    headers: {
-      Authorization: `Bearer ${access_token}`,
-    },
-  });
+  try {
+    await axiosPublic.post(`api/payment/v1/confirmation?confirmationCode=${code}`, {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+    });
+  } catch (error) {
+    toast.error("Tasdiqlash kodi noto'g'ri kiritilgan");
+  }
 };
 
 export const buyTest = async testId => {

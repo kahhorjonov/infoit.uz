@@ -27,8 +27,8 @@ export default function CardTest() {
     };
 
     try {
-      const result = await sendCardDetails(data);
-      toast.info(result.data.message);
+      await sendCardDetails(data);
+      toast.info('Telefon raqamga borgan sms kodni kiriting');
       setConfirmation(true);
     } catch (ex) {
       toast.error(ex.response.data.message);
@@ -41,7 +41,7 @@ export default function CardTest() {
       confirmationPayment(confirmationCode);
       buyTest(params?.id);
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error("Tasdiqlash kodi noto'g'ri kiritilgan");
     }
   };
 
@@ -54,6 +54,7 @@ export default function CardTest() {
             mask='9999 9999 9999 9999'
             type='text'
             className='border px-2'
+            disabled={confirmation}
             onChange={e => setCardNumber(e.target.value).replace(/\s/g, '')}
           />
         </div>
@@ -63,6 +64,7 @@ export default function CardTest() {
             mask='99/99'
             alwaysShowMask='true'
             className='border px-2'
+            disabled={confirmation}
             onChange={e => setExpDate(e.target.value)}
           />
         </div>
@@ -89,7 +91,7 @@ export default function CardTest() {
             <button
               type='button'
               onClick={handleConfirmation}
-              className='p-3 bg-lightBlue-600 text-white focus:outline-none rounded'
+              className='p-3 bg-blue-900 text-white focus:outline-none rounded'
             >
               To`lovni amalga oshirish
             </button>
@@ -99,7 +101,7 @@ export default function CardTest() {
             <button
               type='button'
               onClick={handleSendCardDetails}
-              className='p-3 bg-lightBlue-600 text-white focus:outline-none rounded'
+              className='p-3 bg-blue-900 text-white focus:outline-none rounded'
             >
               Sms kodni olish
             </button>

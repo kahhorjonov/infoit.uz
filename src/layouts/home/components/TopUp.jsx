@@ -48,6 +48,7 @@ export default function TopUp() {
                 <InputMask
                   mask='9999 9999 9999 9999'
                   type='text'
+                  disabled={confirmation}
                   className='border px-3'
                   onChange={e => setCardNumber(e.target.value.replace(/\s/g, ''))}
                 />
@@ -56,6 +57,7 @@ export default function TopUp() {
                 <label className='block text-xs'>Amal qilish muddati</label>
                 <InputMask
                   mask='99/99'
+                  disabled={confirmation}
                   alwaysShowMask='true'
                   className='border px-3'
                   onChange={e => setExpDate(e.target.value)}
@@ -66,6 +68,7 @@ export default function TopUp() {
                 <InputMask
                   mask='999999'
                   maskChar=''
+                  disabled={confirmation}
                   className='border px-3'
                   onChange={e => setSumma(e.target.value)}
                 />
@@ -96,7 +99,7 @@ export default function TopUp() {
                   <button
                     type='button'
                     onClick={handleConfirmation}
-                    className='p-3 bg-lightBlue-600 text-white focus:outline-none rounded'
+                    className='p-3 bg-blue-900 text-white focus:outline-none rounded'
                   >
                     To`lovni amalga oshirish
                   </button>
@@ -106,7 +109,7 @@ export default function TopUp() {
                   <button
                     type='button'
                     onClick={handleSendCardDetails}
-                    className='p-3 bg-lightBlue-600 text-white focus:outline-none rounded'
+                    className='p-3 bg-blue-900 text-white focus:outline-none rounded'
                   >
                     Sms kodni olish
                   </button>
