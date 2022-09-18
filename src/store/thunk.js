@@ -163,6 +163,11 @@ export const getPlanningTest =
         `api/test/v1/find-all-admin?category=${categoryId}&page=${pagination.pageNumber - 1}&size=${
           pagination.pageSize
         }&search=${search}`,
+        {
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+          },
+        },
       );
 
       dispatch(getPlanningTestSuccess({ data: response.data.objectKoinot, pagination }));
