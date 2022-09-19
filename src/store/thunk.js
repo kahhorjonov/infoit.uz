@@ -99,7 +99,7 @@ export const addQuestion = (question, categoryId, pagination, search) => async d
     toast.success(response.data.message);
     dispatch(getQuestions({ search, categoryId, pagination }));
   } catch (e) {
-    toast.error(e);
+    toast.error(e.response.message);
   }
 };
 
@@ -109,7 +109,7 @@ export const editQuestion = (question, categoryId, pagination, search) => async 
     toast.success(response.data.message);
     dispatch(getQuestions({ search, categoryId, pagination }));
   } catch (e) {
-    toast.error(e);
+    toast.error(e.response.message);
   }
 };
 
@@ -192,23 +192,26 @@ export const getPlanningTestForUser =
     }
   };
 
-export const addPlanningTest = data => async dispatch => {
-  try {
-    await axiosPublic.post('api/test/v1/save', data, {
-      headers: { Authorization: `Bearer ${access_token}` },
-    });
-    toast.success('Muvaffaqiyatli amalga oshirildi!');
-    dispatch(
-      getPlanningTest({
-        search: data?.search,
-        categoryId: data.categoryId,
-        pagination: { pageNumber: 1, pageSize: 10 },
-      }),
-    );
-  } catch (e) {
-    toast.error(e);
-  }
-};
+export const addPlanningTest =
+  ({ data, pagination, onChange }) =>
+  async dispatch => {
+    try {
+      await axiosPublic.post('api/test/v1/save', data, {
+        headers: { Authorization: `Bearer ${access_token}` },
+      });
+      toast.success('Muvaffaqiyatli amalga oshirildi!');
+      dispatch(
+        getPlanningTest({
+          search: data?.search,
+          categoryId: data.categoryId,
+          pagination,
+        }),
+      );
+      onChange();
+    } catch (e) {
+      toast.error(e.response.data.message);
+    }
+  };
 
 export const getPlanningTestById = id => async dispatch => {
   try {

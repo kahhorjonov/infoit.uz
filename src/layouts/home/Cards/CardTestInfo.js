@@ -13,6 +13,7 @@ import ModalComp from 'components/Modal/ModalComp';
 import MDButton from 'components/MDButton';
 import MDBox from 'components/MDBox';
 import MDTypography from 'components/MDTypography';
+import moment from 'moment/moment';
 
 export default function CardTestInfo({ planningTests, workingComp, onChangeAction }) {
   const dispatch = useDispatch();
@@ -90,8 +91,8 @@ export default function CardTestInfo({ planningTests, workingComp, onChangeActio
           </p>
           <p>
             <span className='text-sm whitespace-nowrap mr-2'>
-              {new Date(planningTests?.startTestDate)
-                .toISOString()
+              {moment(new Date(planningTests?.startTestDate))
+                .format()
                 .substr(0, 16)
                 .replace('T', ', ')}
             </span>
@@ -103,8 +104,8 @@ export default function CardTestInfo({ planningTests, workingComp, onChangeActio
           </p>
           <p>
             <span className='text-sm whitespace-nowrap mr-2'>
-              {new Date(planningTests?.finishTestDate)
-                .toISOString()
+              {moment(new Date(planningTests?.finishTestDate))
+                .format()
                 .substr(0, 16)
                 .replace('T', ', ')}
             </span>

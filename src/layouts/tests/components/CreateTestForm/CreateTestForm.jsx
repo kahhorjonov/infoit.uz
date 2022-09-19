@@ -4,7 +4,8 @@ import MDBox from 'components/MDBox';
 import MDInput from 'components/MDInput';
 import MDTypography from 'components/MDTypography';
 import { uploadPhoto } from 'store/thunk';
-import { toast } from 'react-toastify';
+
+import moment from 'moment/moment';
 
 function CreateTestForm({
   name,
@@ -104,9 +105,10 @@ function CreateTestForm({
         }}
       />
       <MDInput
-        value={startTestDate}
-        onChange={e => onChangeTestData('startTestDate', e.target.value)}
-        // onChange={e => console.log(Date.parse(e.target.value))}
+        value={moment(new Date(startTestDate)).format().substr(0, 16)}
+        onChange={e => {
+          onChangeTestData('startTestDate', Date.parse(e.target.value));
+        }}
         label='Test boshlanish vaqti'
         type='datetime-local'
         fullWidth
@@ -114,8 +116,8 @@ function CreateTestForm({
         required
       />
       <MDInput
-        value={finishTestDate}
-        onChange={e => onChangeTestData('finishTestDate', e.target.value)}
+        value={moment(new Date(finishTestDate)).format().substr(0, 16)}
+        onChange={e => onChangeTestData('finishTestDate', Date.parse(e.target.value))}
         label='Test amal qilish muddati'
         type='datetime-local'
         fullWidth
