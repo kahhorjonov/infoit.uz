@@ -15,7 +15,7 @@ import Styles from './UsersTable.module.scss';
 function UsersTable({ role }) {
   const dispatch = useDispatch();
   const {
-    users: { isLoading, users, count, pagination },
+    users: { isLoading, search, users, count, pagination },
   } = useSelector(store => store);
   const [open, setOpen] = useState(false);
 
@@ -28,10 +28,10 @@ function UsersTable({ role }) {
   };
 
   const handleChangeCurrentPage = pageNumber => {
-    dispatch(getUsers({ role, pagination: { ...pagination, pageNumber } }));
+    dispatch(getUsers({ search, role, pagination: { ...pagination, pageNumber } }));
   };
   const handleChangePageSize = pageSize => {
-    dispatch(getUsers({ role, pagination: { ...pagination, pageNumber: 1, pageSize } }));
+    dispatch(getUsers({ search, role, pagination: { ...pagination, pageNumber: 1, pageSize } }));
   };
 
   return (
