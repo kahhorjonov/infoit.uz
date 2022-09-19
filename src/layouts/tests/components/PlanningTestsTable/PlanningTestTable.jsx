@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPlanningTest, getPlanningTestById } from 'store/thunk';
 import PropTypes from 'prop-types';
+import moment from 'moment/moment';
 import MDBox from 'components/MDBox';
 import PaginationTable from 'components/Pagination/Pagination';
 import Spiner from 'components/Loader/Spiner';
@@ -103,14 +104,14 @@ function PlanningTestTable({ onChangeActionType }) {
                   <td>{milliSecondsToMinutes(testData?.durationTimeInMinutes)}</td>
                   <td>{testData?.price}</td>
                   <td>
-                    {new Date(testData?.startTestDate)
-                      .toISOString()
+                    {moment(new Date(testData?.startTestDate))
+                      .format()
                       .substr(0, 16)
                       .replace('T', ', ')}
                   </td>
                   <td>
-                    {new Date(testData?.finishTestDate)
-                      .toISOString()
+                    {moment(new Date(testData?.finishTestDate))
+                      .format()
                       .substr(0, 16)
                       .replace('T', ', ')}
                   </td>

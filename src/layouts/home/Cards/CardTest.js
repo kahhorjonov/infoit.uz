@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment/moment';
 
 // icons
 import AccessTimeFilled from '@mui/icons-material/AccessTimeFilled';
@@ -25,7 +26,7 @@ export default function CardTest({ id, name, category, price, startTestDate }) {
           </p>
           <p>
             <span className='text-sm whitespace-nowrap mr-2'>
-              {new Date(startTestDate).toISOString().substring(0, 16).replace('T', ', ')}
+              {moment(new Date(startTestDate)).format().substr(0, 16).replace('T', ', ')}
             </span>
             {/* <span className='text-sm whitespace-nowrap font-bold'>
               {new Date(durationTimeInMinutes).toLocaleTimeString()}

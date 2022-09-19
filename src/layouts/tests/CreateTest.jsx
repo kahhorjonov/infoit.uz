@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCategories, addPlanningTest } from 'store/thunk';
 import { toast } from 'react-toastify';
+import moment from 'moment/moment';
 import { Icon, Grid } from '@mui/material';
 import DashboardLayout from 'examples/LayoutContainers/DashboardLayout';
 import DashboardNavbar from 'examples/Navbars/DashboardNavbar';
@@ -17,7 +18,7 @@ function CreateTest() {
   const dispatch = useDispatch();
   const {
     category: { currentCategory },
-    planningTests: { currentTestData, search },
+    planningTests: { currentTestData, search, pagination },
   } = useSelector(store => store);
   const [actionType, setActionType] = useState('view');
   const [newTest, setNewTest] = useState({
@@ -30,8 +31,8 @@ function CreateTest() {
     attachmentId: '',
     questionsCount: 0,
     durationTimeInMinutes: 0,
-    startTestDate: new Date().toISOString().substr(0, 16),
-    finishTestDate: new Date().toISOString().substr(0, 16),
+    startTestDate: moment(new Date()).format().substr(0, 16),
+    finishTestDate: moment(new Date()).format().substr(0, 16),
   });
 
   const handleChangeTestData = (name, value) => {
@@ -54,11 +55,11 @@ function CreateTest() {
     else if (!newTest?.durationTimeInMinutes) toast.error('Test ishlash vaqtini kiriting!');
     // else if (!newTest?.price) toast.error('Enter the test price!');
     else if (!newTest?.questionsCount) toast.error('Savollar sonini kiriting!');
-    else if (Date.parse(newTest?.startTestDate) < Date.parse(new Date()))
+    else if (newTest?.startTestDate < Date.parse(new Date()))
       toast.error('Test boshlanish vaqti noto`g`ri!');
-    else if (Date.parse(newTest?.finishTestDate) < Date.parse(new Date()))
+    else if (newTest?.finishTestDate < Date.parse(new Date()))
       toast.error('Testning tugash vaqti noto`g`ri!');
-    else if (Date.parse(newTest?.startTestDate) >= Date.parse(newTest?.finishTestDate))
+    else if (newTest?.startTestDate >= newTest?.finishTestDate)
       toast.error('Test boshlash va tugash vaqti noto`g`ri!');
     else if (!newTest?.attachmentId) toast.error('Test uchun muqova tanlang!');
     else return true;
@@ -68,9 +69,25 @@ function CreateTest() {
   const handleSave = data => {
     if (handleTestValidation()) {
       actionType === 'add'
-        ? dispatch(addPlanningTest({ ...data, search, categoryId: currentCategory?.id }))
-        : dispatch(addPlanningTest({ ...data, search }));
-      setActionType('view');
+        ? dispatch(
+            addPlanningTest({
+              data: {
+                ...data,
+                search,
+                categoryId: currentCategory?.id,
+              },
+              pagination,
+              onChange: () => setActionType('view'),
+            }),
+          )
+        : dispatch(
+            addPlanningTest({
+              pagination,
+              data: { ...data, search },
+              onChange: () => setActionType('view'),
+            }),
+          );
+      // setActionType('view');
     }
   };
 
@@ -86,9 +103,9 @@ function CreateTest() {
         categoryId: currentTestData?.category?.id,
         attachmentId: currentTestData?.photo?.fileId,
         questionsCount: currentTestData?.questionsCount,
-        startTestDate: new Date(currentTestData?.startTestDate).toISOString().substr(0, 16),
-        finishTestDate: new Date(currentTestData?.finishTestDate).toISOString().substr(0, 16),
-        durationTimeInMinutes: new Date(currentTestData?.durationTimeInMinutes).getMinutes(),
+        startTestDate: currentTestData?.startTestDate,
+        finishTestDate: currentTestData?.finishTestDate,
+        durationTimeInMinutes: currentTestData.durationTimeInMinutes / 1000 / 60,
       });
   }, [actionType, currentTestData]);
 

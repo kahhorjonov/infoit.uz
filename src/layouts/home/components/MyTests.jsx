@@ -4,11 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUserTests, startUserTest, getCurrentTestTime } from 'store/thunk';
 import cover from 'assets/homePage/Testcover.png';
 
-import { MenuItem, Select, Icon } from '@mui/material';
+import { Icon } from '@mui/material';
 import Spiner from 'components/Loader/Spiner';
 import { setUserCurrentTestInfo } from 'store/actions/actionCreaters';
 import { toast } from 'react-toastify';
 import MDButton from 'components/MDButton';
+import moment from 'moment';
 
 const seconToMinut = second => second / 1000 / 60;
 
@@ -115,12 +116,15 @@ export default function MyTests() {
                     </p>
                     <p className='text-blueGray-400 text-xs'>
                       Boshlanish vaqti:
-                      {new Date(test?.startTestDate).toISOString().substr(0, 16).replace('T', ', ')}
+                      {moment(new Date(test?.startTestDate))
+                        .format()
+                        .substr(0, 16)
+                        .replace('T', ', ')}
                     </p>
                     <p className='text-blueGray-400 text-xs'>
                       Amal qilish muddati:
-                      {new Date(test?.finishTestDate)
-                        .toISOString()
+                      {moment(new Date(test?.finishTestDate))
+                        .format()
                         .substr(0, 16)
                         .replace('T', ', ')}
                     </p>
