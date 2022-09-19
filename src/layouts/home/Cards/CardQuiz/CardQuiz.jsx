@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { sendAnswer } from 'store/thunk';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -8,6 +9,7 @@ import MDButton from 'components/MDButton';
 import { Icon } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ModalComp from 'components/Modal/ModalComp';
 
 import Styles from './CardQuiz.module.scss';
 
@@ -15,6 +17,7 @@ function CardQuiz({ onFinishTest }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = useParams();
+  const [openImage, setOpenImage] = useState(false);
 
   const paramPathName = params['*'].split('/')[0];
 
@@ -25,12 +28,17 @@ function CardQuiz({ onFinishTest }) {
   const handleChooseChoice = (questionId, questionChoiceId) => {
     dispatch(sendAnswer({ questionId, questionChoiceId }));
   };
+  const handleOpenImage = () => setOpenImage(true);
+  const handleCloseImage = () => setOpenImage(false);
 
   const handleClickNext = pageNum => pageNumber < count && dispatch(setQuizPageNumber(pageNum + 1));
   const handleClickPrev = pageNum => pageNumber > 1 && dispatch(setQuizPageNumber(pageNum - 1));
 
   return (
     <div className={Styles.cardQuiz}>
+      <ModalComp status={openImage} onClose={handleCloseImage} width='maxContainer'>
+        <img src={currentQuiz?.questionPhoto?.link} alt={currentQuiz?.questionPhoto?.fileId} />
+      </ModalComp>
       <p>Savol {pageNumber}</p>
       <div className={Styles.question}>
         <div>
@@ -39,7 +47,11 @@ function CardQuiz({ onFinishTest }) {
           {paramPathName === 'result' && <span>{currentQuiz?.questionText}</span>}
         </div>
         <div className={Styles.imageCont}>
-          <img src={currentQuiz?.questionPhoto?.link} alt={currentQuiz?.questionPhoto?.fileId} />
+          <img
+            src={currentQuiz?.questionPhoto?.link}
+            alt={currentQuiz?.questionPhoto?.fileId}
+            onClick={() => handleOpenImage()}
+          />
         </div>
       </div>
 
