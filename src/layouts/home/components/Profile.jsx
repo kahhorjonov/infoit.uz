@@ -94,7 +94,7 @@ export default function Profile() {
               <div className='flex flex-col mt-12 mx-4'>
                 <label className='text-base mb-3'>Telefon raqam</label>
                 <input
-                  disabled={isDisabled}
+                  disabled
                   type='text'
                   className='text-sm text-blueGray-500'
                   value={profile?.phoneNumber || ''}

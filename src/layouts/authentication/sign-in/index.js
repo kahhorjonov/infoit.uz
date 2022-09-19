@@ -59,7 +59,7 @@ function Basic() {
             : window.location.replace('/')
           : window.location.replace(`/${redirectPath}`);
       } catch (error) {
-        toast.error(error?.response?.data?.objectKoinot[0]?.expelling);
+        toast.error("Login yoki parol noto'g'ri");
       }
     } else {
       setPhone({ ...phone, isOpened: true });

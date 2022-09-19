@@ -138,7 +138,7 @@ export default function CardTestInfo({ planningTests, workingComp, onChangeActio
               <button
                 onClick={() => handleOpen()}
                 type='button'
-                className='w-full bg-lightBlue-600'
+                className='w-full bg-blue-900'
                 style={{
                   outline: 'none',
                   padding: '0.4rem 0.6rem',
