@@ -29,12 +29,16 @@ export const getTokenFromStorage = () => {
 };
 
 export const login = (phoneNumber, password) => {
-  const result = axios.post(`${baseURL}/auth/v1/login`, {
-    phoneNumber: `+998${phoneNumber}`,
-    password,
-  });
-
-  return result;
+  try {
+    const result = axios.post(`${baseURL}/auth/v1/login`, {
+      phoneNumber: `+998${phoneNumber}`,
+      password,
+    });
+    return result;
+  } catch (e) {
+    toast.error("Login yoki parol noto'g'ri");
+    return '';
+  }
 };
 
 export function setToken(jwt) {

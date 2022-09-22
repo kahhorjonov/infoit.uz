@@ -46,21 +46,17 @@ function Basic() {
         index >= 1 ? (edited += phoneValue) : '';
       });
 
-      try {
-        const result = await login(edited, password.password);
-        setToken(result.data.objectKoinot.accessToken);
-        // toast.success(result.data.message);
-        // navigate(redirectPath, { replace: true });
+      const result = await login(edited, password.password);
+      setToken(result.data.objectKoinot.accessToken);
+      // toast.success(result.data.message);
+      // navigate(redirectPath, { replace: true });
 
-        result.data.objectKoinot.roles[0].slice(5).toLowerCase() === 'user'
-          ? localStorage.getItem('buy')
-            ? window.location.replace(`/test/${localStorage.getItem('buy')}`) ||
-              localStorage.removeItem('buy')
-            : window.location.replace('/')
-          : window.location.replace(`/${redirectPath}`);
-      } catch (error) {
-        toast.error("Login yoki parol noto'g'ri");
-      }
+      result.data.objectKoinot.roles[0].slice(5).toLowerCase() === 'user'
+        ? localStorage.getItem('buy')
+          ? window.location.replace(`/test/${localStorage.getItem('buy')}`) ||
+            localStorage.removeItem('buy')
+          : window.location.replace('/')
+        : window.location.replace(`/${redirectPath}`);
     } else {
       setPhone({ ...phone, isOpened: true });
       setPassword({ ...password, isOpened: true });
