@@ -37,7 +37,7 @@ export const getCategories = addCurrCategory => async dispatch => {
     const response = await axiosPublic.get('api/category/v1');
     dispatch(getCategoriesSuccess({ category: response.data.objectKoinot, addCurrCategory }));
   } catch (e) {
-    toast.error(e);
+    toast.error(e.response.data.message);
   }
 };
 
@@ -52,7 +52,7 @@ export const createNewCategory = data => async dispatch => {
     toast.success(response.data.message);
     dispatch(getCategories());
   } catch (e) {
-    toast.error(e);
+    toast.error(e.response.data.message);
   }
 };
 
@@ -67,7 +67,7 @@ export const deleteCategory = categoryId => async dispatch => {
     toast.success(response.data.message);
     dispatch(getCategories());
   } catch (e) {
-    toast.error(e);
+    toast.error(e.response.data.message);
   }
 };
 
@@ -89,7 +89,7 @@ export const getQuestions =
 
       dispatch(getQuestionsSuccess({ questions: response.data.objectKoinot, pagination }));
     } catch (e) {
-      toast.error(e);
+      toast.error(e.response.message);
     }
   };
 
