@@ -48,14 +48,14 @@ function PlanningTestTable({ onChangeActionType }) {
   };
 
   useEffect(() => {
-    currentCategory?.id &&
-      dispatch(
-        getPlanningTest({
-          search,
-          categoryId: currentCategory?.id,
-          pagination: { ...pagination, pageNumber: 1 },
-        }),
-      );
+    // currentCategory?.id &&
+    dispatch(
+      getPlanningTest({
+        search,
+        categoryId: currentCategory?.id || '',
+        pagination: { ...pagination, pageNumber: 1 },
+      }),
+    );
   }, [dispatch, currentCategory, search]);
 
   return (
@@ -81,7 +81,7 @@ function PlanningTestTable({ onChangeActionType }) {
       </ModalComp>
       {isLoading ? (
         <Spiner />
-      ) : (
+      ) : forAdmin?.length > 0 ? (
         <>
           <table className={Styles.testTable}>
             <thead>
@@ -127,6 +127,10 @@ function PlanningTestTable({ onChangeActionType }) {
             onChangePageSize={pageSize => handleChangePageSize(pageSize)}
           />
         </>
+      ) : (
+        <div>
+          <h1>Testlar mavjud emas!</h1>
+        </div>
       )}
     </MDBox>
   );

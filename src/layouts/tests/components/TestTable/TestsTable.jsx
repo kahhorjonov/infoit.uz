@@ -25,29 +25,29 @@ function TestTable({ questionsId, onAddQuestionId }) {
     dispatch(
       getQuestions({
         search: '',
-        categoryId: category.currentCategory.id,
-        pagination: { ...questionsData.pagination, pageNumber: 1, pageSize },
+        categoryId: category?.currentCategory?.id,
+        pagination: { ...questionsData?.pagination, pageNumber: 1, pageSize },
       }),
     );
   };
 
   useEffect(() => {
     // console.log(category.currentCategory.id, questionsData);
-    category.currentCategory.id &&
-      dispatch(
-        getQuestions({
-          search: '',
-          categoryId: category.currentCategory.id,
-          pagination: questionsData.pagination,
-        }),
-      );
+    // category.currentCategory.id &&
+    dispatch(
+      getQuestions({
+        search: '',
+        categoryId: category?.currentCategory?.id || '',
+        pagination: questionsData?.pagination,
+      }),
+    );
   }, [dispatch, category.currentCategory.id]);
 
   return (
     <MDBox bgColor='white' coloredShadow='dark' borderRadius='xl' p={3}>
       {questionsData.isLoading ? (
         <Spiner />
-      ) : (
+      ) : questionsData?.questions?.length > 0 ? (
         <>
           <table className={Styles.testTable}>
             <thead>
@@ -85,6 +85,10 @@ function TestTable({ questionsId, onAddQuestionId }) {
             onChangePageSize={pageSize => handleChangePageSize(pageSize)}
           />
         </>
+      ) : (
+        <div>
+          <h1>Testlar mavjud emas!</h1>
+        </div>
       )}
     </MDBox>
   );

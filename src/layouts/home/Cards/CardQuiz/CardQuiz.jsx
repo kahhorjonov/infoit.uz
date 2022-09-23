@@ -133,8 +133,8 @@ function CardQuiz({ onFinishTest }) {
               ? 'Testni yakunlash'
               : 'Keyingi test'
             : pageNumber === count
-            ? 'Testni chiqish'
-            : 'Keyingi test'}
+            ? 'Testdan chiqish'
+            : 'Keyingi savol'}
         </MDButton>
       </div>
     </div>

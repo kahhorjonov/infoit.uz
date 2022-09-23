@@ -34,7 +34,7 @@ function DashboardStatisticstable() {
     <MDBox>
       {isLoading ? (
         <Spiner />
-      ) : (
+      ) : dashboardStatistics?.length > 0 ? (
         <>
           <table className={Styles.usersTable}>
             <thead>
@@ -67,6 +67,10 @@ function DashboardStatisticstable() {
             onChangePageSize={pageSize => handleChangePageSize(pageSize)}
           /> */}
         </>
+      ) : (
+        <div>
+          <h1>Testlar bo`yicha statistika mavjud emas!</h1>
+        </div>
       )}
     </MDBox>
   );

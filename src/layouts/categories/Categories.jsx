@@ -69,7 +69,15 @@ function Categories() {
                 </MDBox>
               </MDBox>
               <MDBox width='100%' p={3}>
-                {category.isLoading ? <Spiner /> : <CategoriesTable />}
+                {category.isLoading ? (
+                  <Spiner />
+                ) : category?.categories.length > 0 ? (
+                  <CategoriesTable />
+                ) : (
+                  <div>
+                    <h1>Fanlar mavjud emas!</h1>
+                  </div>
+                )}
               </MDBox>
             </Card>
           </Grid>
