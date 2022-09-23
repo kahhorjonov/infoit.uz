@@ -45,14 +45,14 @@ function Table() {
   };
 
   useEffect(() => {
-    currentCategory?.id &&
-      dispatch(
-        getQuestions({
-          search,
-          pagination,
-          categoryId: currentCategory?.id,
-        }),
-      );
+    // currentCategory?.id &&
+    dispatch(
+      getQuestions({
+        search,
+        pagination,
+        categoryId: currentCategory?.id || '',
+      }),
+    );
   }, [dispatch, currentCategory, search]);
 
   return (
@@ -68,7 +68,7 @@ function Table() {
       </ModalComp>
       {isLoading ? (
         <Spiner />
-      ) : (
+      ) : questions?.length > 0 ? (
         <>
           <table className={Styles.table}>
             <thead>
@@ -99,6 +99,10 @@ function Table() {
             onChangePageSize={pageSize => handleChangePageSize(pageSize)}
           />
         </>
+      ) : (
+        <div>
+          <h1>Savollar mavjud emas!</h1>
+        </div>
       )}
     </MDBox>
   );

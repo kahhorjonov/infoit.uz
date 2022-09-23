@@ -77,7 +77,7 @@ export const getQuestions =
     try {
       dispatch(getQuestionsProccess());
       const response = await axiosPublic.get(
-        `api/question/v1?category=${categoryId}&page=${pagination.pageNumber - 1}&size=${
+        `api/question/v1?category=${categoryId || ''}&page=${pagination.pageNumber - 1}&size=${
           pagination.pageSize
         }&search=${search}`,
         {
