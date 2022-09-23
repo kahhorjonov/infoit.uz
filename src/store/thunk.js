@@ -121,7 +121,7 @@ export const deleteQuestion = async testId => {
     toast.success(response.data.message);
     return response.data.success;
   } catch (e) {
-    toast.error(`${e.response.data.message}, ${e.response.data.objectKoinot[0].expelling}`);
+    toast.error(`${e.response.data.message}`);
     return e.response.data.success;
   }
 };
