@@ -1153,6 +1153,10 @@ video {
   border-collapse: collapse;
 }
 
+.border-green {
+  border-color: green;
+}
+
 .border-lightBlue-700 {
   --tw-border-opacity: 1;
   border-color: rgba(3, 105, 161, var(--tw-border-opacity));
@@ -2345,6 +2349,10 @@ video {
 
 .text-right {
   text-align: right;
+}
+
+.text-green {
+  color: green;
 }
 
 .text-blue-900 {

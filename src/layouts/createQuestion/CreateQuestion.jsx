@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { getCategories, getQuestions } from 'store/thunk';
+import { getCategories } from 'store/thunk';
 // @mui material components
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
@@ -15,34 +16,35 @@ import DashboardNavbar from 'examples/Navbars/DashboardNavbar';
 
 import MDButton from 'components/MDButton';
 import { Icon } from '@mui/material';
-import ModalComp from 'components/Modal/ModalComp';
+// import ModalComp from 'components/Modal/ModalComp';
 // import { SelectPicker } from 'rsuite';
 
 import DropDown from 'components/DropDown/DropDown';
-import Form from './components/Form';
+// import Form from './components/Form';
 import Table from './components/Table/Table';
 
 function CreateQuestion() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { category } = useSelector(state => state);
-  const [createQStatus, setCreateQStatus] = useState(false);
+  // const [createQStatus, setCreateQStatus] = useState(false);
 
-  const handleOpen = () => setCreateQStatus(true);
-  const handleClose = () => setCreateQStatus(false);
+  // const handleOpen = () => setCreateQStatus(true);
+  // const handleClose = () => setCreateQStatus(false);
 
   useEffect(() => {
-    dispatch(getCategories(true));
+    category?.categories?.length === 0 && dispatch(getCategories(true));
   }, [dispatch]);
 
   return (
     <DashboardLayout>
-      <ModalComp status={createQStatus} onClose={handleClose}>
+      {/* <ModalComp status={createQStatus} onClose={handleClose}>
         <Form
           formType='add'
           categoryId={category?.currentCategory?.id || 0}
           onClose={handleClose}
         />
-      </ModalComp>
+      </ModalComp> */}
       <DashboardNavbar />
       <MDBox pt={6} pb={3}>
         <Grid container spacing={6}>
@@ -66,7 +68,16 @@ function CreateQuestion() {
                 <MDBox display='flex' alignItems='center' gap={3}>
                   <DropDown />
                   {category?.currentCategory?.id && (
-                    <MDButton onClick={() => handleOpen()}>
+                    <MDButton
+                      onClick={() =>
+                        navigate('/admin/questionForm', {
+                          state: {
+                            formType: 'add',
+                            categoryId: category?.currentCategory?.id || 0,
+                          },
+                        })
+                      }
+                    >
                       <Icon>add</Icon>
                     </MDButton>
                   )}

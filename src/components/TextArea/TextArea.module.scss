@@ -3,7 +3,12 @@
   border-bottom: 1px solid black !important;
   display: flex;
   justify-content: space-between;
+  align-items: flex-end;
   font-size: 0.8rem;
+
+  fieldset {
+    border: none;
+  }
 
   textarea {
     width: 100%;

@@ -43,6 +43,7 @@ import Users from 'layouts/users/Users';
 import Login from 'layouts/authentication/sign-in';
 import Register from 'layouts/authentication/sign-up';
 import Logout from 'layouts/admin/Logout';
+import Form from 'layouts/createQuestion/components/Form';
 
 // import Logo from '../../assets/images/small-logos/'
 
@@ -131,7 +132,10 @@ function Admin() {
       <Routes>
         <Route path='/' exact element={<Dashboard />} />
         <Route path='/dashboard' exact element={<Dashboard />} />
-        <Route path='/createQuestion' exact element={<CreateQuestion />} />
+        <Route path='/createQuestion'>
+          <Route index element={<CreateQuestion />} />
+        </Route>
+        <Route path='/questionForm' exact element={<Form />} />
         <Route path='/createTest' exact element={<CreateTest />} />
         <Route path='/categories' exact element={<Categories />} />
         <Route path='/users' exact element={<Users />} />

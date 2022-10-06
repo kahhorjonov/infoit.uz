@@ -1,4 +1,5 @@
 import { Icon } from '@mui/material';
+import MDInput from 'components/MDInput';
 import PropTypes from 'prop-types';
 import { uploadPhoto } from 'store/thunk';
 import Styles from './TextArea.module.scss';
@@ -16,12 +17,26 @@ function TextArea({ formType, text, image, onChangeText, onAddImage, onDeleteIma
           {text}
         </span>
       ) : (
-        <textarea
+        <MDInput
           value={text}
           name='text_area'
-          id='text_area'
+          multiline
+          fullWidth
+          padding='1rem'
+          sx={{
+            width: '100%',
+            fontSize: '1rem',
+            padding: '0.5rem 0',
+          }}
           onChange={e => onChangeText(e.target.value)}
         />
+
+        // <textarea
+        //   value={text}
+        //   name='text_area'
+        //   id='text_area'
+        //   onChange={e => onChangeText(e.target.value)}
+        // />
       )}
       {image ? (
         <div className={Styles.viewImage}>

@@ -1,4 +1,5 @@
 import { Icon } from '@mui/material';
+import MDInput from 'components/MDInput';
 import PropTypes from 'prop-types';
 import { uploadPhoto } from 'store/thunk';
 import Styles from './ChoiceInput.module.scss';
@@ -55,14 +56,29 @@ function ChoiceInput({
         <span className={Styles.text}>{text}</span>
       ) : (
         <>
-          <input
+          <MDInput
+            value={text}
+            name='text_area'
+            id='input'
+            type='text'
+            multiline
+            fullWidth
+            padding='1rem'
+            sx={{
+              width: '100%',
+              fontSize: '1rem',
+            }}
+            placeholder={placeholder}
+            onChange={e => onChangeText(idx, 'text', e.target.value)}
+          />
+          {/* <input
             value={text}
             id='input'
             type='text'
             className={Styles.input}
             placeholder={placeholder}
             onChange={e => onChangeText(idx, 'text', e.target.value)}
-          />
+          /> */}
 
           <Icon
             fontSize='large'
