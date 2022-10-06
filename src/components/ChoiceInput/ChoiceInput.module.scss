@@ -11,16 +11,19 @@
   gap: 10px;
   font-size: 0.7rem;
 
-  .input {
-    width: 100%;
-    padding: 0 0.5rem;
-    font-size: 1rem;
-    color: #000;
+  fieldset {
+    border: none;
   }
+  // .input {
+  //   width: 100%;
+  //   padding: 0 0.5rem;
+  //   font-size: 1rem;
+  //   color: #000;
+  // }
 
   .viewImage {
     position: relative;
-    
+
     img {
       width: 100px;
     }
