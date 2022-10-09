@@ -20,10 +20,10 @@
       td {
         border-bottom: 1px solid gray;
       }
-      :nth-child(1) {
+      & :nth-child(1) {
         width: 30px;
       }
-      :nth-child(2) {
+      & :nth-child(2) {
         width: 60%;
       }
       &:hover {

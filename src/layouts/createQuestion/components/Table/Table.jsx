@@ -8,6 +8,7 @@ import MDBox from 'components/MDBox';
 import ModalComp from 'components/Modal/ModalComp';
 import MDButton from 'components/MDButton';
 import Spiner from 'components/Loader/Spiner';
+import Latex from 'react-latex';
 import Styles from './Table.module.scss';
 
 function Table() {
@@ -79,7 +80,9 @@ function Table() {
             <span className='font-bold'>Savol:</span> {currentQuestion?.id}
           </h2>
           <div className='flex justify-between'>
-            <p className='text-base'>{currentQuestion?.name}</p>
+            <p className='text-base'>
+              <Latex>{currentQuestion?.name}</Latex>
+            </p>
             {currentQuestion?.questionPhoto && (
               <img
                 src={currentQuestion?.questionPhoto?.link}
@@ -102,7 +105,9 @@ function Table() {
                     className='max-w-100-px'
                   />
                 )}
-                <span className='ml-3'>{choice?.text}</span>
+                <span className='ml-3'>
+                  <Latex>{choice?.text}</Latex>
+                </span>
               </div>
             ))}
           </div>
@@ -152,10 +157,14 @@ function Table() {
                 <tr key={question.id} onClick={() => handleChooseQuestion(question)}>
                   <td>{idx + 1 + pagination.pageSize * (pagination.pageNumber - 1)}</td>
                   <td>
-                    <img src='' alt='' />
-                    {question?.name}
+                    {/* <img src='' alt='' /> */}
+                    <span>
+                      <Latex>{question?.name}</Latex>
+                    </span>
                   </td>
-                  <td>{question?.choices?.filter(choice => choice.correct)[0]?.text}</td>
+                  <td>
+                    <Latex>{question?.choices?.filter(choice => choice.correct)[0]?.text}</Latex>
+                  </td>
                 </tr>
               ))}
             </tbody>
