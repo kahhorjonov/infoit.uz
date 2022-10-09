@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserTests, startUserTest, getCurrentTestTime } from 'store/thunk';
-import cover from 'assets/homePage/Testcover.png';
+import infoit_bg from 'assets/images/infoit_bg.jpg';
 
 import { Icon } from '@mui/material';
 import Spiner from 'components/Loader/Spiner';
@@ -98,7 +98,7 @@ export default function MyTests() {
                 <div className='flex'>
                   <img
                     style={{ maxHeight: '110px', borderRadius: '7px' }}
-                    src={test?.photo?.link || cover}
+                    src={test?.photo?.link || infoit_bg}
                     alt={test?.photo?.id || '...'}
                   />
                   <div className='mx-4'>

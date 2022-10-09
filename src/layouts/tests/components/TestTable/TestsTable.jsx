@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Latex from 'react-latex';
 import PropTypes from 'prop-types';
 import { getQuestions } from 'store/thunk';
 import MDBox from 'components/MDBox';
@@ -72,7 +73,9 @@ function TestTable({ questionsId, onAddQuestionId }) {
                       1 +
                       questionsData.pagination.pageSize * (questionsData.pagination.pageNumber - 1)}
                   </td>
-                  <td>{test.name}</td>
+                  <td>
+                    <Latex>{test.name}</Latex>
+                  </td>
                 </tr>
               ))}
             </tbody>

@@ -65,38 +65,30 @@
     }
     .active {
       background-color: #013098;
+      color: #fff;
       .choiceVariant {
-      color: #013098;
-      }
-      .choiceText {
-        color: #fff;
+        color: #013098;
       }
     }
     .correct {
+      color: #fff;
       background-color: #27a55d;
       .choiceVariant {
         background-color: #ff8389;
       }
-      .choiceText {
-        color: #fff;
-      }
     }
     .correctChoice {
       background-color: #27a55d;
+      color: #fff;
       .choiceVariant {
         color: #27a55d;
       }
-      .choiceText {
-        color: #fff;
-      }
     }
     .uncorrectChoice {
+      color: #fff;
       background-color: #ff8389;
       .choiceVariant {
         color: #ff8389;
-      }
-      .choiceText {
-        color: #fff;
       }
     }
   }

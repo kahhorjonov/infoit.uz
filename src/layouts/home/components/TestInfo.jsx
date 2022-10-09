@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getPlanningTest, getPlanningTestById } from 'store/thunk';
-import cover from 'assets/images/testcover.png';
+import infoit_bg from 'assets/images/infoit_bg.jpg';
 
 // Components
 
@@ -39,7 +39,7 @@ export default function TestInfo() {
               <img
                 alt={currentTestData?.photo?.fileId || '...'}
                 className='rounded-xl ml-auto mr-auto shadow-lg right'
-                src={currentTestData?.photo?.link || cover}
+                src={currentTestData?.photo?.link || infoit_bg}
               />
             </div>
 
