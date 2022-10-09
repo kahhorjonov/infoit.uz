@@ -19,12 +19,12 @@
     tr {
       td {
         border-bottom: 1px solid gray;
-      }
-      & :nth-child(1) {
-        width: 30px;
-      }
-      & :nth-child(2) {
-        width: 60%;
+        &:nth-child(1) {
+          width: 30px;
+        }
+        &:nth-child(2) {
+          width: 60%;
+        }
       }
       &:hover {
         background: rgb(243, 243, 243);
