@@ -4,6 +4,7 @@ import { sendAnswer } from 'store/thunk';
 import { useNavigate, useParams } from 'react-router-dom';
 import { v4 } from 'uuid';
 import PropTypes from 'prop-types';
+import Latex from 'react-latex';
 import { setQuizPageNumber } from 'store/actions/actionCreaters';
 import MDButton from 'components/MDButton';
 import { Icon } from '@mui/material';
@@ -42,9 +43,8 @@ function CardQuiz({ onFinishTest }) {
       <p>Savol {pageNumber}</p>
       <div className={Styles.question}>
         <div>
-          {/* <p>Savolni o‘qib, variantlardan birini tanlang</p> */}
-          {paramPathName === 'quiz' && <span>{currentQuiz?.name}</span>}
-          {paramPathName === 'result' && <span>{currentQuiz?.questionText}</span>}
+          {paramPathName === 'quiz' && <Latex>{currentQuiz?.name}</Latex>}
+          {paramPathName === 'result' && <Latex>{currentQuiz?.questionText}</Latex>}
         </div>
         <div className={Styles.imageCont}>
           <img
@@ -89,9 +89,7 @@ function CardQuiz({ onFinishTest }) {
                 <img src={choice?.choicePhoto?.link} alt={choice?.choicePhoto?.fileId || '...'} />
               </div>
             )}
-            <span className={Styles.choiceText}>
-              {paramPathName === 'quiz' ? choice?.text : choice?.choice}
-            </span>
+            <Latex>{paramPathName === 'quiz' ? choice?.text : choice?.choice}</Latex>
           </div>
         ))}
       </div>
