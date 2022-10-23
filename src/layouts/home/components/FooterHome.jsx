@@ -18,11 +18,12 @@ export default function FooterHome() {
             {/* <span className='uppercase text-2xl text-blue-900'>
               infoit<span className='text-orange'>.uz</span>
             </span> */}
+
             <h5 className='text-lg mt-4 mb-2 text-blueGray-600'>
               <PhoneIcon /> &nbsp; +998 88 887-00-00
             </h5>
             <h5 className='text-lg mt-0 mb-2 text-blueGray-600'>
-              <EmailIcon /> &nbsp; InfoIT@gmail.com
+              <EmailIcon /> &nbsp; uzinfoit@gmail.com
             </h5>
           </div>
           <div className='w-full lg:w-6/12 mt-6'>

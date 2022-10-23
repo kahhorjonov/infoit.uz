@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getPlanningTest, getPlanningTestById } from 'store/thunk';
 import infoit_bg from 'assets/images/infoit_bg.jpg';
+import default_image from 'assets/homePage/default_test.jpg';
 
 // Components
 
@@ -37,9 +38,9 @@ export default function TestInfo() {
           <div className='items-center flex flex-wrap'>
             <div className='w-full lg:w-6/12 xl:w-4/12 px-4 py-6 ml-auto mr-auto text-center'>
               <img
+                src={currentTestData?.photo?.link || default_image}
                 alt={currentTestData?.photo?.fileId || '...'}
                 className='rounded-xl ml-auto mr-auto shadow-lg right'
-                src={currentTestData?.photo?.link || infoit_bg}
               />
             </div>
 

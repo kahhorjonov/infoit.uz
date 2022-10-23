@@ -10,6 +10,7 @@ import Spiner from 'components/Loader/Spiner';
 import ModalComp from 'components/Modal/ModalComp';
 import CardTestInfo from 'layouts/home/Cards/CardTestInfo';
 import infoit_bg from 'assets/images/infoit_bg.jpg';
+import default_image from 'assets/homePage/default_test.jpg';
 import Styles from '../TestTable.module.scss';
 
 function PlanningTestTable({ onChangeActionType }) {
@@ -67,7 +68,7 @@ function PlanningTestTable({ onChangeActionType }) {
             <img
               alt={currentTestData?.photo?.fileName || '...'}
               className='rounded-xl ml-auto mr-auto shadow-lg right'
-              src={currentTestData?.photo?.link || infoit_bg}
+              src={currentTestData?.photo?.link || default_image}
             />
           </div>
 

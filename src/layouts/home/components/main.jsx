@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import hand from 'assets/homePage/hand&pen.png';
+import image from 'assets/homePage/default.jpg';
 
 // Icons
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
@@ -53,7 +54,7 @@ export default function Home() {
                 style={{ width: '708px' }}
                 alt='...'
                 className='rounded-xl ml-auto mr-auto shadow-lg right'
-                src={hand}
+                src={image}
                 // src='https://images.unsplash.com/photo-1555212697-194d092e3b8f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80'
                 // src="https://images.unsplash.com/photo-1555212697-194d092e3b8f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
               />
