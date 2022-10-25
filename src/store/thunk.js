@@ -264,11 +264,15 @@ export function sendCardDetails(data) {
 
 export const confirmationPayment = async code => {
   try {
-    await axiosPublic.post(`api/payment/v1/confirmation?confirmationCode=${code}`, {
-      headers: {
-        Authorization: `Bearer ${access_token}`,
+    await axiosPublic.post(
+      `api/payment/v1/confirmation?confirmationCode=${parseInt(code, 10)}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
       },
-    });
+    );
   } catch (error) {
     toast.error("Tasdiqlash kodi noto'g'ri kiritilgan");
   }
