@@ -273,6 +273,7 @@ export const confirmationPayment = async code => {
         },
       },
     );
+    window.location.reload();
   } catch (error) {
     toast.error("Tasdiqlash kodi noto'g'ri kiritilgan");
   }
