@@ -273,6 +273,7 @@ export const confirmationPayment = async code => {
         },
       },
     );
+    toast.success('To`lov muvaffaqiyatli amalga oshirildi.')
     window.location.reload();
   } catch (error) {
     toast.error("Tasdiqlash kodi noto'g'ri kiritilgan");
