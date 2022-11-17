@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 // Icons
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
+import TelegramIcon from '@mui/icons-material/Telegram';
 
 import InfoIt_LOGO from 'assets/images/infoit_logo.svg';
 
@@ -20,10 +21,13 @@ export default function FooterHome() {
             </span> */}
 
             <h5 className='text-lg mt-4 mb-2 text-blueGray-600'>
-              <PhoneIcon /> &nbsp; +998 88 887-00-00
+              <PhoneIcon /> &nbsp; <a href='tel:+998974523190'>+998 97 452 31 90</a>
             </h5>
             <h5 className='text-lg mt-0 mb-2 text-blueGray-600'>
               <EmailIcon /> &nbsp; uzinfoit@gmail.com
+            </h5>
+            <h5 className='text-lg mt-0 mb-2 text-blueGray-600'>
+              <TelegramIcon /> &nbsp; <a href='https://t.me/test_infoituz'>test_infoituz</a>
             </h5>
           </div>
           <div className='w-full lg:w-6/12 mt-6'>
