@@ -180,10 +180,10 @@ export default function HomeNavbar() {
                       <Link className='rounded-lg' to='/profile'>
                         <PersonIcon /> Profil
                       </Link>
-                      <hr />
+                      {/* <hr />
                       <Link className='rounded-lg' to='/topup'>
                         <AccountBalanceWalletIcon /> Hisobni to`ldirish
-                      </Link>
+                      </Link> */}
                       <hr />
                       <Link to='/myTests' className='rounded-lg'>
                         <QuizIcon /> Testlarim
